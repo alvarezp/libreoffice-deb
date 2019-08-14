@@ -886,7 +886,7 @@ ifneq (,$(filter sane, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libsane-dev
 endif
 ifneq (,$(filter libpng, $(SYSTEM_STUFF)))
-       BUILD_DEPS += , libpng-dev
+       BUILD_DEPS += , libpng-dev (>= 1.6)
 endif
 
 ifeq "$(ENABLE_CURL)" "y"
