@@ -4,9 +4,24 @@ libreoffice (1:7.4.0~alpha0~git20211115-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Wed, 17 Nov 2021 06:08:27 +0100
 
-libreoffice (1:7.3.0~beta1~git20211125-1) UNRELEASED; urgency=medium
+libreoffice (1:7.3.0~rc1~git20211128-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
+
+  * debian/libuno-sal3.symbols: update
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 28 Nov 2021 16:46:17 +0100
+
+libreoffice (1:7.3.0~beta1-2) experimental; urgency=medium
+
+  * debian/patches/revert-eabcfb3f18a6944d9ad89cecd3eb3ca7a2259cf3.diff:
+    as name says; revert broken change/test; from upstream gerrit
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 28 Nov 2021 16:29:51 +0100
+
+libreoffice (1:7.3.0~beta1-1) experimental; urgency=medium
+
+  * New upstream beta release
 
   * debian/patches/pdfium-support-system-libopenjpeg-and-libabsl.diff:
     don't use internal libabsl cody copy in pdfium; add conditionalization
@@ -18,7 +33,7 @@ libreoffice (1:7.3.0~beta1~git20211125-1) UNRELEASED; urgency=medium
     - actually only set TEST_TIMEOUT if we ignore the test results anyway...
     - add abseil and openjpeg2 to SYSTEM_STUFF if building pdfium
 
- -- Rene Engelhard <rene@debian.org>  Mon, 15 Nov 2021 22:19:57 +0100
+ -- Rene Engelhard <rene@debian.org>  Thu, 25 Nov 2021 20:17:04 +0100
 
 libreoffice (1:7.3.0~alpha1-6) experimental; urgency=medium
 

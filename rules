@@ -767,7 +767,7 @@ endif
 
 ifeq "$(ENABLE_PDFIMPORT)" "y"
   ifeq "$(ENABLE_POPPLER)" "y"
-	BUILD_DEPS += , libpoppler-dev (>= 0.12.0), libpoppler-private-dev, libpoppler-cpp-dev
+	BUILD_DEPS += , libpoppler-dev (>= 0.14.0), libpoppler-private-dev, libpoppler-cpp-dev
 	BUILD_DEPS_ARCH += , poppler-data <!nocheck>
   else
 	CONFIGURE_FLAGS += --disable-poppler
