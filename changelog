@@ -1,3 +1,9 @@
+libreoffice (1:7.4.0~alpha0~git20211115-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 17 Nov 2021 06:08:27 +0100
+
 libreoffice (1:7.3.0~beta1~git20211125-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
