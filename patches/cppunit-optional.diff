@@ -28,17 +28,17 @@ index c12fe95a561c..66d327ae8fb8 100644
  dnl ===================================================================
  dnl Check whether freetype is available
 diff --git a/config_host.mk.in b/config_host.mk.in
-index 880895e3c00f..a3dab3e00979 100644
+index 8888355642ef..ac8a4b64967e 100644
 --- a/config_host.mk.in
 +++ b/config_host.mk.in
-@@ -114,6 +115,7 @@ export SYSTEM_COINMP=@SYSTEM_COINMP@
+@@ -147,6 +147,7 @@ export ENABLE_COINMP=@ENABLE_COINMP@
  export SYSTEM_COINMP=@SYSTEM_COINMP@
  export COINMP_CFLAGS=@COINMP_CFLAGS@
  export COINMP_LIBS=@COINMP_LIBS@
 +export ENABLE_CPPUNIT=@ENABLE_CPPUNIT@
  export ENABLE_CUPS=@ENABLE_CUPS@
  export ENABLE_CURL=@ENABLE_CURL@
- export ENABLE_FUZZERS=@ENABLE_FUZZERS@
+ export ENABLE_DBGUTIL=@ENABLE_DBGUTIL@
 diff --git a/sal/Module_sal.mk b/sal/Module_sal.mk
 index fe9523a7a6e2..719edf8c6252 100644
 --- a/sal/Module_sal.mk

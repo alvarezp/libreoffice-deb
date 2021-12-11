@@ -45,10 +45,10 @@ index 7d2a347..a15ac52 100644
  $(eval $(call gb_AutoInstall_add_module,extensions_ct2n,,,,PACKAGE_FILELIST))
  $(eval $(call gb_AutoInstall_add_module,extensions_bsh,,,LIBO_JAR_FILE))
 diff --git a/Repository.mk b/Repository.mk
-index 36b35b7a4262..25f202cb0983 100644
+index f386b8aa7c05..7c337f23891b 100644
 --- a/Repository.mk
 +++ b/Repository.mk
-@@ -245,13 +245,29 @@ $(eval $(call gb_Helper_register_executables_for_install,UREBIN,ure,\
+@@ -244,13 +244,29 @@ $(eval $(call gb_Helper_register_executables_for_install,UREBIN,ure,\
  
  $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,base, \
  	abp \
@@ -79,8 +79,8 @@ index 36b35b7a4262..25f202cb0983 100644
  	date \
  	pricing \
  	sc \
-@@ -263,6 +279,14 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,calc, \
- 	$(call gb_Helper_optional,SCRIPTING,vbaobj) \
+@@ -265,6 +281,13 @@ $(eval $(call gb_Helper_register_plugins_for_install,OOOLIBS,calc, \
+     scui \
  ))
  
 +$(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,draw, \
@@ -88,13 +88,12 @@ index 36b35b7a4262..25f202cb0983 100644
 +	sd \
 +	sdd \
 +	sdfilt \
-+	sdui \
 +))
 +
  $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,graphicfilter, \
  	svgfilter \
  	wpftdraw \
-@@ -271,10 +295,10 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,graphicfilter, \
+@@ -272,10 +295,10 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,graphicfilter, \
  ))
  
  $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,impress, \
@@ -106,10 +105,10 @@ index 36b35b7a4262..25f202cb0983 100644
  ))
  
  $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,onlineupdate, \
-@@ -349,11 +349,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
+@@ -355,11 +378,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
+ 	cppcanvas \
  	configmgr \
  	ctl \
- 	cui \
 -	dba \
 -	dbahsql \
 -	$(call gb_Helper_optional,DBCONNECTIVITY, \
@@ -118,7 +117,7 @@ index 36b35b7a4262..25f202cb0983 100644
  	dbtools \
  	deploymentmisc \
  	$(if $(filter-out MACOSX WNT,$(OS)),desktopbe1) \
-@@ -366,7 +386,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
+@@ -373,7 +391,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
  	evtatt \
  	expwrap \
  	$(call gb_Helper_optional,DBCONNECTIVITY, \
@@ -126,15 +125,15 @@ index 36b35b7a4262..25f202cb0983 100644
  		file) \
  	filterconfig \
  	fps_office \
-@@ -387,7 +406,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
+@@ -388,7 +405,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
+ 	i18npool \
  	i18nsearch \
  	hyphen \
-     icg \
 -	$(if $(ENABLE_JAVA),jdbc) \
  	$(if $(ENABLE_LDAP),ldapbe2) \
  	$(if $(filter WNT,$(OS)),WinUserInfoBe) \
  	localebe1 \
-@@ -403,10 +421,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
+@@ -403,10 +419,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
  	msfilter \
  	$(call gb_Helper_optional,SCRIPTING,msforms) \
  	mtfrenderer \
@@ -145,21 +144,20 @@ index 36b35b7a4262..25f202cb0983 100644
  	odfflatxml \
  	offacc \
  	oox \
-@@ -419,13 +434,8 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
+@@ -419,12 +432,8 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
  	sb \
  	$(call gb_Helper_optional,DBCONNECTIVITY,sdbt) \
  	scn \
 -	sd \
 -	sdd \
 -	sdfilt \
--	sdui \
  	sfx \
  	simplecanvas \
 -	slideshow \
  	sot \
  	spell \
  	$(if $(DISABLE_GUI),,spl) \
-@@ -437,7 +447,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
+@@ -436,7 +445,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
  	svt \
  	svx \
  	svxcore \
@@ -167,34 +165,50 @@ index 36b35b7a4262..25f202cb0983 100644
  	syssh \
  	textconversiondlgs \
  	textfd \
-@@ -522,6 +531,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,writer, \
+@@ -487,13 +495,16 @@ $(eval $(call gb_Helper_register_plugins_for_install,OOOLIBS,ooo, \
+     acc \
+     cui \
+     icg \
+-    sdui \
+     $(if $(USING_X11),vclplug_gen) \
+     $(if $(filter $(OS),WNT),vclplug_win) \
+     $(if $(filter $(OS),MACOSX),vclplug_osx) \
+     $(if $(USING_X11),,$(if $(ENABLE_QT5),vclplug_qt5)) \
+ ))
+ 
++$(eval $(call gb_Helper_register_plugins_for_install,OOOLIBS,draw, \
++    sdui \
++))
++
+ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,postgresqlsdbc, \
+ 	$(if $(BUILD_POSTGRESQL_SDBC), \
+ 		postgresql-sdbc \
+@@ -529,6 +540,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,writer, \
  	hwp \
  	$(if $(ENABLE_LWP),lwpft) \
  	msword \
 +	sw \
  	swd \
- 	swui \
  	t602filter \
-@@ -600,14 +610,12 @@ $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo, \
+ 	$(call gb_Helper_optional,SCRIPTING,vbaswobj) \
+@@ -622,12 +634,10 @@ $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo, \
+     ) \
  	cached1 \
- 	collator_data \
  	comphelper \
 -	$(call gb_Helper_optional,DBCONNECTIVITY,dbpool2) \
  	$(call gb_Helper_optional,BREAKPAD,crashreport) \
  	deployment \
  	deploymentgui \
- 	dict_ja \
- 	dict_zh \
  	embobj \
 -	$(if $(ENABLE_JAVA),hsqldb) \
  	i18nutil \
- 	index_data \
  	$(if $(and $(ENABLE_GTK3), $(filter LINUX %BSD SOLARIS,$(OS))), libreofficekitgtk) \
-@@ -623,7 +631,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo, \
+ 	$(if $(ENABLE_JAVA), \
+@@ -636,7 +646,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo, \
  	emboleobj \
  	package2 \
  	$(call gb_Helper_optional,SCRIPTING,scriptframe) \
 -	sdbc2 \
  	sofficeapp \
  	srtrs1 \
- 	textconv_dict \
+ 	ucb1 \

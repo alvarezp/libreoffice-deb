@@ -44,6 +44,6 @@ no-opencl-per-default.diff
 pdfium-m68k.diff
 apparmor-updates.diff
 apparmor-gnupg-tofu.diff
-temporarily-disable-test-metadata-test.diff
+#temporarily-disable-test-metadata-test.diff
 arm-fp-mode.diff
 moreIconsDialog-accesses-internet.diff
