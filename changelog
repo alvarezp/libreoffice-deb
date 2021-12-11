@@ -4,10 +4,16 @@ libreoffice (1:7.4.0~alpha0~git20211211-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Wed, 17 Nov 2021 06:08:27 +0100
 
-libreoffice (1:7.3.0~rc1~git20211128-1) UNRELEASED; urgency=medium
+libreoffice (1:7.3.0~rc1~git20211201-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
+  * debian/rules:
+    - build the connectivity mysqlc test with the rest of the tests so it
+      doesn't do that in the actual autopkgtest test
+    - stop hardcoding clang-12 for ppc64el, add build-dep on clang (>= 1:12)
+      now that 13 is default in sid
+    - add support (don't use it (yet)) for using --enable-cipher-openssl-backend
   * debian/libuno-sal3.symbols: update
 
  -- Rene Engelhard <rene@debian.org>  Sun, 28 Nov 2021 16:46:17 +0100

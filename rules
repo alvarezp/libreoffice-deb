@@ -324,6 +324,12 @@ BUILD_GTK3=y
   endif
 endif
 # DO NOT ENABLE. WILL NOT WORK.
+# as of 2021-11-29:
+# 14:41 < _rene_> caolanm: just wondering after I did a testbuild lately on (then) master: what is the state of gtk4? enable-able (even
+#                though there's no desktop actually using it ttbomk) or better wait?
+#[...]
+#14:45 <@caolanm> _rene_, I wouldn't enable it yet. There's too much basic stuff not working well enough yet, e.g.
+#                 https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/4124
 BUILD_GTK4=n
 ENABLE_EVO2=y
 ENABLE_GIO=y
@@ -659,15 +665,12 @@ CLANG_VERSION=default
 # llvm-11-linker-tools does not contain this on ppc64el...
 # for mips64el that doesn't exist so disable LTO there...
 ifeq "$(ENABLE_LTO)" "y"
-  ifeq "$(DEB_HOST_ARCH)" "ppc64el"
-	CLANG_VERSION := 12
-  endif
   # see https://lists.debian.org/debian-devel-changes/2021/11/msg02548.html
   BUILD_DEPS += , binutils (>= 2.37-9) [ppc64]
   ifeq "$(DEB_HOST_ARCH)" "mips64el"
 	ENABLE_LTO=n
   endif
-	BUILD_DEPS += , clang-12 [ppc64el] | clang (>= 1:12) [ppc64el]
+	BUILD_DEPS += , clang (>= 1:12) [ppc64el]
 endif
 
 ifeq "$(USE_CLANG)" "y"
@@ -1508,12 +1511,17 @@ else
   CONFIGURE_FLAGS += --with-webdav=no
 endif
 
-ifneq "$(NEON_SECTYPE)" "openssl"
+ENABLE_SAL_OPENSSL_BACKEND=n
+ifneq "$(ENABLE_SAL_OPENSSL_BACKEND)" "y"
     ifneq (,$(filter mariadb, $(SYSTEM_STUFF)))
       ifneq (,$(filter postgresql, $(SYSTEM_STUFF)))
 	CONFIGURE_FLAGS += --disable-openssl
       endif
    endif
+else
+	CONFIGURE_FLAGS += --enable-cipher-openssl-backend
+	SYSTEM_STUFF += openssl
+	BUILD_DEPS += , libssl-dev
 endif
 
 ifneq (,$(filter redland, $(SYSTEM_STUFF)))
@@ -2172,7 +2180,7 @@ ifeq "$(BUILD_TESTS)" "y"
 
 	# build the tests (first)
 	export gb_SUPPRESS_TESTS=true; \
-		$(MAKE) check
+		$(MAKE) check CONNECTIVITY_TEST_MYSQL_DRIVER=dummy
 endif
 
 ifneq "$(AUTOPKGTEST_BUILD)" "y"
