@@ -1,8 +1,8 @@
 diff --git a/sw/qa/uitest/styleInspector/styleInspector.py b/sw/qa/uitest/styleInspector/styleInspector.py
-index acaa85d693fe..e859848b7738 100644
+index 7cfabce07dcc..9f0c6112bc9b 100644
 --- a/sw/qa/uitest/styleInspector/styleInspector.py
 +++ b/sw/qa/uitest/styleInspector/styleInspector.py
-@@ -129,65 +129,6 @@ class styleNavigator(UITestCase):
+@@ -129,69 +129,6 @@ class styleNavigator(UITestCase):
  
              self.xUITest.executeCommand(".uno:Sidebar")
  
@@ -48,10 +48,10 @@ index acaa85d693fe..e859848b7738 100644
 -            self.xUITest.executeCommand(".uno:GoRight")
 -
 -            # The cursor is on text with annotated text range
--            xDirFormatting = xListBox.getChild('3')
--            self.assertEqual(2, len(xDirFormatting.getChildren()))
+-            xDirFormatting = xListBox.getChild('0')
+-            self.assertEqual("Fields\t", get_state_as_dict(xListBox.getChild('0'))['Text'])
+-            self.assertEqual(1, len(xDirFormatting.getChildren()))
 -            self.assertEqual("Metadata Reference\t", get_state_as_dict(xDirFormatting.getChild('0'))['Text'])
--            self.assertEqual("Nested Text Content\tAnnotated text range", get_state_as_dict(xDirFormatting.getChild('1'))['Text'])
 -
 -            xMetadata = xDirFormatting.getChild('0')
 -            self.assertEqual(4, len(xMetadata.getChildren()))
@@ -60,8 +60,12 @@ index acaa85d693fe..e859848b7738 100644
 -            self.assertEqual("http://www.w3.org/2000/01/rdf-schema#comment\tComment...", get_state_as_dict(xMetadata.getChild('2'))['Text'])
 -            self.assertEqual("http://www.w3.org/2000/01/rdf-schema#label\tAnnotated paragraph portion", get_state_as_dict(xMetadata.getChild('3'))['Text'])
 -
--            self.assertEqual(0, len(xListBox.getChild('1').getChildren()))
+-            xDirFormatting = xListBox.getChild('4')
+-            self.assertEqual(1, len(xDirFormatting.getChildren()))
+-            self.assertEqual("Nested Text Content\tAnnotated text range", get_state_as_dict(xDirFormatting.getChild('0'))['Text'])
+-
 -            self.assertEqual(0, len(xListBox.getChild('2').getChildren()))
+-            self.assertEqual(0, len(xListBox.getChild('3').getChildren()))
 -
 -            self.xUITest.executeCommand(".uno:Sidebar")
 -

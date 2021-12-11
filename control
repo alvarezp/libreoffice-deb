@@ -168,6 +168,7 @@ Build-Depends: autoconf,
                libzmf-dev,
                libzmf-dev (<< 0.1~),
                libzxingcore-dev (>= 1.2.0),
+               llvm [alpha amd64 arm64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mipsel mips64el ppc64el],
                lp-solve (>= 5.5.0.13-5+b1),
                maven-repo-helper,
                pkg-config,
@@ -191,23 +192,23 @@ Build-Depends-Arch: firebird3.0-server-core [!hppa !mips64 !s390 !sparc] <!noche
                     fonts-liberation2 [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     gdb [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     ghostscript [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
-                    gpg <!nocheck>,
-                    gpg-agent <!nocheck>,
-                    gpgconf <!nocheck>,
+                    gpg [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
+                    gpg-agent [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
+                    gpgconf [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     hunspell-en-us [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     hyphen-en-us [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     imagemagick [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     libcppunit-dev (>= 1.14) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     libcppunit-dev (>= 1.15.1-4) [alpha amd64 arm64 ia64 mips64 ppc64 ppc64el s390x sparc64] <!nocheck>,
-                    libe-book-dev (>= 0.1.2) <!nocheck>,
-                    libetonyek-dev (>= 0.1.8) <!nocheck>,
-                    libmwaw-dev (>= 0.3.17) <!nocheck>,
-                    libstaroffice-dev (>= 0.0.3) <!nocheck>,
-                    libwps-dev (>= 0.4.12) <!nocheck>,
+                    libe-book-dev (>= 0.1.2) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
+                    libetonyek-dev (>= 0.1.8) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
+                    libmwaw-dev (>= 0.3.17) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
+                    libstaroffice-dev (>= 0.0.3) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
+                    libwps-dev (>= 0.4.12) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     locales [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
-                    poppler-data <!nocheck>,
+                    poppler-data [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     pstoedit [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
-                    python3-lxml <!nocheck !nopython>
+                    python3-lxml [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck !nopython>
 Build-Depends-Indep: ant (>= 1.7.0) [!hppa !mips64 !s390 !sparc] <!nojava>,
                      ant-optional (>= 1.7.0) [!hppa !mips64 !s390 !sparc] <!nojava>,
                      apparmor <!nocheck>,
@@ -227,7 +228,7 @@ Build-Conflicts: amd-libopencl1,
 Standards-Version: 4.0.1
 Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git  -b debian-experimental-7.3
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
-Bugs: mailto:debian-openoffice@lists.debian.org
+Bugs: 
 Homepage: http://www.libreoffice.org
 
 Package: libreoffice
