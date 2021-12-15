@@ -264,19 +264,7 @@ ENABLE_CURL=y
 CURL_SECTYPE=gnutls
 ENABLE_WEBDAV=y
 ifeq "$(ENABLE_WEBDAV)" "y"
-WEBDAV_LIB=curl
-  ifeq "$(WEBDAV_LIB)" "neon"
-    SYSTEM_STUFF += neon
-    NEON_SECTYPE=gnutls
-    NEONSONR=27
-  else
-    ifeq "$(WEBDAV_LIB)" "serf"
-      SYSTEM_STUFF += apr
-      SYSTEM_STUFF += serf
-    else # curl
-      ENABLE_CURL=y
-    endif
-  endif
+  ENABLE_CURL=y
 endif
 ifeq "$(ENABLE_CURL)" "y"
 SYSTEM_STUFF += curl
@@ -1506,30 +1494,10 @@ else
 endif
 
 ifeq "$(ENABLE_WEBDAV)" "y"
-  ifeq "$(WEBDAV_LIB)" "neon"
-    ifneq (,$(filter neon, $(SYSTEM_STUFF)))
-      ifneq "$(NEON_SECTYPE)" "openssl"
-	BUILD_DEPS += , libneon$(NEONSONR)-$(NEON_SECTYPE)-dev (>= 0.31.1)
-      else
-	BUILD_DEPS += , libneon$(NEONSONR)-dev (>= 0.31.1)
-      endif
-    endif
-  else
-    ifeq "$(WEBDAV_LIB)" "serf"
-      ifneq (,$(filter apr, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libaprutil1-dev
-      endif
-      ifneq (,$(filter serf, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libserf-dev
-      endif
-    else # curl
-      ifneq (,$(filter curl, $(SYSTEM_STUFF)))
+    ifneq (,$(filter curl, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libcurl4-$(CURL_SECTYPE)-dev (>= 7.68)
-      endif
-      ENABLE_CURL=y
     endif
-  endif
-  CONFIGURE_FLAGS += --with-webdav=$(WEBDAV_LIB)
+    ENABLE_CURL=y
 else
   CONFIGURE_FLAGS += --with-webdav=no
 endif
