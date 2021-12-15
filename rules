@@ -353,8 +353,8 @@ SYSTEM_STUFF += postgresql
 DICT_DIR=/usr/share/hunspell
 HYPH_DIR=/usr/share/hyphen
 THES_DIR=/usr/share/mythes
-ENABLE_CMIS=n
-ifeq "$(ENABLE_CMIS)" "y"
+ENABLE_LIBCMIS=n
+ifeq "$(ENABLE_LIBCMIS)" "y"
 SYSTEM_STUFF += libcmis
 endif
 SYSTEM_STUFF += jpeg
@@ -1251,12 +1251,12 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
 	BUILD_DEPS_ARCH += , libe-book-dev (>= 0.1.2)$(OOO_NO_CHECK_ARCHS) <!nocheck>
     endif
   endif
-  ifeq "$(ENABLE_CMIS)" "y"
+  ifeq "$(ENABLE_LIBCMIS)" "y"
     ifneq (,$(filter libcmis, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libcmis-dev (>= 0.5.2~), libcmis-dev (<< 0.6~)
     endif
   else
-	CONFIGURE_FLAGS += --disable-cmis
+	CONFIGURE_FLAGS += --disable-libcmis
   endif
   ifeq "$(ENABLE_ZXING)" "y"
     ifneq (,$(filter zxing, $(SYSTEM_STUFF)))
