@@ -335,7 +335,18 @@ IMAGES:=$(DEFAULT_IMAGE) sifr sifr_dark sifr_dark_svg breeze breeze_dark breeze_
 IMAGES_PACKAGES=$(subst _,-,$(filter-out sukapura_svg,$(filter-out sifr_dark_svg,$(filter-out breeze_dark_svg,$(filter-out sifr_dark,$(filter-out breeze_dark,$(filter-out breeze_svg,$(filter-out elementary_svg,$(IMAGES)))))))))
 CONFIGURE_FLAGS_INDEP += --with-theme="$(IMAGES)"
 ENABLE_MARIADB=y
-MYSQL_FLAVOUR=mariadb
+ifeq "$(ENABLE_MARIADB)" "y"
+# FIXME: the mysql test doesn't get really tested since it is only ran/built
+# with CONNECTIVITY_TEST_MYSQL_DRIVER set - and doesn't build on 32bit... The
+# test is run in autopkgtest on OOO_CHECK_FATAL_ARCHS (aka 64bit archs!) only for
+# now anyway so let's just hack around here for now and disable the build of it
+# alltogether when not used and just set CONNECTIVITY_TEST_MYSQL_DRIVER on those
+# OOO_CHECK_FATAL_ARCHS
+  ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_CHECK_FATAL_ARCHS)))
+export CONNECTIVITY_TEST_MYSQL_DRIVER=dummy
+  endif
+endif
+  MYSQL_FLAVOUR=mariadb
 # set this also to y for system-mysql..
 SYSTEM_STUFF += mariadb
 SYSTEM_STUFF += postgresql
@@ -654,8 +665,6 @@ ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
   # llvm-11-linker-tools does not contain this on ppc64el...
   # for mips64el that doesn't exist so disable LTO there...
   ifeq "$(ENABLE_LTO)" "y"
-    # see https://lists.debian.org/debian-devel-changes/2021/11/msg02548.html
-    BUILD_DEPS += , binutils (>= 2.37-9) [ppc64]
     ifeq "$(DEB_HOST_ARCH)" "mips64el"
 	ENABLE_LTO=n
     endif
@@ -1563,6 +1572,8 @@ endif
 
 ifeq ($(ENABLE_LTO),y)
 	CONFIGURE_FLAGS += --enable-lto
+	# see https://lists.debian.org/debian-devel-changes/2021/11/msg02548.html
+	BUILD_DEPS += , binutils (>= 2.37-9) [ppc64]
 endif
 
 ifeq ($(USE_GOLD),y)
@@ -2175,7 +2186,7 @@ ifeq "$(BUILD_TESTS)" "y"
 
 	# build the tests (first)
 	export gb_SUPPRESS_TESTS=true; \
-		$(MAKE) check CONNECTIVITY_TEST_MYSQL_DRIVER=dummy
+		$(MAKE) check
 endif
 
 ifneq "$(AUTOPKGTEST_BUILD)" "y"
@@ -2194,6 +2205,7 @@ ifeq "$(RUN_MAKE_CHECK)" "y"
 		export LANG=en_US.UTF-8; \
 		export TZ=UTC; \
 		unset DISPLAY; \
+		unset CONNECTIVITY_TEST_MYSQL_DRIVER; \
 		export PARALLELISM=1; \
 		if [ -x /usr/bin/gdb ]; then ulimit -c unlimited; fi && \
 		$(TEST_TIMEOUT) $(MAKE) -k check || $(TEST_TIMEOUT) $(MAKE) check && \

@@ -11,6 +11,8 @@ libreoffice (1:7.3.0~rc1~git20211204-1) UNRELEASED; urgency=medium
   * debian/rules:
     - add support (don't use it (yet)) for using --enable-cipher-openssl-backend
     - limit llvm build-dep to le/skia-using archs
+    - build the mysqlc test only on the archs we run the actual test (at least
+      for now)
 
  -- Rene Engelhard <rene@debian.org>  Sun, 28 Nov 2021 16:46:17 +0100
 
