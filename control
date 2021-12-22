@@ -118,6 +118,7 @@ Build-Depends: autoconf,
                libopenjp2-7-dev,
                liborcus-dev (<< 0.18~),
                liborcus-dev (>= 0.17),
+               liborcus-dev (>= 0.17.2) <!nocheck>,
                libpagemaker-dev,
                libpagemaker-dev (<< 0.1~),
                libpentaho-reporting-flow-engine-java (>= 0.9.4) [!hppa !mips64 !s390 !sparc] <!nojava>,
@@ -4905,8 +4906,8 @@ Description: office productivity suite -- "GUI" development stuff
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains the gengal and ui-previewer utilities which were moved
- from libreoffice-dev.
+ This package contains the gengal utility which was moved from
+ libreoffice-dev.
 
 Package: libreoffice-dev-common
 Section: devel

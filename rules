@@ -1170,6 +1170,9 @@ endif
 
 ifneq (,$(filter orcus, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , liborcus-dev (>= 0.17), liborcus-dev (<< 0.18~)
+    ifeq "$(RUN_MAKE_CHECK)" "y"
+	BUILD_DEPS += , liborcus-dev (>= 0.17.2) <!nocheck>
+    endif
 endif
 
 ifeq "$(ENABLE_XMLHELP)" "y"
@@ -3030,17 +3033,6 @@ endif
 	for i in draw base writer impress calc math; do \
 		rm -rf $(PKGDIR)-$$i/$(OODIR)/program/resource; \
 	done
-
-ifeq "$(PACKAGE_SDK)" "y"
-  ifeq "$(ENABLE_GUI)" "y"
-	# move ui-previewer into -dev-gui
-	mkdir -p $(PKGDIR)-dev-gui/$(OODIR)/program
-	mv $(PKGDIR)-core/$(OODIR)/program/ui-previewer \
-		$(PKGDIR)-dev-gui/$(OODIR)/program
-  endif
-else
-	rm -f $(PKGDIR)-core/$(OODIR)/program/ui-previewer
-endif
 
 ifeq "$(ENABLE_JAVA)" "y"
 	mkdir -p $(PKGDIR)-sdbc-hsqldb/$(OODIR)/program

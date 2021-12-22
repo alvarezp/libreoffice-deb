@@ -4,15 +4,16 @@ libreoffice (1:7.4.0~alpha0~git20211215-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Wed, 17 Nov 2021 06:08:27 +0100
 
-libreoffice (1:7.3.0~rc1~git20211214-1) UNRELEASED; urgency=medium
+libreoffice (1:7.3.0~rc1-1) experimental; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules:
     - add support (don't use it (yet)) for using --enable-cipher-openssl-backend
     - limit llvm build-dep to le/skia-using archs
     - build the mysqlc test only on the archs we run the actual test (at least
       for now)
+    - bump liborcus-dev build-depends to >= 0.17.2 if we run the tests
 
  -- Rene Engelhard <rene@debian.org>  Sun, 28 Nov 2021 16:46:17 +0100
 
