@@ -36,7 +36,6 @@ apparmor-mesa.diff
 disableClassPathURLCheck.diff
 use-mariadb-java-instead-of-mysql-java.diff
 apparmor-opencl.diff
-fix-uicheck-tests-on-i386.patch
 fix-flaky-bridgetest.diff
 add-access2base-doc.diff
 disable-shortcuts_tab_navigation-uitest.diff

@@ -57,7 +57,6 @@ Build-Depends: autoconf,
                libe-book-dev (<< 0.2~),
                libe-book-dev (>= 0.1),
                libebook1.2-dev,
-               libeot-dev,
                libepoxy-dev (>= 1.2),
                libepubgen-dev (<< 0.2~),
                libepubgen-dev (>= 0.1.0),
@@ -117,8 +116,7 @@ Build-Depends: autoconf,
                libodfgen-dev (>= 0.1),
                libopenjp2-7-dev,
                liborcus-dev (<< 0.18~),
-               liborcus-dev (>= 0.17),
-               liborcus-dev (>= 0.17.2) <!nocheck>,
+               liborcus-dev (>= 0.17.2),
                libpagemaker-dev,
                libpagemaker-dev (<< 0.1~),
                libpentaho-reporting-flow-engine-java (>= 0.9.4) [!hppa !mips64 !s390 !sparc] <!nojava>,
@@ -229,7 +227,7 @@ Build-Conflicts: amd-libopencl1,
 Standards-Version: 4.0.1
 Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git  -b debian-experimental-7.3
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
-Bugs: 
+Bugs: mailto:debian-openoffice@lists.debian.org
 Homepage: http://www.libreoffice.org
 
 Package: libreoffice

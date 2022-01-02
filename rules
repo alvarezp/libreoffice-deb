@@ -428,7 +428,7 @@ ifeq "$(ENABLE_FIREBIRD)" "y"
 endif
 ENABLE_EOT=y
 ifeq "$(ENABLE_EOT)" "y"
-SYSTEM_STUFF += libeot
+SYSTEM_STUFF += eot
 endif
 SYSTEM_STUFF += glm
 BUILD_PPC64EL=y
