@@ -1169,10 +1169,7 @@ ifneq (,$(filter mdds, $(SYSTEM_STUFF)))
 endif
 
 ifneq (,$(filter orcus, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , liborcus-dev (>= 0.17), liborcus-dev (<< 0.18~)
-    ifeq "$(RUN_MAKE_CHECK)" "y"
-	BUILD_DEPS += , liborcus-dev (>= 0.17.2) <!nocheck>
-    endif
+	BUILD_DEPS += , liborcus-dev (>= 0.17.2), liborcus-dev (<< 0.18~)
 endif
 
 ifeq "$(ENABLE_XMLHELP)" "y"

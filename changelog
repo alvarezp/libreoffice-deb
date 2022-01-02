@@ -4,6 +4,24 @@ libreoffice (1:7.4.0~alpha0~git20220102-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Wed, 17 Nov 2021 06:08:27 +0100
 
+libreoffice (1:7.3.0~rc2~git20211226-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 23 Dec 2021 20:07:59 +0100
+
+libreoffice (1:7.3.0~rc1-2) experimental; urgency=medium
+
+  * debian/patches/fix-uicheck-tests-on-i386.patch: update
+  * debian/patches/fix-Tdf126116-test.diff: add upstream patch from gerrit;
+    fix upstream FTBFS timebomb found by reproducible builds
+
+  * debian/tests/*: rename "uno" to "testtools-bridgetest", since it's
+    more telling (and inside testtols anyway, uno is just the command
+    ran)
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 23 Dec 2021 17:23:03 +0100
+
 libreoffice (1:7.3.0~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
