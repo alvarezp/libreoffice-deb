@@ -1544,7 +1544,7 @@ ifneq (,$(filter glm, $(SYSTEM_STUFF)))
 endif
 
 ifneq (,$(filter gpgmepp, $(SYSTEM_STUFF)))
-	BUILD_DEPS+= , libgpgmepp-dev, libgpgme-dev, libgpg-error-dev
+	BUILD_DEPS+= , libgpgmepp-dev (>= 1.14), libgpgme-dev, libgpg-error-dev
 endif
 ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , gpg$(OOO_NO_CHECK_ARCHS) <!nocheck>
