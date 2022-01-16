@@ -2129,6 +2129,17 @@ endif
 
 	rm -f config.status autogen.lastrun
 
+ifeq "$(ENABLE_HELP)" "y"
+  ifeq (pt,$(findstring pt,$(HELPISOS)))
+	# this somehow is missing. let's assume pt-BR is sufficiently ok for "original" pt
+	if [ ! -f helpcontent2/source/media/screenshots/modules/simpress/ui/prntopts/pt/prntopts.png ]; then \
+		mkdir -p helpcontent2/source/media/screenshots/modules/simpress/ui/prntopts/pt; \
+		cp helpcontent2/source/media/screenshots/modules/simpress/ui/prntopts/pt-BR/prntopts.png \
+			helpcontent2/source/media/screenshots/modules/simpress/ui/prntopts/pt; \
+	fi
+  endif
+endif
+
 	# now build with the indep stuff (javadoc, languages, ....)
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) \
 	MARIADBCONFIG=$(MARIADBCONFIG) \

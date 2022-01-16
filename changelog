@@ -4,11 +4,23 @@ libreoffice (1:7.4.0~alpha0~git20220105-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Wed, 17 Nov 2021 06:08:27 +0100
 
-libreoffice (1:7.3.0~rc2~git20211226-1) UNRELEASED; urgency=medium
+libreoffice (1:7.3.0~rc2-2) unstable; urgency=medium
 
-  * New upstream snapshot
+  * upload to unstable
 
- -- Rene Engelhard <rene@debian.org>  Thu, 23 Dec 2021 20:07:59 +0100
+  * debian/tests/control.in, debian/tests/uicheck-{sfx2,svx}:
+    also run uitests in sfx2 and svx
+  * debian/tests/control.in: try to optimize the order of the tests
+    a bit (especially for uicheck-*) to try reusing the testbed and
+    avoid costly copy(up|down)s
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 16 Jan 2022 11:30:18 +0100
+
+libreoffice (1:7.3.0~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 12 Jan 2022 20:17:15 +0100
 
 libreoffice (1:7.3.0~rc1-2) experimental; urgency=medium
 
