@@ -385,7 +385,8 @@ ifeq "$(ENABLE_HELP)" "y"
   ENABLE_HTML_HELP=y
   ENABLE_XMLHELP=y
   ifeq "$(ENABLE_HTML_HELP)" "y"
-  HELP_DEPENDS := libreoffice-help-common (= $${binary:Version}), firefox-esr | epiphany-browser | konqueror | chromium | firefox
+  HELP_DEPENDS := libreoffice-help-common (= $${binary:Version}),
+  HELP_RECOMMENDS := firefox-esr | epiphany-browser | konqueror | chromium | firefox
   HELP_COMMON_DEPENDS := libjs-normalize.css
   else
   HELP_DEPENDS := libreoffice-writer
@@ -3939,6 +3940,7 @@ endif
 		-V'numbertext-data-recommends=$(NUMBERTEXT_DATA_RECOMMENDS)' \
 		-V'pyuno-depends=$(PYUNO_DEPENDS)' \
 		-V'help-depends=$(HELP_DEPENDS)' \
+		-V'help-recommends=$(HELP_RECOMMENDS)' \
 		-V'help-common-depends=$(HELP_COMMON_DEPENDS)' \
 		-V'report-builder-jar-depends=$(REPORT_BUILDER_JAR_DEPENDS)' \
 		-V'Binary-Version=$(BINARY_VERSION)' \

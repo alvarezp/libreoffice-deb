@@ -1,7 +1,8 @@
 Package: libreoffice-help-@LCODE@
 Architecture: all
 Section: doc
-Recommends: libreoffice-core (>> ${base-version})
+Recommends: libreoffice-core (>> ${base-version}),
+ ${help-recommends}
 Depends: libreoffice-l10n-@LCODE@,
          libreoffice-common (>= 1:6.1.0~),
          ${help-depends},
