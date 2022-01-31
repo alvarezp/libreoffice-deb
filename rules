@@ -870,7 +870,7 @@ ifneq (,$(filter box2d, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libbox2d-dev
 endif
 
-ifneq (,$(filter libwebpd, $(SYSTEM_STUFF)))
+ifneq (,$(filter libwebp, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libwebp-dev
 endif
 
