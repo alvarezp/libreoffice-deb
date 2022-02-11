@@ -2072,30 +2072,11 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	rm -rf instdir-nogui
 	cp -r instdir instdir-nogui
 
-	# clean (git grep HAVE_FEATURE_UI). This also causes relinking
-	# since it relinks libmergedlo.so(?) but this is better than rebuilding
-	# the whole of vcl, framework, sw, ...
-	find workdir -name "spritehelper.o" \
-		-o -name "app.o" \
-		-o -name "cmdlineargs.o" \
-		-o -name "sofficemain.o" \
-		-o -name "splashx.o" \
-		-o -name "titlehelper.o" \
-		-o -name "svpinst.o" \
-		-o -name "salmain.o" \
-		-exec rm {} \;
-	find workdir instdir -name "*canvas*" \
-		-o -name "*libsofficeapp*" \
-		-o -name "*oosplash*" \
-		-o -name "*libfwe*" \
-		-o -name "*libvcl*" \
-		-exec rm {} \;
-	# more cleanup. global.cxx of libsc.o wants
-	# OpenGLWrapper::isVCLOpenGLEnabled()
-	find workdir -name "global.o" -exec rm {} \;
-	find workdir instdir -name "*libsc*" -exec rm {} \;
-	# it is required to regenerate main.xcd without --disable-gui
-	find workdir -name "main.xcd" -o -name "main.list" -exec rm {} \;
+	# clean. cleaning up only potentially affected ones was not really
+	# maintainable and broke running the uitests since something apparently was not rebuilt
+	# for "use UI" as it should.
+	# Better safe than sorry, even though that increases build time for a magnitude...
+	$(MAKE) clean
 endif
 
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) \
