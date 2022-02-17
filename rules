@@ -740,7 +740,7 @@ endif
       ifeq "$(CLANG_VERSION)" "default"
 	export LO_CLANG_CC=clang
 	export LO_CLANG_CXX=clang++
-	BUILD_DEPS += , clang (>= 1:5.0.2) [$(filter-out armel ppc64el,$(OOO_LE_ARCHS))]
+	BUILD_DEPS += , clang (>= 1:8.0.1) [$(filter-out armel ppc64el,$(OOO_LE_ARCHS))]
 	# see #963162, #963167 which apparently don't exist on 11
 	BUILD_DEPS += , clang (>= 1:11) [armel]
       else
@@ -752,7 +752,7 @@ endif
   endif
 else
   ifeq "$(CLANG_VERSION)" "default"
-	BUILD_DEPS += , clang (>= 1:5.0.2)
+	BUILD_DEPS += , clang (>= 1:8.0.1)
 	CONFIGURE_FLAGS+= CC=clang CXX=clang++
   else
 	BUILD_DEPS += , clang-$(CLANG_VERSION)
@@ -762,7 +762,7 @@ else
   	CONFIGURE_FLAGS += --enable-compiler-plugins
   	CLANGDIR := /usr/lib/llvm-$(shell $(CLANG) --version | head -n 1 | awk '{ print $$3 }' | cut -d. -f1)
     ifeq "$(CLANG_VERSION)" "default"
-	BUILD_DEPS += , libclang-dev, llvm-dev
+	BUILD_DEPS += , clang (>= 1:12.0.1), libclang-dev (>= 1:12.0.1), llvm-dev (>= 1:12.0.1)
     else
 	BUILD_DEPS += , libclang-$(CLANG_VERSION)-dev, llvm-$(CLANG_VERSION)-dev
     endif
