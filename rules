@@ -329,6 +329,7 @@ SYSTEM_STUFF += harfbuzz
 SYSTEM_STUFF += libexttextcat
 SYSTEM_STUFF += cppunit
 SYSTEM_STUFF += cuckoo
+SYSTEM_STUFF += dragonbox
 DEFAULT_IMAGE=colibre
 IMAGES:=$(DEFAULT_IMAGE) sifr sifr_dark sifr_dark_svg breeze breeze_dark breeze_dark_svg breeze_svg elementary elementary_svg karasa_jaga sukapura sukapura_svg
 # FIXME
@@ -646,7 +647,7 @@ endif
 # Debian Buster
 ifeq "$(DEB_DISTRIBUTION)" "bullseye-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out cuckoo zxing mdds orcus,$(SYSTEM_STUFF))
+  SYSTEM_STUFF := $(filter-out cuckoo zxing mdds orcus dragonbox,$(SYSTEM_STUFF))
   BULLSEYE_BACKPORT=y
   ENABLE_LTO=n
 endif
@@ -1163,6 +1164,9 @@ ifneq (,$(filter boost, $(SYSTEM_STUFF)))
   endif
   ifneq (,$(filter cuckoo, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libcuckoo-dev
+  endif
+  ifneq (,$(filter dragonbox, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , libdragonbox-dev
   endif
 endif
 
