@@ -213,7 +213,7 @@ Architecture: %OOO_ARCHS%
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
-         ure (>= 1:7.3.0~),
+         ure (>= 1:7.4.0~),
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libpaper-utils, ${gstreamer-plugins-suggests}
@@ -259,7 +259,7 @@ Architecture: %OOO_NOGUI_ARCHS%
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
-         ure (>= 1:7.3.0~),
+         ure (>= 1:7.4.0~),
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libpaper-utils

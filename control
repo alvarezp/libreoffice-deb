@@ -431,7 +431,7 @@ Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreeb
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
-         ure (>= 1:7.3.0~),
+         ure (>= 1:7.4.0~),
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libpaper-utils, ${gstreamer-plugins-suggests}
@@ -483,7 +483,7 @@ Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
-         ure (>= 1:7.3.0~),
+         ure (>= 1:7.4.0~),
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libpaper-utils
@@ -4699,8 +4699,8 @@ Replaces: libjuh-java (<< 1:6.4.0~rc1-6),
 Breaks: libjuh-java (<< 1:6.4.0~rc1-6),
         libjurt-java (<< 1:6.4.0~rc1-6),
         libreoffice-common (<< 1:4.5.0),
-        libreoffice-core (<< 1:7.2.0~),
-        libreoffice-core-nogui (<< 1:7.2.0~),
+        libreoffice-core (<< 1:7.4.0~),
+        libreoffice-core-nogui (<< 1:7.4.0~),
         libridl-java (<< 1:6.4.0~rc1-6),
         libunoloader-java (<< 1:6.4.0~rc1-6),
         ure-java (<< 1:7.1.1~rc2-1)
