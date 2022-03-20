@@ -40,7 +40,6 @@ fix-flaky-bridgetest.diff
 add-access2base-doc.diff
 disable-shortcuts_tab_navigation-uitest.diff
 no-opencl-per-default.diff
-pdfium-m68k.diff
 apparmor-updates.diff
 apparmor-gnupg-tofu.diff
 temporarily-disable-test-metadata-test.diff
