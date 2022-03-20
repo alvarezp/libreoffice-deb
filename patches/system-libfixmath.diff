@@ -14,7 +14,7 @@ index 1e26c8be4225..3c8031d1fdf2 100644
  AC_ARG_WITH(system-glm,
      AS_HELP_STRING([--with-system-glm],
          [Use glm already on system.]),,
-@@ -10578,6 +10627,23 @@ fi
+@@ -10578,6 +10627,24 @@ fi
  AC_SUBST([SYSTEM_DRAGONBOX])
  AC_SUBST([DRAGONBOX_CFLAGS])
  
@@ -28,6 +28,7 @@ index 1e26c8be4225..3c8031d1fdf2 100644
 +    AC_LANG_PUSH([C++])
 +    AC_CHECK_HEADER([libfixmath/fix16.hpp], [],
 +       [AC_MSG_ERROR([libfixmath/fix16.hpp not found. install libfixmath])], [])
++    AC_CHECK_LIB([libfixmath], [fix16_mul], [:], [AC_MSG_ERROR(libfixmath lib not found or functional)], [])
 +    AC_LANG_POP([C++])
 +else
 +    AC_MSG_RESULT([internal])
