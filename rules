@@ -603,8 +603,6 @@ ifeq (,$(filter $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
 	ENABLE_NLPSOLVER=n
 	DEBHELPER_OPTIONS += -Nlibreoffice-wiki-publisher -Nlibreoffice-script-provider-python -Nlibreoffice-nlpsolver
 	CONFIGURE_FLAGS += --disable-extension-integration --disable-extensions
-else
-	CONFIGURE_FLAGS += --enable-extension-integration
 endif
 
 ifeq (,$(filter $(DEB_HOST_ARCH),$(OOO_JAVA_ARCHS)))
@@ -2406,6 +2404,21 @@ ifneq "$(PACKAGE_LIBRELOGO)" "y"
 	rm -rf debian/tmp/pkg/libreoffice-librelogo
 endif
 
+	# FIXME; hack: somehow there only the dirs are there (dh_installdirs). they *are* in the install phase and gid2pkgdirs also
+	# is supposed to install it to the dir but apparently doesn't. They are in instdir though, so let's use it from
+	# there..
+ifeq "$(ENABLE_NLPSOLVER)" "y"
+	rm -rf debian/tmp/pkg/libreoffice-nlpsolver
+	mkdir -p debian/tmp/pkg/libreoffice-nlpsolver/$(OODIR)/share/extensions
+	cp -ra instdir/share/extensions/nlpsolver \
+		debian/tmp/pkg/libreoffice-nlpsolver/$(OODIR)/share/extensions
+endif
+ifeq "$(ENABLE_MEDIAWIKI)" "y"
+	mkdir -p debian/tmp/pkg/libreoffice-wiki-publisher/$(OODIR)/share/extensions
+	cp -ra instdir/share/extensions/wiki-publisher \
+		debian/tmp/pkg/libreoffice-wiki-publisher/$(OODIR)/share/extensions
+endif
+
 	for i in calc impress draw base writer; do \
 		echo "../usr/share/metainfo/libreoffice-$$i.appdata.xml /usr/share/metainfo/" >> $(PKGDIR)-$$i.install; \
 	done
@@ -2428,6 +2441,9 @@ endif
 
 	dh_installdirs -A
 	dh_install -A --sourcedir=debian/tmp/pkg && dh_missing -A --sourcedir=debian/tmp/pkg --fail-missing
+
+	find debian/libreoffice-nlpsolver
+	find debian/libreoffice-wiki-publisher
 
 	# somehow this isn't installed anymore on -B builds...
 	if [ ! -f debian/libreoffice-report-builder/$(OODIR)/program/librptlo.so ]; then \
