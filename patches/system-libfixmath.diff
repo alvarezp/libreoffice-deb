@@ -85,7 +85,7 @@ index d580ff3d2f6a..dfef474cf78a 100644
      -DDESKTOP_DETECTOR_DLL_NAME=\"$(call gb_Library_get_runtime_filename,$(call gb_Library__get_name,desktop_detector))\" \
      -DTK_DLL_NAME=\"$(call gb_Library_get_runtime_filename,$(call gb_Library__get_name,tk))\" \
      $(if $(SYSTEM_GLM),-DGLM_ENABLE_EXPERIMENTAL) \
-+    $(if $(SYSTEM_LIBFIXMATH),-DSYSTEM_LIBXFIXMATH) \
++    $(if $(SYSTEM_LIBFIXMATH),-DSYSTEM_LIBFIXMATH) \
  ))
  
  $(eval $(call gb_Library_use_sdk_api,vcl))
@@ -97,7 +97,7 @@ index 800f161a744a..eb80790932ab 100644
  #endif
  #include <sft.hxx>
  #include <impfontcharmap.hxx>
-+#ifndef SYSTEM_LIBFIXMATH
++#ifdef SYSTEM_LIBFIXMATH
 +#include <libfixmath/fix16.hpp>
 +#else
  #include <tools/fix16.hxx>
