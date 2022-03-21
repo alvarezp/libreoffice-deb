@@ -13,3 +13,4 @@ libuno_cppuhelpergcc3.so.3 libuno-cppuhelpergcc3-3 #MINVER#, uno-libs-private
 # add new stuff BELOW this line
 # and note that the stuff above HAS NO epoch but the
 # below HAS
+ (symver)LIBO_UDK_7.4 1:7.4.0~alpha
