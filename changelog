@@ -1,4 +1,4 @@
-libreoffice (1:7.4.0~alpha0~git20220328-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.0~alpha0~git20220401-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
     - adds support for webp (closes: #998753)
