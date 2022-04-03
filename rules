@@ -643,7 +643,7 @@ endif
 #############
 # Distro-specific overrides
 
-# Debian Buster
+# Debian Bullseye
 ifeq "$(DEB_DISTRIBUTION)" "bullseye-backports"
   BUGS=mailto:debian-backports@lists.debian.org
   SYSTEM_STUFF := $(filter-out cuckoo zxing mdds orcus dragonbox libfixmath,$(SYSTEM_STUFF))
