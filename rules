@@ -2414,15 +2414,20 @@ endif
 	# is supposed to install it to the dir but apparently doesn't. They are in instdir though, so let's use it from
 	# there..
 ifeq "$(ENABLE_NLPSOLVER)" "y"
-	rm -rf debian/tmp/pkg/libreoffice-nlpsolver
-	mkdir -p debian/tmp/pkg/libreoffice-nlpsolver/$(OODIR)/share/extensions
-	cp -ra instdir/share/extensions/nlpsolver \
-		debian/tmp/pkg/libreoffice-nlpsolver/$(OODIR)/share/extensions
+	if [ -d instdir/share/extensions/nlpsolver]; then \
+		rm -rf debian/tmp/pkg/libreoffice-nlpsolver; \
+		mkdir -p debian/tmp/pkg/libreoffice-nlpsolver/$(OODIR)/share/extensions; \
+		cp -ra instdir/share/extensions/nlpsolver \
+			debian/tmp/pkg/libreoffice-nlpsolver/$(OODIR)/share/extensions; \
+	fi
 endif
 ifeq "$(ENABLE_MEDIAWIKI)" "y"
-	mkdir -p debian/tmp/pkg/libreoffice-wiki-publisher/$(OODIR)/share/extensions
-	cp -ra instdir/share/extensions/wiki-publisher \
-		debian/tmp/pkg/libreoffice-wiki-publisher/$(OODIR)/share/extensions
+	if [ -d instdir/share/extensions/wiki-publisher ]; then \
+		rm -rf debian/tmp/pkg/libreoffice-wiki-publisher; \
+		mkdir -p debian/tmp/pkg/libreoffice-wiki-publisher/$(OODIR)/share/extensions; \
+		cp -ra instdir/share/extensions/wiki-publisher \
+			debian/tmp/pkg/libreoffice-wiki-publisher/$(OODIR)/share/extensions; \
+	fi
 endif
 
 	for i in calc impress draw base writer; do \
