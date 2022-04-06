@@ -2453,9 +2453,6 @@ endif
 	dh_installdirs -A
 	dh_install -A --sourcedir=debian/tmp/pkg && dh_missing -A --sourcedir=debian/tmp/pkg --fail-missing
 
-	find debian/libreoffice-nlpsolver
-	find debian/libreoffice-wiki-publisher
-
 	# somehow this isn't installed anymore on -B builds...
 	if [ ! -f debian/libreoffice-report-builder/$(OODIR)/program/librptlo.so ]; then \
 		mkdir -p debian/libreoffice-report-builder/$(OODIR)/program/; \
