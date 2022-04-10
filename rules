@@ -2416,7 +2416,7 @@ endif
 	# is supposed to install it to the dir but apparently doesn't. They are in instdir though, so let's use it from
 	# there..
 ifeq "$(ENABLE_NLPSOLVER)" "y"
-	if [ -d instdir/share/extensions/nlpsolver]; then \
+	if [ -d instdir/share/extensions/nlpsolver ]; then \
 		rm -rf debian/tmp/pkg/libreoffice-nlpsolver; \
 		mkdir -p debian/tmp/pkg/libreoffice-nlpsolver/$(OODIR)/share/extensions; \
 		cp -ra instdir/share/extensions/nlpsolver \
