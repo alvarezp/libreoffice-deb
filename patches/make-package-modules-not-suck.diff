@@ -42,8 +42,8 @@ index 7d2a347..a15ac52 100644
  $(eval $(call gb_AutoInstall_add_module,calc_brand,,LIBO_EXECUTABLE,,PACKAGE_FILELIST))
 +$(eval $(call gb_AutoInstall_add_module,draw,LIBO_LIB_FILE))
  $(eval $(call gb_AutoInstall_add_module,draw_brand,,LIBO_EXECUTABLE,,PACKAGE_FILELIST))
- $(eval $(call gb_AutoInstall_add_module,extensions_ct2n,,,,PACKAGE_FILELIST))
  $(eval $(call gb_AutoInstall_add_module,extensions_bsh,,,LIBO_JAR_FILE))
+ $(eval $(call gb_AutoInstall_add_module,extensions_numbertext,,,,PACKAGE_FILELIST))
 diff --git a/Repository.mk b/Repository.mk
 index f386b8aa7c05..7c337f23891b 100644
 --- a/Repository.mk
