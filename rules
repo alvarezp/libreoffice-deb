@@ -1121,6 +1121,8 @@ ifeq "$(ENABLE_NSS)" "y"
   ifneq (,$(filter nss, $(SYSTEM_STUFF)))
 	BUILD_DEPS+= , libnss3-dev (>= 3.12.3)
 	BUILD_DEPS+= , libnspr4-dev
+  else
+	CONFIGURE_FLAGS += --without-system-nss
   endif
 else
 	CONFIGURE_FLAGS += --disable-nss

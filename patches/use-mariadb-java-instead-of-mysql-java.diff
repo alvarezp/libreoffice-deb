@@ -52,8 +52,8 @@ index 95094265e..c0ad7802e 100644
          if (!jdc)
          {
              aProps.push_back(PropertyValue("JavaDriverClass", 0,
--                                           makeAny(OUString("com.mysql.jdbc.Driver")),
-+                                           makeAny(OUString("org.mariadb.jdbc.Driver")),
+-                                           Any(OUString("com.mysql.jdbc.Driver")),
++                                           Any(OUString("org.mariadb.jdbc.Driver")),
                                             PropertyState_DIRECT_VALUE));
          }
      }
