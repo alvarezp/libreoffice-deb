@@ -964,6 +964,9 @@ endif
 	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
 	BUILD_DEPS_ARCH += , fonts-kacst$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	# now we get a abort if fonts is not found and replaced in layout tests
+	# and Linux Libertine G is used in test documents
+	BUILD_DEPS_ARCH += , fonts-linuxlibertine$(OOO_NO_CHECK_ARCHS) <!nocheck>
     ifneq (,$(filter cppunit, $(SYSTEM_STUFF)))
 	BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.14)$(OOO_NO_CHECK_ARCHS) <!nocheck>
       # without the deterministic order patch the xmlsecurity_signing test fails. See
