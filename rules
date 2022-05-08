@@ -964,8 +964,12 @@ endif
 	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
 	BUILD_DEPS_ARCH += , fonts-kacst$(OOO_NO_CHECK_ARCHS) <!nocheck>
-	# now we get a abort if fonts is not found and replaced in layout tests
-	# and Linux Libertine G is used in test documents
+	# FIXME: Linux Libertine G (does fonts-linuxlibertine even contain it?, I don't see the _G files?)
+	# now is used in test documents.
+	# now we get a abort if fonts is not found and replaced in layout tests (even though
+	# https://cgit.freedesktop.org/libreoffice/core/commit/?id=172270a8f04388a8f8062f672f9c3f3144a01a1f suggests that
+	# it isn't the case in --without-fonts) but... And while we disable that abort via patch having this
+	# to be sure there is no other failure mode makes sense (as with the other fonts above)
 	BUILD_DEPS_ARCH += , fonts-linuxlibertine$(OOO_NO_CHECK_ARCHS) <!nocheck>
     ifneq (,$(filter cppunit, $(SYSTEM_STUFF)))
 	BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.14)$(OOO_NO_CHECK_ARCHS) <!nocheck>
