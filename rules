@@ -368,9 +368,7 @@ ENABLE_PDFIMPORT=y
 ENABLE_POPPLER=y
 SYSTEM_STUFF += poppler
 ENABLE_PDFIUM=y
-ifneq (big,$(DEB_HOST_ARCH_ENDIAN))
 ENABLE_SKIA=y
-endif
 # see https://cgit.freedesktop.org/libreoffice/core/commit/?id=a0edcc68f94915a78fcc08e70d2cdd752abd9ebb
 ifeq "$(ENABLE_SKIA)" "y"
     BUILD_DEPS += , libfreetype6-dev (>= 2.8.1)
@@ -686,9 +684,9 @@ ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
     else
       ifeq "$(ALLOW_CLANG)" "y"
         ifeq "$(CLANG_VERSION)" "default"
-	  BUILD_DEPS += , llvm [$(OOO_LE_ARCHS)]
+	  BUILD_DEPS += , llvm
         else
-	  BUILD_DEPS += , llvm-$(CLANG_VERSION)-linker-tools [$(OOO_LE_ARCHS)]
+	  BUILD_DEPS += , llvm-$(CLANG_VERSION)-linker-tools
         endif
       endif
     endif
@@ -740,7 +738,7 @@ endif
       ifeq "$(CLANG_VERSION)" "default"
 	export LO_CLANG_CC=clang
 	export LO_CLANG_CXX=clang++
-	BUILD_DEPS += , clang (>= 1:8.0.1) [$(filter-out armel ppc64el,$(OOO_LE_ARCHS))]
+	BUILD_DEPS += , clang (>= 1:8.0.1) [$(filter-out armel ppc64el,$(OOO_ARCHS))]
 	# see #963162, #963167 which apparently don't exist on 11
 	BUILD_DEPS += , clang (>= 1:11) [armel]
       else
