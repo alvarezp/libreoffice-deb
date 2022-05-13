@@ -1299,7 +1299,7 @@ endif
 
 ifeq "$(ENABLE_EOT)" "y"
  	CONFIGURE_FLAGS += --enable-eot
- ifneq (,$(filter libeot, $(SYSTEM_STUFF)))
+ ifneq (,$(filter eot, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libeot-dev
  endif
 endif
