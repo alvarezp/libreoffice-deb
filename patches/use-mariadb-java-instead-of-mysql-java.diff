@@ -42,9 +42,9 @@ index 95094265e..c0ad7802e 100644
 @@ -54,7 +54,7 @@ namespace
  OUString getJavaDriverClass(css::uno::Sequence<css::beans::PropertyValue> const& info)
  {
-     return comphelper::NamedValueCollection(info).getOrDefault("JavaDriverClass",
--                                                               OUString("com.mysql.jdbc.Driver"));
-+                                                               OUString("org.mariadb.jdbc.Driver"));
+     return comphelper::NamedValueCollection::getOrDefault(info, u"JavaDriverClass",
+-                                                          OUString("com.mysql.jdbc.Driver"));
++                                                          OUString("org.mariadb.jdbc.Driver"));
  }
  }
  

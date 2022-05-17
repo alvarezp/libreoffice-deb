@@ -1,3 +1,9 @@
+libreoffice (1:7.4.0~beta1~git20220517-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
+
 libreoffice (1:7.4.0~alpha1-2) experimental; urgency=medium
 
   * fix eot conditional 

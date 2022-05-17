@@ -2208,9 +2208,6 @@ ifeq "$(RUN_MAKE_CHECK)" "y"
 	mkdir -p $(CURDIR)/debian/locales
 	USE_CPUS=$(NUM_CPUS) debian/scripts/locale-gen
 
-	# FIXME: test fails
-	rm -f sc/qa/unit/data/functions/text/fods/clean.fods
-
         # and now run them
 	$(IGNORE_MAKE_CHECK_FAILURES)t=`mktemp -q -d`; \
 	cd $(SOURCE_TREE) && \
