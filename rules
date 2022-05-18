@@ -644,7 +644,7 @@ endif
 # Debian Bullseye
 ifeq "$(DEB_DISTRIBUTION)" "bullseye-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out cuckoo zxing mdds orcus libnumbertext dragonbox libfixmath,$(SYSTEM_STUFF))
+  SYSTEM_STUFF := $(filter-out cuckoo zxing mdds orcus libnumbertext dragonbox libfixmath libmwaw,$(SYSTEM_STUFF))
   BULLSEYE_BACKPORT=y
   ENABLE_LTO=n
 endif
@@ -1229,9 +1229,10 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   endif
   ifneq (,$(filter libmwaw, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libmwaw-dev (>= 0.3.1), libmwaw-dev (<< 0.4~)
-    ifeq "$(RUN_MAKE_CHECK)" "y"
-	BUILD_DEPS_ARCH += , libmwaw-dev (>= 0.3.21)$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    endif
+#    ifeq "$(RUN_MAKE_CHECK)" "y"
+#	BUILD_DEPS_ARCH += , libmwaw-dev (>= 0.3.21)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , libmwaw-dev (>= 0.3.21)
+#    endif
   endif
   ifneq (,$(filter libodfgen, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libodfgen-dev (>= 0.1), libodfgen-dev (<< 0.2~)
