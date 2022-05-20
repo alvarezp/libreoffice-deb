@@ -443,6 +443,7 @@ endif
 SYSTEM_STUFF += libnumbertext
 SYSTEM_STUFF += box2d
 SYSTEM_STUFF += libwebp
+SYSTEM_STUFF += libtiff
 
 # Default flags to pass to configure
 CONFIGURE_FLAGS+= \
@@ -872,6 +873,10 @@ endif
 
 ifneq (,$(filter libwebp, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libwebp-dev
+endif
+
+ifneq (,$(filter libtiff, $(SYSTEM_STUFF)))
+       BUILD_DEPS += , libtiff-dev
 endif
 
 COINMP_MINVER=(>= 1.7.6+dfsg1-2)
