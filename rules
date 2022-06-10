@@ -399,12 +399,6 @@ endif
 SYSTEM_STUFF += lcms2
 SYSTEM_STUFF += liblangtag
 SYSTEM_STUFF += orcus
-USE_UCPP=n
-ifeq "$(USE_UCPP)" "y"
-  SYSTEM_STUFF += ucpp
-else
-  CONFIGURE_FLAGS += --with-idlc-cpp=cpp
-endif
 # kfreebsd runs into SIZE_MAX problems, and the rest might
 # get OOM (mips(el)...) so enable mergelibs only for 64bit
 # archs
@@ -1137,16 +1131,6 @@ ifeq "$(ENABLE_NSS)" "y"
 else
 	CONFIGURE_FLAGS += --disable-nss
 endif
-
-ifeq "$(USE_UCPP)" "y"
-  ifneq (,$(filter ucpp, $(SYSTEM_STUFF)))
-	IDLC_CPP_DEPENDS := ucpp
-  endif
-else
-	IDLC_CPP_DEPENDS := cpp
-	CONFIGURE_FLAGS += --with-idlc-cpp=cpp
-endif
-	BUILD_DEPS += , $(IDLC_CPP_DEPENDS)
 
 ifneq (,$(filter hunspell, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libhunspell-dev (>= 1.1.5-2)
@@ -2034,9 +2018,6 @@ $(STAMP_DIR)/prepare:
 
 	mkdir -p $(STAMP_DIR)
 
-	# Make sure we have /proc mounted - otherwise idlc will fail later.
-	test -r /proc/version
-
 ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 ifeq (terse,$(findstring terse,$(DEB_BUILD_OPTIONS)))
 	if [ -d .pc/do-not-hide-test-output.diff ]; then \
@@ -2569,9 +2550,6 @@ ifeq "$(PACKAGE_SDK)" "y"
 		$(PKGDIR)-dev/usr/include/$(DEB_HOST_MULTIARCH)/libreoffice/sal
 	cd $(PKGDIR)-dev/usr/include/libreoffice/sal/ && \
 		ln -s /usr/include/$(DEB_HOST_MULTIARCH)/libreoffice/sal/typesizes.h
-	mkdir -p $(PKGDIR)-dev-common/usr/share/idl
-	mv $(PKGDIR)-dev/usr/share/idl/libreoffice \
-		$(PKGDIR)-dev-common/usr/share/idl
 	mkdir -p $(PKGDIR)-dev-common/$(OOSDKDIR)
 	mv $(PKGDIR)-dev/$(OOSDKDIR)/classes \
 		$(PKGDIR)-dev-common/$(OOSDKDIR)
@@ -2626,9 +2604,6 @@ ifeq "$(PACKAGE_SDK)" "y"
   endif
 	chmod 644 $(PKGDIR)-dev-common/$(OOSDKDIR)/configure.pl
 	chmod 755 $(PKGDIR)-dev-common/$(OOSDKDIR)/setsdkenv_unix
-
-	# fix permissions
-	find $(PKGDIR)-dev-common/usr/share/idl/$(OODIRNAME) -type f -exec chmod 644 {} \;
 endif
 
 ifeq "$(ENABLE_EVO2)" "y"
@@ -3838,7 +3813,6 @@ endif
 		-V'lpsolve-dep=$(LPSOLVE_DEP)' \
 		-V'gstreamer-plugins-suggests=$(GSTREAMER_PLUGINS_SUGGESTS)' \
 		-V'libebook-dep=$(LIBEBOOK_DEP)' \
-		-V'idlc-cpp-depends=$(IDLC_CPP_DEPENDS)' \
 		-V'pyuno-depends=$(PYUNO_DEPENDS)' \
 		-V'gnome-gtk-recommends=$(GNOME_GTK_RECOMMENDS)' \
 		-V'firebird-engine-depends=$(FIREBIRD_ENGINE_DEPENDS)' \

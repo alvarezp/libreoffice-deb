@@ -14,7 +14,6 @@ Build-Depends: autoconf,
                clang (>= 1:8.0.1) [alpha amd64 arm64 armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 s390 s390x sparc sparc64],
                coinor-libcoinmp-dev (>= 1.8.3-3),
                coinor-libcoinutils-dev (>= 2.10.14+repack1-1),
-               cpp,
                debhelper (>= 10.10.4),
                debhelper-compat (= 12),
                default-jdk (>= 2:1.9) [!hppa !s390 !sparc !hurd-i386] <!nojava>,
@@ -4881,7 +4880,6 @@ Section: devel
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          libreoffice-dev-common (= ${source:Version}),
-         ${idlc-cpp-depends},
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: g++, ${java-common-depends}, ${java-runtime-depends}

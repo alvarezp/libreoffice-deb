@@ -141,8 +141,8 @@ index 5f2654b..471210f 100644
 --- a/Repository.mk
 +++ b/Repository.mk
 @@ -834,7 +841,7 @@ $(eval $(call gb_Helper_register_packages_for_install,sdk,\
- 	offapi_idl \
- 	udkapi_idl \
+ 	odk_settings \
+ 	odk_settings_generated \
  	$(if $(ENABLE_JAVA), \
 -		odk_javadoc \
 +		$(if $(JAVADOC),odk_javadoc) \
