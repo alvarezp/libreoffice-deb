@@ -1,3 +1,10 @@
+libreoffice (1:7.4.0~beta1-2) UNRELEASED; urgency=medium
+
+  * debian/patches/fix-bigendian.diff: fix ww8 filter build on bigendian
+  * debian/patches/fix-32bit.diff: fix new a11y cppunits tests on 32bit
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 10 Jun 2022 21:50:46 +0200
+
 libreoffice (1:7.4.0~beta1-1) experimental; urgency=medium
 
   * New upstream beta release

@@ -1,0 +1,29 @@
+From 170a594dc10b66ff01c4dd8df48d87f8be39e4a7 Mon Sep 17 00:00:00 2001
+From: Rene Engelhard <rene@rene-engelhard.de>
+Date: Fri, 10 Jun 2022 19:45:46 +0200
+Subject: [PATCH] really fix bigendian builds
+
+this time - since I missed to take over one rename
+between trees. sigh. Continues 089c91b1ad16232f130cb50266732509f83c52eb
+
+Change-Id: I726410ab1024b995937952fbce1214866ee8ba19
+---
+ sw/source/filter/ww8/ww8scan.cxx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sw/source/filter/ww8/ww8scan.cxx b/sw/source/filter/ww8/ww8scan.cxx
+index d6e3a81b4bf1..f9529062cde1 100644
+--- a/sw/source/filter/ww8/ww8scan.cxx
++++ b/sw/source/filter/ww8/ww8scan.cxx
+@@ -2159,7 +2159,7 @@ WW8PLCFspecial::WW8PLCFspecial(SvStream* pSt, sal_uInt32 nFilePos,
+ 
+     m_nIMax = ( nPLCF - 4 ) / ( 4 + nStruct );
+ #ifdef OSL_BIGENDIAN
+-    for( m_nIdx = 0; m_nIdx <= m_nIMax; nIdx++ )
++    for( m_nIdx = 0; m_nIdx <= m_nIMax; m_nIdx++ )
+         m_pPLCF_PosArray[m_nIdx] = OSL_SWAPDWORD( m_pPLCF_PosArray[m_nIdx] );
+     m_nIdx = 0;
+ #endif // OSL_BIGENDIAN
+-- 
+2.30.2
+
