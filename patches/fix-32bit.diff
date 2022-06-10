@@ -40,10 +40,10 @@ index 5613724786b9..b260a0edb1c7 100644
 -    CPPUNIT_ASSERT_GREATEREQUAL(0, bounds.Y);
 -    CPPUNIT_ASSERT_GREATER(0, bounds.Width);
 -    CPPUNIT_ASSERT_GREATER(0, bounds.Height);
-+    CPPUNIT_ASSERT_GREATEREQUAL(static_cast<sal_Int16>(0), bounds.X);
-+    CPPUNIT_ASSERT_GREATEREQUAL(static_cast<sal_Int16>(0), bounds.Y);
-+    CPPUNIT_ASSERT_GREATER(static_cast<sal_Int16>(0), bounds.Width);
-+    CPPUNIT_ASSERT_GREATER(static_cast<sal_Int16>(0), bounds.Height);
++    CPPUNIT_ASSERT_GREATEREQUAL(static_cast<sal_Int32>(0), bounds.X);
++    CPPUNIT_ASSERT_GREATEREQUAL(static_cast<sal_Int32>(0), bounds.Y);
++    CPPUNIT_ASSERT_GREATER(static_cast<sal_Int32>(0), bounds.Width);
++    CPPUNIT_ASSERT_GREATER(static_cast<sal_Int32>(0), bounds.Height);
  }
  
  /**
@@ -56,7 +56,7 @@ index 3a7eb70e9dd5..9a32f12c2f45 100644
      auto childCount = mxContext->getAccessibleChildCount();
      std::cout << childCount << " children found." << std::endl;
 -    CPPUNIT_ASSERT_GREATEREQUAL(0, childCount);
-+    CPPUNIT_ASSERT_GREATEREQUAL(static_cast<sal_Int16>(0), childCount);
++    CPPUNIT_ASSERT_GREATEREQUAL(static_cast<sal_Int32>(0), childCount);
  }
  
  /**
@@ -66,8 +66,8 @@ index 3a7eb70e9dd5..9a32f12c2f45 100644
      std::cout << "The locale is " << loc.Language << "," << loc.Country << std::endl;
 -    CPPUNIT_ASSERT_GREATER(0, loc.Language.getLength());
 -    CPPUNIT_ASSERT_GREATER(0, loc.Country.getLength());
-+    CPPUNIT_ASSERT_GREATER(static_cast<sal_Int16>(0), loc.Language.getLength());
-+    CPPUNIT_ASSERT_GREATER(static_cast<sal_Int16>(0), loc.Country.getLength());
++    CPPUNIT_ASSERT_GREATER(static_cast<sal_Int32>(0), loc.Language.getLength());
++    CPPUNIT_ASSERT_GREATER(static_cast<sal_Int32>(0), loc.Country.getLength());
  }
  
  /* vim:set shiftwidth=4 softtabstop=4 expandtab cinoptions=b1,g0,N-s cinkeys+=0=break: */
