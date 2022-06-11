@@ -28,6 +28,8 @@ libreoffice (1:7.4.0~alpha1-1) experimental; urgency=medium
   * debian/rules:
    - run make clean after nogui builds instead of trying to manually clean
      up affected files
+   - enable skia also on bigendian archs since upstream does this now and
+     "and despite the disclaimer it reportedly works fine"
   * debian/watch: watch alpha/betas
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 16:53:37 +0200
