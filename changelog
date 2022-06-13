@@ -1,6 +1,9 @@
 libreoffice (1:7.4.0~beta1-3) UNRELEASED; urgency=medium
 
-  * disable skia on bigendian archs again 
+  * debian/patches/patches/tdf148395-do-no-rely-on-math-and-impress.diff:
+    add from upstream gerrit; remove assert that fails depending on which
+    components are installed
+  * debian/rules: disable skia on bigendian archs again 
 
  -- Rene Engelhard <rene@debian.org>  Sat, 11 Jun 2022 20:59:44 +0200
 
