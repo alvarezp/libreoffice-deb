@@ -1,8 +1,6 @@
 libreoffice (1:7.4.0~beta1-3) UNRELEASED; urgency=medium
 
-  * debian/rules: disable skia on bigendian archs again 
-  * debian/tests/control.in: make uicheck-sw depend on libreoffice-math and
-    impress since a test now assumes exactly 5 choices of OLE objects...
+  * disable skia on bigendian archs again 
 
  -- Rene Engelhard <rene@debian.org>  Sat, 11 Jun 2022 20:59:44 +0200
 
