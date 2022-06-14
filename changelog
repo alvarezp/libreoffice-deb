@@ -4,6 +4,19 @@ libreoffice (1:7.5.0~alpha0~git20220610-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
+libreoffice (1:7.4.0~beta1-3) experimental; urgency=medium
+
+  * debian/patches/patches/tdf148395-do-no-rely-on-math-and-impress.diff:
+    add from upstream gerrit; remove assert that fails depending on which
+    components are installed
+  * debian/rules:
+    - disable skia on bigendian archs again 
+    - force libuno-sal3 (>= 1:7.4.0~beta1) dependency for -core to be sure
+      since the uno:EditGlossary test (in openDialogs.openDialogs)
+      segfaults/hangs with 7.3.4s libuno-sal3
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 14 Jun 2022 06:27:46 +0200
+
 libreoffice (1:7.4.0~beta1-2) experimental; urgency=medium
 
   * debian/patches/fix-bigendian.diff: fix ww8 filter build on bigendian
@@ -34,6 +47,8 @@ libreoffice (1:7.4.0~alpha1-1) experimental; urgency=medium
   * debian/rules:
    - run make clean after nogui builds instead of trying to manually clean
      up affected files
+   - enable skia also on bigendian archs since upstream does this now and
+     "and despite the disclaimer it reportedly works fine"
   * debian/watch: watch alpha/betas
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 16:53:37 +0200
