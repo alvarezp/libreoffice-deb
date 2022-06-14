@@ -1,4 +1,4 @@
-libreoffice (1:7.4.0~beta1-3) UNRELEASED; urgency=medium
+libreoffice (1:7.4.0~beta1-3) experimental; urgency=medium
 
   * debian/patches/patches/tdf148395-do-no-rely-on-math-and-impress.diff:
     add from upstream gerrit; remove assert that fails depending on which
@@ -9,7 +9,7 @@ libreoffice (1:7.4.0~beta1-3) UNRELEASED; urgency=medium
       since the uno:EditGlossary test (in openDialogs.openDialogs)
       segfaults/hangs with 7.3.4s libuno-sal3
 
- -- Rene Engelhard <rene@debian.org>  Mon, 13 Jun 2022 20:07:24 +0200
+ -- Rene Engelhard <rene@debian.org>  Tue, 14 Jun 2022 06:27:46 +0200
 
 libreoffice (1:7.4.0~beta1-2) experimental; urgency=medium
 
