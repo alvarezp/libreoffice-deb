@@ -4,6 +4,12 @@ libreoffice (1:7.5.0~alpha0~git20220610-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
+libreoffice (1:7.4.0~beta2~git20220614-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 12 Jun 2022 17:19:00 +0200
+
 libreoffice (1:7.4.0~beta1-4) experimental; urgency=medium
 
   * debian/rules: oops, fix too greedy sed call... 
