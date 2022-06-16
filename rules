@@ -3810,9 +3810,9 @@ endif
 	perl -pi -e "s/coinor-libcoinmp1v5/coinor-libcoinmp1v5 $(COINMP_MINVER)/" \
 		debian/libreoffice-calc.substvars
   endif
-  # FIXME. Otherwise the unoEditGlossary openDialog test crashes and hangs. go sure to make sure it doesn't
-  # happen on runtime. No idea whether alpha1 would suffice but it doesn't really matter in practice anyway :)
-	perl -pi -e "s/libuno-sal3 \(.*\)/libuno-sal3 \(>= 1:7.4.0~beta1\)/" \
+  	# FIXME. Otherwise the unoEditGlossary openDialog test crashes and hangs. go sure to make sure it doesn't
+	# happen on runtime. No idea whether alpha1 would suffice but it doesn't really matter in practice anyway :)
+	perl -pi -e "s/, libuno-sal3 \(>= 1:7.3.0~beta1\),/, libuno-sal3 \(>= 1:7.4.0~beta1\),/" \
 			debian/libreoffice-core.substvars
 ifeq "$(ENABLE_JAVA)" "y"
 	for p in $(ARCH_DEP_PACKAGES); do \
