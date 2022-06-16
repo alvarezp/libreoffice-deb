@@ -4,6 +4,12 @@ libreoffice (1:7.5.0~alpha0~git20220610-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
+libreoffice (1:7.4.0~beta1-4) experimental; urgency=medium
+
+  * debian/rules: oops, fix too greedy sed call... 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 16 Jun 2022 19:24:35 +0200
+
 libreoffice (1:7.4.0~beta1-3) experimental; urgency=medium
 
   * debian/patches/patches/tdf148395-do-no-rely-on-math-and-impress.diff:
