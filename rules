@@ -2020,6 +2020,10 @@ $(STAMP_DIR)/prepare:
 
 	mkdir -p $(STAMP_DIR)
 
+	# Make sure we have /proc mounted.
+	# Otherwise configure will fail since java -version fails without /proc...
+	test -r /proc/version
+
 ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 ifeq (terse,$(findstring terse,$(DEB_BUILD_OPTIONS)))
 	if [ -d .pc/do-not-hide-test-output.diff ]; then \
