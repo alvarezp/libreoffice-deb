@@ -80,7 +80,7 @@ Architecture: amd64 arm64
 Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-math, libreoffice-base, libreoffice-subsequentcheckbase, libreoffice-sdbc-hsqldb, libreoffice-sdbc-firebird
 Restrictions: allow-stderr, skippable
 
-Test-Command: export DOXYGEN=`command -v doxygen`; export ENABLE_JAVA=TRUE; export JDK=sun; export JAVADOC=/usr/lib/jvm/default-java/bin/javadoc; perl odk/util/check.pl /usr/lib/libreoffice/sdk
+Test-Command: export SYSTEM_UCPP=TRUE; export DOXYGEN=`command -v doxygen`; export ENABLE_JAVA=TRUE; export JDK=sun; export JAVADOC=/usr/lib/jvm/default-java/bin/javadoc; perl odk/util/check.pl /usr/lib/libreoffice/sdk
 Features: test-name=sdk-complete
 Depends: libreoffice-dev, libreoffice-dev-doc
 Restrictions: superficial
