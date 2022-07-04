@@ -116,5 +116,5 @@ index 37acfdc3730f..7d26342f179f 100644
  ))
 +#    CppunitTest_chart2_dump \
  
- ifeq ($(ENABLE_CHART_TESTS),TRUE)
  ifeq ($(WITH_FONTS), TRUE)
+ $(eval $(call gb_Module_add_slowcheck_targets,chart2,\
