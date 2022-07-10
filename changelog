@@ -1,14 +1,32 @@
-libreoffice (1:7.5.0~alpha0~git20220704-1) UNRELEASED; urgency=medium
+libreoffice (1:7.5.0~alpha0~git20220708-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
+
+  * debian/watch: alpha/betas again 
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
-libreoffice (1:7.4.0~rc1~git20220628-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.0~rc2~git20220708-1) UNRELEASED; urgency=medium
 
-  * New upstream snapshot 
+  * New upstream snapshot
 
- -- Rene Engelhard <rene@debian.org>  Sun, 12 Jun 2022 17:19:00 +0200
+ -- Rene Engelhard <rene@debian.org>  Fri, 08 Jul 2022 16:35:36 +0200
+
+libreoffice (1:7.4.0~rc1-2) experimental; urgency=medium
+
+  * debian/patches/TestEmfPlusDrawPathWithCustomCap-Aarch64.diff,
+    emfio/qa/cppunit/emf/data/TestEmfPlusDrawPathWithCustomCap.emf: add patch
+    from libreoffice-7-4 branch to fix emf test failure on arm64
+
+  * debian/watch: track rcs again 
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 08 Jul 2022 16:20:08 +0200
+
+libreoffice (1:7.4.0~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 07 Jul 2022 03:44:09 +0200
 
 libreoffice (1:7.4.0~beta1-4) experimental; urgency=medium
 
