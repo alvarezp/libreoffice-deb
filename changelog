@@ -12,6 +12,13 @@ libreoffice (1:7.4.0~rc2~git20220708-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Fri, 08 Jul 2022 16:35:36 +0200
 
+libreoffice (1:7.4.0~rc1-3) experimental; urgency=medium
+
+  * debian/rules: use -O0 on s390x to work around miscompile, thanks
+    Stephan Bergmann for analysis. 
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 19 Jul 2022 17:09:13 +0200
+
 libreoffice (1:7.4.0~rc1-2) experimental; urgency=medium
 
   * debian/patches/TestEmfPlusDrawPathWithCustomCap-Aarch64.diff,

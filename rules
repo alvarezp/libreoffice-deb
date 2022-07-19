@@ -721,6 +721,15 @@ ifeq "$(DEB_HOST_ARCH)" "armhf"
     endif
   endif
 endif
+  # and also on s390x since it otherwise gets miscompiled.
+  # Upstream tacked it down to a gcc bug: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106355
+  # but
+  # 16:37 <@sberg> _rene_, I couldn't reproduce the issue with an -O0 (--enable-dbgutil) build, and can with a -O2 (no --enable-debug etc.) one
+ifeq "$(DEB_HOST_ARCH)" "s390x"
+  ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	DEB_BUILD_OPTIONS += noopt
+  endif
+endif
   # skia build picks up clang if present (for performance reasons,
   # at least on Windows...). See the thread starting at
   # https://lists.freedesktop.org/archives/libreoffice/2020-April/084929.html
