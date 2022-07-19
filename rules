@@ -1613,6 +1613,13 @@ ifeq ($(ENABLE_LTO),y)
 	# see https://lists.debian.org/debian-devel-changes/2021/11/msg02548.html
 	BUILD_DEPS += , binutils (>= 2.37-9) [ppc64]
 endif
+# go sure. if we explicitely disable LTO when it is enabled we don't want it to sneak in
+# (and vice-versa). See https://lists.debian.org/debian-devel/2022/06/msg00092.html
+ifeq ($(ENABLE_LTO),y)
+export DEB_BUILD_MAINT_OPTIONS=optimize=+lto
+else
+export DEB_BUILD_MAINT_OPTIONS=optimize=-lto 
+endif
 
 ifeq ($(USE_GOLD),y)
        CONFIGURE_FLAGS += --enable-ld=gold
