@@ -1,5 +1,8 @@
 libreoffice (1:7.4.0~rc2~git20220721-1) UNRELEASED; urgency=medium
 
+  * debian/patches/svm-test-bigendian.diff: from master, fix svm test on
+    bigendian (other tests still fail)
+
   * New upstream snapshot
 
   * debian/rules:
