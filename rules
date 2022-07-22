@@ -1617,10 +1617,12 @@ endif
 # (and vice-versa). See https://lists.debian.org/debian-devel/2022/06/msg00092.html
 ifeq ($(ENABLE_LTO),y)
 export DEB_BUILD_MAINT_OPTIONS=optimize=+lto
+# honour parallel=X
 DEB_CFLAGS_MAINT_STRIP += -flto=auto
 DEB_CXXFLAGS_MAINT_STRIP += -flto=auto
 DEB_CFLAGS_MAINT_APPEND += -flto=$(NUM_CPUS)
 DEB_CXXFLAGS_MAINT_APPEND += -flto=$(NUM_CPUS)
+# save space
 ifeq "$(SMALL_SYMBOLS)" "y"
 DEB_CFLAGS_MAINT_STRIP += -ffat-lto-objects
 DEB_CXXFLAGS_MAINT_STRIP += -ffat-lto-objects
