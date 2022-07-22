@@ -1,6 +1,13 @@
-libreoffice (1:7.4.0~rc2~git20220708-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.0~rc2~git20220721-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
+
+  * debian/rules:
+    - explicitely set export DEB_BUILD_MAINT_OPTIONS=optimize=+lto / -lto
+      depending on ENABLE_LTO=y/n here
+    - make parallel=X affecting -flto=X again: force -flto=auto (apparently default
+      since gcc 12 became default) off and add -flto=X
+    - strip -ffat-lto-objects if building with SMALL symbols
 
  -- Rene Engelhard <rene@debian.org>  Fri, 08 Jul 2022 16:35:36 +0200
 
