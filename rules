@@ -915,8 +915,8 @@ ifeq "$(ENABLE_SYMBOLS)" "y"
   # Small symbols?
   ifeq "$(SMALL_SYMBOLS)" "y"
 	CONFIGURE_FLAGS += --enable-symbols=SMALL
-	DEB_CFLAGS_MAINT_STRIP := -g
-	DEB_CXXFLAGS_MAINT_STRIP := -g
+	DEB_CFLAGS_MAINT_STRIP += -g
+	DEB_CXXFLAGS_MAINT_STRIP += -g
 	DEB_CFLAGS_MAINT_PREPEND += -g1
 	DEB_CXXFLAGS_MAINT_PREPEND += -g1
 export DEB_CFLAGS_MAINT_STRIP DEB_CXXFLAGS_MAINT_STRIP
@@ -1596,6 +1596,25 @@ ifeq ($(ENABLE_LTO),y)
 	CONFIGURE_FLAGS += --enable-lto
 	# see https://lists.debian.org/debian-devel-changes/2021/11/msg02548.html
 	BUILD_DEPS += , binutils (>= 2.37-9) [ppc64]
+endif
+# go sure. if we explicitely disable LTO when it is enabled we don't want it to sneak in
+# (and vice-versa). See https://lists.debian.org/debian-devel/2022/06/msg00092.html
+ifeq ($(ENABLE_LTO),y)
+export DEB_BUILD_MAINT_OPTIONS=optimize=+lto
+# honour parallel=X. We can just remove the auto here (coming from dpkg-buildflags)
+# since upstream already adds -flto=X.
+# Replacing -flto=auto with -flto=X doesn't work since clang doesn't understand -flto=X
+DEB_CFLAGS_MAINT_STRIP += -flto=auto
+DEB_CXXFLAGS_MAINT_STRIP += -flto=auto
+# save space
+ifeq "$(SMALL_SYMBOLS)" "y"
+DEB_CFLAGS_MAINT_STRIP += -ffat-lto-objects
+DEB_CXXFLAGS_MAINT_STRIP += -ffat-lto-objects
+endif
+export DEB_CFLAGS_MAINT_STRIP DEB_CXXFLAGS_MAINT_STRIP
+export DEB_CFLAGS_MAINT_APPEND DEB_CXXFLAGS_MAINT_APPEND
+else
+export DEB_BUILD_MAINT_OPTIONS=optimize=-lto 
 endif
 
 ifeq ($(USE_GOLD),y)
