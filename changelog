@@ -1,7 +1,9 @@
-libreoffice (1:7.4.0~rc2~git20220721-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.0~rc2~git20220725-1) UNRELEASED; urgency=medium
 
   * debian/patches/svm-test-bigendian.diff: from master, fix svm test on
     bigendian (other tests still fail)
+  * debian/patches/hrk-euro.diff: add HRK->EUR to the (hidden) Euro Conversion
+    Wizard for completeness' sake
 
   * New upstream snapshot
 
