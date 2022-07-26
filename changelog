@@ -111,12 +111,18 @@ libreoffice (1:7.3.3~rc1-2) unstable; urgency=medium
 libreoffice (1:7.3.3~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
+    - fixes
+      + CVE-2022-26306 Static Initialization Vector Allows to Recover
+        Passwords for Web Connections Without Knowing the Master Password
+      + CVE-2022-26307 Weak Master Keys
 
  -- Rene Engelhard <rene@debian.org>  Wed, 13 Apr 2022 17:29:06 +0200
 
 libreoffice (1:7.3.2~rc2-1) unstable; urgency=medium
 
-  * New upstream release candidate 
+  * New upstream release candidate
+    - fixes CVE-2022-26305 Execution of Untrusted Macros Due to Improper
+      Certificate Validation
 
  -- Rene Engelhard <rene@debian.org>  Wed, 23 Mar 2022 20:30:37 +0100
 
@@ -186,6 +192,8 @@ libreoffice (1:7.3.0~rc1-2) experimental; urgency=medium
 libreoffice (1:7.3.0~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
+    - fixes CVE-2021-25636 Incorrect trust validation of signature with ambiguous
+      KeyInfo children
 
   * debian/rules:
     - add support (don't use it (yet)) for using --enable-cipher-openssl-backend
