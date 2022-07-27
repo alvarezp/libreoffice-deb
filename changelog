@@ -4,6 +4,8 @@ libreoffice (1:7.4.0~rc2~git20220727-1) UNRELEASED; urgency=medium
     bigendian (other tests still fail)
   * debian/patches/hrk-euro.diff: add HRK->EUR to the (hidden) Euro Conversion
     Wizard for completeness' sake
+  * debian/patches/fix-uicheck-tests-on-i386.patch: readd lost/still needed
+    patch to work around rounding errors in descriptiveStatistics test on i386
 
   * New upstream snapshot
 
