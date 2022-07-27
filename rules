@@ -41,6 +41,7 @@ include /usr/share/dpkg/vendor.mk
 SHELL:=/bin/bash
 
 SYSTEM_GCC_VERSION = $(shell gcc --version | sed -n '/^gcc/s/.*\(..\..\)\../\1/p' | cut -d" " -f1)
+SYSTEM_CLANG_VERSION = $(shell clang -v 2>&1 | head -n1 | awk '{ print $$4 }' | cut -d. -f1)
 
 PKGDIR:=debian/libreoffice
 OODIRNAME=libreoffice
@@ -700,6 +701,21 @@ ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
         else
 	  BUILD_DEPS += , llvm-$(CLANG_VERSION)-linker-tools [$(OOO_LE_ARCHS)]
         endif
+      endif
+    endif
+  endif
+endif
+ifeq "$(USE_DWZ)" "y"
+  # dwz errors out with
+  # dwz: debian/libreoffice-core/usr/lib/libreoffice/program/libskialo.so: Unknown debugging section .debug_addr
+  # since clang 14
+  ifeq "$(USE_CLANG)" "y"
+	USE_DWZ := n
+  endif
+  ifeq "$(ENABLE_SKIA)" "y"
+    ifneq "$(shell echo $(ALLOW_CLANG) | grep y)" ""
+      ifeq "$(shell dpkg --compare-versions $(SYSTEM_CLANG_VERSION) ge 14 && echo true)" "true"
+	DH_DWZ_ARGS += -Xskia
       endif
     endif
   endif
@@ -3655,7 +3671,7 @@ ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 	done
   endif
   ifeq "$(USE_DWZ)" "y"
-	dh_dwz -a -- $(DWZ_ARGS)
+	dh_dwz -a $(DH_DWZ_ARGS) -- $(DWZ_ARGS)
   endif
 	dh_strip -a
 	# dh_strip --dbg-package= is not idempotent, force copying of the binaries

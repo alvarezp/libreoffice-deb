@@ -1,3 +1,12 @@
+libreoffice (1:7.3.5~rc2-2) unstable; urgency=medium
+
+  * debian/rules:
+    - exclude skia from dh_dwz since it fails when built with clang 14 (and
+      disable dwz completely if we ever built everything with clang for
+      completeness' sake...)
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 27 Jul 2022 17:34:23 +0200
+
 libreoffice (1:7.3.5~rc2-1) unstable; urgency=medium
 
   * New upstream release candidate 
