@@ -20,7 +20,6 @@ disable-flaky-tests.diff
 #dont-touch-urd.diff
 fix-internal-hsqldb-build.diff
 javadoc-optional.diff
-hppa-is-32bit.diff
 no-packagekit-per-default.diff
 system-officeotron-and-odfvalidator.diff
 cppunit-optional.diff
