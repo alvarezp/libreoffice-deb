@@ -1,4 +1,4 @@
-libreoffice (1:7.4.0~rc2~git20220725-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.0~rc2~git20220727-1) UNRELEASED; urgency=medium
 
   * debian/patches/svm-test-bigendian.diff: from master, fix svm test on
     bigendian (other tests still fail)
@@ -13,6 +13,9 @@ libreoffice (1:7.4.0~rc2~git20220725-1) UNRELEASED; urgency=medium
     - make parallel=X affecting -flto=X again: force -flto=auto (apparently default
       since gcc 12 became default) off and add -flto=X
     - strip -ffat-lto-objects if building with SMALL symbols
+    - exclude skia from dh_dwz since it fails when built with clang 14 (and
+      disable dwz completely if we ever built everything with clang for
+      completeness' sake...)
 
  -- Rene Engelhard <rene@debian.org>  Fri, 08 Jul 2022 16:35:36 +0200
 
