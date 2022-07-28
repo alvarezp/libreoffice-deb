@@ -20,8 +20,8 @@
  export CDEFAULTOPT=@CDEFAULTOPT@
 +export HARDEN_CPPFLAGS=@HARDEN_CPPFLAGS@
  export CROSS_COMPILING=@CROSS_COMPILING@
- export CUCKOO_CFLAGS=$(gb_SPACE)@CUCKOO_CFLAGS@
  export CURL=@CURL@
+ export CURL_CFLAGS=$(gb_SPACE)@CURL_CFLAGS@
 diff --git a/solenv/gbuild/gbuild.mk b/solenv/gbuild/gbuild.mk
 index c71cb40..f826d65 100644
 --- a/solenv/gbuild/gbuild.mk

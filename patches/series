@@ -41,9 +41,11 @@ fix-flaky-bridgetest.diff
 add-access2base-doc.diff
 disable-shortcuts_tab_navigation-uitest.diff
 no-opencl-per-default.diff
-pdfium-m68k.diff
 apparmor-updates.diff
 apparmor-gnupg-tofu.diff
 temporarily-disable-test-metadata-test.diff
 arm-fp-mode.diff
 moreIconsDialog-accesses-internet.diff
+do-not-ABORT_ON_NON_APPLICATION_FONT_USE.diff
+svm-test-bigendian.diff
+hrk-euro.diff

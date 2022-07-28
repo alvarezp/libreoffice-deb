@@ -30,14 +30,17 @@ index daa0f1835be7..c4186e900a87 100644
      CustomTarget_test_urp \
      InternalUnoApi_test_urp \
      JunitTest_bridgefactory \
+diff --git a/postprocess/Module_postprocess.mk b/postprocess/Module_postprocess.mk
+index 0fbede6a9f2b..4c3abc52747c 100644
 --- a/postprocess/Module_postprocess.mk
 +++ b/postprocess/Module_postprocess.mk
-@@ -12,18 +12,18 @@ $(eval $(call gb_Module_Module,postprocess))
+@@ -12,19 +12,19 @@ $(eval $(call gb_Module_Module,postprocess))
  # UGLY: postprocess_XCDS variable from CustomTarget_registry
  # is reused in Package_registry!
  
 -$(eval $(call gb_Module_add_targets,postprocess,\
 +#$(eval $(call gb_Module_add_targets,postprocess,\
+     $(if $(ENABLE_CUSTOMTARGET_COMPONENTS),CustomTarget_components) \
  	CustomTarget_registry \
  	Rdb_services \
 -))

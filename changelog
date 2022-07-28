@@ -1,6 +1,20 @@
-libreoffice (1:7.3.5~rc2-2) UNRELEASED; urgency=medium
+libreoffice (1:7.4.0~rc2-1) experimental; urgency=medium
+
+  * debian/patches/svm-test-bigendian.diff: from master, fix svm test on
+    bigendian (other tests still fail)
+  * debian/patches/hrk-euro.diff: add HRK->EUR to the (hidden) Euro Conversion
+    Wizard for completeness' sake
+  * debian/patches/fix-uicheck-tests-on-i386.patch: readd lost/still needed
+    patch to work around rounding errors in descriptiveStatistics test on i386
+
+  * New upstream release candidate
 
   * debian/rules:
+    - explicitely set export DEB_BUILD_MAINT_OPTIONS=optimize=+lto / -lto
+      depending on ENABLE_LTO=y/n here
+    - make parallel=X affecting -flto=X again: force -flto=auto (apparently default
+      since gcc 12 became default) off and add -flto=X
+    - strip -ffat-lto-objects if building with SMALL symbols
     - exclude skia from dh_dwz since it fails when built with clang 14 (and
       disable dwz completely if we ever built everything with clang for
       completeness' sake...)
@@ -30,6 +44,87 @@ libreoffice (1:7.3.4~rc1-1) unstable; urgency=medium
   * New upstream release candidate
 
  -- Rene Engelhard <rene@debian.org>  Wed, 18 May 2022 20:36:02 +0200
+=======
+ -- Rene Engelhard <rene@debian.org>  Wed, 27 Jul 2022 23:55:16 +0200
+
+libreoffice (1:7.4.0~rc1-3) experimental; urgency=medium
+
+  * debian/rules: use -O0 on s390x to work around miscompile, thanks
+    Stephan Bergmann for analysis. 
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 19 Jul 2022 17:09:13 +0200
+
+libreoffice (1:7.4.0~rc1-2) experimental; urgency=medium
+
+  * debian/patches/TestEmfPlusDrawPathWithCustomCap-Aarch64.diff,
+    emfio/qa/cppunit/emf/data/TestEmfPlusDrawPathWithCustomCap.emf: add patch
+    from libreoffice-7-4 branch to fix emf test failure on arm64
+
+  * debian/watch: track rcs again 
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 08 Jul 2022 16:20:08 +0200
+
+libreoffice (1:7.4.0~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 07 Jul 2022 03:44:09 +0200
+
+libreoffice (1:7.4.0~beta1-4) experimental; urgency=medium
+
+  * debian/rules: oops, fix too greedy sed call... 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 16 Jun 2022 19:24:35 +0200
+
+libreoffice (1:7.4.0~beta1-3) experimental; urgency=medium
+
+  * debian/patches/tdf148395-do-no-rely-on-math-and-impress.diff:
+    add from upstream gerrit; remove assert that fails depending on which
+    components are installed
+  * debian/rules:
+    - disable skia on bigendian archs again 
+    - force libuno-sal3 (>= 1:7.4.0~beta1) dependency for -core to be sure
+      since the uno:EditGlossary test (in openDialogs.openDialogs)
+      segfaults/hangs with 7.3.4s libuno-sal3
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 14 Jun 2022 06:27:46 +0200
+
+libreoffice (1:7.4.0~beta1-2) experimental; urgency=medium
+
+  * debian/patches/fix-bigendian.diff: fix ww8 filter build on bigendian
+  * debian/patches/fix-32bit.diff: fix new a11y cppunits tests on 32bit
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 11 Jun 2022 14:15:09 +0200
+
+libreoffice (1:7.4.0~beta1-1) experimental; urgency=medium
+
+  * New upstream beta release
+
+  * debian/tests/*: update to fix testtools-bridgetest and
+    junit-subsequentcheck
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 10 Jun 2022 16:12:11 +0200
+
+libreoffice (1:7.4.0~alpha1-2) experimental; urgency=medium
+
+  * fix eot conditional 
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 13 May 2022 06:40:06 +0200
+
+libreoffice (1:7.4.0~alpha1-1) experimental; urgency=medium
+
+  * New upstream alpha release
+    - adds support for webp (closes: #998753)
+
+  * debian/rules:
+   - run make clean after nogui builds instead of trying to manually clean
+     up affected files
+   - enable skia also on bigendian archs since upstream does this now and
+     "and despite the disclaimer it reportedly works fine"
+  * debian/watch: watch alpha/betas
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 16:53:37 +0200
+>>>>>>> origin/debian-experimental-7.4
 
 libreoffice (1:7.3.3~rc2-1) unstable; urgency=medium
 
@@ -1864,7 +1959,7 @@ libreoffice (1:6.2.0~rc1-1) experimental; urgency=medium
   * debian/patches/aarch64-temporarily-disable-testgetCaughtException.diff:
     as name says; the test is new in 6.2, never worked on arm64 (so no
     regression) and the other, bigger tests (junit, uicheck) work fine.
-  * debian/patches/patches/fix-build-with-poppler-0.71.diff: one more patch
+  * debian/patches/fix-build-with-poppler-0.71.diff: one more patch
     for poppler 0.71 (from master) (closes: #915726)
 
   * debian/libreoffice-base.{postrm,preinst}.in: remove manual
@@ -2256,7 +2351,7 @@ libreoffice (1:6.1.0~alpha1-1) experimental; urgency=medium
 
 libreoffice (1:6.0.4~rc1-4) unstable; urgency=medium
 
-  * debian/patches/patches/disable-java-in-odk-build-examples-on-zero-vm.diff:
+  * debian/patches/disable-java-in-odk-build-examples-on-zero-vm.diff:
     as name says, the test builds many Java projects without a output and on
     Zero this is slow -> "hangs" gets killed because of inactivity
   * explicitely disable junit tests when determining that java uses the Zero VM
@@ -5870,7 +5965,7 @@ libreoffice (1:3.5.0-1) experimental; urgency=low
 
   * debian/patches/no-rcX-in-final.diff: don't show rc3, it's not a rc
     amymore...
-  * debian/patches/patches/make-gengal-work-again.diff: register gengal.bin
+  * debian/patches/make-gengal-work-again.diff: register gengal.bin
     executable to get proper rpath and remove gengalrc
   * debian/patches/odk-fix-rdb-paths.diff: backport fix to fix rdb path
     in settings/std.mk in the SDK

@@ -22,8 +22,8 @@ CURDIR ?= $(realpath $(dir $(firstword $(MAKEFILE_LIST)))/..)
 BASE_VERSION:=$(shell echo $(DEB_VERSION) | cut -d: -f1):$(DEB_VERSION_UPSTREAM)
 BINARY_VERSION=$(DEB_VERSION)
 #HELP_L10N_VIRTUAL_VERSION:=$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d: -f2 | tr [~] [\\-])
-HELP_L10N_VIRTUAL_VERSION:=7.3
-OOVER:=7.3
+HELP_L10N_VIRTUAL_VERSION:=7.4
+OOVER:=7.4
 NEXT_OOVER:=$(shell echo "$(OOVER) + 0.1" | bc)
 
 ARCH_INDEP_PACKAGES := $(shell dh_listpackages -i)
@@ -76,7 +76,7 @@ lo_sources_ver=$(shell grep AC_INIT $(SOURCE_TREE)/configure.ac | grep documentf
 # NOT in proper libreoffice-3-6 branch
 # use ./g checkout -b tag-libreoffice-3.6.2.1 libreoffice-3.6.2.1
 GIT_TAG=libreoffice-$(lo_sources_ver)
-GIT_BRANCH=libreoffice-7-3-5
+GIT_BRANCH=libreoffice-7-4-0
 endif
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 lo_sources_ver=$(shell cat $(CURDIR)/sources.ver | cut -d= -f2)
@@ -265,19 +265,7 @@ ENABLE_CURL=y
 CURL_SECTYPE=gnutls
 ENABLE_WEBDAV=y
 ifeq "$(ENABLE_WEBDAV)" "y"
-WEBDAV_LIB=curl
-  ifeq "$(WEBDAV_LIB)" "neon"
-    SYSTEM_STUFF += neon
-    NEON_SECTYPE=gnutls
-    NEONSONR=27
-  else
-    ifeq "$(WEBDAV_LIB)" "serf"
-      SYSTEM_STUFF += apr
-      SYSTEM_STUFF += serf
-    else # curl
-      ENABLE_CURL=y
-    endif
-  endif
+  ENABLE_CURL=y
 endif
 ifeq "$(ENABLE_CURL)" "y"
 SYSTEM_STUFF += curl
@@ -342,10 +330,12 @@ SYSTEM_STUFF += harfbuzz
 SYSTEM_STUFF += libexttextcat
 SYSTEM_STUFF += cppunit
 SYSTEM_STUFF += cuckoo
+SYSTEM_STUFF += dragonbox
+SYSTEM_STUFF += libfixmath
 DEFAULT_IMAGE=colibre
-IMAGES:=$(DEFAULT_IMAGE) sifr sifr_dark sifr_dark_svg breeze breeze_dark breeze_dark_svg breeze_svg elementary elementary_svg karasa_jaga sukapura sukapura_svg
+IMAGES:=$(DEFAULT_IMAGE) colibre_dark colibre_svg colibre_dark_svg sifr sifr_dark sifr_dark_svg breeze breeze_dark breeze_dark_svg breeze_svg elementary elementary_svg karasa_jaga sukapura sukapura_svg
 # FIXME
-IMAGES_PACKAGES=$(subst _,-,$(filter-out sukapura_svg,$(filter-out sifr_dark_svg,$(filter-out breeze_dark_svg,$(filter-out sifr_dark,$(filter-out breeze_dark,$(filter-out breeze_svg,$(filter-out elementary_svg,$(IMAGES)))))))))
+IMAGES_PACKAGES=$(subst _,-,$(filter-out colibre_svg,$(filter-out colibre_svg,$(filter-out colibre_dark_svg,$(filter-out sukapura_svg,$(filter-out sifr_dark_svg,$(filter-out breeze_dark_svg,$(filter-out sifr_dark,$(filter-out breeze_dark,$(filter-out breeze_svg,$(filter-out elementary_svg,$(IMAGES))))))))))))
 CONFIGURE_FLAGS_INDEP += --with-theme="$(IMAGES)"
 ENABLE_MARIADB=y
 ifeq "$(ENABLE_MARIADB)" "y"
@@ -366,8 +356,8 @@ SYSTEM_STUFF += postgresql
 DICT_DIR=/usr/share/hunspell
 HYPH_DIR=/usr/share/hyphen
 THES_DIR=/usr/share/mythes
-ENABLE_CMIS=n
-ifeq "$(ENABLE_CMIS)" "y"
+ENABLE_LIBCMIS=n
+ifeq "$(ENABLE_LIBCMIS)" "y"
 SYSTEM_STUFF += libcmis
 endif
 SYSTEM_STUFF += jpeg
@@ -442,7 +432,7 @@ ifeq "$(ENABLE_FIREBIRD)" "y"
 endif
 ENABLE_EOT=y
 ifeq "$(ENABLE_EOT)" "y"
-SYSTEM_STUFF += libeot
+SYSTEM_STUFF += eot
 endif
 SYSTEM_STUFF += glm
 BUILD_PPC64EL=y
@@ -455,6 +445,8 @@ ifneq "$(AUTOPKGTEST_BUILD)" "y"
 endif
 SYSTEM_STUFF += libnumbertext
 SYSTEM_STUFF += box2d
+SYSTEM_STUFF += libwebp
+SYSTEM_STUFF += libtiff
 
 # Default flags to pass to configure
 CONFIGURE_FLAGS+= \
@@ -613,8 +605,6 @@ ifeq (,$(filter $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
 	ENABLE_NLPSOLVER=n
 	DEBHELPER_OPTIONS += -Nlibreoffice-wiki-publisher -Nlibreoffice-script-provider-python -Nlibreoffice-nlpsolver
 	CONFIGURE_FLAGS += --disable-extension-integration --disable-extensions
-else
-	CONFIGURE_FLAGS += --enable-extension-integration
 endif
 
 ifeq (,$(filter $(DEB_HOST_ARCH),$(OOO_JAVA_ARCHS)))
@@ -658,7 +648,7 @@ endif
 # Debian Bullseye
 ifeq "$(DEB_DISTRIBUTION)" "bullseye-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out cuckoo zxing mdds orcus libnumbertext,$(SYSTEM_STUFF))
+  SYSTEM_STUFF := $(filter-out cuckoo zxing mdds orcus libnumbertext dragonbox libfixmath libmwaw,$(SYSTEM_STUFF))
   BULLSEYE_BACKPORT=y
   ENABLE_LTO=n
 endif
@@ -752,6 +742,15 @@ ifeq "$(DEB_HOST_ARCH)" "armhf"
     endif
   endif
 endif
+  # and also on s390x since it otherwise gets miscompiled.
+  # Upstream tacked it down to a gcc bug: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106355
+  # but
+  # 16:37 <@sberg> _rene_, I couldn't reproduce the issue with an -O0 (--enable-dbgutil) build, and can with a -O2 (no --enable-debug etc.) one
+ifeq "$(DEB_HOST_ARCH)" "s390x"
+  ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	DEB_BUILD_OPTIONS += noopt
+  endif
+endif
   # skia build picks up clang if present (for performance reasons,
   # at least on Windows...). See the thread starting at
   # https://lists.freedesktop.org/archives/libreoffice/2020-April/084929.html
@@ -766,7 +765,7 @@ endif
       ifeq "$(CLANG_VERSION)" "default"
 	export LO_CLANG_CC=clang
 	export LO_CLANG_CXX=clang++
-	BUILD_DEPS += , clang (>= 1:5.0.2) [$(filter-out armel ppc64el,$(OOO_LE_ARCHS))]
+	BUILD_DEPS += , clang (>= 1:8.0.1) [$(filter-out armel ppc64el,$(OOO_LE_ARCHS))]
 	# see #963162, #963167 which apparently don't exist on 11
 	BUILD_DEPS += , clang (>= 1:11) [armel]
       else
@@ -778,7 +777,7 @@ endif
   endif
 else
   ifeq "$(CLANG_VERSION)" "default"
-	BUILD_DEPS += , clang (>= 1:5.0.2)
+	BUILD_DEPS += , clang (>= 1:8.0.1)
 	CONFIGURE_FLAGS+= CC=clang CXX=clang++
   else
 	BUILD_DEPS += , clang-$(CLANG_VERSION)
@@ -788,7 +787,7 @@ else
   	CONFIGURE_FLAGS += --enable-compiler-plugins
   	CLANGDIR := /usr/lib/llvm-$(shell $(CLANG) --version | head -n 1 | awk '{ print $$3 }' | cut -d. -f1)
     ifeq "$(CLANG_VERSION)" "default"
-	BUILD_DEPS += , libclang-dev, llvm-dev
+	BUILD_DEPS += , clang (>= 1:12.0.1), libclang-dev (>= 1:12.0.1), llvm-dev (>= 1:12.0.1)
     else
 	BUILD_DEPS += , libclang-$(CLANG_VERSION)-dev, llvm-$(CLANG_VERSION)-dev
     endif
@@ -898,6 +897,14 @@ ifneq (,$(filter box2d, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libbox2d-dev
 endif
 
+ifneq (,$(filter libwebp, $(SYSTEM_STUFF)))
+       BUILD_DEPS += , libwebp-dev
+endif
+
+ifneq (,$(filter libtiff, $(SYSTEM_STUFF)))
+       BUILD_DEPS += , libtiff-dev
+endif
+
 COINMP_MINVER=(>= 1.7.6+dfsg1-2)
 	COINUTILS_MINVER=(>= 2.10.14+repack1-1)
 	# go sure given #873362
@@ -929,8 +936,8 @@ ifeq "$(ENABLE_SYMBOLS)" "y"
   # Small symbols?
   ifeq "$(SMALL_SYMBOLS)" "y"
 	CONFIGURE_FLAGS += --enable-symbols=SMALL
-	DEB_CFLAGS_MAINT_STRIP := -g
-	DEB_CXXFLAGS_MAINT_STRIP := -g
+	DEB_CFLAGS_MAINT_STRIP += -g
+	DEB_CXXFLAGS_MAINT_STRIP += -g
 	DEB_CFLAGS_MAINT_PREPEND += -g1
 	DEB_CXXFLAGS_MAINT_PREPEND += -g1
 export DEB_CFLAGS_MAINT_STRIP DEB_CXXFLAGS_MAINT_STRIP
@@ -986,6 +993,13 @@ endif
 	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
 	BUILD_DEPS_ARCH += , fonts-kacst$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	# FIXME: Linux Libertine G (does fonts-linuxlibertine even contain it?, I don't see the _G files?)
+	# now is used in test documents.
+	# now we get a abort if fonts is not found and replaced in layout tests (even though
+	# https://cgit.freedesktop.org/libreoffice/core/commit/?id=172270a8f04388a8f8062f672f9c3f3144a01a1f suggests that
+	# it isn't the case in --without-fonts) but... And while we disable that abort via patch having this
+	# to be sure there is no other failure mode makes sense (as with the other fonts above)
+	BUILD_DEPS_ARCH += , fonts-linuxlibertine$(OOO_NO_CHECK_ARCHS) <!nocheck>
     ifneq (,$(filter cppunit, $(SYSTEM_STUFF)))
 	BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.14)$(OOO_NO_CHECK_ARCHS) <!nocheck>
       # without the deterministic order patch the xmlsecurity_signing test fails. See
@@ -1143,6 +1157,8 @@ ifeq "$(ENABLE_NSS)" "y"
   ifneq (,$(filter nss, $(SYSTEM_STUFF)))
 	BUILD_DEPS+= , libnss3-dev (>= 3.12.3)
 	BUILD_DEPS+= , libnspr4-dev
+  else
+	CONFIGURE_FLAGS += --without-system-nss
   endif
 else
 	CONFIGURE_FLAGS += --disable-nss
@@ -1187,6 +1203,12 @@ ifneq (,$(filter boost, $(SYSTEM_STUFF)))
   endif
   ifneq (,$(filter cuckoo, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libcuckoo-dev
+  endif
+  ifneq (,$(filter dragonbox, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , libdragonbox-dev
+  endif
+  ifneq (,$(filter libfixmath, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , libfixmath-dev
   endif
 endif
 
@@ -1238,9 +1260,10 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   endif
   ifneq (,$(filter libmwaw, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libmwaw-dev (>= 0.3.1), libmwaw-dev (<< 0.4~)
-    ifeq "$(RUN_MAKE_CHECK)" "y"
-	BUILD_DEPS_ARCH += , libmwaw-dev (>= 0.3.21)$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    endif
+#    ifeq "$(RUN_MAKE_CHECK)" "y"
+#	BUILD_DEPS_ARCH += , libmwaw-dev (>= 0.3.21)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , libmwaw-dev (>= 0.3.21)
+#    endif
   endif
   ifneq (,$(filter libodfgen, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libodfgen-dev (>= 0.1), libodfgen-dev (<< 0.2~)
@@ -1281,12 +1304,12 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
 	BUILD_DEPS_ARCH += , libe-book-dev (>= 0.1.2)$(OOO_NO_CHECK_ARCHS) <!nocheck>
     endif
   endif
-  ifeq "$(ENABLE_CMIS)" "y"
+  ifeq "$(ENABLE_LIBCMIS)" "y"
     ifneq (,$(filter libcmis, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libcmis-dev (>= 0.5.2~), libcmis-dev (<< 0.6~)
     endif
   else
-	CONFIGURE_FLAGS += --disable-cmis
+	CONFIGURE_FLAGS += --disable-libcmis
   endif
   ifeq "$(ENABLE_ZXING)" "y"
     ifneq (,$(filter zxing, $(SYSTEM_STUFF)))
@@ -1308,7 +1331,7 @@ endif
 
 ifeq "$(ENABLE_EOT)" "y"
  	CONFIGURE_FLAGS += --enable-eot
- ifneq (,$(filter libeot, $(SYSTEM_STUFF)))
+ ifneq (,$(filter eot, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libeot-dev
  endif
 endif
@@ -1533,30 +1556,10 @@ else
 endif
 
 ifeq "$(ENABLE_WEBDAV)" "y"
-  ifeq "$(WEBDAV_LIB)" "neon"
-    ifneq (,$(filter neon, $(SYSTEM_STUFF)))
-      ifneq "$(NEON_SECTYPE)" "openssl"
-	BUILD_DEPS += , libneon$(NEONSONR)-$(NEON_SECTYPE)-dev (>= 0.31.1)
-      else
-	BUILD_DEPS += , libneon$(NEONSONR)-dev (>= 0.31.1)
-      endif
-    endif
-  else
-    ifeq "$(WEBDAV_LIB)" "serf"
-      ifneq (,$(filter apr, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libaprutil1-dev
-      endif
-      ifneq (,$(filter serf, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libserf-dev
-      endif
-    else # curl
-      ifneq (,$(filter curl, $(SYSTEM_STUFF)))
+    ifneq (,$(filter curl, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libcurl4-$(CURL_SECTYPE)-dev (>= 7.68)
-      endif
-      ENABLE_CURL=y
     endif
-  endif
-  CONFIGURE_FLAGS += --with-webdav=$(WEBDAV_LIB)
+    ENABLE_CURL=y
 else
   CONFIGURE_FLAGS += --with-webdav=no
 endif
@@ -1573,6 +1576,10 @@ else
 	SYSTEM_STUFF += openssl
 	BUILD_DEPS += , libssl-dev
 endif
+
+# only for cross-compile - like wasm...
+#BUILD_DEPS += , liblockfile-bin
+#SYSTEM_STUFF += lockfile
 
 ifneq (,$(filter redland, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , librdf0-dev (>= 1.0.16-2)
@@ -1620,6 +1627,25 @@ ifeq ($(ENABLE_LTO),y)
 	CONFIGURE_FLAGS += --enable-lto
 	# see https://lists.debian.org/debian-devel-changes/2021/11/msg02548.html
 	BUILD_DEPS += , binutils (>= 2.37-9) [ppc64]
+endif
+# go sure. if we explicitely disable LTO when it is enabled we don't want it to sneak in
+# (and vice-versa). See https://lists.debian.org/debian-devel/2022/06/msg00092.html
+ifeq ($(ENABLE_LTO),y)
+export DEB_BUILD_MAINT_OPTIONS=optimize=+lto
+# honour parallel=X. We can just remove the auto here (coming from dpkg-buildflags)
+# since upstream already adds -flto=X.
+# Replacing -flto=auto with -flto=X doesn't work since clang doesn't understand -flto=X
+DEB_CFLAGS_MAINT_STRIP += -flto=auto
+DEB_CXXFLAGS_MAINT_STRIP += -flto=auto
+# save space
+ifeq "$(SMALL_SYMBOLS)" "y"
+DEB_CFLAGS_MAINT_STRIP += -ffat-lto-objects
+DEB_CXXFLAGS_MAINT_STRIP += -ffat-lto-objects
+endif
+export DEB_CFLAGS_MAINT_STRIP DEB_CXXFLAGS_MAINT_STRIP
+export DEB_CFLAGS_MAINT_APPEND DEB_CXXFLAGS_MAINT_APPEND
+else
+export DEB_BUILD_MAINT_OPTIONS=optimize=-lto 
 endif
 
 ifeq ($(USE_GOLD),y)
@@ -2112,30 +2138,11 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	rm -rf instdir-nogui
 	cp -r instdir instdir-nogui
 
-	# clean (git grep HAVE_FEATURE_UI). This also causes relinking
-	# since it relinks libmergedlo.so(?) but this is better than rebuilding
-	# the whole of vcl, framework, sw, ...
-	find workdir -name "spritehelper.o" \
-		-o -name "app.o" \
-		-o -name "cmdlineargs.o" \
-		-o -name "sofficemain.o" \
-		-o -name "splashx.o" \
-		-o -name "titlehelper.o" \
-		-o -name "svpinst.o" \
-		-o -name "salmain.o" \
-		-exec rm {} \;
-	find workdir instdir -name "*canvas*" \
-		-o -name "*libsofficeapp*" \
-		-o -name "*oosplash*" \
-		-o -name "*libfwe*" \
-		-o -name "*libvcl*" \
-		-exec rm {} \;
-	# more cleanup. global.cxx of libsc.o wants
-	# OpenGLWrapper::isVCLOpenGLEnabled()
-	find workdir -name "global.o" -exec rm {} \;
-	find workdir instdir -name "*libsc*" -exec rm {} \;
-	# it is required to regenerate main.xcd without --disable-gui
-	find workdir -name "main.xcd" -o -name "main.list" -exec rm {} \;
+	# clean. cleaning up only potentially affected ones was not really
+	# maintainable and broke running the uitests since something apparently was not rebuilt
+	# for "use UI" as it should.
+	# Better safe than sorry, even though that increases build time for a magnitude...
+	$(MAKE) clean
 endif
 
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) \
@@ -2458,6 +2465,26 @@ endif
 
 ifneq "$(PACKAGE_LIBRELOGO)" "y"
 	rm -rf debian/tmp/pkg/libreoffice-librelogo
+endif
+
+	# FIXME; hack: somehow there only the dirs are there (dh_installdirs). they *are* in the install phase and gid2pkgdirs also
+	# is supposed to install it to the dir but apparently doesn't. They are in instdir though, so let's use it from
+	# there..
+ifeq "$(ENABLE_NLPSOLVER)" "y"
+	if [ -d instdir/share/extensions/nlpsolver ]; then \
+		rm -rf debian/tmp/pkg/libreoffice-nlpsolver; \
+		mkdir -p debian/tmp/pkg/libreoffice-nlpsolver/$(OODIR)/share/extensions; \
+		cp -ra instdir/share/extensions/nlpsolver \
+			debian/tmp/pkg/libreoffice-nlpsolver/$(OODIR)/share/extensions; \
+	fi
+endif
+ifeq "$(ENABLE_MEDIAWIKI)" "y"
+	if [ -d instdir/share/extensions/wiki-publisher ]; then \
+		rm -rf debian/tmp/pkg/libreoffice-wiki-publisher; \
+		mkdir -p debian/tmp/pkg/libreoffice-wiki-publisher/$(OODIR)/share/extensions; \
+		cp -ra instdir/share/extensions/wiki-publisher \
+			debian/tmp/pkg/libreoffice-wiki-publisher/$(OODIR)/share/extensions; \
+	fi
 endif
 
 	for i in calc impress draw base writer; do \
@@ -3378,6 +3405,9 @@ endif
 	set -e; \
 	for i in $(IMAGES); do \
 		z=images_$$i.zip; p=$$i; \
+		if [ "$$i" = "colibre_dark" ]; then p=colibre; fi; \
+		if [ "$$i" = "colibre_dark_svg" ]; then p=colibre; fi; \
+		if [ "$$i" = "colibre_svg" ]; then p=colibre; fi; \
 		if [ "$$i" = "breeze_dark" ]; then p=breeze; fi; \
 		if [ "$$i" = "breeze_dark_svg" ]; then p=breeze; fi; \
 		if [ "$$i" = "breeze_svg" ]; then p=breeze; fi; \
@@ -3823,6 +3853,10 @@ endif
 	perl -pi -e "s/coinor-libcoinmp1v5/coinor-libcoinmp1v5 $(COINMP_MINVER)/" \
 		debian/libreoffice-calc.substvars
   endif
+  	# FIXME. Otherwise the unoEditGlossary openDialog test crashes and hangs. go sure to make sure it doesn't
+	# happen on runtime. No idea whether alpha1 would suffice but it doesn't really matter in practice anyway :)
+	perl -pi -e "s/, libuno-sal3 \(>= 1:7.3.0~beta1\),/, libuno-sal3 \(>= 1:7.4.0~beta1\),/" \
+			debian/libreoffice-core.substvars
 ifeq "$(ENABLE_JAVA)" "y"
 	for p in $(ARCH_DEP_PACKAGES); do \
 		jh_depends -p$$p -Xure -Xbase-files; \

@@ -10,17 +10,17 @@ index 712a61df544f..0d50f538ba7b 100644
  	-fno-common \
  	-pipe \
 -	$(if $(filter EMSCRIPTEN,$(OS)),-fno-stack-protector,-fstack-protector-strong) \
- 	$(if $(gb_COLOR),-fdiagnostics-color=always) \
  
  gb_CXXFLAGS_COMMON := \
+ 	-Wall \
 @@ -82,7 +81,6 @@ gb_CXXFLAGS_COMMON := \
  	-fmessage-length=0 \
  	-fno-common \
  	-pipe \
 -	$(if $(filter EMSCRIPTEN,$(OS)),-fno-stack-protector,-fstack-protector-strong) \
- 	$(if $(gb_COLOR),-fdiagnostics-color=always) \
  
  ifeq ($(HAVE_WDEPRECATED_COPY_DTOR),TRUE)
+ gb_CXXFLAGS_COMMON += -Wdeprecated-copy-dtor
 @@ -136,8 +134,6 @@ endif
  gb_VISIBILITY_FLAGS_CXX := -fvisibility-inlines-hidden
  gb_CXXFLAGS_COMMON += $(gb_VISIBILITY_FLAGS_CXX)

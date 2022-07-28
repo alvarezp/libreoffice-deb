@@ -1,8 +1,8 @@
 diff --git a/sw/qa/uitest/styleInspector/styleInspector.py b/sw/qa/uitest/styleInspector/styleInspector.py
-index 7cfabce07dcc..9f0c6112bc9b 100644
+index 49d02fc01c9b..d1e9d30711e9 100644
 --- a/sw/qa/uitest/styleInspector/styleInspector.py
 +++ b/sw/qa/uitest/styleInspector/styleInspector.py
-@@ -129,69 +129,6 @@ class styleNavigator(UITestCase):
+@@ -131,69 +131,6 @@ class styleNavigator(UITestCase):
  
              self.xUITest.executeCommand(".uno:Sidebar")
  
@@ -19,7 +19,7 @@ index 7cfabce07dcc..9f0c6112bc9b 100644
 -            # The cursor is on text without metadata
 -            self.assertEqual(1, len(xListBox.getChild('0').getChildren()))
 -            self.assertEqual("Default Paragraph Style\t", get_state_as_dict(xListBox.getChild('0').getChild('0'))['Text'])
--            self.assertEqual(137, len(xListBox.getChild('0').getChild('0').getChildren()))
+-            self.assertEqual(140, len(xListBox.getChild('0').getChild('0').getChildren()))
 -            self.assertEqual(0, len(xListBox.getChild('1').getChildren()))
 -            self.assertEqual(0, len(xListBox.getChild('2').getChildren()))
 -            self.assertEqual(0, len(xListBox.getChild('3').getChildren()))
@@ -29,7 +29,7 @@ index 7cfabce07dcc..9f0c6112bc9b 100644
 -            # The cursor is on text with paragraph metadata showed under direct paragraph formatting
 -            self.assertEqual(1, len(xListBox.getChild('0').getChildren()))
 -            self.assertEqual("Default Paragraph Style\t", get_state_as_dict(xListBox.getChild('0').getChild('0'))['Text'])
--            self.assertEqual(137, len(xListBox.getChild('0').getChild('0').getChildren()))
+-            self.assertEqual(140, len(xListBox.getChild('0').getChild('0').getChildren()))
 -
 -            xParDirFormatting = xListBox.getChild('1')
 -            self.assertEqual(1, len(xParDirFormatting.getChildren()))

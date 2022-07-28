@@ -4,14 +4,6 @@ Bug-Ubuntu: https://launchpad.net/bugs/1832360
 
 --- a/testtools/source/bridgetest/bridgetest.cxx
 +++ b/testtools/source/bridgetest/bridgetest.cxx
-@@ -53,6 +53,7 @@
- #include "multi.hxx"
- #include <memory>
- #include <utility>
-+#include <cmath>
- 
- using namespace osl;
- using namespace cppu;
 @@ -124,6 +125,9 @@ public:
  
  static bool equals( const TestElement & rData1, const TestElement & rData2 )
