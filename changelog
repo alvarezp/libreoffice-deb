@@ -1,3 +1,9 @@
+libreoffice (1:7.4.0~rc2-3) unstable; urgency=medium
+
+  * debian/changelog: oops, fix merge... 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 28 Jul 2022 22:58:57 +0200
+
 libreoffice (1:7.4.0~rc2-2) unstable; urgency=medium
 
   * upload to unstable 
@@ -26,32 +32,6 @@ libreoffice (1:7.4.0~rc2-1) experimental; urgency=medium
       completeness' sake...)
 
  -- Rene Engelhard <rene@debian.org>  Wed, 27 Jul 2022 17:34:23 +0200
-
-libreoffice (1:7.3.5~rc2-1) unstable; urgency=medium
-
-  * New upstream release candidate 
-
- -- Rene Engelhard <rene@debian.org>  Sat, 16 Jul 2022 12:57:00 +0200
-
-libreoffice (1:7.3.5~rc1-1) unstable; urgency=medium
-
-  * New upstream release candidate
-
- -- Rene Engelhard <rene@debian.org>  Fri, 01 Jul 2022 21:51:28 +0200
-
-libreoffice (1:7.3.4~rc2-1) unstable; urgency=medium
-
-  * New upstream release candidate
-
- -- Rene Engelhard <rene@debian.org>  Thu, 02 Jun 2022 17:51:28 +0200
-
-libreoffice (1:7.3.4~rc1-1) unstable; urgency=medium
-
-  * New upstream release candidate
-
- -- Rene Engelhard <rene@debian.org>  Wed, 18 May 2022 20:36:02 +0200
-=======
- -- Rene Engelhard <rene@debian.org>  Wed, 27 Jul 2022 23:55:16 +0200
 
 libreoffice (1:7.4.0~rc1-3) experimental; urgency=medium
 
@@ -130,7 +110,6 @@ libreoffice (1:7.4.0~alpha1-1) experimental; urgency=medium
   * debian/watch: watch alpha/betas
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 16:53:37 +0200
->>>>>>> origin/debian-experimental-7.4
 
 libreoffice (1:7.3.3~rc2-1) unstable; urgency=medium
 
