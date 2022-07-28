@@ -7,7 +7,7 @@ libreoffice (1:7.4.0~rc2-1) experimental; urgency=medium
   * debian/patches/fix-uicheck-tests-on-i386.patch: readd lost/still needed
     patch to work around rounding errors in descriptiveStatistics test on i386
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules:
     - explicitely set export DEB_BUILD_MAINT_OPTIONS=optimize=+lto / -lto
