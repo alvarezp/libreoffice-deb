@@ -20,12 +20,12 @@ Restrictions: superficial
 # the installed LO. works standalone, though, so it's patched out of the
 # smoketest. Do it here separately.
 Tests: test-extension
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Depends: libreoffice-core-nogui, libreoffice-common, libreoffice-java-common, libreoffice-smoketest-data, default-jdk
 Restrictions: allow-stderr, superficial, skippable
 
 Tests: test-extension-shared
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Depends: libreoffice-core-nogui, libreoffice-common, libreoffice-java-common, libreoffice-smoketest-data, default-jdk
 Restrictions: allow-stderr, needs-root, superficial
 
@@ -86,12 +86,12 @@ Depends: libreoffice-dev, libreoffice-dev-doc
 Restrictions: superficial
 
 Tests: odk-build-examples
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Depends: @builddeps@, libreoffice-core-nogui, libreoffice-dev, libreoffice-dev-doc, python3-uno
 Restrictions: allow-stderr, skippable
 
 Tests: odk-build-examples-java
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Depends: @builddeps@, libreoffice-core-nogui, libreoffice-dev, libreoffice-dev-doc, libreoffice-java-common, libofficebean-java
 Restrictions: allow-stderr, skippable
 

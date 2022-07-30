@@ -339,7 +339,7 @@ Description: office productivity suite (metapackage)
   * bluez: Bluetooth support for Impress (slideshow remote control)
 
 Package: libreoffice-nogui
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Section: metapackages
 Depends: libreoffice-base-nogui [!hppa !mips64 !s390 !sparc],
          libreoffice-calc-nogui,
@@ -484,7 +484,7 @@ Description: office productivity suite -- arch-dependent files
  LibreOffice.  See the libreoffice package for more information.
 
 Package: libreoffice-core-nogui
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
@@ -651,7 +651,7 @@ Description: office productivity suite -- word processor
  This package contains the wordprocessor component for LibreOffice.
 
 Package: libreoffice-writer-nogui
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !mips64 !s390 !sparc],
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
@@ -690,7 +690,7 @@ Description: office productivity suite -- spreadsheet
  This package contains the spreadsheet component for LibreOffice.
 
 Package: libreoffice-calc-nogui
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !mips64 !s390 !sparc],
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
@@ -727,7 +727,7 @@ Description: office productivity suite -- presentation
  This package contains the presentation component for LibreOffice.
 
 Package: libreoffice-impress-nogui
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          libreoffice-draw-nogui (= ${binary:Version}) | libreoffice-draw (= ${binary:Version}),
@@ -762,7 +762,7 @@ Description: office productivity suite -- drawing
  This package contains the drawing component for LibreOffice.
 
 Package: libreoffice-draw-nogui
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -794,7 +794,7 @@ Description: office productivity suite -- equation editor
  This package contains the equation editor component for LibreOffice.
 
 Package: libreoffice-math-nogui
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Depends: fonts-opensymbol (>= 2:102.11),
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
@@ -847,7 +847,7 @@ Description: office productivity suite -- database
  This package contains the database component for LibreOffice.
 
 Package: libreoffice-base-nogui
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 armel armhf i386 ppc64 ppc64el s390x
 Section: database
 Depends: libreoffice-base-core (= ${binary:Version}),
          libreoffice-base-drivers (= ${binary:Version}),

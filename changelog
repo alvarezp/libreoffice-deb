@@ -1,3 +1,11 @@
+libreoffice (1:7.4.0~rc2-4) UNRELEASED; urgency=medium
+
+  * debian/rules: add armel to nogui archs given some tests (ours,
+    but also parlatype-libreoffice-extension (now also) run on armel
+    and want -nogui) 
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 30 Jul 2022 11:43:31 +0200
+
 libreoffice (1:7.4.0~rc2-3) unstable; urgency=medium
 
   * debian/changelog: oops, fix merge... 
