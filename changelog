@@ -6,6 +6,18 @@ libreoffice (1:7.5.0~alpha0~git20220727-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
+libreoffice (1:7.4.0~rc2-3) unstable; urgency=medium
+
+  * debian/changelog: oops, fix merge... 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 28 Jul 2022 22:58:57 +0200
+
+libreoffice (1:7.4.0~rc2-2) unstable; urgency=medium
+
+  * upload to unstable 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 28 Jul 2022 08:52:48 +0200
+
 libreoffice (1:7.4.0~rc2-1) experimental; urgency=medium
 
   * debian/patches/svm-test-bigendian.diff: from master, fix svm test on
