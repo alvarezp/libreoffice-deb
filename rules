@@ -426,7 +426,7 @@ ifeq "$(ENABLE_FIREBIRD)" "y"
 endif
 ENABLE_EOT=y
 ifeq "$(ENABLE_EOT)" "y"
-SYSTEM_STUFF += eot
+SYSTEM_STUFF += libeot
 endif
 SYSTEM_STUFF += glm
 BUILD_PPC64EL=y
@@ -1314,8 +1314,8 @@ ifeq "$(INSTALL_APPARMOR_PROFILES)" "y"
 endif
 
 ifeq "$(ENABLE_EOT)" "y"
- 	CONFIGURE_FLAGS += --enable-eot
- ifneq (,$(filter eot, $(SYSTEM_STUFF)))
+ CONFIGURE_FLAGS += --enable-eot
+ ifneq (,$(filter libeot, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libeot-dev
  endif
 endif
