@@ -1,0 +1,28 @@
+From 3ef4d50add24fbfad34c757e53af816c669202d5 Mon Sep 17 00:00:00 2001
+From: Rene Engelhard <rene@rene-engelhard.de>
+Date: Sun, 7 Aug 2022 11:04:15 +0200
+Subject: [PATCH] add libebook-1.2.so.21
+
+comparing the Debian packages of 3.44.1 and 3.45.2 the actual headers
+didn't change, so no code changes needed afaics
+
+Change-Id: Ifae6395831ca538bb1699a7f2ba4cb504e552baa
+---
+ connectivity/source/drivers/evoab2/EApi.cxx | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/connectivity/source/drivers/evoab2/EApi.cxx b/connectivity/source/drivers/evoab2/EApi.cxx
+index 8f6a6f7083d0..9ec8e0d44e32 100644
+--- a/connectivity/source/drivers/evoab2/EApi.cxx
++++ b/connectivity/source/drivers/evoab2/EApi.cxx
+@@ -21,6 +21,7 @@
+ #define  DECLARE_FN_POINTERS 1
+ #include "EApi.h"
+ static const char *eBookLibNames[] = {
++    "libebook-1.2.so.21", // evolution-data-server 3.45.2+
+     "libebook-1.2.so.20", // evolution-data-server 3.33.2+
+     "libebook-1.2.so.19", // evolution-data-server 3.24+
+     "libebook-1.2.so.16"
+-- 
+2.30.2
+
