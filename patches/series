@@ -36,7 +36,6 @@ apparmor-mesa.diff
 disableClassPathURLCheck.diff
 use-mariadb-java-instead-of-mysql-java.diff
 apparmor-opencl.diff
-fix-uicheck-tests-on-i386.patch
 fix-flaky-bridgetest.diff
 add-access2base-doc.diff
 disable-shortcuts_tab_navigation-uitest.diff
@@ -49,5 +48,4 @@ moreIconsDialog-accesses-internet.diff
 do-not-ABORT_ON_NON_APPLICATION_FONT_USE.diff
 svm-test-bigendian.diff
 hrk-euro.diff
-add-libebook-1.2.so.21.patch
 fix-eot-configure-ac.diff

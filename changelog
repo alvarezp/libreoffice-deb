@@ -1,3 +1,9 @@
+libreoffice (1:7.4.1~rc1~git20220807-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 07 Aug 2022 18:25:18 +0200
+
 libreoffice (1:7.4.0~rc2-4) UNRELEASED; urgency=medium
 
   * debian/patches/add-libebook-1.2.so.21.patch: as name says for libebook
