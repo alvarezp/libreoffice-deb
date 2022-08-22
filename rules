@@ -329,7 +329,6 @@ SYSTEM_STUFF += graphite
 SYSTEM_STUFF += harfbuzz
 SYSTEM_STUFF += libexttextcat
 SYSTEM_STUFF += cppunit
-SYSTEM_STUFF += cuckoo
 SYSTEM_STUFF += dragonbox
 SYSTEM_STUFF += libfixmath
 DEFAULT_IMAGE=colibre
@@ -642,7 +641,7 @@ endif
 # Debian Bullseye
 ifeq "$(DEB_DISTRIBUTION)" "bullseye-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out cuckoo zxing mdds orcus libnumbertext dragonbox libfixmath libmwaw,$(SYSTEM_STUFF))
+  SYSTEM_STUFF := $(filter-out zxing mdds orcus libnumbertext dragonbox libfixmath libmwaw,$(SYSTEM_STUFF))
   BULLSEYE_BACKPORT=y
   ENABLE_LTO=n
 endif
@@ -1184,9 +1183,6 @@ ifneq (,$(filter boost, $(SYSTEM_STUFF)))
   endif
   ifeq "$(shell if [ -e /usr/lib/$(DEB_HOST_MULTIARCH)/libboost_date_time.so ]; then echo true; fi)" "true"
   	CONFIGURE_FLAGS += --with-boost-libdir=/usr/lib/$(DEB_HOST_MULTIARCH)
-  endif
-  ifneq (,$(filter cuckoo, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libcuckoo-dev
   endif
   ifneq (,$(filter dragonbox, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libdragonbox-dev

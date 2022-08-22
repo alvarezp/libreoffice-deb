@@ -1,4 +1,4 @@
-libreoffice (1:7.5.0~alpha0~git20220807-1) UNRELEASED; urgency=medium
+libreoffice (1:7.5.0~alpha0~git20220818-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
@@ -6,20 +6,22 @@ libreoffice (1:7.5.0~alpha0~git20220807-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
-libreoffice (1:7.4.1~rc1~git20220807-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.1~rc1~git20220818-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
  -- Rene Engelhard <rene@debian.org>  Sun, 07 Aug 2022 18:25:18 +0200
 
-libreoffice (1:7.4.0~rc2-4) UNRELEASED; urgency=medium
+libreoffice (1:7.4.0~rc3-1) unstable; urgency=medium
 
   * debian/patches/add-libebook-1.2.so.21.patch: as name says for libebook
     SONAME bump
   * debian/patches/fix-eot-configure-ac.diff: as name says; make --enable-eot
     work again 
 
- -- Rene Engelhard <rene@debian.org>  Sun, 07 Aug 2022 13:58:09 +0200
+  * New upstream release candidate
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 10 Aug 2022 16:04:33 +0000
 
 libreoffice (1:7.4.0~rc2-3) unstable; urgency=medium
 
