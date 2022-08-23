@@ -30,3 +30,19 @@ index 9d10fa9ac2c6..cd0d86b7f98c 100644
  $(eval $(call gb_CppunitTest_use_more_fonts,sw_layoutwriter$(1)))
  
  endef
+diff --git a/vcl/CppunitTest_vcl_pdfexport.mk b/vcl/CppunitTest_vcl_pdfexport.mk
+index 1810d69042e0..2721d15e410b 100644
+--- a/vcl/CppunitTest_vcl_pdfexport.mk
++++ b/vcl/CppunitTest_vcl_pdfexport.mk
+@@ -43,11 +43,6 @@ $(eval $(call gb_CppunitTest_use_rdb,vcl_pdfexport,services))
+ 
+ $(eval $(call gb_CppunitTest_use_configuration,vcl_pdfexport))
+ 
+-# assert if font/glyph fallback occurs
+-$(call gb_CppunitTest_get_target,vcl_pdfexport): \
+-    EXTRA_ENV_VARS := \
+-        SAL_ABORT_ON_NON_APPLICATION_FONT_USE=1
+-
+ $(eval $(call gb_CppunitTest_use_more_fonts,vcl_pdfexport))
+ 
+ # vim: set noet sw=4 ts=4:
