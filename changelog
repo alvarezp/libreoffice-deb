@@ -1,11 +1,11 @@
-libreoffice (1:7.4.1~rc1~git20220824-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.1~rc1-1) experimental; urgency=medium
 
   * debian/patches/Make-configure-work-with-gpgme-1.18.patch: as name says,
     from gerrit
 
-  * New upstream snapshot 
+  * New upstream release candidate
 
- -- Rene Engelhard <rene@debian.org>  Sun, 07 Aug 2022 18:25:18 +0200
+ -- Rene Engelhard <rene@debian.org>  Wed, 24 Aug 2022 18:28:30 +0200
 
 libreoffice (1:7.4.0~rc3-1) unstable; urgency=medium
 
