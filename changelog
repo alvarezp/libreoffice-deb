@@ -1,4 +1,7 @@
-libreoffice (1:7.4.1~rc1~git20220818-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.1~rc1~git20220824-1) UNRELEASED; urgency=medium
+
+  * debian/patches/Make-configure-work-with-gpgme-1.18.patch: as name says,
+    from gerrit
 
   * New upstream snapshot 
 
