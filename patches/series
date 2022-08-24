@@ -51,3 +51,4 @@ svm-test-bigendian.diff
 hrk-euro.diff
 add-libebook-1.2.so.21.patch
 fix-eot-configure-ac.diff
+Make-configure-work-with-gpgme-1.18.patch

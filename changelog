@@ -1,5 +1,8 @@
 libreoffice (1:7.4.0-1) UNRELEASED; urgency=medium
 
+  * debian/patches/Make-configure-work-with-gpgme-1.18.patch: as name says,
+    from gerrit
+
   * LibreOffice 7.4.0 final release (identical to rc3)
 
   * debian/watch: track releases again
