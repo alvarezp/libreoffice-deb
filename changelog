@@ -1,13 +1,11 @@
-libreoffice (1:7.4.0-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.1~rc1-1) experimental; urgency=medium
 
   * debian/patches/Make-configure-work-with-gpgme-1.18.patch: as name says,
     from gerrit
 
-  * LibreOffice 7.4.0 final release (identical to rc3)
+  * New upstream release candidate
 
-  * debian/watch: track releases again
-
- -- Rene Engelhard <rene@debian.org>  Wed, 24 Aug 2022 09:48:46 +0200
+ -- Rene Engelhard <rene@debian.org>  Wed, 24 Aug 2022 18:28:30 +0200
 
 libreoffice (1:7.4.0~rc3-1) unstable; urgency=medium
 
