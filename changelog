@@ -1,3 +1,9 @@
+libreoffice (1:7.4.0-1) UNRELEASED; urgency=medium
+
+  * LibreOffice 7.4.0 final release (identical to rc3)
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 24 Aug 2022 09:48:46 +0200
+
 libreoffice (1:7.4.0~rc3-1) unstable; urgency=medium
 
   * debian/patches/add-libebook-1.2.so.21.patch: as name says for libebook
