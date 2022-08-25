@@ -1,3 +1,9 @@
+libreoffice (1:7.4.1~rc1-2) unstable; urgency=medium
+
+  * upload to unstable 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 25 Aug 2022 07:59:51 +0200
+
 libreoffice (1:7.4.1~rc1-1) experimental; urgency=medium
 
   * debian/patches/Make-configure-work-with-gpgme-1.18.patch: as name says,
