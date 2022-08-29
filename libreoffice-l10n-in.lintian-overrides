@@ -1,2 +1,0 @@
-# this is a metapackage, so actually "metapackages" is correct, IMHO
-libreoffice-l10n-in: wrong-section-according-to-package-name libreoffice-l10n-in => localization

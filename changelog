@@ -1,3 +1,11 @@
+libreoffice (1:7.4.1~rc1-3) UNRELEASED; urgency=medium
+
+  * debian/source/lintian-overrides, debian/*.lintian-overrides:
+    - update mismatched lintian overrides (and override some more lintian madness)
+  * debian/copryight: update for prism.js, remove js which are gone
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 28 Aug 2022 22:08:26 +0200
+
 libreoffice (1:7.4.1~rc1-2) unstable; urgency=medium
 
   * upload to unstable 

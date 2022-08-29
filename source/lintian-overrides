@@ -1,5 +1,13 @@
 # This one *has* a (detached) license paragraph....
 libreoffice source: missing-license-paragraph-in-dep5-copyright mpl-2.0 (paragraph at line 37)
-libreoffice source: source-is-missing helpcontent2/help3xsl/fuse.js line length is 564 characters (>512)
-libreoffice source: source-is-missing helpcontent2/help3xsl/fuzzysort.js line length is 499 characters (>256)
-
+# This *is* the code. lintian, don't assume every HTML file with long lines is generated, thanks, bye!
+libreoffice source: source-is-missing odk/index.html
+libreoffice source: source-is-missing odk/docs/tools.html
+libreoffice source: source-is-missing odk/examples/DevelopersGuide/examples.html
+libreoffice source: source-is-missing odk/examples/examples.html
+libreoffice source: source-is-missing odk/index.html
+libreoffice source: source-is-missing odk/index_online.html
+# similar, this is NOT minified. FIXME: use node-prismjs even though it's 1.26 while this is 1.28?
+libreoffice source: source-is-missing helpcontent2/help3xsl/prism.js
+# no, it isn't. the one is always, the other is for tests (<!nocheck>)!
+W: libreoffice source: redundant-build-prerequisites libmwaw-dev (>= 0.3.1), libmwaw-dev (>= 0.3.21)
