@@ -10,8 +10,10 @@ libreoffice (1:7.4.1~rc1-3) UNRELEASED; urgency=medium
   * debian/shell-lib-extensions.sh:
     - only touch /usr/lib/libreoffice/share/extensions when it is existing and
       a directory to go sure
-  (both together closes: #1005832, #1018750)
-
+  * debian/libreoffice-common.preinst.in:
+    - rm -f /usr/lib/libreoffice/share/extensions in preinst when it's a
+      0-byte file
+  (all together closes: #1005832, #1018750)
  -- Rene Engelhard <rene@debian.org>  Sun, 28 Aug 2022 22:08:26 +0200
 
 libreoffice (1:7.4.1~rc1-2) unstable; urgency=medium
