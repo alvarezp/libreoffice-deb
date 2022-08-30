@@ -4,6 +4,14 @@ libreoffice (1:7.4.1~rc1-3) UNRELEASED; urgency=medium
     - update mismatched lintian overrides (and override some more lintian madness)
   * debian/copryight: update for prism.js, remove js which are gone
 
+  * debian/rules:
+    - mkdir -p /usr/lib/libreoffice/share/extensions explicitely to have us
+      "own it"
+  * debian/shell-lib-extensions.sh:
+    - only touch /usr/lib/libreoffice/share/extensions when it is existing and
+      a directory to go sure
+  (both together closes: #1005832, #1018750)
+
  -- Rene Engelhard <rene@debian.org>  Sun, 28 Aug 2022 22:08:26 +0200
 
 libreoffice (1:7.4.1~rc1-2) unstable; urgency=medium

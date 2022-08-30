@@ -3638,6 +3638,9 @@ endif
 		done; \
 	done
 
+	# make sure we have a share/extensions dir owned by -common
+	mkdir -p $(PKGDIR)-common/$(OODIR)/share/extensions
+
 	touch $@
 
 binary-arch: $(STAMP_DIR)/binary-arch
