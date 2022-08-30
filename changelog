@@ -14,7 +14,8 @@ libreoffice (1:7.4.1~rc1-3) UNRELEASED; urgency=medium
     - rm -f /usr/lib/libreoffice/share/extensions in preinst when it's a
       0-byte file
   (all together closes: #1005832, #1018750)
- -- Rene Engelhard <rene@debian.org>  Sun, 28 Aug 2022 22:08:26 +0200
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 30 Aug 2022 17:58:46 +0000
 
 libreoffice (1:7.4.1~rc1-2) unstable; urgency=medium
 
