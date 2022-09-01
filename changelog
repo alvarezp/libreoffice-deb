@@ -1,4 +1,4 @@
-libreoffice (1:7.4.1~rc1-3) UNRELEASED; urgency=medium
+libreoffice (1:7.4.1~rc1-3) unstable; urgency=medium
 
   * debian/source/lintian-overrides, debian/*.lintian-overrides:
     - update mismatched lintian overrides (and override some more lintian madness)
@@ -15,7 +15,7 @@ libreoffice (1:7.4.1~rc1-3) UNRELEASED; urgency=medium
       0-byte file
   (all together closes: #1005832, #1018750)
 
- -- Rene Engelhard <rene@debian.org>  Tue, 30 Aug 2022 17:58:46 +0000
+ -- Rene Engelhard <rene@debian.org>  Thu, 01 Sep 2022 06:24:20 +0200
 
 libreoffice (1:7.4.1~rc1-2) unstable; urgency=medium
 
