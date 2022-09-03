@@ -2,6 +2,10 @@ version=4
 
 # only releases (and the final rc before the release. The last rc simply get renamed
 # so e.g. 6.4.3 final is 6.4.3 rc2 which is 6.4.3.2)
+# FIXME:
+# Unfortunately it seems that download.documentfoundation.org/libreoffice/src gets the rcs too. But
+# download.documentfoundation.org/stable((\d.\d.\d) doesn't work since we then get no tarball information
+# as that doesn't ship the source... And I fail getting parsing of www.libreoffice.org/download to work
 opts="compression=xz,pgpsigurlmangle=s/$/.asc/,uversionmangle=s/(\d.\d.\d).(\d)/$1/" \
   http://download.documentfoundation.org/@PACKAGE@/src/(\d.\d.\d)/@PACKAGE@-(\d.\d.\d).(\d).tar.xz debian
 
