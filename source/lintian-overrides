@@ -21,4 +21,5 @@ libreoffice source: superfluous-file-pattern tarballs/pdfium* [debian/copyright:
 libreoffice source: superfluous-file-pattern tarballs/skia* [debian/copyright:127]
 # patched in by us
 libreoffice source: superfluous-file-pattern wizards/source/access2base/access2base.html [debian/copyright:199]
-
+# two licenses..
+libreoffice source: duplicate-globbing-patterns helpcontent2/help3xsl/polyfills.js (lines 228 232) [debian/copyright]
