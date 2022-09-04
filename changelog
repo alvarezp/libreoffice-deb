@@ -1,15 +1,34 @@
+libreoffice (1:7.4.1~rc1-4) UNRELEASED; urgency=medium
+
+  The "hrmpf. lintian" release.
+
+  * debian/source/lintian-overrides, debian/*.lintian-overrides,
+    debian/copryight:
+    - really fix those lintian warnings supposed to be fixed in -3
+  * debian/changelog:
+    - fix debian-changelog-line-too-long in -3s changelog
+  * debian/copyright:
+    - fix license of sysui/desktop/appstream-appdata/*.xml, "fix"
+      some superfluous-file-pattern, thanks lintian
+  * debian/source.lintian-overrides:
+    - override new(?) superfluous-file-pattern, (even the ones before
+      since lintian still complains)
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 03 Sep 2022 12:03:10 +0200
+
 libreoffice (1:7.4.1~rc1-3) unstable; urgency=medium
 
   * debian/source/lintian-overrides, debian/*.lintian-overrides:
-    - update mismatched lintian overrides (and override some more lintian madness)
+    - update mismatched lintian overrides (and override some more lintian
+      madness)
   * debian/copryight: update for prism.js, remove js which are gone
 
   * debian/rules:
     - mkdir -p /usr/lib/libreoffice/share/extensions explicitly to have us
       "own it"
   * debian/shell-lib-extensions.sh:
-    - only touch /usr/lib/libreoffice/share/extensions when it is existing and
-      a directory to go sure
+    - only touch /usr/lib/libreoffice/share/extensions when it is existing
+      and a directory to go sure
   * debian/libreoffice-common.preinst.in:
     - rm -f /usr/lib/libreoffice/share/extensions in preinst when it's a
       0-byte file
