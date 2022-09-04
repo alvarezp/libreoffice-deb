@@ -389,7 +389,7 @@ ifeq "$(ENABLE_HELP)" "y"
   ifeq "$(ENABLE_HTML_HELP)" "y"
   HELP_DEPENDS := libreoffice-help-common (= $${binary:Version}),
   HELP_RECOMMENDS := firefox-esr | epiphany-browser | konqueror | chromium | firefox
-  HELP_COMMON_DEPENDS := libjs-normalize.css
+  HELP_COMMON_DEPENDS := node-prismjs
   else
   HELP_DEPENDS := libreoffice-writer
   DEBHELPER_OPTIONS += -Nlibreoffice-help-common

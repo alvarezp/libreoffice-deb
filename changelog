@@ -13,6 +13,9 @@ libreoffice (1:7.4.1~rc1-4) UNRELEASED; urgency=medium
   * debian/source.lintian-overrides:
     - override new(?) superfluous-file-pattern, (even the ones before
       since lintian still complains)
+  * debian/rules, debian/libreoffice-help-common.links: remove link and
+    dependency to normalize.css (not used anymore), link and depend on
+    node-prismjs instead
 
  -- Rene Engelhard <rene@debian.org>  Sat, 03 Sep 2022 12:03:10 +0200
 
