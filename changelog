@@ -24,8 +24,8 @@ libreoffice (1:7.4.1~rc1-3) unstable; urgency=medium
   * debian/copryight: update for prism.js, remove js which are gone
 
   * debian/rules:
-    - mkdir -p /usr/lib/libreoffice/share/extensions explicitly to have us
-      "own it"
+    - mkdir -p /usr/lib/libreoffice/share/extensions explicitly to have
+      libreoffice-common "own it"
   * debian/shell-lib-extensions.sh:
     - only touch /usr/lib/libreoffice/share/extensions when it is existing
       and a directory to go sure
