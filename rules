@@ -389,7 +389,7 @@ ifeq "$(ENABLE_HELP)" "y"
   ifeq "$(ENABLE_HTML_HELP)" "y"
   HELP_DEPENDS := libreoffice-help-common (= $${binary:Version}),
   HELP_RECOMMENDS := firefox-esr | epiphany-browser | konqueror | chromium | firefox
-  HELP_COMMON_DEPENDS := libjs-normalize.css
+  HELP_COMMON_DEPENDS := node-normalize.css, node-prismjs
   else
   HELP_DEPENDS := libreoffice-writer
   DEBHELPER_OPTIONS += -Nlibreoffice-help-common
@@ -899,7 +899,7 @@ ifneq (,$(filter libtiff, $(SYSTEM_STUFF)))
 endif
 
 COINMP_MINVER=(>= 1.7.6+dfsg1-2)
-	COINUTILS_MINVER=(>= 2.10.14+repack1-1)
+	COINUTILS_MINVER=(>= 2.10.14+repack1-1~)
 	# go sure given #873362
 	COINMP_MINVER=(>= 1.8.3-3)
 ifneq ($(ENABLE_COINMP),y)
@@ -3616,6 +3616,9 @@ endif
 			mv $$i `echo $$i | sed -e s/registry/.registry/`; \
 		done; \
 	done
+
+	# make sure we have a share/extensions dir owned by -common
+	mkdir -p $(PKGDIR)-common/$(OODIR)/share/extensions
 
 	touch $@
 

@@ -6,11 +6,64 @@ libreoffice (1:7.5.0~alpha0~git20220823-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
-libreoffice (1:7.4.1~rc1~git20220818-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.1~rc1-4) UNRELEASED; urgency=medium
 
-  * New upstream snapshot 
+  The "hrmpf. lintian" release.
 
- -- Rene Engelhard <rene@debian.org>  Sun, 07 Aug 2022 18:25:18 +0200
+  * debian/source/lintian-overrides, debian/*.lintian-overrides,
+    debian/copryight:
+    - really fix those lintian warnings supposed to be fixed in -3
+  * debian/changelog:
+    - fix debian-changelog-line-too-long in -3s changelog
+  * debian/copyright:
+    - fix license of sysui/desktop/appstream-appdata/*.xml, "fix"
+      some superfluous-file-pattern, thanks lintian
+  * debian/source.lintian-overrides:
+    - override new(?) superfluous-file-pattern, (even the ones before
+      since lintian still complains)
+  * debian/rules, debian/libreoffice-help-common.links: link and depend
+    on node-prismjs (and depend on node-normalize.css instead of the virtual
+    libjs-normalize.css)
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 03 Sep 2022 12:03:10 +0200
+
+libreoffice (1:7.4.1~rc1-3) unstable; urgency=medium
+
+  * debian/source/lintian-overrides, debian/*.lintian-overrides:
+    - update mismatched lintian overrides (and override some more lintian
+      madness)
+  * debian/copryight: update for prism.js, remove js which are gone
+
+  * debian/rules:
+    - mkdir -p /usr/lib/libreoffice/share/extensions explicitly to have
+      libreoffice-common "own it"
+  * debian/shell-lib-extensions.sh:
+    - only touch /usr/lib/libreoffice/share/extensions when it is existing
+      and a directory to go sure
+  * debian/libreoffice-common.preinst.in:
+    - rm -f /usr/lib/libreoffice/share/extensions in preinst when it's a
+      0-byte file
+  (all together closes: #1005832, #1018750)
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 01 Sep 2022 06:24:20 +0200
+
+libreoffice (1:7.4.1~rc1-2) unstable; urgency=medium
+
+  * upload to unstable 
+
+  * debian/watch: watch releases again for preparation of not uploading any
+    rc anymore
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 25 Aug 2022 07:59:51 +0200
+
+libreoffice (1:7.4.1~rc1-1) experimental; urgency=medium
+
+  * debian/patches/Make-configure-work-with-gpgme-1.18.patch: as name says,
+    from gerrit
+
+  * New upstream release candidate
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 24 Aug 2022 18:28:30 +0200
 
 libreoffice (1:7.4.0~rc3-1) unstable; urgency=medium
 

@@ -46,3 +46,4 @@ arm-fp-mode.diff
 moreIconsDialog-accesses-internet.diff
 do-not-ABORT_ON_NON_APPLICATION_FONT_USE.diff
 fix-eot-configure-ac.diff
+Make-configure-work-with-gpgme-1.18.patch
