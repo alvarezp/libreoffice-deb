@@ -1,5 +1,25 @@
-# This one *has* a (detached) license paragraph....
-libreoffice source: missing-license-paragraph-in-dep5-copyright mpl-2.0 (paragraph at line 37)
-libreoffice source: source-is-missing helpcontent2/help3xsl/fuse.js line length is 564 characters (>512)
-libreoffice source: source-is-missing helpcontent2/help3xsl/fuzzysort.js line length is 499 characters (>256)
-
+# This *is* the code. lintian, don't assume every HTML file with long lines is generated, thanks, bye!
+libreoffice source: source-is-missing [odk/index.html]
+libreoffice source: source-is-missing [odk/docs/tools.html]
+libreoffice source: source-is-missing [odk/examples/DevelopersGuide/examples.html]
+libreoffice source: source-is-missing [odk/examples/examples.html]
+libreoffice source: source-is-missing [odk/index_online.html]
+# similar, this is NOT minified. FIXME: use node-prismjs even though it's 1.26 while this is 1.28?
+libreoffice source: source-is-missing [helpcontent2/help3xsl/prism.js]
+# no, it isn't. the one is always, the other is for tests (<!nocheck>)!
+libreoffice source: redundant-build-prerequisites libmwaw-dev (>= 0.3.1), libmwaw-dev (>= 0.3.21)
+# hrmpf. of course they are there
+# $ ls tarballs/*
+# tarballs/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip    tarballs/dtoa-20180411.tgz
+# tarballs/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip    tarballs/pdfium-5058.tar.bz2
+# tarballs/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip  tarballs/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz
+libreoffice source: superfluous-file-pattern tarballs/*rhino* [debian/copyright:131]
+libreoffice source: superfluous-file-pattern tarballs/*swingEx* [debian/copyright:163]
+libreoffice source: superfluous-file-pattern tarballs/*xsltml* [debian/copyright:136]
+libreoffice source: superfluous-file-pattern tarballs/dtoa* [debian/copyright:122]
+libreoffice source: superfluous-file-pattern tarballs/pdfium* [debian/copyright:169]
+libreoffice source: superfluous-file-pattern tarballs/skia* [debian/copyright:127]
+# patched in by us
+libreoffice source: superfluous-file-pattern wizards/source/access2base/access2base.html [debian/copyright:199]
+# two licenses..
+libreoffice source: duplicate-globbing-patterns helpcontent2/help3xsl/polyfills.js (lines 228 232) [debian/copyright]
