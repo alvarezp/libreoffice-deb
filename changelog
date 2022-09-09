@@ -1,6 +1,6 @@
-libreoffice (1:7.4.1~rc2~git20220905-4) UNRELEASED; urgency=medium
+libreoffice (1:7.4.1~rc2-1) UNRELEASED; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   The "hrmpf. lintian" release.
 
