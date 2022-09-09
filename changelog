@@ -2,6 +2,9 @@ libreoffice (1:7.4.1~rc2-1) UNRELEASED; urgency=medium
 
   * New upstream release candidate
 
+  * debian/patches/poppler-22.09.diff: fix build with poppler 22.09,
+    from gerrit
+
   The "hrmpf. lintian" release.
 
   * debian/source/lintian-overrides, debian/*.lintian-overrides,
