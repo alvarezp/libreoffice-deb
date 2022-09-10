@@ -1,4 +1,4 @@
-libreoffice (1:7.4.1~rc2-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.1~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate
 
@@ -22,7 +22,7 @@ libreoffice (1:7.4.1~rc2-1) UNRELEASED; urgency=medium
     on node-prismjs (and depend on node-normalize.css instead of the virtual
     libjs-normalize.css)
 
- -- Rene Engelhard <rene@debian.org>  Sat, 03 Sep 2022 12:03:10 +0200
+ -- Rene Engelhard <rene@debian.org>  Sat, 10 Sep 2022 08:16:12 +0200
 
 libreoffice (1:7.4.1~rc1-3) unstable; urgency=medium
 
