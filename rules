@@ -389,7 +389,10 @@ ifeq "$(ENABLE_HELP)" "y"
   ifeq "$(ENABLE_HTML_HELP)" "y"
   HELP_DEPENDS := libreoffice-help-common (= $${binary:Version}),
   HELP_RECOMMENDS := firefox-esr | epiphany-browser | konqueror | chromium | firefox
-  HELP_COMMON_DEPENDS := node-normalize.css, node-prismjs
+  HELP_COMMON_DEPENDS := node-normalize.css
+    ifneq "$(BULLSEYE_BACKPORT)" "y"
+      HELP_COMMON_DEPENDS += node-prismjs
+    endif
   else
   HELP_DEPENDS := libreoffice-writer
   DEBHELPER_OPTIONS += -Nlibreoffice-help-common
@@ -3689,7 +3692,11 @@ ifeq "$(ENABLE_PYTHON)" "y"
 endif
 	dh_lintian -a
 	dh_bugfiles -a -A
+ifeq "$(BULLSEYE_BACKPORT)" "y"
+	dh_link -a -Xprismjs
+else
 	dh_link -a
+endif
 ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 	for i in libuno-cppu3 libuno-sal3 libreoffice-core libreoffice-writer; do \
 		rm -rf debian/.debhelper/$$i/dbgsym-root; \

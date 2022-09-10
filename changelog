@@ -1,3 +1,11 @@
+libreoffice (1:7.4.1~rc2-3) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - don't depend on node-prismjs on bullseye-backport since there it
+      depends on nodejs... 
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 10 Sep 2022 19:20:16 +0200
+
 libreoffice (1:7.4.1~rc2-2) experimental; urgency=medium
 
   * upload with correct control.... 
