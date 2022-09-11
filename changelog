@@ -3,6 +3,8 @@ libreoffice (1:7.4.1~rc2-3) UNRELEASED; urgency=medium
   * debian/rules:
     - don't depend on node-prismjs on bullseye-backport since there it
       depends on nodejs... 
+    - also use node-prismjs/node-normalize.css for the build and add them
+      to Build-Depends-Indep
   * debian/copyright, debian/libreoffice-common.links: mention prism.css
     explicitly and link to node-primsjs' prism.css
 

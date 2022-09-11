@@ -390,8 +390,10 @@ ifeq "$(ENABLE_HELP)" "y"
   HELP_DEPENDS := libreoffice-help-common (= $${binary:Version}),
   HELP_RECOMMENDS := firefox-esr | epiphany-browser | konqueror | chromium | firefox
   HELP_COMMON_DEPENDS := node-normalize.css
+  BUILD_DEPS_INDEP += , node-normalize.css
     ifneq "$(BULLSEYE_BACKPORT)" "y"
       HELP_COMMON_DEPENDS += node-prismjs
+      BUILD_DEPS_INDEP += , node-prismjs
     endif
   else
   HELP_DEPENDS := libreoffice-writer
@@ -1810,6 +1812,14 @@ endif
 	# obsolete lock file not cleaned up....
 	rm -f dbaccess/qa/extras/testdocuments/fdo84315.odb.lck
 
+	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
+		rm -f normalize.css
+ifneq "$(BULLSEYE_BACKPORT)" "y"
+	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
+		rm -f prism.js && \
+		rm -f prism.css
+endif
+
 	# Files created in debian directory
 	$(MAKE) -f debian/rules clean-debdir
 
@@ -2095,6 +2105,14 @@ endif
 ifeq "$(ENABLE_PCH)" "y"
 	# regen PCHs to go sure...
 	bin/update_pch.sh
+endif
+
+	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
+		ln -sf /usr/share/javascript/normalize.css/normalize.css
+ifneq "$(BULLSEYE_BACKPORT)" "y"
+	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
+		ln -sf /usr/share/nodejs/prismjs/prism.js && \
+		ln -sf /usr/share/nodejs/prismjs/themes/prism.css
 endif
 
 	touch $@

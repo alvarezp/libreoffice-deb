@@ -223,6 +223,8 @@ Build-Depends-Indep: ant (>= 1.7.0) [!hppa !mips64 !s390 !sparc] <!nojava>,
                      graphviz <!nodoc>,
                      junit4 (>= 4.8.2-2) <!nojava>,
                      libbsh-java <!nojava>,
+                     node-normalize.css,
+                     node-prismjs,
                      rdfind,
                      symlinks
 Build-Conflicts: amd-libopencl1,
