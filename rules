@@ -389,7 +389,12 @@ ifeq "$(ENABLE_HELP)" "y"
   ifeq "$(ENABLE_HTML_HELP)" "y"
   HELP_DEPENDS := libreoffice-help-common (= $${binary:Version}),
   HELP_RECOMMENDS := firefox-esr | epiphany-browser | konqueror | chromium | firefox
-  HELP_COMMON_DEPENDS := node-normalize.css, node-prismjs
+  HELP_COMMON_DEPENDS := node-normalize.css
+  BUILD_DEPS_INDEP += , node-normalize.css
+    ifneq "$(BULLSEYE_BACKPORT)" "y"
+      HELP_COMMON_DEPENDS += , node-prismjs
+      BUILD_DEPS_INDEP += , node-prismjs
+    endif
   else
   HELP_DEPENDS := libreoffice-writer
   DEBHELPER_OPTIONS += -Nlibreoffice-help-common
@@ -1791,6 +1796,14 @@ endif
 	# obsolete lock file not cleaned up....
 	rm -f dbaccess/qa/extras/testdocuments/fdo84315.odb.lck
 
+	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
+		rm -f normalize.css
+ifneq "$(BULLSEYE_BACKPORT)" "y"
+	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
+		rm -f prism.js && \
+		rm -f prism.css
+endif
+
 	# Files created in debian directory
 	$(MAKE) -f debian/rules clean-debdir
 
@@ -2077,6 +2090,14 @@ endif
 ifeq "$(ENABLE_PCH)" "y"
 	# regen PCHs to go sure...
 	bin/update_pch.sh
+endif
+
+	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
+		ln -sf /usr/share/javascript/normalize.css/normalize.css
+ifneq "$(BULLSEYE_BACKPORT)" "y"
+	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
+		ln -sf /usr/share/nodejs/prismjs/prism.js && \
+		ln -sf /usr/share/nodejs/prismjs/themes/prism-coy.css prism.css
 endif
 
 	touch $@
@@ -2773,7 +2794,7 @@ $(STAMP_DIR)/maintscripts: $(wildcard debian/shell-lib*.sh) $(wildcard debian/*.
 	      if grep -q "lool" $$MAINTSCRIPT.in; then \
 		cat debian/shell-lib-lool.sh >> $$MAINTSCRIPT; \
 	      fi; \
-	      if egrep -q "(validate_extension|sync_extension)" $$MAINTSCRIPT.in; then \
+	      if grep -E -q "(validate_extension|sync_extension)" $$MAINTSCRIPT.in; then \
 		 cat debian/shell-lib-extensions.sh >> $$MAINTSCRIPT; \
 	      fi; \
 	      sed -n '/^#INCLUDE_SHELL_LIB#$$/,$$p' < $$MAINTSCRIPT.in | sed -e '/^#INCLUDE_SHELL_LIB#$$/d' >> $$MAINTSCRIPT; \
@@ -3959,7 +3980,11 @@ ifeq "$(ENABLE_HELP)" "y"
 endif
 	dh_lintian -i
 	dh_bugfiles -i -A
+ifeq "$(BULLSEYE_BACKPORT)" "y"
+	dh_link -i -Xprism
+else
 	dh_link -i
+endif
 	dh_fixperms -i
 	dh_icons -i
 ifeq "$(INSTALL_APPARMOR_PROFILES)" "y"

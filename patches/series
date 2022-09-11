@@ -46,3 +46,4 @@ arm-fp-mode.diff
 moreIconsDialog-accesses-internet.diff
 do-not-abort-on-NON_APPLICATION_FONT_USE.diff
 fix-eot-configure-ac.diff
+poppler-22.09.diff

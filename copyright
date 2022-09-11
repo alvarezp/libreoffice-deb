@@ -103,8 +103,12 @@ Files: helpcontent2/help3xsl/normalize.css
 Copyright: Copyright © Nicolas Gallagher and Jonathan Neal
 License: Expat
 
-Files: helpcontent2/help3xsl/prism.*
+Files: helpcontent2/help3xsl/prism.js
 Copyright: Copyright (c) Lea Verou <https://lea.verou.me>
+License: MIT
+
+Files: helpcontent2/help3xsl/prism.css
+Copyright: Copyright (c) Tim  Shedor
 License: MIT
 
 Files: debian/*

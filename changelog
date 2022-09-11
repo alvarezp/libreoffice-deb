@@ -6,7 +6,32 @@ libreoffice (1:7.5.0~alpha0~git20220908-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
-libreoffice (1:7.4.1~rc1-4) UNRELEASED; urgency=medium
+libreoffice (1:7.4.1~rc2-3) unstable; urgency=medium
+
+  * upload to unstable
+
+  * debian/rules:
+    - don't depend on node-prismjs on bullseye-backport since there it
+      depends on nodejs... 
+    - also use node-prismjs/node-normalize.css for the build and add them
+      to Build-Depends-Indep
+  * debian/copyright, debian/libreoffice-common.links: mention prism.css
+    explicitly and link to node-primsjs' prism-coy.css
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 11 Sep 2022 22:30:14 +0200
+
+libreoffice (1:7.4.1~rc2-2) experimental; urgency=medium
+
+  * upload with correct control.... 
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 10 Sep 2022 13:28:55 +0200
+
+libreoffice (1:7.4.1~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/patches/poppler-22.09.diff: fix build with poppler 22.09,
+    from gerrit
 
   The "hrmpf. lintian" release.
 
@@ -25,7 +50,7 @@ libreoffice (1:7.4.1~rc1-4) UNRELEASED; urgency=medium
     on node-prismjs (and depend on node-normalize.css instead of the virtual
     libjs-normalize.css)
 
- -- Rene Engelhard <rene@debian.org>  Sat, 03 Sep 2022 12:03:10 +0200
+ -- Rene Engelhard <rene@debian.org>  Sat, 10 Sep 2022 08:16:12 +0200
 
 libreoffice (1:7.4.1~rc1-3) unstable; urgency=medium
 
