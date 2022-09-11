@@ -845,7 +845,7 @@ ifneq (,$(filter graphite, $(SYSTEM_STUFF)))
 endif
 
 ifneq (,$(filter harfbuzz, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libharfbuzz-dev (>= 0.9.42)
+	BUILD_DEPS += , libharfbuzz-dev (>= 2.1.0)
 endif
 
 ifneq (,$(filter libexttextcat, $(SYSTEM_STUFF)))
