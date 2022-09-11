@@ -3692,11 +3692,7 @@ ifeq "$(ENABLE_PYTHON)" "y"
 endif
 	dh_lintian -a
 	dh_bugfiles -a -A
-ifeq "$(BULLSEYE_BACKPORT)" "y"
-	dh_link -a -Xprismjs
-else
 	dh_link -a
-endif
 ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 	for i in libuno-cppu3 libuno-sal3 libreoffice-core libreoffice-writer; do \
 		rm -rf debian/.debhelper/$$i/dbgsym-root; \
@@ -3988,7 +3984,11 @@ ifeq "$(ENABLE_HELP)" "y"
 endif
 	dh_lintian -i
 	dh_bugfiles -i -A
+ifeq "$(BULLSEYE_BACKPORT)" "y"
+	dh_link -i -Xprism
+else
 	dh_link -i
+endif
 	dh_fixperms -i
 	dh_icons -i
 ifeq "$(INSTALL_APPARMOR_PROFILES)" "y"
