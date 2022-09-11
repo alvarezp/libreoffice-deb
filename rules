@@ -2112,7 +2112,7 @@ endif
 ifneq "$(BULLSEYE_BACKPORT)" "y"
 	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
 		ln -sf /usr/share/nodejs/prismjs/prism.js && \
-		ln -sf /usr/share/nodejs/prismjs/themes/prism.css
+		ln -sf /usr/share/nodejs/prismjs/themes/prism-coy.css prism.css
 endif
 
 	touch $@
