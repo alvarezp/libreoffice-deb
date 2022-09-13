@@ -1,3 +1,9 @@
+libreoffice (1:7.4.1~rc2-4) UNRELEASED; urgency=medium
+
+  * debian/source/lintian-overrides: update for latest copyright changes
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 13 Sep 2022 06:53:52 +0200
+
 libreoffice (1:7.4.1~rc2-3) unstable; urgency=medium
 
   * upload to unstable
