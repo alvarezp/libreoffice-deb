@@ -4,7 +4,7 @@ libreoffice source: source-is-missing [odk/docs/tools.html]
 libreoffice source: source-is-missing [odk/examples/DevelopersGuide/examples.html]
 libreoffice source: source-is-missing [odk/examples/examples.html]
 libreoffice source: source-is-missing [odk/index_online.html]
-# similar, this is NOT minified. FIXME: use node-prismjs even though it's 1.26 while this is 1.28?
+# similar, this is NOT minified.
 libreoffice source: source-is-missing [helpcontent2/help3xsl/prism.js]
 # no, it isn't. the one is always, the other is for tests (<!nocheck>)!
 libreoffice source: redundant-build-prerequisites libmwaw-dev (>= 0.3.1), libmwaw-dev (>= 0.3.21)
