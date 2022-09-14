@@ -391,10 +391,8 @@ ifeq "$(ENABLE_HELP)" "y"
   HELP_RECOMMENDS := firefox-esr | epiphany-browser | konqueror | chromium | firefox
   HELP_COMMON_DEPENDS := node-normalize.css
   BUILD_DEPS_INDEP += , node-normalize.css
-    ifneq "$(BULLSEYE_BACKPORT)" "y"
-      HELP_COMMON_DEPENDS += , node-prismjs
-      BUILD_DEPS_INDEP += , node-prismjs
-    endif
+  HELP_COMMON_DEPENDS += , node-prismjs
+  BUILD_DEPS_INDEP += , node-prismjs
   else
   HELP_DEPENDS := libreoffice-writer
   DEBHELPER_OPTIONS += -Nlibreoffice-help-common
@@ -643,12 +641,10 @@ endif
 #############
 # Distro-specific overrides
 
-# Debian Bullseye
-ifeq "$(DEB_DISTRIBUTION)" "bullseye-backports"
+# Debian Bookworm
+ifeq "$(DEB_DISTRIBUTION)" "bookworm-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out zxing mdds orcus libnumbertext dragonbox libfixmath libmwaw,$(SYSTEM_STUFF))
-  BULLSEYE_BACKPORT=y
-  ENABLE_LTO=n
+  BOOKWORM_BACKPORT=y
 endif
 
 CONFIGURE_FLAGS += $(foreach i, $(SYSTEM_STUFF),--with-system-$(i))
@@ -1798,11 +1794,9 @@ endif
 
 	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
 		rm -f normalize.css
-ifneq "$(BULLSEYE_BACKPORT)" "y"
 	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
 		rm -f prism.js && \
 		rm -f prism.css
-endif
 
 	# Files created in debian directory
 	$(MAKE) -f debian/rules clean-debdir
@@ -2094,11 +2088,9 @@ endif
 
 	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
 		ln -sf /usr/share/javascript/normalize.css/normalize.css
-ifneq "$(BULLSEYE_BACKPORT)" "y"
 	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
 		ln -sf /usr/share/nodejs/prismjs/prism.js && \
 		ln -sf /usr/share/nodejs/prismjs/themes/prism-coy.css prism.css
-endif
 
 	touch $@
 
@@ -3980,11 +3972,7 @@ ifeq "$(ENABLE_HELP)" "y"
 endif
 	dh_lintian -i
 	dh_bugfiles -i -A
-ifeq "$(BULLSEYE_BACKPORT)" "y"
-	dh_link -i -Xprism
-else
 	dh_link -i
-endif
 	dh_fixperms -i
 	dh_icons -i
 ifeq "$(INSTALL_APPARMOR_PROFILES)" "y"
