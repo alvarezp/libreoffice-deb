@@ -839,7 +839,7 @@ ifneq (,$(filter graphite, $(SYSTEM_STUFF)))
 endif
 
 ifneq (,$(filter harfbuzz, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libharfbuzz-dev (>= 2.0.0)
+	BUILD_DEPS += , libharfbuzz-dev (>= 2.1.0)
 endif
 
 ifneq (,$(filter libexttextcat, $(SYSTEM_STUFF)))
@@ -880,7 +880,7 @@ ifneq (,$(filter sane, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libsane-dev
 endif
 ifneq (,$(filter libpng, $(SYSTEM_STUFF)))
-       BUILD_DEPS += , libpng-dev
+       BUILD_DEPS += , libpng-dev (>= 1.6)
 endif
 
 ifeq "$(ENABLE_CURL)" "y"
