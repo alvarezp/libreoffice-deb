@@ -177,7 +177,10 @@ Build-Depends: autoconf,
                python3,
                python3-dev (>= 3.3) <!nopython>,
                python3-distutils <!nopython>,
+               qmake6 (>= 6.2.1+dfsg-2),
                qt5-qmake (>= 5.6),
+               qt6-base-dev (>= 6.2.1+dfsg-2),
+               qt6-base-dev-tools (>= 6.2.1+dfsg-2),
                qtbase5-dev (>= 5.6),
                qtbase5-dev-tools (>= 5.6),
                unixodbc-dev (>= 2.2.11),
@@ -5043,6 +5046,19 @@ Description: office productivity suite -- Qt 5 integration
  .
  This package contains the Qt 5 plugin for drawing LibreOffices widgets
  with Qt 5 and a Qt File Picker and print dialog.
+
+Package: libreoffice-qt6
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Depends: libreoffice-core (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Enhances: libreoffice
+Description: office productivity suite -- Qt 6 integration
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the Qt 6 plugin for drawing LibreOffices widgets
+ with Qt 6 and a Qt File Picker and print dialog.
 
 Package: libreoffice-plasma
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64

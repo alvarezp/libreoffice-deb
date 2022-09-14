@@ -3,6 +3,8 @@ libreoffice (1:7.5.0~alpha0~git20220914-1) UNRELEASED; urgency=medium
   * New upstream snapshot 
 
   * debian/watch: alpha/betas again 
+  * debian/rules:
+    - enable qt6 plugin (closes: #1019740)
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 

@@ -202,7 +202,7 @@ ifeq "$(BUILD_PLASMA)" "y"
     KF5_QT5_DEPENDS := libreoffice-qt5 (= $${binary:Version})
   endif
 endif
-ENABLE_QT6=n
+ENABLE_QT6=y
 # for moc move to /usr/lib/qt6/libxexec
 QT6_MINVER= (>= 6.2.1+dfsg-2)
 # https://www.debian.org/doc/debian-policy/ says this is not defined and must
