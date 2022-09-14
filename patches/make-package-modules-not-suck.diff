@@ -79,7 +79,7 @@ index f386b8aa7c05..7c337f23891b 100644
  	date \
  	pricing \
  	sc \
-@@ -265,6 +281,13 @@ $(eval $(call gb_Helper_register_plugins_for_install,OOOLIBS,calc, \
+@@ -265,6 +281,12 @@ $(eval $(call gb_Helper_register_plugins_for_install,OOOLIBS,calc, \
      scui \
  ))
  
@@ -87,7 +87,6 @@ index f386b8aa7c05..7c337f23891b 100644
 +	animcore \
 +	sd \
 +	sdd \
-+	sdfilt \
 +))
 +
  $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,graphicfilter, \
@@ -144,13 +143,12 @@ index f386b8aa7c05..7c337f23891b 100644
  	odfflatxml \
  	offacc \
  	oox \
-@@ -442,11 +441,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
+@@ -443,10 +443,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
  	sb \
  	$(call gb_Helper_optional,DBCONNECTIVITY,sdbt) \
  	scn \
 -	sd \
 -	sdd \
--	sdfilt \
  	sfx \
 -	slideshow \
  	sot \
