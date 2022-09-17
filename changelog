@@ -1,8 +1,11 @@
-libreoffice (1:7.4.1~rc2-4) UNRELEASED; urgency=medium
+libreoffice (1:7.4.1-1) unstable; urgency=medium
+
+  * LibreOffice 7.4.1 final release (identical to rc2)
+    (closes: #1018173)
 
   * debian/source/lintian-overrides: update for latest copyright changes
 
- -- Rene Engelhard <rene@debian.org>  Tue, 13 Sep 2022 06:53:52 +0200
+ -- Rene Engelhard <rene@debian.org>  Sat, 17 Sep 2022 19:49:58 +0200
 
 libreoffice (1:7.4.1~rc2-3) unstable; urgency=medium
 
