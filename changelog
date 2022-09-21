@@ -1,3 +1,9 @@
+libreoffice (1:7.4.2~rc1-2) experimental; urgency=medium
+
+  * reupload with correct control... 
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 21 Sep 2022 18:08:40 +0200
+
 libreoffice (1:7.4.2~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
