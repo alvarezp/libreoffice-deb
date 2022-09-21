@@ -1,9 +1,9 @@
-libreoffice (1:7.4.2~rc1~git20220913-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.2~rc1-1) experimental; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
- -- Rene Engelhard <rene@debian.org>  Sun, 11 Sep 2022 22:30:14 +0200
- 
+ -- Rene Engelhard <rene@debian.org>  Wed, 21 Sep 2022 17:36:50 +0200
+
 libreoffice (1:7.4.1-1) unstable; urgency=medium
 
   * LibreOffice 7.4.1 final release (identical to rc2)
