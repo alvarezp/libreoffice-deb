@@ -3183,7 +3183,7 @@ endif
 			if [ ! -e debian/$$i.bug-script.in ]; then \
 				printf "#!/bin/sh\n\n" > debian/$$i.bug-script; \
 			fi ;\
-			echo "ucfq $$i" >>  debian/$$i.bug-script; \
+			echo "ucfq $$i >&3" >>  debian/$$i.bug-script; \
 		fi ;\
 	done
 	# generate .links files from *.in
