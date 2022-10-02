@@ -1,3 +1,10 @@
+libreoffice (1:7.4.1-2) unstable; urgency=medium
+
+  * debian/patches/Make-configure-work-with-gpgme-1.18.patch: readd; went
+    only upstream for 7.4.2
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 02 Oct 2022 11:13:11 +0200
+
 libreoffice (1:7.4.1-1) unstable; urgency=medium
 
   * LibreOffice 7.4.1 final release (identical to rc2)
