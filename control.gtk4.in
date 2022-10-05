@@ -11,5 +11,7 @@ Description: office productivity suite -- GTK+ 4 integration
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the Gtk plugin for drawing LibreOffices widgets
- with Gtk+ 4 and Gtk/GNOMEish print dialog when running under GNOME.
+ with Gtk+ 4 and Gtk/GNOMEish print dialog.
+ .
+ You need to enable it manually by export SAL_USE_VCLPLUGIN=gtk4.
 

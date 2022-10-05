@@ -10,4 +10,6 @@ Description: office productivity suite -- Qt 6 integration
  .
  This package contains the Qt 6 plugin for drawing LibreOffices widgets
  with Qt 6 and a Qt File Picker and print dialog.
+ .
+ You need to enable it manually by export SAL_USE_VCLPLUGIN=qt6.
 

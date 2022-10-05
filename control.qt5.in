@@ -11,4 +11,7 @@ Description: office productivity suite -- Qt 5 integration
  .
  This package contains the Qt 5 plugin for drawing LibreOffices widgets
  with Qt 5 and a Qt File Picker and print dialog.
+ .
+ You need to enable it manually by export SAL_USE_VCLPLUGIN=qt5 if you are
+ not using Plasma.
 
