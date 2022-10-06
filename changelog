@@ -1,4 +1,6 @@
-libreoffice (1:7.4.2~rc1-3) UNRELEASED; urgency=medium
+libreoffice (1:7.4.2~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
 
   * debian/rules: fix build-depends-on-obsolete-package
     (s/libfreetype6-dev/libfreetype-dev/,
@@ -8,7 +10,7 @@ libreoffice (1:7.4.2~rc1-3) UNRELEASED; urgency=medium
   * debian/control.{gtk4,qt5,qt6}.in: mention the need to
     manually export SAL_USE_VCLPLUGIN
 
- -- Rene Engelhard <rene@debian.org>  Sun, 02 Oct 2022 14:05:44 +0200
+ -- Rene Engelhard <rene@debian.org>  Thu, 06 Oct 2022 17:44:16 +0200
 
 libreoffice (1:7.4.2~rc1-2) experimental; urgency=medium
 
