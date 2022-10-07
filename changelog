@@ -2,9 +2,11 @@ libreoffice (1:7.4.2~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate
 
-  * debian/rules: fix build-depends-on-obsolete-package
-    (s/libfreetype6-dev/libfreetype-dev/,
-     s/libfontconfig1-dev/libfontconfig-dev/) 
+  * debian/rules:
+    - add missing >&3 to ufcq calls in bug scripts
+    - fix build-depends-on-obsolete-package
+      (s/libfreetype6-dev/libfreetype-dev/,
+      s/libfontconfig1-dev/libfontconfig-dev/) 
   * debian/control.gtk4.in: remove "when running under GNOME"
     from package description since GNOME implies gtk3
   * debian/control.{gtk4,qt5,qt6}.in: mention the need to
