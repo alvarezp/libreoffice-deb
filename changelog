@@ -1,3 +1,11 @@
+libreoffice (1:7.4.2-1) unstable; urgency=medium
+
+  * LibreOffice 7.4.2 release (identical to rc3)
+
+  * upload to unstable 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 10 Oct 2022 19:32:31 +0200
+
 libreoffice (1:7.4.2~rc3-1) experimental; urgency=medium
 
   * New upstream release candidate 
