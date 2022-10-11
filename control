@@ -11,7 +11,7 @@ Build-Depends: autoconf,
                bzip2,
                clang (>= 1:11) [armel],
                clang (>= 1:12) [ppc64el],
-               clang (>= 1:8.0.1) [alpha amd64 arm64 armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mipsel mips64el],
+               clang (>= 1:8.0.1) [alpha amd64 arm64 armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mipsel mips64el riscv64],
                coinor-libcoinmp-dev (>= 1.8.3-3),
                coinor-libcoinutils-dev (>= 2.10.14+repack1-1~),
                debhelper (>= 10.10.4),
@@ -30,7 +30,7 @@ Build-Depends: autoconf,
                java-common (>= 0.61) <!nojava>,
                javahelper (>= 0.37~) <!nojava>,
                junit4 (>= 4.8.2-2) [amd64 arm64] <!nocheck !nojava>,
-               libabsl-dev,
+               libabsl-dev [alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64],
                libabw-dev (<< 0.2~),
                libabw-dev (>= 0.1),
                libarchive-zip-perl [!hppa !mips64 !s390 !sparc] <!nojava>,
@@ -115,7 +115,7 @@ Build-Depends: autoconf,
                libnumbertext-dev (>= 1.0.6),
                libodfgen-dev (<< 0.2~),
                libodfgen-dev (>= 0.1),
-               libopenjp2-7-dev,
+               libopenjp2-7-dev [alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64],
                liborcus-dev (<< 0.18~),
                liborcus-dev (>= 0.17.2),
                libpagemaker-dev,
@@ -170,7 +170,7 @@ Build-Depends: autoconf,
                libzmf-dev,
                libzmf-dev (<< 0.1~),
                libzxingcore-dev (>= 1.2.0),
-               llvm [alpha amd64 arm64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mipsel mips64el ppc64el],
+               llvm [alpha amd64 arm64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mipsel mips64el ppc64el riscv64],
                lp-solve (>= 5.5.0.13-5+b1),
                maven-repo-helper,
                pkg-config,
@@ -205,7 +205,7 @@ Build-Depends-Arch: firebird3.0-server-core [!hppa !mips64 !s390 !sparc] <!noche
                     hyphen-en-us [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     imagemagick [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     libcppunit-dev (>= 1.14) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
-                    libcppunit-dev (>= 1.15.1-4) [alpha amd64 arm64 ia64 mips64 ppc64 ppc64el s390x sparc64] <!nocheck>,
+                    libcppunit-dev (>= 1.15.1-4) [alpha amd64 arm64 ia64 mips64 ppc64 ppc64el riscv64 s390x sparc64] <!nocheck>,
                     libe-book-dev (>= 0.1.2) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     libetonyek-dev (>= 0.1.8) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     libmwaw-dev (>= 0.3.21),
@@ -241,7 +241,7 @@ Bugs: mailto:debian-openoffice@lists.debian.org
 Homepage: http://www.libreoffice.org
 
 Package: libreoffice
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Section: metapackages
 Depends: libreoffice-base [!hppa !mips64 !s390 !sparc],
          libreoffice-calc,
@@ -435,7 +435,7 @@ Description: office productivity suite -- Indic language packages
  indic languages.
 
 Package: libreoffice-core
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
@@ -633,7 +633,7 @@ Description: office productivity suite -- common files for LibreOffice help
  for the LibreOffice Help.
 
 Package: libreoffice-writer
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !mips64 !s390 !sparc],
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
@@ -676,7 +676,7 @@ Description: office productivity suite -- word processor (no GUI variant)
  This package contains the wordprocessor component for LibreOffice.
 
 Package: libreoffice-calc
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !mips64 !s390 !sparc],
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
@@ -711,7 +711,7 @@ Description: office productivity suite -- spreadsheet (no GUI variant)
  for use with libreoffice-core-nogui.
 
 Package: libreoffice-impress
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
          libreoffice-draw (= ${binary:Version}),
@@ -747,7 +747,7 @@ Description: office productivity suite -- presentation (no GUI variant)
  This package contains the presentation component for LibreOffice.
 
 Package: libreoffice-draw
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -782,7 +782,7 @@ Description: office productivity suite -- drawing (no GUI variant)
  This package contains the drawing component for LibreOffice.
 
 Package: libreoffice-math
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: fonts-opensymbol (>= 2:102.11),
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
@@ -812,7 +812,7 @@ Description: office productivity suite -- equation editor (no GUI variant)
  This package contains the equation editor component for LibreOffice.
 
 Package: libreoffice-base-core
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -830,7 +830,7 @@ Description: office productivity suite -- shared library
  libreoffice-sdbc-*).
 
 Package: libreoffice-base
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Section: database
 Pre-Depends: dpkg (>= 1.19.1)
 Depends: libreoffice-base-core (= ${binary:Version}),
@@ -949,7 +949,7 @@ Description: office productivity suite -- Sukapura symbol style
  This package contains the "sukapura" symbol style.
 
 Package: libreoffice-gnome
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -974,7 +974,7 @@ Description: office productivity suite -- GNOME integration
 
 Package: python3-uno
 Section: python
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Enhances: libreoffice
 Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
@@ -1062,7 +1062,7 @@ Depends: libreoffice-core-nogui | libreoffice-core,
          ${java:Depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Section: database
 Enhances: libreoffice-base-drivers
 Description: HSQLDB SDBC driver for LibreOffice
@@ -1074,7 +1074,7 @@ Description: HSQLDB SDBC driver for LibreOffice
 
 Package: libreoffice-sdbc-mysql
 Section: database
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Depends: libreoffice-core-nogui | libreoffice-core,
          ${misc:Depends},
          ${shlibs:Depends}
@@ -1090,13 +1090,13 @@ Package: libreoffice-base-drivers
 Depends: libreoffice-core-nogui | libreoffice-core,
          ${misc:Depends},
          ${shlibs:Depends}
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Section: database
 Suggests: libjtds-java,
           libreoffice-sdbc-mysql | libmyodbc | libmariadb-java,
           libreoffice-sdbc-postgresql | odbc-postgresql | libpg-java,
           libsqliteodbc | tdsodbc | odbc-mdbtools
-Recommends: libreoffice-sdbc-hsqldb [alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386],
+Recommends: libreoffice-sdbc-hsqldb [alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386],
             ${base-firebird-recommends}
 Replaces: libreoffice-base (<< 1:4.3.0-3), libreoffice-core (<< 1:6.2.0~beta1~)
 Breaks: libreoffice-base (<< 1:4.3.0-3)
@@ -1163,7 +1163,7 @@ Depends: liblibreoffice-java,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libreoffice-core-nogui | libreoffice-core
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Replaces: libreoffice-officebean (<< 1:6.4.0~rc2-1)
 Breaks: libreoffice-officebean (<< 1:6.4.0~rc2-1)
 Description: generic Java Bean wrapper for LibreOffice components
@@ -4579,7 +4579,7 @@ Description: office productivity suite -- Chinese_traditional help
 
 Package: uno-libs-private
 Section: libs
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Replaces: uno-libs3
 Breaks: uno-libs3
@@ -4598,7 +4598,7 @@ Description: LibreOffice UNO runtime environment -- private libraries used by pu
 
 Package: libuno-sal3
 Section: libs
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Replaces: uno-libs3, ure (<< 5.0.0~rc2-1)
 Breaks: libreoffice-core (<< 1:4.3.0~), uno-libs3
@@ -4616,7 +4616,7 @@ Description: LibreOffice UNO runtime environment -- SAL public library
 
 Package: libuno-salhelpergcc3-3
 Section: libs
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Replaces: uno-libs3, ure (<< 5.0.0~rc2-1)
 Breaks: libreoffice-core (<< 1:4.3.0~), uno-libs3
@@ -4634,7 +4634,7 @@ Description: LibreOffice UNO runtime environment -- SAL helpers for C++ library
 
 Package: libuno-cppu3
 Section: libs
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Replaces: uno-libs3, ure (<< 5.0.0~rc2-1)
 Breaks: libreoffice-core (<< 1:4.3.0~), uno-libs3
@@ -4653,7 +4653,7 @@ Description: LibreOffice UNO runtime environment -- CPPU public library
 
 Package: libuno-cppuhelpergcc3-3
 Section: libs
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: uno-libs-private (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -4674,7 +4674,7 @@ Description: LibreOffice UNO runtime environment -- CPPU helper library
 
 Package: libuno-purpenvhelpergcc3-3
 Section: libs
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Replaces: uno-libs3, ure (<< 5.0.0~rc2-1)
 Breaks: libreoffice-core (<< 1:4.3.0~), uno-libs3
@@ -4693,7 +4693,7 @@ Description: LibreOffice UNO runtime environment -- "purpose environment" helper
 
 Package: ure
 Section: libs
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: uno-libs-private (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -4724,7 +4724,7 @@ Description: LibreOffice UNO runtime environment
 
 Package: ure-java
 Section: java
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libunoloader-java,
          uno-libs-private (= ${binary:Version}),
          ure (= ${binary:Version}),
@@ -4822,7 +4822,7 @@ Description: LibreOffice component for building database reports
 
 Package: libreoffice-report-builder-bin
 Section: misc
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Depends: libreoffice-base, libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
 Description: LibreOffice component for building database reports -- libraries
  LibreOffice is a full-featured office productivity suite that provides
@@ -4833,7 +4833,7 @@ Description: LibreOffice component for building database reports -- libraries
 
 Package: libreoffice-report-builder-bin-nogui
 Section: misc
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Depends: libreoffice-base-nogui | libreoffice-base,
          libreoffice-core-nogui | libreoffice-core,
          ${misc:Depends},
@@ -4881,7 +4881,7 @@ Description: OpenSymbol TrueType font
 
 Package: libreoffice-dev
 Section: devel
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          libreoffice-dev-common (= ${source:Version}),
          ${misc:Depends},
@@ -4901,7 +4901,7 @@ Description: office productivity suite -- SDK -- architecture-dependent parts
 
 Package: libreoffice-dev-gui
 Section: devel
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-core (= ${binary:Version}),
          libreoffice-dev (= ${binary:Version}),
          libreoffice-dev-common (= ${source:Version}),
@@ -4951,7 +4951,7 @@ Description: office productivity suite -- SDK documentation
 
 Package: libreofficekit-dev
 Section: libdevel
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: gir1.2-lokdocview-0.1 (= ${binary:Version}), ${misc:Depends}
 Suggests: libgtk-3-dev
 Recommends: libreoffice-core, libreofficekit-data
@@ -4966,7 +4966,7 @@ Description: LibreOfficeKit -- headers
  This package contains the headers needed for using LibreOfficeKit.
 
 Package: libreoffice-gtk3
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -4982,7 +4982,7 @@ Description: office productivity suite -- GTK+ 3 integration
  with Gtk+ 3 and Gtk/GNOMEish print dialog when running under GNOME.
 
 Package: gir1.2-lokdocview-0.1
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Section: introspection
 Depends: liblibreofficekitgtk (= ${binary:Version}),
          ${gir:Depends},
@@ -4995,7 +4995,7 @@ Description: GTK3 widget wrapping LibreOffice functionality - introspection
 
 Package: liblibreofficekitgtk
 Section: gnome
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreofficekit-data, ${misc:Depends}, ${shlibs:Depends}
 Replaces: libreoffice-gtk3 (<< 1:5.2.0~)
 Breaks: libreoffice-gtk3 (<< 1:5.2.0~)
@@ -5017,7 +5017,7 @@ Description: common data for LOKDocView
  handlers).
 
 Package: libreoffice-kf5
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-core (= ${binary:Version}),
          ${kf5-qt5-depends},
          ${misc:Depends},
@@ -5034,7 +5034,7 @@ Description: office productivity suite -- KDE Frameworks 5 integration
  Picker when running under Plasma.
 
 Package: libreoffice-qt5
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -5051,7 +5051,7 @@ Description: office productivity suite -- Qt 5 integration
  not using Plasma.
 
 Package: libreoffice-qt6
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -5062,9 +5062,11 @@ Description: office productivity suite -- Qt 6 integration
  .
  This package contains the Qt 6 plugin for drawing LibreOffices widgets
  with Qt 6 and a Qt File Picker and print dialog.
+ .
+ You need to enable it manually by export SAL_USE_VCLPLUGIN=qt6.
 
 Package: libreoffice-plasma
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -5079,7 +5081,7 @@ Description: office productivity suite -- some Plasma integration
 
 Package: libreoffice-sdbc-postgresql
 Section: misc
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Depends: libreoffice-common (>= 1:7.0.0~alpha),
          libreoffice-core,
          ${misc:Depends},
@@ -5095,7 +5097,7 @@ Description: PostgreSQL SDBC driver for LibreOffice
 Homepage: http://wiki.documentfoundation.org/PostgreSQL-SDBC
 
 Package: libreoffice-evolution
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Section: gnome
 Depends: libreoffice-base,
          libreoffice-common (>= 1:7.0.0~alpha~),
@@ -5156,7 +5158,7 @@ Depends: libreoffice-core-nogui | libreoffice-core,
          ${firebird-engine-depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mips mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 powerpcspe kfreebsd-amd64 kfreebsd-i386
 Section: database
 Enhances: libreoffice-base-drivers
 Description: Firebird SDBC driver for LibreOffice

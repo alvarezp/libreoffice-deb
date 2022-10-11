@@ -85,7 +85,7 @@ endif
 #########
 # Default package configuration
 #
-OOO_ARCHS = alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+OOO_ARCHS = alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 PATCHSET=$(DEB_VENDOR)
 BUILD_DEPS=\
     autoconf,\
@@ -368,6 +368,12 @@ ENABLE_PDFIMPORT=y
 ENABLE_POPPLER=y
 SYSTEM_STUFF += poppler
 ENABLE_PDFIUM=y
+ifeq (m68k,$(OOO_HOST_ARCH))
+ENABLE_PDFIUM=n
+endif
+ifeq (riscv64,$(OOO_HOST_ARCH))
+ENABLE_PDFIUM=n
+endif
 ifneq (big,$(DEB_HOST_ARCH_ENDIAN))
 ENABLE_SKIA=y
 endif
@@ -516,7 +522,7 @@ endef
 PLATFORMID := $(shell grep PLATFORMID debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
 
 
-OOO_64BIT_ARCHS = $(filter alpha amd64 arm64 ia64 kfreebsd-amd64 mips64 mips64el ppc64 ppc64el s390x sparc64, $(OOO_ARCHS))
+OOO_64BIT_ARCHS = $(filter alpha amd64 arm64 ia64 kfreebsd-amd64 mips64 mips64el ppc64 ppc64el riscv64 s390x sparc64, $(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_64BIT_ARCHS))
 OOO_BE_ARCHS = $(filter hppa m68k mips mips64 powerpc powerpcspe ppc64 s390 s390x sparc sparc64,$(OOO_ARCHS))
 OOO_LE_ARCHS = $(filter-out $(OOO_BE_ARCHS),$(OOO_ARCHS))
@@ -528,7 +534,7 @@ $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
 OOO_JUNIT_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 #OOO_CHECK_FATAL_ARCHS := i386 amd64 armhf arm64
-OOO_CHECK_FATAL_ARCHS := amd64 arm64
+OOO_CHECK_FATAL_ARCHS := amd64 arm64 riscv64
 
 BUILD_TESTS=y
 ifeq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
@@ -579,6 +585,8 @@ OOO_FIREBIRD_ARCHS := $(OOO_BASE_ARCHS)
 $(eval $(call gen_no_archs,OOO_FIREBIRD_ARCHS))
 OOO_NOGUI_ARCHS := $(filter amd64 i386 arm64 armhf s390x ppc64 ppc64el,$(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_NOGUI_ARCHS))
+OOO_PDFIUM_ARCHS := $(filter-out m68k risc64,$(OOO_ARCHS))
+$(eval $(call gen_no_archs,OOO_PDFIUM_ARCHS))
 
 ifneq (,$(filter $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
   ifneq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_BASE_ARCHS)))
@@ -822,10 +830,10 @@ ifeq "$(ENABLE_PDFIMPORT)" "y"
 	SYSTEM_STUFF += abseil
 	SYSTEM_STUFF += openjpeg
     ifneq (,$(filter openjpeg, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libopenjp2-7-dev
+	BUILD_DEPS += , libopenjp2-7-dev [$(OOO_PDFIUM_ARCHS)]
     endif
     ifneq (,$(filter abseil, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libabsl-dev
+	BUILD_DEPS += , libabsl-dev [$(OOO_PDFIUM_ARCHS)]
     endif
   endif
 endif
