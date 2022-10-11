@@ -1,4 +1,4 @@
-libreoffice (1:7.5.0~alpha0~git20221001-1) UNRELEASED; urgency=medium
+libreoffice (1:7.5.0~alpha0~git20221011-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
@@ -7,6 +7,28 @@ libreoffice (1:7.5.0~alpha0~git20221001-1) UNRELEASED; urgency=medium
     - enable qt6 plugin (closes: #1019740)
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
+
+libreoffice (1:7.4.2~rc3-1) experimental; urgency=medium
+
+  * New upstream release candidate 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 10 Oct 2022 19:06:49 +0200
+
+libreoffice (1:7.4.2~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/rules:
+    - add missing >&3 to ufcq calls in bug scripts
+    - fix build-depends-on-obsolete-package
+      (s/libfreetype6-dev/libfreetype-dev/,
+      s/libfontconfig1-dev/libfontconfig-dev/) 
+  * debian/control.gtk4.in: remove "when running under GNOME"
+    from package description since GNOME implies gtk3
+  * debian/control.{gtk4,qt5,qt6}.in: mention the need to
+    manually export SAL_USE_VCLPLUGIN
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 06 Oct 2022 17:44:16 +0200
 
 libreoffice (1:7.4.2~rc1-2) experimental; urgency=medium
 
@@ -110,6 +132,7 @@ libreoffice (1:7.4.1~rc1-1) experimental; urgency=medium
     from gerrit
 
   * New upstream release candidate
+    - fixes CVE-2022-3140 (Macro URL arbitrary script execution)
 
  -- Rene Engelhard <rene@debian.org>  Wed, 24 Aug 2022 18:28:30 +0200
 

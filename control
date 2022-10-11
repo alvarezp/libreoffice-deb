@@ -66,12 +66,12 @@ Build-Depends: autoconf,
                libexttextcat-dev (>= 3.4.1),
                libfixmath-dev,
                libflute-java (>= 1.1.6) [!hppa !mips64 !s390 !sparc] <!nojava>,
-               libfontconfig1-dev,
+               libfontconfig-dev,
                libfonts-java (>= 1.1.6) [!hppa !mips64 !s390 !sparc] <!nojava>,
                libformula-java (>= 1.1.7) [!hppa !mips64 !s390 !sparc] <!nojava>,
                libfreehand-dev (<< 0.2~),
                libfreehand-dev (>= 0.1),
-               libfreetype6-dev (>= 2.8.1),
+               libfreetype-dev (>= 2.8.1),
                libgirepository1.0-dev (>= 1.32),
                libgl-dev,
                libglib2.0-dev (>= 2.38.0),
@@ -5046,6 +5046,9 @@ Description: office productivity suite -- Qt 5 integration
  .
  This package contains the Qt 5 plugin for drawing LibreOffices widgets
  with Qt 5 and a Qt File Picker and print dialog.
+ .
+ You need to enable it manually by export SAL_USE_VCLPLUGIN=qt5 if you are
+ not using Plasma.
 
 Package: libreoffice-qt6
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64

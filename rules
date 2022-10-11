@@ -97,7 +97,7 @@ BUILD_DEPS=\
     fontforge-nox | fontforge, \
     gperf (>= 3.1),\
     libc0.1 (>= 2.10.2-7) [kfreebsd-any],\
-    libfontconfig1-dev,\
+    libfontconfig-dev,\
     pkg-config,\
     unzip,\
     xsltproc,\
@@ -373,9 +373,9 @@ ENABLE_SKIA=y
 endif
 # see https://cgit.freedesktop.org/libreoffice/core/commit/?id=a0edcc68f94915a78fcc08e70d2cdd752abd9ebb
 ifeq "$(ENABLE_SKIA)" "y"
-    BUILD_DEPS += , libfreetype6-dev (>= 2.8.1)
+    BUILD_DEPS += , libfreetype-dev (>= 2.8.1)
 else
-    BUILD_DEPS += , libfreetype6-dev (>= 2.2.0)
+    BUILD_DEPS += , libfreetype-dev (>= 2.2.0)
 endif
 SYSTEM_STUFF += libpng
 ENABLE_NSS=y
