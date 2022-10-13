@@ -11,6 +11,13 @@ libreoffice (1:7.5.0~alpha0~git20221011-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
+
+  * LibreOffice 7.4.2 release (identical to rc3)
+
+  * upload to unstable 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 10 Oct 2022 19:32:31 +0200
+
 libreoffice (1:7.4.2~rc3-1) experimental; urgency=medium
 
   * New upstream release candidate 
@@ -77,6 +84,7 @@ libreoffice (1:7.4.1~rc2-2) experimental; urgency=medium
 libreoffice (1:7.4.1~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate
+    - fixes CVE-2022-3140 (Macro URL arbitrary script execution)
 
   * debian/patches/poppler-22.09.diff: fix build with poppler 22.09,
     from gerrit
