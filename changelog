@@ -11,6 +11,7 @@ libreoffice (1:7.5.0~alpha0~git20221011-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
+libreoffice (1:7.4.2-1) unstable; urgency=medium
 
   * LibreOffice 7.4.2 release (identical to rc3)
 
@@ -143,7 +144,6 @@ libreoffice (1:7.4.1~rc1-1) experimental; urgency=medium
     from gerrit
 
   * New upstream release candidate
-    - fixes CVE-2022-3140 (Macro URL arbitrary script execution)
 
  -- Rene Engelhard <rene@debian.org>  Wed, 24 Aug 2022 18:28:30 +0200
 
