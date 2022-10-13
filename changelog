@@ -72,6 +72,7 @@ libreoffice (1:7.4.1~rc2-2) experimental; urgency=medium
 libreoffice (1:7.4.1~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate
+    - fixes CVE-2022-3140 (Macro URL arbitrary script execution)
 
   * debian/patches/poppler-22.09.diff: fix build with poppler 22.09,
     from gerrit
