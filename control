@@ -194,6 +194,7 @@ Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i38
                     fonts-kacst [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     fonts-liberation2 [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     fonts-linuxlibertine [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
+                    fonts-noto-core [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     gdb [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     ghostscript [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     gpg [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
