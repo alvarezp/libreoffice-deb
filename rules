@@ -995,6 +995,8 @@ endif
 	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
 	BUILD_DEPS_ARCH += , fonts-kacst$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	# needed NashkAravic
+	BUILD_DEPS_ARCH += , fonts-noto-core$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# FIXME: Linux Libertine G (does fonts-linuxlibertine even contain it?, I don't see the _G files?)
 	# now is used in test documents.
 	# now we get a abort if fonts is not found and replaced in layout tests (even though
