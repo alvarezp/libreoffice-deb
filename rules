@@ -998,7 +998,8 @@ endif
 	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
 	BUILD_DEPS_ARCH += , fonts-kacst$(OOO_NO_CHECK_ARCHS) <!nocheck>
-	# needed NashkAravic
+	# sdext/source/pdfimport/test/tests.cxx (the test PDF uses NaskhArabic) and the result of the import is
+	# checked which fails without the font.
 	BUILD_DEPS_ARCH += , fonts-noto-core$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# FIXME: Linux Libertine G (does fonts-linuxlibertine even contain it?, I don't see the _G files?)
 	# now is used in test documents.
