@@ -1,1 +1,1 @@
-report-with: libreoffice-base
+report-with: libreoffice-base libreoffice-java-common ure-java
