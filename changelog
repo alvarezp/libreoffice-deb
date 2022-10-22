@@ -5,7 +5,8 @@ libreoffice (1:7.4.2-2) UNRELEASED; urgency=medium
       (closes: #1021778) 
     - add missing >&3 to ufcq calls in bug scripts (also for indep...)
   * debian/python3-uno.lintian-overrides,
-    debian/libreoffice-base{,-drivers}.lintian-overrides : override
+    debian/libreoffice-base{,-drivers}.lintian-overrides.
+    debian/libreoffice-sdbc-firebird.lintian-overrides: override
     debian-news-entry-has-unknown-version now triggering after debhelpers
     new changelog trimming
   * debian/libreoffice-impress.bug-control: remove report-with: on fglrx
