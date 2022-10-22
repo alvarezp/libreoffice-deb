@@ -2,6 +2,13 @@ libreoffice (1:7.4.3~rc1~git20221001-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
+  * debian/rules, debian/*.bug-scripts.in, debian/bug-control: rework
+    - call /usr/share/bug/<package>/script for report-with: packages to work
+      around #819543
+    - make the nogui packages also report-with: their nogui (alternative)
+      dependencies
+    - read Java config also from the user config
+
  -- Rene Engelhard <rene@debian.org>  Wed, 21 Sep 2022 18:08:40 +0200
 
 libreoffice (1:7.4.2-1) unstable; urgency=medium

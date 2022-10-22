@@ -3201,6 +3201,7 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	rm -rf debian/libreoffice-impress-nogui/$(OODIR)/opengl
 endif
 
+	rm -f *.bug-script
 	for i in $(ARCH_DEP_PACKAGES); do \
 		if [ -e debian/$$i.bug-script.in ]; then \
 			cat debian/$$i.bug-script.in \
@@ -3214,6 +3215,22 @@ endif
 			fi ;\
 			echo "ucfq $$i >&3" >>  debian/$$i.bug-script; \
 		fi ;\
+	done
+	for i in $(ARCH_DEP_PACKAGES); do \
+		if [ -e debian/$$i.bug-control ]; then \
+			if grep -q "^report-with:" debian/$$i.bug-control; then \
+				extra_packages=`grep "^report-with:" debian/$$i.bug-control | sed -e "s/^report-with: //"`; \
+				for p in $$extra_packages; do \
+					if [ $$i != $$p ] && [ -f debian/$$p.bug-script ] && ! echo $$added_packages | grep -q $$p && \
+						! grep -q bug\/$$p\/script debian/$$i.bug-script; then \
+							printf "#!/bin/sh\n" >> debian/$$i.bug-script; \
+							printf "if [ -x /usr/share/bug/$$p/script ]; then /usr/share/bug/$$p/script; fi\n" >> debian/$$i.bug-script; \
+							added_packages="$$added_packages $$p"; \
+					fi; \
+				done; \
+				added_packages=; \
+			fi; \
+		fi; \
 	done
 	# generate .links files from *.in
 	for PKG in $(ARCH_DEP_PACKAGES); do \
@@ -3525,6 +3542,22 @@ endif
 			fi ;\
 			echo "ucfq $$i" >>  debian/$$i.bug-script; \
 		fi ;\
+	done
+	for i in $(ARCH_INDEP_PACKAGES); do \
+		if [ -e debian/$$i.bug-control ]; then \
+			if grep -q "^report-with:" debian/$$i.bug-control; then \
+				extra_packages=`grep "^report-with:" debian/$$i.bug-control | sed -e "s/^report-with: //"`; \
+				for p in $$extra_packages; do \
+					if [ $$i != $$p ] && [ -f debian/$$p.bug-script ] && ! echo $$added_packages | grep -q $$p && \
+						! grep -q bug\/$$p\/script debian/$$i.bug-script; then \
+							printf "#!/bin/sh\n" >> debian/$$i.bug-script; \
+							printf "if [ -x /usr/share/bug/$$p/script ]; then /usr/share/bug/$$p/script; fi\n" >> debian/$$i.bug-script; \
+							added_packages="$$added_packages $$p"; \
+					fi; \
+				done; \
+				added_packages=; \
+			fi; \
+		fi; \
 	done
 	# generate .links files from *.in
 	for PKG in $(ARCH_INDEP_PACKAGES); do \
