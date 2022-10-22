@@ -3065,7 +3065,6 @@ endif
 	mkdir -p -m755 $(PKGDIR)-base/usr/share/applications \
 	               $(PKGDIR)-core/usr/share/applications
 
-	sed -i -e 's/Office;/Office;Graphics;/' $(PKGDIR)-draw/usr/share/applications/libreoffice-draw.desktop
 	sed -i -e 's/Education;Science;//' $(PKGDIR)-math/usr/share/applications/libreoffice-math.desktop
 	# invalid, according to lintian. make it shut up.
 	for i in writer calc impress draw math base; do \
@@ -3540,7 +3539,7 @@ endif
 			if [ ! -e debian/$$i.bug-script.in ]; then \
 				printf "#!/bin/sh\n\n" > debian/$$i.bug-script; \
 			fi ;\
-			echo "ucfq $$i" >>  debian/$$i.bug-script; \
+			echo "ucfq $$i >&3" >>  debian/$$i.bug-script; \
 		fi ;\
 	done
 	for i in $(ARCH_INDEP_PACKAGES); do \
