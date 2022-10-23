@@ -8,7 +8,9 @@ echo "" >&3
 echo "Java:" >&3
 #_lo_profile_ver=`echo @OOVER@ | cut -d. -f1`
 _lo_profile_ver=4
+RTL_OS=@RTL_OS@
+RTL_ARCH=@RTL_ARCH@
 if [ -d "$HOME/.config/libreoffice/$_lo_profile_ver" ]; then
-	grep -ri java $HOME/.config/libreoffice/$_lo_profile_ver/user/config/javasettings_*xml >&3
+	grep -ri java $HOME/.config/libreoffice/$_lo_profile_ver/user/config/javasettings_${RTL_OS}_${RTL_ARCH}.xml >&3
 fi
 
