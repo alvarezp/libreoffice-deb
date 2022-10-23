@@ -522,7 +522,8 @@ define gen_no_archs
 endef
 
 PLATFORMID := $(shell grep PLATFORMID debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
-
+RTL_OS := $(shell grep RTL_OS debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
+RTL_ARCH := $(shell grep RTL_ARCH debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
 
 OOO_64BIT_ARCHS = $(filter alpha amd64 arm64 ia64 kfreebsd-amd64 mips64 mips64el ppc64 ppc64el s390x sparc64, $(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_64BIT_ARCHS))
@@ -3205,6 +3206,8 @@ endif
 		if [ -e debian/$$i.bug-script.in ]; then \
 			cat debian/$$i.bug-script.in \
 				| sed -e "s/@PLATFORMID@/$(PLATFORMID)/" \
+				| sed -e "s/@RTL_OS@/$(RTL_OS)/" \
+				| sed -e "s/@RTL_ARCH@/$(RTL_ARCH)/" \
 				| sed -e "s/@OOVER@/$(OOVER)/" \
 				> debian/$$i.bug-script; \
 		fi ;\
