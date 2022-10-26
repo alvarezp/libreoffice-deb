@@ -43,7 +43,7 @@ Gemeinsame Unterverzeichnisse: odk-old/util und odk/util.
 +    [with_javadoc=yes])
 +
  AC_ARG_WITH(visual-studio,
-     AS_HELP_STRING([--with-visual-studio=<2019/2022>],
+     AS_HELP_STRING([--with-visual-studio=<2019/2022/2022preview>],
          [Specify which Visual Studio version to use in case several are
 @@ -7872,34 +7872,43 @@ fi
  dnl ===================================================================
