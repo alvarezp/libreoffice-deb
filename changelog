@@ -1,5 +1,8 @@
 libreoffice (1:7.4.2-2) UNRELEASED; urgency=medium
 
+  * debian/patches/curl-7.86.diff: backport from master; fix
+    JunitTest_ucb_complex test with curl 7.86
+
   * debian/rules:
     - don't add Graphics; to draws .desktop, it's already there
       (closes: #1021778) 
