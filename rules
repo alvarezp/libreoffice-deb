@@ -867,7 +867,7 @@ else
        CONFIGURE_FLAGS += --without-system-libxml
 endif
 ifneq (,$(filter xmlsec, $(SYSTEM_STUFF)))
-       BUILD_DEPS += , libxmlsec1-dev (>= 1.2.28)
+       BUILD_DEPS += , libxmlsec1-dev (>= 1.2.35)
 endif
 ifneq (,$(filter expat, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libexpat1-dev
