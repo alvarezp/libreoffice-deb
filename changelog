@@ -8,6 +8,8 @@ libreoffice (1:7.4.3~rc1~git20221027-1) UNRELEASED; urgency=medium
     - make the nogui packages also report-with: their nogui (alternative)
       dependencies
     - read Java config also from the user config
+  * debian/rules:
+    - allow new versioned java-runtime provides in Java runtime dependencies
 
  -- Rene Engelhard <rene@debian.org>  Wed, 21 Sep 2022 18:08:40 +0200
 

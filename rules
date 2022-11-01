@@ -1120,7 +1120,7 @@ ifeq "$(ENABLE_JAVA)" "y"
     endif
   endif
 	JAVA_RUNTIME_DEPENDS = default-jre (>= 2:1.$(JAVA_RUNTIME_BASELINE))
-	JAVA_RUNTIME_DEPENDS += | java$(JAVA_RUNTIME_BASELINE)-runtime
+	JAVA_RUNTIME_DEPENDS += | java-runtime (>= $(JAVA_RUNTIME_BASELINE)) | java$(JAVA_RUNTIME_BASELINE)-runtime
 	# Suns Java "packages"
 	JAVA_RUNTIME_DEPENDS += | jre
 export JAVA_HOME
