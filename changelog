@@ -1,6 +1,6 @@
-libreoffice (1:7.4.3~rc1~git20221027-1) UNRELEASED; urgency=medium
+libreoffice (1:7.4.3~rc1-1) experimental; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules, debian/*.bug-scripts.in, debian/bug-control: rework
     - call /usr/share/bug/<package>/script for report-with: packages to work
@@ -13,7 +13,7 @@ libreoffice (1:7.4.3~rc1~git20221027-1) UNRELEASED; urgency=medium
   * debian/rules:
     - allow new versioned java-runtime provides in Java runtime dependencies
 
- -- Rene Engelhard <rene@debian.org>  Wed, 21 Sep 2022 18:08:40 +0200
+ -- Rene Engelhard <rene@debian.org>  Wed, 02 Nov 2022 18:55:31 +0100
 
 libreoffice (1:7.4.2-2) unstable; urgency=medium
 
