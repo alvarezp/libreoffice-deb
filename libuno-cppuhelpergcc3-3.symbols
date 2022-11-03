@@ -1,4 +1,6 @@
 libuno_cppuhelpergcc3.so.3 libuno-cppuhelpergcc3-3 #MINVER#, uno-libs-private
+| libuno-cppuhelpergcc3-3 #MINVER#, uno-libs-private, libstdc++6 (>= 4.1.1)
+ (symver)GLIBCXX_3.4 1.4.0 1
  (symver)UDK_3_0_0 1.4.0
  (symver)UDK_3.1 1.4.0
  (symver)UDK_3.2 1.4.0
