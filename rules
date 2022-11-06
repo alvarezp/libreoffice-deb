@@ -3832,7 +3832,7 @@ ifeq "$(ENABLE_INTROSPECTION)" "y"
 endif
 	dh_strip_nondeterminism -a
 	for i in sal3 cppu3 salhelpergcc3-3 cppuhelpergcc3-3 purpenvhelpergcc3-3; do \
-		dh_makeshlibs -plibuno-$$i -V"libuno-$$i (>= 1:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -c0 -d -V -v$(BINARY_VERSION); \
+		dh_makeshlibs -plibuno-$$i -V"libuno-$$i (>= 1:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -c2 -d -V -v$(BINARY_VERSION); \
 	done
 	dh_makeshlibs -n -pure -V"ure (>= 1:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -d -V -v$(BINARY_VERSION)
 	dh_installdeb -a
