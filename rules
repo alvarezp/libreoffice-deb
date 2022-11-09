@@ -391,10 +391,6 @@ ifeq "$(ENABLE_HELP)" "y"
   HELP_RECOMMENDS := firefox-esr | epiphany-browser | konqueror | chromium | firefox
   HELP_COMMON_DEPENDS := node-normalize.css
   BUILD_DEPS_INDEP += , node-normalize.css
-    ifneq "$(BULLSEYE_BACKPORT)" "y"
-      HELP_COMMON_DEPENDS += , node-prismjs
-      BUILD_DEPS_INDEP += , node-prismjs
-    endif
   else
   HELP_DEPENDS := libreoffice-writer
   DEBHELPER_OPTIONS += -Nlibreoffice-help-common
@@ -1094,7 +1090,17 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
   endif
 endif
 
-ifeq "$(ENABLE_JAVA)" "y"
+
+ifeq "$(ENABLE_HELP)" "y"
+ifeq "$(ENABLE_HTML_HELP)" "y"
+    ifneq "$(BULLSEYE_BACKPORT)" "y"
+      HELP_COMMON_DEPENDS += , node-prismjs
+      BUILD_DEPS_INDEP += , node-prismjs
+    endif
+  endif
+endif
+
+    ifeq "$(ENABLE_JAVA)" "y"
   BUILD_DEPS += , maven-repo-helper
   ifeq "$(JDK)" "default"
 	JAVA_HOME=/usr/lib/jvm/default-java
