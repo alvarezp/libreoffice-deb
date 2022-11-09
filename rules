@@ -1100,7 +1100,7 @@ ifeq "$(ENABLE_HTML_HELP)" "y"
   endif
 endif
 
-    ifeq "$(ENABLE_JAVA)" "y"
+ifeq "$(ENABLE_JAVA)" "y"
   BUILD_DEPS += , maven-repo-helper
   ifeq "$(JDK)" "default"
 	JAVA_HOME=/usr/lib/jvm/default-java
