@@ -13,12 +13,18 @@ libreoffice (1:7.5.0~alpha0~git20221029-1) UNRELEASED; urgency=medium
 
 libreoffice (1:7.4.3~rc1-2) UNRELEASED; urgency=medium
 
-  * debian/*.symbols: fix fix lintians
+  * debian/libreoffice-core.NEWS: add NEWS entry for #1019423
+  * debian/*.symbols: fix lintians
     "symbols-file-contains-current-version-with-debian-revision on
-    symbol GLIBCXX_3.4@GLIBCXX_3.4" by adding a extra dependency on
+    symbol GLIBCXX_3.4@GLIBCXX_3.4" by adding a alternative dependency
+    template triggering on this symbol and adding an extra dependency on
     libstdc++6 (>= 4.1.1) (version taking from libstdc++.symbols)
+  * debian/rules:
+    - now that we cover all symbols in *.symbols, use -c2 for dh_makeshlibs
+    - move ifeq for bullseye-backports down in the file to really exclude
+      the node-prismjs dependency on on bullseye-backport
 
- -- Rene Engelhard <rene@debian.org>  Sat, 05 Nov 2022 07:21:00 +0100
+ -- Rene Engelhard <rene@debian.org>  Wed, 09 Nov 2022 07:36:00 +0100
 
 libreoffice (1:7.4.3~rc1-1) experimental; urgency=medium
 
