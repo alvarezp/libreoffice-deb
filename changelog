@@ -4,6 +4,7 @@ libreoffice (1:7.4.2-3) UNRELEASED; urgency=medium
     - allow new versioned java-runtime provides in Java runtime dependencies
     - move ifeq for bullseye-backports down in the file to really exclude
       the node-prismjs dependency on on bullseye-backports
+  * debian/libreoffice-core.NEWS: add NEWS entry for #1019423
 
  -- Rene Engelhard <rene@debian.org>  Wed, 09 Nov 2022 07:18:00 +0100
 
