@@ -1,6 +1,6 @@
 libreoffice (1:7.4.2~rc1-1) unstable; urgency=low
 
-  * LibreOffice 7.4.1 contained a bug about wrongly remembering the
+  * LibreOffice 7.4.0/7.4.1 contained a bug about wrongly remembering the
     size of the LibreOffice windows. (Most prominently showing inside KDE).
     .
     This has been fixed in 7.4.2 but you experience this problem even after
