@@ -1,4 +1,4 @@
-libreoffice (1:7.4.2-3) UNRELEASED; urgency=medium
+libreoffice (1:7.4.2-3) unstable; urgency=medium
 
   * debian/rules:
     - allow new versioned java-runtime provides in Java runtime dependencies
@@ -6,7 +6,7 @@ libreoffice (1:7.4.2-3) UNRELEASED; urgency=medium
       the node-prismjs dependency on on bullseye-backports
   * debian/libreoffice-core.NEWS: add NEWS entry for #1019423
 
- -- Rene Engelhard <rene@debian.org>  Wed, 09 Nov 2022 07:18:00 +0100
+ -- Rene Engelhard <rene@debian.org>  Wed, 09 Nov 2022 17:20:12 +0100
 
 libreoffice (1:7.4.2-2) unstable; urgency=medium
 
