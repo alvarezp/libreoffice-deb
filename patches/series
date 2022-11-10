@@ -45,4 +45,3 @@ temporarily-disable-test-metadata-test.diff
 arm-fp-mode.diff
 moreIconsDialog-accesses-internet.diff
 do-not-abort-on-NON_APPLICATION_FONT_USE.diff
-riscv64.diff
