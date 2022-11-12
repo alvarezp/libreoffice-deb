@@ -530,8 +530,6 @@ OOO_JUNIT_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 #OOO_CHECK_FATAL_ARCHS := i386 amd64 armhf arm64
 OOO_CHECK_FATAL_ARCHS := amd64 arm64
-# new arch, so doesn't get a "old arch/release arch" bonus... May be removed at some time, though...
-OOO_CHECK_FATAL_ARCHS += riscv64
 
 BUILD_TESTS=y
 ifeq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
