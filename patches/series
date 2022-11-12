@@ -49,3 +49,4 @@ do-not-ABORT_ON_NON_APPLICATION_FONT_USE.diff
 hrk-euro.diff
 fix-eot-configure-ac.diff
 curl-7.86.diff
+dragonbox-1.1.3.diff
