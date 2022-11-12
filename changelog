@@ -5,6 +5,7 @@ libreoffice (1:7.5.0~alpha0~git20221112-1) UNRELEASED; urgency=medium
   * debian/watch: alpha/betas again 
   * debian/rules:
     - enable qt6 plugin (closes: #1019740)
+  * debian/rules, debian/vars.loong64: add initial loong(arch)64 support
   * debian/rules, debian/vars.riscv64: add riscv64 support
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
