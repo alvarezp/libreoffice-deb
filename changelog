@@ -1,12 +1,11 @@
-libreoffice (1:7.5.0~alpha0~git20221110-1) UNRELEASED; urgency=medium
+libreoffice (1:7.5.0~alpha0~git20221112-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
   * debian/watch: alpha/betas again 
   * debian/rules:
     - enable qt6 plugin (closes: #1019740)
-  * debian/rules, debian/vars.riscv64: add riscv64 support. Make test
-    failures fatal for now
+  * debian/rules, debian/vars.riscv64: add riscv64 support
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
