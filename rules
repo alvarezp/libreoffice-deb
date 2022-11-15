@@ -857,7 +857,7 @@ endif
 ifneq (,$(filter libnumbertext, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libnumbertext-dev (>= 1.0.6)
 	# https://cgit.freedesktop.org/libreoffice/core/commit/?h=libreoffice-7-3&id=09dfe214a30f58ddcd7a857db8f5eee68d4cef2a
-	BUILD_DEPS_ARCH += , libnumbertext-data (>= 1.0.11) <!nocheck>
+	BUILD_DEPS_ARCH += , libnumbertext-data (>= 1.0.9) <!nocheck>
 	NUMBERTEXT_DATA_RECOMMENDS := libnumbertext-data
 endif
 
