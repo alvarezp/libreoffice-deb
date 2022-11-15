@@ -208,7 +208,7 @@ Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i38
                     libe-book-dev (>= 0.1.2) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     libetonyek-dev (>= 0.1.8) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     libmwaw-dev (>= 0.3.21),
-                    libnumbertext-data (>= 1.0.9) <!nocheck>,
+                    libnumbertext-data (>= 1.0.11) <!nocheck>,
                     libstaroffice-dev (>= 0.0.3) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     libwps-dev (>= 0.4.12) [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     locales [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
