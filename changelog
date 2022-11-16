@@ -1,4 +1,4 @@
-libreoffice (1:7.5.0~alpha0~git20221116-1) UNRELEASED; urgency=medium
+libreoffice (1:7.5.0~alpha0~git20221117-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
@@ -10,10 +10,19 @@ libreoffice (1:7.5.0~alpha0~git20221116-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
+libreoffice (1:7.4.3~rc2-2) experimental; urgency=medium
+
+  * debian/patches/fix-system-libfixmath.diff: fix build without
+    mergelibs (a.k.a. 32bit archs) by adding explicit -llibfixmath ...
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 16 Nov 2022 21:54:08 +0100
+
 libreoffice (1:7.4.3~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate
 
+  * debian/patches/fix-system-libfixmath.diff: actually don't compile
+    internal fix16.cxx but use system-libfixmath as intended
   * debian/rules, debian/patches/dragonbox-1.1.3.diff: fix build with
     dragonbox 1.1.3 and update dragonbox build-dependency
     (closes: #1024157)
