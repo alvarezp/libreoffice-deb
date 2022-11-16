@@ -16,7 +16,7 @@ libreoffice (1:7.4.3~rc1-2) experimental; urgency=medium
   * debian/rules:
     - now that we cover all symbols in *.symbols, use -c2 for dh_makeshlibs
     - move ifeq for bullseye-backports down in the file to really exclude
-      the node-prismjs dependency on on bullseye-backports
+      the node-prismjs dependency on bullseye-backports
   * debian/libreoffice-core.NEWS: add NEWS entry for #1019423
 
  -- Rene Engelhard <rene@debian.org>  Wed, 09 Nov 2022 17:21:29 +0100
