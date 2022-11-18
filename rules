@@ -1588,9 +1588,10 @@ else
 	BUILD_DEPS += , libssl-dev
 endif
 
-# only for cross-compile - like wasm...
-#BUILD_DEPS += , liblockfile-bin
-#SYSTEM_STUFF += lockfile
+SYSTEM_STUFF += lockfile
+ifneq (,$(filter lockfile, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , liblockfile-bin
+endif
 
 ifneq (,$(filter redland, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , librdf0-dev (>= 1.0.16-2)
