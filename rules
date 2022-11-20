@@ -8,7 +8,7 @@
 # Authors:
 # Chris Halls <halls@debian.org>
 # Rene Engelhard <rene@debian.org>
-# Copyright 2002-2015 Software in the Public Interest, Inc.
+# Copyright 2002-2022 Software in the Public Interest, Inc.
 # Portions Copyright 2010 Canonical Ltd. Author: Matthias Klose
 # Portions Copyright 2011-2013 Canonical Ltd. Author: Bjoern Michaelsen
 # Licensed under the GNU General Public License, version 2.  See the file
@@ -76,7 +76,7 @@ lo_sources_ver=$(shell grep AC_INIT $(SOURCE_TREE)/configure.ac | grep documentf
 # NOT in proper libreoffice-3-6 branch
 # use ./g checkout -b tag-libreoffice-3.6.2.1 libreoffice-3.6.2.1
 GIT_TAG=libreoffice-$(lo_sources_ver)
-GIT_BRANCH=libreoffice-7-4-2
+GIT_BRANCH=libreoffice-7-4-3
 endif
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 lo_sources_ver=$(shell cat $(CURDIR)/sources.ver | cut -d= -f2)
@@ -518,7 +518,8 @@ define gen_no_archs
 endef
 
 PLATFORMID := $(shell grep PLATFORMID debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
-
+RTL_OS := $(shell grep RTL_OS debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
+RTL_ARCH := $(shell grep RTL_ARCH debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
 
 OOO_64BIT_ARCHS = $(filter alpha amd64 arm64 ia64 kfreebsd-amd64 mips64 mips64el ppc64 ppc64el s390x sparc64, $(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_64BIT_ARCHS))
@@ -993,6 +994,9 @@ endif
 	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
 	BUILD_DEPS_ARCH += , fonts-kacst$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	# sdext/source/pdfimport/test/tests.cxx (the test PDF uses NaskhArabic) and the result of the import is
+	# checked which fails without the font.
+	BUILD_DEPS_ARCH += , fonts-noto-core$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# FIXME: Linux Libertine G (does fonts-linuxlibertine even contain it?, I don't see the _G files?)
 	# now is used in test documents.
 	# now we get a abort if fonts is not found and replaced in layout tests (even though
@@ -1584,9 +1588,10 @@ else
 	BUILD_DEPS += , libssl-dev
 endif
 
-# only for cross-compile - like wasm...
-#BUILD_DEPS += , liblockfile-bin
-#SYSTEM_STUFF += lockfile
+SYSTEM_STUFF += lockfile
+ifneq (,$(filter lockfile, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , liblockfile-bin
+endif
 
 ifneq (,$(filter redland, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , librdf0-dev (>= 1.0.16-2)
@@ -3206,10 +3211,13 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	rm -rf debian/libreoffice-impress-nogui/$(OODIR)/opengl
 endif
 
+	rm -f *.bug-script
 	for i in $(ARCH_DEP_PACKAGES); do \
 		if [ -e debian/$$i.bug-script.in ]; then \
 			cat debian/$$i.bug-script.in \
 				| sed -e "s/@PLATFORMID@/$(PLATFORMID)/" \
+				| sed -e "s/@RTL_OS@/$(RTL_OS)/" \
+				| sed -e "s/@RTL_ARCH@/$(RTL_ARCH)/" \
 				| sed -e "s/@OOVER@/$(OOVER)/" \
 				> debian/$$i.bug-script; \
 		fi ;\
@@ -3219,6 +3227,22 @@ endif
 			fi ;\
 			echo "ucfq $$i >&3" >>  debian/$$i.bug-script; \
 		fi ;\
+	done
+	for i in $(ARCH_DEP_PACKAGES); do \
+		if [ -e debian/$$i.bug-control ]; then \
+			if grep -q "^report-with:" debian/$$i.bug-control; then \
+				extra_packages=`grep "^report-with:" debian/$$i.bug-control | sed -e "s/^report-with: //"`; \
+				for p in $$extra_packages; do \
+					if [ $$i != $$p ] && [ -f debian/$$p.bug-script ] && ! echo $$added_packages | grep -q $$p && \
+						! grep -q bug\/$$p\/script debian/$$i.bug-script; then \
+							printf "#!/bin/sh\n" >> debian/$$i.bug-script; \
+							printf "if [ -x /usr/share/bug/$$p/script ]; then /usr/share/bug/$$p/script; fi\n" >> debian/$$i.bug-script; \
+							added_packages="$$added_packages $$p"; \
+					fi; \
+				done; \
+				added_packages=; \
+			fi; \
+		fi; \
 	done
 	# generate .links files from *.in
 	for PKG in $(ARCH_DEP_PACKAGES); do \
@@ -3531,6 +3555,22 @@ endif
 			echo "ucfq $$i >&3" >>  debian/$$i.bug-script; \
 		fi ;\
 	done
+	for i in $(ARCH_INDEP_PACKAGES); do \
+		if [ -e debian/$$i.bug-control ]; then \
+			if grep -q "^report-with:" debian/$$i.bug-control; then \
+				extra_packages=`grep "^report-with:" debian/$$i.bug-control | sed -e "s/^report-with: //"`; \
+				for p in $$extra_packages; do \
+					if [ $$i != $$p ] && [ -f debian/$$p.bug-script ] && ! echo $$added_packages | grep -q $$p && \
+						! grep -q bug\/$$p\/script debian/$$i.bug-script; then \
+							printf "#!/bin/sh\n" >> debian/$$i.bug-script; \
+							printf "if [ -x /usr/share/bug/$$p/script ]; then /usr/share/bug/$$p/script; fi\n" >> debian/$$i.bug-script; \
+							added_packages="$$added_packages $$p"; \
+					fi; \
+				done; \
+				added_packages=; \
+			fi; \
+		fi; \
+	done
 	# generate .links files from *.in
 	for PKG in $(ARCH_INDEP_PACKAGES); do \
 	  LINKS=debian/$$PKG.links ; \
@@ -3799,7 +3839,7 @@ ifeq "$(ENABLE_INTROSPECTION)" "y"
 endif
 	dh_strip_nondeterminism -a
 	for i in sal3 cppu3 salhelpergcc3-3 cppuhelpergcc3-3 purpenvhelpergcc3-3; do \
-		dh_makeshlibs -plibuno-$$i -V"libuno-$$i (>= 1:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -c0 -d -V -v$(BINARY_VERSION); \
+		dh_makeshlibs -plibuno-$$i -V"libuno-$$i (>= 1:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -c2 -V -v$(BINARY_VERSION); \
 	done
 	dh_makeshlibs -n -pure -V"ure (>= 1:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -d -V -v$(BINARY_VERSION)
 	dh_installdeb -a

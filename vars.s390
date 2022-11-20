@@ -1,1 +1,3 @@
 PLATFORMID=linux_s390
+RTL_ARCH=S390
+RTL_OS=Linux

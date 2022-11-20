@@ -102,6 +102,7 @@ Build-Depends: autoconf,
                liblcms2-dev,
                libldap2-dev,
                libloader-java (>= 1.1.6) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               liblockfile-bin,
                liblpsolve55-dev (>= 5.5.0.13-5+b1),
                libmariadb-dev,
                libmdds-dev (<< 2.1~),
@@ -194,6 +195,7 @@ Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i38
                     fonts-kacst [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     fonts-liberation2 [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     fonts-linuxlibertine [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
+                    fonts-noto-core [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     gdb [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     ghostscript [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
                     gpg [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el] <!nocheck>,
@@ -233,7 +235,7 @@ Build-Conflicts: amd-libopencl1,
                  nvidia-glx-legacy-dev,
                  nvidia-libopencl1
 Standards-Version: 4.0.1
-Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git
+Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-7.4
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
 Bugs: 
 Homepage: http://www.libreoffice.org

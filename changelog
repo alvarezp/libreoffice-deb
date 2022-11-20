@@ -1,19 +1,60 @@
-libreoffice (1:7.4.2-4) unstable; urgency=medium
+libreoffice (1:7.4.3~rc2-3) UNRELEASED; urgency=medium
 
+  * debian/rules: use system-lockfile; lockfile is actually built during
+    the build on non-cross builds
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 18 Nov 2022 18:27:13 +0100
+
+libreoffice (1:7.4.3~rc2-2) experimental; urgency=medium
+
+  * debian/patches/fix-system-libfixmath.diff: fix build without
+    mergelibs (a.k.a. 32bit archs) by adding explicit -llibfixmath ...
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 16 Nov 2022 21:54:08 +0100
+
+libreoffice (1:7.4.3~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/patches/fix-system-libfixmath.diff: actually don't compile
+    internal fix16.cxx but use system-libfixmath as intended
   * debian/rules, debian/patches/dragonbox-1.1.3.diff: fix build with
-    dragonbox 1.1.3 and update dragonbox build-dependency 
+    dragonbox 1.1.3 and update dragonbox build-dependency
+    (closes: #1024157)
 
- -- Rene Engelhard <rene@debian.org>  Sat, 12 Nov 2022 09:28:58 +0100
+ -- Rene Engelhard <rene@debian.org>  Wed, 16 Nov 2022 18:42:19 +0100
 
-libreoffice (1:7.4.2-3) unstable; urgency=medium
+libreoffice (1:7.4.3~rc1-2) experimental; urgency=medium
 
+  * debian/*.symbols: fix lintians
+    "symbols-file-contains-current-version-with-debian-revision on
+    symbol GLIBCXX_3.4@GLIBCXX_3.4" by adding a alternative dependency
+    template triggering on this symbol and adding an extra dependency on
+    libstdc++6 (>= 4.1.1) (version taking from libstdc++.symbols)
   * debian/rules:
-    - allow new versioned java-runtime provides in Java runtime dependencies
+    - now that we cover all symbols in *.symbols, use -c2 for dh_makeshlibs
     - move ifeq for bullseye-backports down in the file to really exclude
       the node-prismjs dependency on bullseye-backports
   * debian/libreoffice-core.NEWS: add NEWS entry for #1019423
 
- -- Rene Engelhard <rene@debian.org>  Wed, 09 Nov 2022 17:20:12 +0100
+ -- Rene Engelhard <rene@debian.org>  Wed, 09 Nov 2022 17:21:29 +0100
+
+libreoffice (1:7.4.3~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/rules, debian/*.bug-scripts.in, debian/bug-control: rework
+    - call /usr/share/bug/<package>/script for report-with: packages to work
+      around #819543
+    - make the nogui packages also report-with: their nogui (alternative)
+      dependencies
+    - read Java config also from the user config
+    - make libreoffice-nlpsolver and libreoffice-wiki-publisher
+      report-with: ure-java
+  * debian/rules:
+    - allow new versioned java-runtime provides in Java runtime dependencies
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 02 Nov 2022 18:55:31 +0100
 
 libreoffice (1:7.4.2-2) unstable; urgency=medium
 
