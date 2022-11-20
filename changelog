@@ -10,6 +10,13 @@ libreoffice (1:7.5.0~alpha0~git20221117-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 May 2022 22:18:09 +0200
 
+libreoffice (1:7.4.3~rc2-3) UNRELEASED; urgency=medium
+
+  * debian/rules: use system-lockfile; lockfile is actually built during
+    the build on non-cross builds
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 18 Nov 2022 18:27:13 +0100
+
 libreoffice (1:7.4.3~rc2-2) experimental; urgency=medium
 
   * debian/patches/fix-system-libfixmath.diff: fix build without
