@@ -1488,7 +1488,7 @@ ifeq "$(ENABLE_JAVA)" "y"
   endif
   ifeq "$(ENABLE_SCRIPT_PROVIDER_BSH)" "y"
     ifneq (,$(filter beanshell, $(SYSTEM_STUFF)))
-	BUILD_DEPS_INDEP += , libbsh-java <!nojava>
+	BUILD_DEPS += , libbsh-java <!nojava>
     endif
 	CONFIGURE_FLAGS += --enable-scripting-beanshell
   else
@@ -2134,7 +2134,6 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--without-junit --without-cppunit \
 		--disable-ext-wiki-publisher \
-		--disable-scripting-javascript --disable-scripting-beanshell \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)" \
 		--disable-gui --disable-introspection --disable-qt5 --disable-kf5
@@ -2159,7 +2158,6 @@ endif
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--without-junit --without-cppunit \
 		--disable-ext-wiki-publisher \
-		--disable-scripting-javascript --disable-scripting-beanshell \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
 
