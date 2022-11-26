@@ -50,7 +50,8 @@ Depends: @builddeps@, libreoffice-core, libreoffice-impress, python3-uno
 Restrictions: allow-stderr
 
 Tests: uicheck-cui
-Depends: @builddeps@, libreoffice-core, libreoffice-impress, libreoffice-writer, python3-uno
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el ppc64 ppc64el riscv64 s390x sparc64 mips powerpc
+Depends: @builddeps@, libreoffice-core, libreoffice-impress, libreoffice-writer, python3-uno, libreoffice-script-provider-python, libreoffice-script-provider-js, libreoffice-script-provider-bsh
 Restrictions: allow-stderr
 
 Tests: uicheck-sd

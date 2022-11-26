@@ -50,7 +50,8 @@ Depends: @builddeps@, libreoffice-core, libreoffice-impress, python3-uno
 Restrictions: allow-stderr
 
 Tests: uicheck-cui
-Depends: @builddeps@, libreoffice-core, libreoffice-impress, libreoffice-writer, python3-uno
+Architecture: %OOO_JAVA_ARCHS%
+Depends: @builddeps@, libreoffice-core, libreoffice-impress, libreoffice-writer, python3-uno, libreoffice-script-provider-python, libreoffice-script-provider-js, libreoffice-script-provider-bsh
 Restrictions: allow-stderr
 
 Tests: uicheck-sd
