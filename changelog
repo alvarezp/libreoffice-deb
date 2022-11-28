@@ -1,3 +1,10 @@
+libreoffice (1:7.5.0~alpha1-2) experimental; urgency=medium
+
+  * debian/rules: disable checks on s390x for now (cause OOM on the buildds),
+    the results are ignored anyway.
+  
+ -- Rene Engelhard <rene@debian.org>  Mon, 28 Nov 2022 18:36:00 +0100
+
 libreoffice (1:7.5.0~alpha1-1) experimental; urgency=medium
 
   * New upstream alpha release
