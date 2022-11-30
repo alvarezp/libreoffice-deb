@@ -79,7 +79,6 @@ index 373f40da36fd..c0401bef9c7a 100644
      -I$(SRCDIR)/sdext/source/pdfimport/inc \
      $$(INCLUDE) \
 @@ -27,13 +27,21 @@ $(eval $(call gb_Executable_use_libraries,pdf2xml,\
-     vcl \
      comphelper \
      cppu \
 -    unotest \
@@ -87,6 +86,7 @@ index 373f40da36fd..c0401bef9c7a 100644
      sal \
      tl \
      xo \
+     i18nutil \
  ))
  
 +ifeq ($(ENABLE_CPPUNIT),TRUE)
