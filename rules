@@ -992,9 +992,10 @@ endif
 	# https://lists.freedesktop.org/archives/libreoffice/2017-May/077764.html
 	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
-	BUILD_DEPS_ARCH += , fonts-kacst$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-hosny-amiri$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# sdext/source/pdfimport/test/tests.cxx (the test PDF uses NaskhArabic) and the result of the import is
-	# checked which fails without the font.
+	# checked which fails without the font. Also used in /vcl/qa/cppunit/complextext.cxx
+    (VclComplexTextTest::testCaching())
 	BUILD_DEPS_ARCH += , fonts-noto-core$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# SdOOXMLExportTest3::testTdf125573_FontWorkScaleX uses Cambria
 	BUILD_DEPS_ARCH += , fonts-crosextra-caladea$(OOO_NO_CHECK_ARCHS) <!nocheck>
@@ -1869,7 +1870,7 @@ debian/control: $(wildcard debian/control*in) $(SOURCE_TREE)/bin/lo-xlate-lang  
 			FONT_RECOMMENDS=", fonts-khmeros"; \
 			;; \
 		ar) \
-			FONT_RECOMMENDS=", fonts-kacst, fonts-hosny-amiri, fonts-sil-scheherazade, fonts-hosny-thabit"; \
+			FONT_RECOMMENDS=", fonts-hosny-amiri, fonts-sil-scheherazade, fonts-hosny-thabit"; \
 			;; \
 		fa) \
 			FONT_RECOMMENDS=", fonts-farsiweb"; \

@@ -196,7 +196,7 @@ Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i38
                     fonts-crosextra-caladea [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
                     fonts-crosextra-carlito [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
                     fonts-dejavu [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
-                    fonts-kacst [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
+                    fonts-hosny-amiri [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
                     fonts-liberation2 [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
                     fonts-linuxlibertine [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
                     fonts-noto-core [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
@@ -1246,7 +1246,6 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${misc:Depends}
 Recommends: fonts-hosny-amiri,
             fonts-hosny-thabit,
-            fonts-kacst,
             fonts-sil-scheherazade,
             libreoffice-core (>> ${base-version})
 Provides: libreoffice-l10n (= ${help-l10n-virtual-version})
