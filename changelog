@@ -1,3 +1,9 @@
+libreoffice (1:7.6.0~alpha0~git20221209-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 08 Dec 2022 20:43:55 +0100
+
 libreoffice (1:7.5.0~beta1-1) experimental; urgency=medium
 
   * New upstream beta release
