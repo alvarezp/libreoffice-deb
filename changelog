@@ -1,9 +1,9 @@
 libreoffice (1:7.4.3-3) UNRELEASED; urgency=medium
 
-  * debian/patches/poppler-22-09.patch: add patch from upstream; fix build
-    with poppler >= 22.09 (closes: #1026098) 
+  * debian/patches/boost-1.81.diff: add patch from libreoffice-7-5 branch;
+    fix build with boost 1.81
 
- -- Rene Engelhard <rene@debian.org>  Wed, 14 Dec 2022 19:32:48 +0100
+ -- Rene Engelhard <rene@debian.org>  Sun, 18 Dec 2022 11:00:27 +0100
 
 libreoffice (1:7.4.3-2) unstable; urgency=medium
 
