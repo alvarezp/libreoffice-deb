@@ -4,6 +4,9 @@ libreoffice (1:7.5.0~rc1~git20221217-1) UNRELEASED; urgency=medium
 
   * debian/control.in:
     - make -core/-core-nogui depend on uno-libs-private (>= 1:7.5.0~)
+  * debian/control.ure.in:
+    - make uno-libs-private break libuno-cppuhelpergcc3-3 (<< 1:7.5.0~),
+     libreoffice-core{,-nogui} (<< 1:7.5.0~)
 
  -- Rene Engelhard <rene@debian.org>  Sat, 10 Dec 2022 11:26:01 +0100
 
