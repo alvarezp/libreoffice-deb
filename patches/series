@@ -49,3 +49,4 @@ do-not-ABORT_ON_NON_APPLICATION_FONT_USE.diff
 hrk-euro.diff
 dragonbox-1.1.3.diff
 fix-system-libfixmath.diff
+boost-1.81.diff
