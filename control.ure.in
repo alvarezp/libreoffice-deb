@@ -3,7 +3,7 @@ Section: libs
 Architecture: %OOO_ARCHS%
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Replaces: uno-libs3
-Breaks: uno-libs3
+Breaks: uno-libs3, libuno-cppuhelpergcc3-3 (<< 1:7.5.0~), libreoffice-core (<< 1:7.5.0~), libreoffice-core-nogui (<< 1:7.5.0~)
 Description: LibreOffice UNO runtime environment -- private libraries used by public ones
  The Uno Runtime Environment (URE) is the well-known UNO component model
  of LibreOffice, packaged up as an individual product.

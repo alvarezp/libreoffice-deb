@@ -442,6 +442,7 @@ Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreeb
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
+         uno-libs-private (>= 1:7.5.0~),
          ure (>= 1:7.4.0~),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -494,6 +495,7 @@ Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
+         uno-libs-private (>= 1:7.5.0~),
          ure (>= 1:7.4.0~),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -4584,7 +4586,10 @@ Section: libs
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Replaces: uno-libs3
-Breaks: uno-libs3
+Breaks: libreoffice-core (<< 1:7.5.0~),
+        libreoffice-core-nogui (<< 1:7.5.0~),
+        libuno-cppuhelpergcc3-3 (<< 1:7.5.0~),
+        uno-libs3
 Description: LibreOffice UNO runtime environment -- private libraries used by public ones
  The Uno Runtime Environment (URE) is the well-known UNO component model
  of LibreOffice, packaged up as an individual product.
