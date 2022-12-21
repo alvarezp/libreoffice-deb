@@ -1017,6 +1017,7 @@ endif
 	BUILD_DEPS_ARCH += , pstoedit$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , imagemagick$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , ghostscript$(OOO_NO_CHECK_ARCHS) <!nocheck>
+
 	BUILD_DEPS_ARCH += , hunspell-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , hyphen-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
     # we don't run any cppunit check in all builds
