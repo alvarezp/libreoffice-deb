@@ -1,6 +1,6 @@
-libreoffice (1:7.5.0~rc1~git20221221-1) UNRELEASED; urgency=medium
+libreoffice (1:7.5.0~rc1-1) experimental; urgency=medium
 
-  * New upstream snapshot 
+  * New upstream release candidate
 
   * debian/control.in:
     - make -core/-core-nogui depend on uno-libs-private (>= 1:7.5.0~)
@@ -8,7 +8,7 @@ libreoffice (1:7.5.0~rc1~git20221221-1) UNRELEASED; urgency=medium
     - make uno-libs-private break libuno-cppuhelpergcc3-3 (<< 1:7.5.0~),
      libreoffice-core{,-nogui} (<< 1:7.5.0~)
 
- -- Rene Engelhard <rene@debian.org>  Sat, 10 Dec 2022 11:26:01 +0100
+ -- Rene Engelhard <rene@debian.org>  Thu, 22 Dec 2022 05:34:34 +0000
 
 libreoffice (1:7.5.0~beta1-1) experimental; urgency=medium
 
