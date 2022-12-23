@@ -1,3 +1,14 @@
+libreoffice (1:7.5.0~rc2~git20221222-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot 
+
+  * debian/rules:
+    - clean (build)-depends (versions) up; remove unnecessary ones since
+      buster (oldstable), hopefully also fixes lintians
+      field-too-long Build-Depends error
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 22 Dec 2022 18:25:39 +0100
+
 libreoffice (1:7.5.0~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
