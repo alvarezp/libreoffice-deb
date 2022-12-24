@@ -4,7 +4,8 @@ libreoffice (1:7.4.4~rc1-2) UNRELEASED; urgency=medium
     fix build with boost 1.81
   * debian/source/lintian-overrides: override bogus
     source-is-missing and source-contains-prebuilt-windows-binary for
-    [sw/qa/extras/txtimport/data/GB18030.txt]
+    [sw/qa/extras/txtimport/data/GB18030.txt]; also override
+    source-is-missing for some htmls in sw/qa/extras/htmlimport/data
 
  -- Rene Engelhard <rene@debian.org>  Sat, 24 Dec 2022 13:53:58 +0100
 
