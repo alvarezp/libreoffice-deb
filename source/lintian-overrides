@@ -23,9 +23,11 @@ libreoffice source: superfluous-file-pattern tarballs/skia* [debian/copyright:13
 libreoffice source: superfluous-file-pattern wizards/source/access2base/access2base.html [debian/copyright:203]
 libreoffice source: source-is-missing [wizards/source/access2base/access2base.html]
 # this is 盖闻天地之数，有十二万九千六百岁为一元。(UTF-8) in GB18030 as verifiable by
-# recode GB18030..UTF-8 sw/qa/extras/txtimport/data/GB18030.txt. Thus this *is* the source.
+# recode GB18030..UTF-8 sw/qa/extras/txtimport/data/GB18030.txt. Thus this *is* the source
+# and not a windows binary at all.
 # Needs to be GB18030 for sw/qa/extras/txtimport/txtimport.cxx - testTdf92161_gb18030
 libreoffice source: source-is-missing [sw/qa/extras/txtimport/data/GB18030.txt]
+libreoffice source: source-contains-prebuilt-windows-binary [sw/qa/extras/txtimport/data/GB18030.txt]
 # two licenses..
 libreoffice source: duplicate-globbing-patterns helpcontent2/help3xsl/polyfills.js (lines 232 236) [debian/copyright]
 
