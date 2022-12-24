@@ -2,8 +2,8 @@ libreoffice (1:7.4.4~rc1-2) UNRELEASED; urgency=medium
 
   * debian/patches/boost-1.81.diff: add patch from libreoffice-7-5 branch;
     fix build with boost 1.81
-
- -- Rene Engelhard <rene@debian.org>  Sun, 18 Dec 2022 11:00:27 +0100
+  * debian/source/lintian-overrides: override
+    source-is-missing [sw/qa/extras/txtimport/data/GB18030.txt]
 
 libreoffice (1:7.4.4~rc1-1) experimental; urgency=medium
 
