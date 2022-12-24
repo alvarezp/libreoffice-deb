@@ -6,8 +6,11 @@ libreoffice (1:7.5.0~rc2~git20221222-1) UNRELEASED; urgency=medium
     - clean (build)-depends (versions) up; remove unnecessary ones since
       buster (oldstable), hopefully also fixes lintians
       field-too-long Build-Depends error
+  * debian/source/lintian-overrides: override bogus
+    source-is-missing and source-contains-prebuilt-windows-binary for
+    [sw/qa/extras/txtimport/data/GB18030.txt]
 
- -- Rene Engelhard <rene@debian.org>  Thu, 22 Dec 2022 18:25:39 +0100
+ -- Rene Engelhard <rene@debian.org>  Sat, 24 Dec 2022 13:53:58 +0100
 
 libreoffice (1:7.5.0~rc1-1) experimental; urgency=medium
 
