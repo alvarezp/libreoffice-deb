@@ -13,6 +13,8 @@ libreoffice source: source-is-missing [sw/qa/extras/htmlimport/data/inlined_imag
 libreoffice source: source-is-missing [sw/qa/extras/htmlexport/data/clearing-break.html]
 libreoffice source: source-is-missing [sw/qa/extras/htmlimport/data/image-lazy-read.html]
 libreoffice source: source-is-missing [sw/qa/extras/htmlimport/data/tdf142781.html]
+# <META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Linux)">
+libreoffice source: source-is-missing [sw/qa/extras/layout/data/forcepoint94.html]
 # similar, this is NOT minified.
 libreoffice source: source-is-missing [helpcontent2/help3xsl/prism.js]
 # no, it isn't. the one is always, the other is for tests (<!nocheck>)!
