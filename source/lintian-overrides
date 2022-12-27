@@ -4,6 +4,17 @@ libreoffice source: source-is-missing [odk/docs/tools.html]
 libreoffice source: source-is-missing [odk/examples/DevelopersGuide/examples.html]
 libreoffice source: source-is-missing [odk/examples/examples.html]
 libreoffice source: source-is-missing [odk/index_online.html]
+# sw/qa/extras/htmlimport/data/PageAndParagraphFilled.html:	<meta name="generator" content="LibreOfficeDev 5.1.0.0.alpha1 (Windows)"/>
+# sw/qa/extras/htmlimport/data/inlined_image.html:	<meta name="generator" content="LibreOfficeDev 4.4.0.0.alpha0 (Linux)"/>
+# long lines due to inline base64 image
+libreoffice source: source-is-missing [sw/qa/extras/htmlimport/data/PageAndParagraphFilled.html]
+libreoffice source: source-is-missing [sw/qa/extras/htmlimport/data/inlined_image.html]
+# as above, but without generator meta tag
+libreoffice source: source-is-missing [sw/qa/extras/htmlexport/data/clearing-break.html]
+libreoffice source: source-is-missing [sw/qa/extras/htmlimport/data/image-lazy-read.html]
+libreoffice source: source-is-missing [sw/qa/extras/htmlimport/data/tdf142781.html]
+# <META NAME="GENERATOR" CONTENT="OpenOffice.org 2.3  (Linux)">
+libreoffice source: source-is-missing [sw/qa/extras/layout/data/forcepoint94.html]
 # similar, this is NOT minified.
 libreoffice source: source-is-missing [helpcontent2/help3xsl/prism.js]
 # no, it isn't. the one is always, the other is for tests (<!nocheck>)!
@@ -26,7 +37,6 @@ libreoffice source: source-is-missing [wizards/source/access2base/access2base.ht
 # recode GB18030..UTF-8 sw/qa/extras/txtimport/data/GB18030.txt. Thus this *is* the source
 # and not a windows binary at all.
 # Needs to be GB18030 for sw/qa/extras/txtimport/txtimport.cxx - testTdf92161_gb18030
-libreoffice source: source-is-missing [sw/qa/extras/txtimport/data/GB18030.txt]
 libreoffice source: source-contains-prebuilt-windows-binary [sw/qa/extras/txtimport/data/GB18030.txt]
 # two licenses..
 libreoffice source: duplicate-globbing-patterns helpcontent2/help3xsl/polyfills.js (lines 232 236) [debian/copyright]
