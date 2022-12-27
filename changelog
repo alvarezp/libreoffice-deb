@@ -1,4 +1,4 @@
-libreoffice (1:7.4.3-4) UNRELEASED; urgency=medium
+libreoffice (1:7.4.3-3) unstable; urgency=medium
 
   * debian/patches/boost-1.81.diff: add patch from libreoffice-7-5 branch;
     fix build with boost 1.81
@@ -6,7 +6,7 @@ libreoffice (1:7.4.3-4) UNRELEASED; urgency=medium
     add from clearlinux-pkgs, see https://github.com/zxing-cpp/zxing-cpp/issues/361,
     thanks Johannes Schauer (closes: #1027048)
 
- -- Rene Engelhard <rene@debian.org>  Tue, 27 Dec 2022 11:13:25 +0100
+ -- Rene Engelhard <rene@debian.org>  Tue, 27 Dec 2022 11:17:56 +0100
 
 libreoffice (1:7.4.3-2) unstable; urgency=medium
 
