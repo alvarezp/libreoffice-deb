@@ -13,7 +13,7 @@ libreoffice (1:7.5.0~rc1-2) experimental; urgency=medium
     [sw/qa/extras/txtimport/data/GB18030.txt]; also override
     source-is-missing for some htmls in sw/qa/extras/html{import,export}/data
 
- -- Rene Engelhard <rene@debian.org>  Wed, 28 Dec 2022 12:27:48 +0100
+ -- Rene Engelhard <rene@debian.org>  Thu, 29 Dec 2022 04:14:57 +0100
 
 libreoffice (1:7.5.0~rc1-1) experimental; urgency=medium
 
