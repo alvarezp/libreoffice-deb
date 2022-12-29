@@ -1,3 +1,10 @@
+libreoffice (1:7.4.4~rc2-2) UNRELEASED; urgency=medium
+
+  * debian/rules: also add forgotten DEB_LDFLAGS_MAINT_STRIP for -flto=auto
+    and (if using "small symbols" anyway -ffat-lto-objects)
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 29 Dec 2022 20:00:26 +0100
+
 libreoffice (1:7.4.4~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate
