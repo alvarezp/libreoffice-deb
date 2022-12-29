@@ -4,9 +4,26 @@ libreoffice (1:7.6.0~alpha0~git20221221-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 08 Dec 2022 20:43:55 +0100
 
-libreoffice (1:7.5.0~rc1~git20221221-1) UNRELEASED; urgency=medium
+libreoffice (1:7.5.0~rc1-2) experimental; urgency=medium
 
-  * New upstream snapshot 
+  * debian/patches/0004-Remove-dependency-on-BitArray.h-from-zxing-1.2.0.patch:
+    add from clearlinux-pkgs, thanks Johannes Schauer -
+    see https://github.com/zxing-cpp/zxing-cpp/issues/361 (closes: #1027048)
+
+  * debian/rules:
+    - clean (build)-depends (versions) up; remove unnecessary ones since
+      buster (oldstable), hopefully also fixes lintians
+      field-too-long Build-Depends error
+  * debian/source/lintian-overrides: override bogus
+    source-contains-prebuilt-windows-binary for
+    [sw/qa/extras/txtimport/data/GB18030.txt]; also override
+    source-is-missing for some htmls in sw/qa/extras/html{import,export}/data
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 29 Dec 2022 04:14:57 +0100
+
+libreoffice (1:7.5.0~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
 
   * debian/control.in:
     - make -core/-core-nogui depend on uno-libs-private (>= 1:7.5.0~)
@@ -14,7 +31,7 @@ libreoffice (1:7.5.0~rc1~git20221221-1) UNRELEASED; urgency=medium
     - make uno-libs-private break libuno-cppuhelpergcc3-3 (<< 1:7.5.0~),
      libreoffice-core{,-nogui} (<< 1:7.5.0~)
 
- -- Rene Engelhard <rene@debian.org>  Sat, 10 Dec 2022 11:26:01 +0100
+ -- Rene Engelhard <rene@debian.org>  Thu, 22 Dec 2022 05:34:34 +0000
 
 libreoffice (1:7.5.0~beta1-1) experimental; urgency=medium
 
