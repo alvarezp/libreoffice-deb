@@ -1,3 +1,9 @@
+libreoffice (1:7.5.0~rc2~git20221229-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 29 Dec 2022 04:14:57 +0100
+
 libreoffice (1:7.5.0~rc1-2) experimental; urgency=medium
 
   * debian/patches/0004-Remove-dependency-on-BitArray.h-from-zxing-1.2.0.patch:
