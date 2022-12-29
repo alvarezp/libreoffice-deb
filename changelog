@@ -1,3 +1,10 @@
+libreoffice (1:7.4.3-4) UNRELEASED; urgency=medium
+
+  * debian/rules: also add forgotten DEB_LDFLAGS_MAINT_STRIP for -flto=auto
+    and (if using "small symbols" anyway -ffat-lto-objects)
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 29 Dec 2022 20:00:26 +0100
+
 libreoffice (1:7.4.3-3) unstable; urgency=medium
 
   * debian/patches/boost-1.81.diff: add patch from libreoffice-7-5 branch;
