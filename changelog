@@ -1,8 +1,8 @@
 libreoffice (1:7.5.0~rc1-2) experimental; urgency=medium
 
   * debian/patches/0004-Remove-dependency-on-BitArray.h-from-zxing-1.2.0.patch:
-    add from clearlinux-pkgs, see https://github.com/zxing-cpp/zxing-cpp/issues/361,
-    thanks Johannes Schauer (closes: #1027048)
+    add from clearlinux-pkgs, thanks Johannes Schauer -
+    see https://github.com/zxing-cpp/zxing-cpp/issues/361 (closes: #1027048)
 
   * debian/rules:
     - clean (build)-depends (versions) up; remove unnecessary ones since
@@ -13,7 +13,7 @@ libreoffice (1:7.5.0~rc1-2) experimental; urgency=medium
     [sw/qa/extras/txtimport/data/GB18030.txt]; also override
     source-is-missing for some htmls in sw/qa/extras/html{import,export}/data
 
- -- Rene Engelhard <rene@debian.org>  Tue, 27 Dec 2022 11:13:25 +0100
+ -- Rene Engelhard <rene@debian.org>  Wed, 28 Dec 2022 12:27:48 +0100
 
 libreoffice (1:7.5.0~rc1-1) experimental; urgency=medium
 
