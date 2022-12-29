@@ -1645,8 +1645,8 @@ endif
 ifeq ($(ENABLE_LTO),y)
 export DEB_BUILD_MAINT_OPTIONS=optimize=+lto
 # honour parallel=X. We can just remove the auto here (coming from dpkg-buildflags)
-# since upstream already adds -flto=X.
-# Replacing -flto=auto with -flto=X doesn't work since clang doesn't understand -flto=X
+# since upstream already adds -flto=jobserver (honouring PARALLEL already).
+# Replacing -flto=auto doesn't work since clang doesn't understand -flto=X (except thin)
 DEB_CFLAGS_MAINT_STRIP += -flto=auto
 DEB_CXXFLAGS_MAINT_STRIP += -flto=auto
 DEB_LDFLAGS_MAINT_STRIP += -flto=auto

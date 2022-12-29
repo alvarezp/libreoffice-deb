@@ -1,3 +1,9 @@
+libreoffice (1:7.4.5~rc1~git20230116-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 16 Jan 2023 18:54:03 +0100
+
 libreoffice (1:7.4.4-1) unstable; urgency=medium
 
   * LibreOffice 7.4.4 final release (identical to rc2)
