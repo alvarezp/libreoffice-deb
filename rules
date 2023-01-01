@@ -1295,7 +1295,7 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   ifeq "$(ENABLE_ZXING)" "y"
     ifneq (,$(filter zxing, $(SYSTEM_STUFF)))
 	# https://cgit.freedesktop.org/libreoffice/core/commit/?id=d53340b2253537104abe6f95c8c63cc74487c3ec
-	BUILD_DEPS += , libzxingcore-dev (>= 1.2.0)
+	BUILD_DEPS += , libzxing-dev (>= 1.2.0)
     endif
   else
 	CONFIGURE_FLAGS += --disable-zxing
