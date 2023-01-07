@@ -2,8 +2,10 @@ libreoffice (1:7.5.0~rc2~git20230101-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
-  * debian/rules: build-depend on libzxing-dev, not the transitional
-    libzxingcore-dev
+  * debian/rules:
+    - also add forgotten DEB_LDFLAGS_MAINT_STRIP for -flto=auto
+      and (if using "small symbols" anyway -ffat-lto-objects)
+    - build-depend on libzxing-dev, not the transitional libzxingcore-dev
 
  -- Rene Engelhard <rene@debian.org>  Thu, 29 Dec 2022 04:14:57 +0100
 

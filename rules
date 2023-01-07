@@ -1619,13 +1619,15 @@ export DEB_BUILD_MAINT_OPTIONS=optimize=+lto
 # Replacing -flto=auto with -flto=X doesn't work since clang doesn't understand -flto=X
 DEB_CFLAGS_MAINT_STRIP += -flto=auto
 DEB_CXXFLAGS_MAINT_STRIP += -flto=auto
+DEB_LDFLAGS_MAINT_STRIP += -flto=auto
 # save space
 ifeq "$(SMALL_SYMBOLS)" "y"
 DEB_CFLAGS_MAINT_STRIP += -ffat-lto-objects
 DEB_CXXFLAGS_MAINT_STRIP += -ffat-lto-objects
+DEB_LDFLAGS_MAINT_STRIP += -ffat-lto-objects
 endif
-export DEB_CFLAGS_MAINT_STRIP DEB_CXXFLAGS_MAINT_STRIP
-export DEB_CFLAGS_MAINT_APPEND DEB_CXXFLAGS_MAINT_APPEND
+export DEB_CFLAGS_MAINT_STRIP DEB_CXXFLAGS_MAINT_STRIP DEB_LDFLAGS_MAINT_STRIP
+export DEB_CFLAGS_MAINT_APPEND DEB_CXXFLAGS_MAINT_APPEND DEB_LDFLAGS_MAINT_APPEND
 else
 export DEB_BUILD_MAINT_OPTIONS=optimize=-lto 
 endif
