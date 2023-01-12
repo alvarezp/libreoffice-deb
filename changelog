@@ -1,13 +1,13 @@
-libreoffice (1:7.5.0~rc2~git20230107-1) UNRELEASED; urgency=medium
+libreoffice (1:7.5.0~rc2-1) experimental; urgency=medium
 
-  * New upstream snapshot 
+  * New upstream release candidate
 
   * debian/rules:
     - also add forgotten DEB_LDFLAGS_MAINT_STRIP for -flto=auto
       and (if using "small symbols" anyway -ffat-lto-objects)
     - build-depend on libzxing-dev, not the transitional libzxingcore-dev
 
- -- Rene Engelhard <rene@debian.org>  Thu, 29 Dec 2022 04:14:57 +0100
+ -- Rene Engelhard <rene@debian.org>  Thu, 12 Jan 2023 22:25:57 +0100
 
 libreoffice (1:7.5.0~rc1-2) experimental; urgency=medium
 
