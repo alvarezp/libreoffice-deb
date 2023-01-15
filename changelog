@@ -1,10 +1,15 @@
-libreoffice (1:7.4.4~rc2-3) UNRELEASED; urgency=medium
+libreoffice (1:7.4.4-1) unstable; urgency=medium
 
+  * LibreOffice 7.4.4 final release (identical to rc2)
+
+  * debian/control.in: fix Vcs-Git:
+  * debian/tests/control: regen to fix unused tests' depends
+  * debian/control: regen for java-common 0.74 (only affecting powerpc)
   * debian/rules:
     - set extra builid to BINARY_VERSION instead of DEB_VERSION to reflect
       the actual binary package version of libreoffice-core if they differed
 
- -- Rene Engelhard <rene@debian.org>  Thu, 12 Jan 2023 18:01:23 +0100
+ -- Rene Engelhard <rene@debian.org>  Sun, 15 Jan 2023 15:37:30 +0100
 
 libreoffice (1:7.4.4~rc2-2) unstable; urgency=medium
 
