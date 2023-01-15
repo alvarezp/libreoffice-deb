@@ -446,7 +446,7 @@ SYSTEM_STUFF += libtiff
 # Default flags to pass to configure
 CONFIGURE_FLAGS+= \
 		--with-vendor='$(OOO_VENDOR)' \
-		--with-extra-buildid='$(DEB_VENDOR) package version: $(DEB_VERSION)' \
+		--with-extra-buildid='$(DEB_VENDOR) package version: $(BINARY_VERSION)' \
                 --prefix=/usr --mandir=/usr/share/man \
                 --docdir=/usr/share/doc/libreoffice \
 		--libdir=/usr/lib \
