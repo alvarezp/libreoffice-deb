@@ -1,3 +1,11 @@
+libreoffice (1:7.4.4~rc2-3) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - set extra builid to BINARY_VERSION instead of DEB_VERSION to reflect
+      the actual binary package version of libreoffice-core if they differed
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 12 Jan 2023 18:01:23 +0100
+
 libreoffice (1:7.4.4~rc2-2) unstable; urgency=medium
 
   * debian/rules: also add forgotten DEB_LDFLAGS_MAINT_STRIP for -flto=auto
