@@ -1,10 +1,14 @@
 libreoffice (1:7.5.0~rc2-2) UNRELEASED; urgency=medium
 
+  * d/patches/fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff: 
+    as name says, fix vcls testSimpleText with fontconfig-config 2.14.1-3
+    (closes: #1029104)
+
   * debian/rules:
     - set extra builid to BINARY_VERSION instead of DEB_VERSION to reflect
       the actual binary package version of libreoffice-core if they differed
 
- -- Rene Engelhard <rene@debian.org>  Thu, 12 Jan 2023 18:01:23 +0100
+ -- Rene Engelhard <rene@debian.org>  Tue, 17 Jan 2023 19:30:30 +0100
 
 libreoffice (1:7.5.0~rc2-1) experimental; urgency=medium
 
