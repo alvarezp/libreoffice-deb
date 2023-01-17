@@ -1,3 +1,11 @@
+libreoffice (1:7.4.4-2) unstable; urgency=medium
+
+  * d/patches/fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff: 
+    as name says, fix vcls testSimpleText with fontconfig-config 2.14.1-3
+    (closes: #1029104)
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 17 Jan 2023 19:30:30 +0100
+
 libreoffice (1:7.4.4-1) unstable; urgency=medium
 
   * LibreOffice 7.4.4 final release (identical to rc2)
