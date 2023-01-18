@@ -1,3 +1,9 @@
+libreoffice (1:7.4.4-3) unstable; urgency=medium
+
+  * reupload with fixed control... 
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 18 Jan 2023 05:44:11 +0000
+
 libreoffice (1:7.4.4-2) unstable; urgency=medium
 
   * fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff: 
