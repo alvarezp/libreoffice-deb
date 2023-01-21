@@ -1,0 +1,51 @@
+From bb3ddcf7ae63879f50c9e88fcc01003e66c7288b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Thu, 19 Jan 2023 20:39:06 +0000
+Subject: change test to use Calibri instead of Cambria
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+because of the Caladea problem
+
+There are sadly now two Caladea fonts with different metrics, see:
+ https://bugzilla.redhat.com/show_bug.cgi?id=2162532
+ https://github.com/huertatipografica/Caladea/issues/4
+
+Change-Id: I7080d16ec8aae2bbe60717aea85b980a33340e9b
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/145830
+Tested-by: Jenkins
+Reviewed-by: Caolán McNamara <caolanm@redhat.com>
+---
+ sd/qa/unit/data/pptx/tdf125573_FontWorkScaleX.pptx | Bin 34718 -> 35488 bytes
+ sd/qa/unit/export-tests-ooxml3.cxx                 |   5 +++--
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/sd/qa/unit/data/pptx/tdf125573_FontWorkScaleX.pptx b/sd/qa/unit/data/pptx/tdf125573_FontWorkScaleX.pptx
+index e8d1938a2308..28672eb4b7f3 100644
+Binary files a/sd/qa/unit/data/pptx/tdf125573_FontWorkScaleX.pptx and b/sd/qa/unit/data/pptx/tdf125573_FontWorkScaleX.pptx differ
+diff --git a/sd/qa/unit/export-tests-ooxml3.cxx b/sd/qa/unit/export-tests-ooxml3.cxx
+index 309709317821..db023bef2592 100644
+--- a/sd/qa/unit/export-tests-ooxml3.cxx
++++ b/sd/qa/unit/export-tests-ooxml3.cxx
+@@ -748,14 +748,15 @@ void SdOOXMLExportTest3::testTdf125573_FontWorkScaleX()
+     awt::Rectangle aBoundRectArch;
+     xShapeArchProps->getPropertyValue(UNO_NAME_MISC_OBJ_BOUNDRECT) >>= aBoundRectArch;
+     // BoundRect is DPI dependent, thus allow some range.
+-    CPPUNIT_ASSERT_LESS(sal_Int32(50), std::abs(aBoundRectArch.Width - 13038));
++    // (Without fix Expected less than: 85 Actual  : 10432)
++    CPPUNIT_ASSERT_LESS(sal_Int32(85), std::abs(aBoundRectArch.Width - 13038));
+ 
+     // Error was, that text in shapes of category "Warp" was not scaled to the path.
+     uno::Reference<beans::XPropertySet> xShapeWaveProps(getShapeFromPage(0, 1));
+     awt::Rectangle aBoundRectWave;
+     xShapeWaveProps->getPropertyValue(UNO_NAME_MISC_OBJ_BOUNDRECT) >>= aBoundRectWave;
+     // BoundRect is DPI dependent, thus allow some range.
+-    CPPUNIT_ASSERT_LESS(sal_Int32(50), std::abs(aBoundRectWave.Width - 11576));
++    CPPUNIT_ASSERT_LESS(sal_Int32(85), std::abs(aBoundRectWave.Width - 11576));
+ }
+ 
+ void SdOOXMLExportTest3::testTdf99497_keepAppearanceOfCircleKind()
+-- 
+cgit v1.2.1
+
