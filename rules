@@ -446,7 +446,7 @@ SYSTEM_STUFF += libtiff
 # Default flags to pass to configure
 CONFIGURE_FLAGS+= \
 		--with-vendor='$(OOO_VENDOR)' \
-		--with-extra-buildid='$(DEB_VENDOR) package version: $(DEB_VERSION)' \
+		--with-extra-buildid='$(DEB_VENDOR) package version: $(BINARY_VERSION)' \
                 --prefix=/usr --mandir=/usr/share/man \
                 --docdir=/usr/share/doc/libreoffice \
 		--libdir=/usr/lib \
@@ -1296,7 +1296,7 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   ifeq "$(ENABLE_ZXING)" "y"
     ifneq (,$(filter zxing, $(SYSTEM_STUFF)))
 	# https://cgit.freedesktop.org/libreoffice/core/commit/?id=d53340b2253537104abe6f95c8c63cc74487c3ec
-	BUILD_DEPS += , libzxingcore-dev (>= 1.2.0)
+	BUILD_DEPS += , libzxing-dev (>= 1.2.0)
     endif
   else
 	CONFIGURE_FLAGS += --disable-zxing
@@ -1620,13 +1620,15 @@ export DEB_BUILD_MAINT_OPTIONS=optimize=+lto
 # Replacing -flto=auto doesn't work since clang doesn't understand -flto=X (except thin)
 DEB_CFLAGS_MAINT_STRIP += -flto=auto
 DEB_CXXFLAGS_MAINT_STRIP += -flto=auto
+DEB_LDFLAGS_MAINT_STRIP += -flto=auto
 # save space
 ifeq "$(SMALL_SYMBOLS)" "y"
 DEB_CFLAGS_MAINT_STRIP += -ffat-lto-objects
 DEB_CXXFLAGS_MAINT_STRIP += -ffat-lto-objects
+DEB_LDFLAGS_MAINT_STRIP += -ffat-lto-objects
 endif
-export DEB_CFLAGS_MAINT_STRIP DEB_CXXFLAGS_MAINT_STRIP
-export DEB_CFLAGS_MAINT_APPEND DEB_CXXFLAGS_MAINT_APPEND
+export DEB_CFLAGS_MAINT_STRIP DEB_CXXFLAGS_MAINT_STRIP DEB_LDFLAGS_MAINT_STRIP
+export DEB_CFLAGS_MAINT_APPEND DEB_CXXFLAGS_MAINT_APPEND DEB_LDFLAGS_MAINT_APPEND
 else
 export DEB_BUILD_MAINT_OPTIONS=optimize=-lto 
 endif
@@ -2210,6 +2212,10 @@ ifeq "$(BUILD_TESTS)" "y"
 	cd $(SOURCE_TREE)/smoketest && \
 		patch -p1 < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff
   endif
+	# we need to do it here (and unapply after the tests) to not have this end up in the config
+	# which gets installed later into fonts-opensymbol
+	patch -p1 < $(CURDIR)/debian/tests/patches/fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff
+	cd $(SOURCE_TREE)/postprocess && $(MAKE) verbose=t
 
 	# enable cppunit etc.
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) \
@@ -2260,6 +2266,8 @@ ifeq "$(BUILD_TESTS)" "y"
 	cd $(SOURCE_TREE)/smoketest && \
 		patch -p1 -R < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff
   endif
+	patch -p1 -R < $(CURDIR)/debian/tests/patches/fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff
+	cd $(SOURCE_TREE)/postprocess && $(MAKE) verbose=t
 endif
 
 check-indep:
