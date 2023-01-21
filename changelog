@@ -1,3 +1,9 @@
+libreoffice (1:7.5.0~rc2-3) UNRELEASED; urgency=medium
+
+  * debian/watch: fix 
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 21 Jan 2023 15:38:41 +0100
+
 libreoffice (1:7.5.0~rc2-2) experimental; urgency=medium
 
   * fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff: 

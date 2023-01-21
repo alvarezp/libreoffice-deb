@@ -30,11 +30,11 @@ opts="pgpsigurlmangle=s/$/.asc/,component=translations,versionmangle=s/(\d.\d.\d
    https://dev-builds.libreoffice.org/pre-releases/src/@PACKAGE@-translations-(\d.\d.\d).(\d).tar.xz same
 
 # alpha, beta
-opts="compression=xz,pgpsigurlmangle=s/$/.asc/,versionmangle=s/(\d.\d.\d).(alpha|beta).(\d)/$1~$2$3/" \
-   https://dev-builds.libreoffice.org/pre-releases/src/@PACKAGE@-(\d.\d.\d).0.(alpha|beta)(\d).tar.xz debian
-
-opts="pgpsigurlmangle=s/$/.asc/,versionmangle=s/(\d.\d.\d).(alpha|beta).(\d)/$1~$2$3/" \
-   https://dev-builds.libreoffice.org/pre-releases/src/@PACKAGE@-help-(\d.\d.\d).0.(alpha|beta)(\d).tar.xz same
-
-opts="pgpsigurlmangle=s/$/.asc/,versionmangle=s/(\d.\d.\d).(alpha|beta).(\d)/$1~$2$3/" \
-   https://dev-builds.libreoffice.org/pre-releases/src/@PACKAGE@-translations-(\d.\d.\d).0.(alpha|beta)(\d).tar.xz same
+#opts="compression=xz,pgpsigurlmangle=s/$/.asc/,versionmangle=s/(\d.\d.\d).(alpha|beta).(\d)/$1~$2$3/" \
+#   https://dev-builds.libreoffice.org/pre-releases/src/@PACKAGE@-(\d.\d.\d).0.(alpha|beta)(\d).tar.xz debian
+#
+#opts="pgpsigurlmangle=s/$/.asc/,versionmangle=s/(\d.\d.\d).(alpha|beta).(\d)/$1~$2$3/" \
+#   https://dev-builds.libreoffice.org/pre-releases/src/@PACKAGE@-help-(\d.\d.\d).0.(alpha|beta)(\d).tar.xz same
+#
+#opts="pgpsigurlmangle=s/$/.asc/,versionmangle=s/(\d.\d.\d).(alpha|beta).(\d)/$1~$2$3/" \
+#   https://dev-builds.libreoffice.org/pre-releases/src/@PACKAGE@-translations-(\d.\d.\d).0.(alpha|beta)(\d).tar.xz same
