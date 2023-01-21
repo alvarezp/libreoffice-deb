@@ -187,7 +187,6 @@ Build-Depends: autoconf,
                zlib1g-dev
 Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nocheck>,
                     fontconfig [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
-                    fonts-crosextra-caladea [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
                     fonts-crosextra-carlito [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
                     fonts-dejavu [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
                     fonts-hosny-amiri [!armel !kfreebsd-amd64 !kfreebsd-i386 !mips !mipsel !mips64el !s390x] <!nocheck>,
