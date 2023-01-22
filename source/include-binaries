@@ -1,6 +1,5 @@
 debian/templates/debian-presentation.otp
 debian/templates/debian-presentation-background.xcf
-desktop/test/deployment/update/platform/linux_sparc64.oxt
 helpcontent2/source/media/screenshots/modules/simpress/ui/prntopts/pt/prntopts.png
 tarballs/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
 tarballs/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
