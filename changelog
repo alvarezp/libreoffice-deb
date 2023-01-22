@@ -1,3 +1,9 @@
+libreoffice (2:7.5.0~rc2-5) experimental; urgency=medium
+
+  * bump fonts-opensymbol epoch to 3: 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 22 Jan 2023 22:35:47 +0100
+
 libreoffice (2:7.5.0~rc2-4) experimental; urgency=medium
 
   * upload to experimental correctly 
