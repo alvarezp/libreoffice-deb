@@ -1,4 +1,4 @@
-libreoffice (1:7.5.0~rc2-3) UNRELEASED; urgency=medium
+libreoffice (1:7.5.0~rc2-3) unstable; urgency=medium
 
   * debian/patches/tdf125573_FontWorkScaleX-use-Calibri-instead-of-Cambria.diff:
     add from upstream master; as name says
