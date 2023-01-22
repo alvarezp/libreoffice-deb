@@ -1,3 +1,9 @@
+libreoffice (2:7.5.0~rc2-4) experimental; urgency=medium
+
+  * upload to experimental correctly 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 22 Jan 2023 09:31:36 +0000
+
 libreoffice (1:7.5.0~rc2-3) unstable; urgency=medium
 
   * debian/patches/tdf125573_FontWorkScaleX-use-Calibri-instead-of-Cambria.diff:
