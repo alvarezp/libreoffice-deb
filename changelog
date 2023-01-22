@@ -1,3 +1,9 @@
+libreoffice (2:7.4.4-5) unstable; urgency=medium
+
+  * bump fonts-opensymbol epoch to 3: 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 22 Jan 2023 22:35:47 +0100
+
 libreoffice (2:7.4.4-4) unstable; urgency=medium
 
   * reupload to fix accidential 7.5.0 upload to unstable
