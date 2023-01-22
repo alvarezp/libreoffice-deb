@@ -4,11 +4,17 @@ libreoffice (1:7.6.0~alpha0~git20230121-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 08 Dec 2022 20:43:55 +0100
 
-libreoffice (1:7.5.0~rc2-3) UNRELEASED; urgency=medium
+libreoffice (1:7.5.0~rc2-3) unstable; urgency=medium
 
+  * debian/patches/tdf125573_FontWorkScaleX-use-Calibri-instead-of-Cambria.diff:
+    add from upstream master; as name says
+
+  * debian/source/include-binaries: include new pptx of above
+  * debian/rules:
+    - no need to Build-Depend on fonts-crosextra-caladea anymore
   * debian/watch: fix 
 
- -- Rene Engelhard <rene@debian.org>  Sat, 21 Jan 2023 15:38:41 +0100
+ -- Rene Engelhard <rene@debian.org>  Sat, 21 Jan 2023 18:42:09 +0100
 
 libreoffice (1:7.5.0~rc2-2) experimental; urgency=medium
 
