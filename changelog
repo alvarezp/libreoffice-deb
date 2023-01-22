@@ -1,6 +1,6 @@
-libreoffice (2:7.5.0~rc2-5) experimental; urgency=medium
+libreoffice (3:7.5.0~rc2-5) experimental; urgency=medium
 
-  * bump fonts-opensymbol epoch to 3: 
+  * bump epoch to 3: and remove extra epoch on fonts-opensymbol
 
  -- Rene Engelhard <rene@debian.org>  Sun, 22 Jan 2023 22:35:47 +0100
 
