@@ -1,3 +1,20 @@
+libreoffice (4:7.4.4-7) unstable; urgency=medium
+
+  * The "if something goes wrong it really does" or 
+    "Don't do stuff in a hurry" release 
+  * bump all epochs again since I again uploaded 7.5.0 to unstable
+    accidentially in a hurry. At least we can now consistently set the epoch
+    to 4: for all packages (as was done in experimental already)
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 23 Jan 2023 07:07:49 +0100
+
+libreoffice (2:7.4.4-6) unstable; urgency=medium
+
+  * also bump epoch for libreoffice-wiki-publisher and libreoffice-nlpsolver
+    to 1: ...
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 23 Jan 2023 06:12:49 +0100
+
 libreoffice (2:7.4.4-5) unstable; urgency=medium
 
   * bump fonts-opensymbol epoch to 3: 
