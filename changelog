@@ -1,3 +1,9 @@
+libreoffice (4:7.5.0~rc3-1) experimental; urgency=medium
+
+  * New upstream release candidate 
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 25 Jan 2023 20:09:55 +0100
+
 libreoffice (4:7.5.0~rc2-7) experimental; urgency=medium
 
   * The "if something goes wrong it really does" release
