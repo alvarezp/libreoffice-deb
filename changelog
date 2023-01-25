@@ -4,6 +4,51 @@ libreoffice (1:7.4.5-1) unstable; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Mon, 23 Jan 2023 19:16:14 +0100
 
+libreoffice (4:7.4.4-8) unstable; urgency=medium
+
+  * The "(More) 'Fun' with epochs" release.
+
+  * debian/control.in:
+    - update -common Breaks: on -core after the epoch bumps (and add
+      -core-nogui) (closes: #1029534)
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 25 Jan 2023 22:43:15 +0100
+
+libreoffice (4:7.4.4-7) unstable; urgency=medium
+
+  * The "if something goes wrong it really does" or 
+    "Don't do stuff in a hurry" release 
+  * bump all epochs again since I again uploaded 7.5.0 to unstable
+    accidentially in a hurry. At least we can now consistently set the epoch
+    to 4: for all packages (as was done in experimental already)
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 23 Jan 2023 07:07:49 +0100
+
+libreoffice (2:7.4.4-6) unstable; urgency=medium
+
+  * also bump epoch for libreoffice-wiki-publisher and libreoffice-nlpsolver
+    to 1: ...
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 23 Jan 2023 06:12:49 +0100
+
+libreoffice (2:7.4.4-5) unstable; urgency=medium
+
+  * bump fonts-opensymbol epoch to 3: 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 22 Jan 2023 22:35:47 +0100
+
+libreoffice (2:7.4.4-4) unstable; urgency=medium
+
+  * reupload to fix accidential 7.5.0 upload to unstable
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 22 Jan 2023 10:23:53 +0100
+
+libreoffice (1:7.4.4-3) unstable; urgency=medium
+
+  * reupload with fixed control... 
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 18 Jan 2023 05:44:11 +0000
+
 libreoffice (1:7.4.4-2) unstable; urgency=medium
 
   * fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff: 
