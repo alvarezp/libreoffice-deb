@@ -1,3 +1,13 @@
+libreoffice (4:7.4.4-8) unstable; urgency=medium
+
+  * The "(More) 'Fun' with epochs" release.
+
+  * debian/control.in:
+    - update -common Breaks: on -core after the epoch bumps (and add
+      -core-nogui) (closes: #1029534)
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 25 Jan 2023 22:43:15 +0100
+
 libreoffice (4:7.4.4-7) unstable; urgency=medium
 
   * The "if something goes wrong it really does" or 

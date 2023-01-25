@@ -570,9 +570,11 @@ Conflicts: broffice,
            python3-uno (<< 1:7.0.0~alpha~)
 Provides: libreoffice-l10n-en-us
 Breaks: libreoffice-base (<< 1:6.4.0~beta1-2~),
-        libreoffice-core (<< 1:${oover}~),
         libreoffice-core (<< 1:6.4.2~rc1),
-        libreoffice-core (>= 1:${next-oover}~),
+        libreoffice-core (<< 4:${oover}~),
+        libreoffice-core (>= 4:${next-oover}~),
+        libreoffice-core-nogui (<< 4:${oover}~),
+        libreoffice-core-nogui (>= 4:${next-oover}~),
         libreoffice-evolution (<< 1:7.0.0~alpha),
         libreoffice-gnome (<< 1:7.0.0~alpha),
         libreoffice-help (<< 5.4),
