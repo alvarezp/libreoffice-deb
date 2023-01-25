@@ -1,3 +1,17 @@
+libreoffice (4:7.5.0~rc2-7) experimental; urgency=medium
+
+  * The "if something goes wrong it really does" release
+  * reupload to experimental correctly. AGAIN.  Bump epoch to 4: again..
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 23 Jan 2023 07:06:55 +0100
+
+libreoffice (3:7.5.0~rc2-6) unstable; urgency=medium
+
+  * also bump epoch for libreoffice-wiki-publisher and
+    libreoffice-nlpsolver...
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 23 Jan 2023 06:10:15 +0100
+
 libreoffice (3:7.5.0~rc2-5) experimental; urgency=medium
 
   * bump epoch to 3: and remove extra epoch on fonts-opensymbol
