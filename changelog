@@ -8,7 +8,7 @@ libreoffice (4:7.5.0~rc3-1) experimental; urgency=medium
     - update -common Breaks: on -core after the epoch bumps (and add
       -core-nogui) (closes: #1029534)
 
- -- Rene Engelhard <rene@debian.org>  Wed, 25 Jan 2023 20:09:55 +0100
+ -- Rene Engelhard <rene@debian.org>  Wed, 25 Jan 2023 23:17:31 +0100
 
 libreoffice (4:7.5.0~rc2-7) experimental; urgency=medium
 
