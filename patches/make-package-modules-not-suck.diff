@@ -97,13 +97,13 @@ index f386b8aa7c05..7c337f23891b 100644
  
  $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,impress, \
 -	animcore \
- 	PresenterScreen \
  	PresentationMinimizer \
  	wpftimpress \
 +	slideshow \
  ))
  
  $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,onlineupdate, \
+ 	$(if $(ENABLE_ONLINE_UPDATE), \
 @@ -355,11 +378,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
  	$(if $(filter $(OS),WNT),,cmdmail) \
  	configmgr \
