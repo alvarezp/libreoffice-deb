@@ -1197,11 +1197,11 @@ ifneq "$(ENABLE_SKIA)" "y"
 endif
 
 ifneq (,$(filter mdds, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libmdds-dev (>= 2.0), libmdds-dev (<< 2.1~)
+	BUILD_DEPS += , libmdds-dev (>= 2.1), libmdds-dev (<< 2.2~)
 endif
 
 ifneq (,$(filter orcus, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , liborcus-dev (>= 0.17.2), liborcus-dev (<< 0.18~)
+	BUILD_DEPS += , liborcus-dev (>= 0.18), liborcus-dev (<< 0.19~)
 endif
 
 ifeq "$(ENABLE_XMLHELP)" "y"
