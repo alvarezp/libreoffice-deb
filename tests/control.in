@@ -64,7 +64,7 @@ Restrictions: allow-stderr
 
 Tests: uicheck-sc
 Architecture: %OOO_JAVA_ARCHS%
-Depends: @builddeps@, libreoffice-core, libreoffice-calc, libreoffice-draw, python3-uno, libreoffice-l10n-he, libreoffice-l10n-zh-tw, libreoffice-java-common, libreoffice-writer
+Depends: @builddeps@, libreoffice-core, libreoffice-calc, libreoffice-draw, libreoffice-impress, python3-uno, libreoffice-l10n-he, libreoffice-l10n-zh-tw, libreoffice-java-common, libreoffice-writer
 Restrictions: allow-stderr
 
 Tests: uicheck-sw
