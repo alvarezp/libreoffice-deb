@@ -1,10 +1,6 @@
-libreoffice (4:7.5.1~rc1~git20230125-1) UNRELEASED; urgency=medium
+libreoffice (4:7.5.1~rc1~git20230201-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
-
- -- Rene Engelhard <rene@debian.org>  Thu, 12 Jan 2023 18:01:23 +0100
-
-libreoffice (4:7.5.0~rc3-2) UNRELEASED; urgency=medium
 
   * debian/tests/control.in:
     - make uicheck-sc depend on libreoffice-impress since for whatever
