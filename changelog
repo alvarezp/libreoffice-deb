@@ -1,3 +1,14 @@
+libreoffice (4:7.4.5-2) UNRELEASED; urgency=medium
+
+  * fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff:
+    revert this local patch before/after the tests ...
+  * debian/control.in:
+    - ... but build-conflict against fontconfig-config (= 2.14.1-3) <!nocheck>
+      instead since it removes the offending config per default (buildd
+      chroot...) if not choosen otherwise via debconf (see #1030000)
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 01 Feb 2023 18:16:03 +0100
+
 libreoffice (4:7.4.5-1) unstable; urgency=medium
 
   * New upstream hotfix release
