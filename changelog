@@ -6,6 +6,9 @@ libreoffice (4:7.4.5-2) UNRELEASED; urgency=medium
     - ... but build-conflict against fontconfig-config (= 2.14.1-3) <!nocheck>
       instead since it removes the offending config per default (buildd
       chroot...) if not choosen otherwise via debconf (see #1030000)
+  * debian/rules:
+    - Do not add documentation symlinks when not building documentation,
+      thanks Vagrant Cascadian (closes: #1030270)
 
  -- Rene Engelhard <rene@debian.org>  Wed, 01 Feb 2023 18:16:03 +0100
 

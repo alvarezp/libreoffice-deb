@@ -3490,7 +3490,7 @@ ifeq "$(DEB_VENDOR)" "Debian"
 	install -m644 debian/templates/*.otp $(PKGDIR)-common/$(OODIR)/share/template/en-US/presnt/
 endif
 
-ifeq "$(PACKAGE_SDK)" "y"
+ifeq "$(PACKAGE_SDK_DOCS)" "y"
 	# add symlinks for docs and examples
 	cd $(PKGDIR)-dev-doc/$(OOSDKDIR) && \
 		rm -rf docs && \
