@@ -2,6 +2,15 @@ libreoffice (4:7.5.1~rc1~git20230201-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
+  * fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff:
+    revert this local patch before/after the tests ...
+  * debian/control.in:
+    - ... but build-conflict against fontconfig-config (= 2.14.1-3) <!nocheck>
+      instead since it removes the offending config per default (buildd
+      chroot...) if not choosen otherwise via debconf (see #1030000)
+  * debian/rules:
+    - Do not add documentation symlinks when not building documentation,
+      thanks Vagrant Cascadian (closes: #1030270)
   * debian/tests/control.in:
     - make uicheck-sc depend on libreoffice-impress since for whatever
       reason ("effects"?) sc/qa/uitest/calc_tests4/exportToPDF.py starts

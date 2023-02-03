@@ -2209,11 +2209,6 @@ ifeq "$(BUILD_TESTS)" "y"
 	cd $(SOURCE_TREE)/smoketest && \
 		patch -p1 < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff
   endif
-	# we need to do it here (and unapply after the tests) to not have this end up in the config
-	# which gets installed later into fonts-opensymbol
-	patch -p1 < $(CURDIR)/debian/tests/patches/fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff
-	cd $(SOURCE_TREE)/postprocess && $(MAKE) verbose=t
-
 	# enable cppunit etc.
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) \
 	CLANGDIR=$(CLANGDIR) \
@@ -2263,8 +2258,6 @@ ifeq "$(BUILD_TESTS)" "y"
 	cd $(SOURCE_TREE)/smoketest && \
 		patch -p1 -R < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff
   endif
-	patch -p1 -R < $(CURDIR)/debian/tests/patches/fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff
-	cd $(SOURCE_TREE)/postprocess && $(MAKE) verbose=t
 endif
 
 check-indep:
@@ -3428,7 +3421,7 @@ ifeq "$(DEB_VENDOR)" "Debian"
 	install -m644 debian/templates/*.otp $(PKGDIR)-common/$(OODIR)/share/template/en-US/presnt/
 endif
 
-ifeq "$(PACKAGE_SDK)" "y"
+ifeq "$(PACKAGE_SDK_DOCS)" "y"
 	# add symlinks for docs and examples
 	cd $(PKGDIR)-dev-doc/$(OOSDKDIR) && \
 		rm -rf docs && \
