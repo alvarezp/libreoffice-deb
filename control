@@ -230,6 +230,8 @@ Build-Depends-Indep: ant (>= 1.7.0) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips6
                      rdfind,
                      symlinks
 Build-Conflicts: amd-libopencl1,
+                 fontconfig-config (= 2.14.1-1) <!nocheck>,
+                 fontconfig-config (= 2.14.1-2) <!nocheck>,
                  fontconfig-config (= 2.14.1-3) <!nocheck>,
                  fonts-opensymbol <!nocheck>,
                  nvidia-glx-dev,
