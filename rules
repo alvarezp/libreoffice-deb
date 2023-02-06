@@ -1320,7 +1320,7 @@ ifneq (,$(filter lcms2, $(SYSTEM_STUFF)))
 endif
 
 ifneq (,$(filter openldap, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libldap2-dev
+	BUILD_DEPS += , libldap-dev
 endif
 
 ifneq (,$(filter liblangtag, $(SYSTEM_STUFF)))
