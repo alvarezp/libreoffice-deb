@@ -1,6 +1,6 @@
-libreoffice (4:7.5.1~rc1~git20230201-1) UNRELEASED; urgency=medium
+libreoffice (4:7.5.1~rc1-1) experimental; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * fontconfig-2.14.1-no-RGB-stripes-layout-for-sub-pixel-rendering.diff:
     revert this local patch before/after the tests ...
@@ -16,7 +16,7 @@ libreoffice (4:7.5.1~rc1~git20230201-1) UNRELEASED; urgency=medium
       reason ("effects"?) sc/qa/uitest/calc_tests4/exportToPDF.py starts
       to hang without it
 
- -- Rene Engelhard <rene@debian.org>  Fri, 27 Jan 2023 20:17:51 +0100
+ -- Rene Engelhard <rene@debian.org>  Thu, 09 Feb 2023 17:17:06 +0100
 
 libreoffice (4:7.5.0~rc3-1) experimental; urgency=medium
 
