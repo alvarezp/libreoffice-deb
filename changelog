@@ -1,6 +1,10 @@
-libreoffice (4:7.6.0~alpha0~git20230209-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~alpha0~git20230211-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
+
+  * debian/rules, debian/control.in: split scriptforge.py into a new
+    python3-scriptforge and install to standard path as it (as for
+    access2base) is supposed to be a import'able library
 
  -- Rene Engelhard <rene@debian.org>  Thu, 08 Dec 2022 20:43:55 +0100
 

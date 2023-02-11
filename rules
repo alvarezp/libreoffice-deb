@@ -1456,7 +1456,7 @@ else
 endif
 
 ifneq "$(ENABLE_PYTHON)" "y"
-	DEBHELPER_OPTIONS+= -Npython3-uno -Nlibreoffice-script-provider-python -Npython3-access2base
+	DEBHELPER_OPTIONS+= -Npython3-uno -Nlibreoffice-script-provider-python -Npython3-access2base -Npython3-scriptforge
 	CONFIGURE_FLAGS += --disable-python
 else
 	PYUNO_DEPENDS = python3-uno
@@ -2667,6 +2667,11 @@ else
 		$$t && mv $$t $(PKGDIR)-common/$(OODIR)/share/basic/script.xlc && rm -f $$t
 	rm -f $(PKGDIR)-common/$(OODIR)/program/access2base.py
 endif
+
+	# ScriptForge
+	mkdir -p debian/python3-scriptforge/$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
+	mv $(PKGDIR)-common/$(OODIR)/program/scriptforge.py \
+		debian/python3-scriptforge/$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
 
 ifeq "$(PACKAGE_SDK)" "y"
 	# move gengal stuff into -dev-gui
@@ -3977,6 +3982,7 @@ ifeq "$(PACKAGE_SDK_DOCS)" "y"
 endif
 	dh_installmime -i
 	dh_python3 -ppython3-access2base
+	dh_python3 -ppython3-scriptforge
 	dh_python3 -plibreoffice-script-provider-python
 ifeq "$(ENABLE_HELP)" "y"
   ifeq "$(ENABLE_HTML_HELP)" "y"
