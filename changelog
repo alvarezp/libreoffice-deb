@@ -13,7 +13,7 @@ libreoffice (4:7.5.1~rc1-1) experimental; urgency=medium
   * debian/control.in:
     - ... but build-conflict against affected fontconfig-configs (with
       <!nocheck>) instead since it now removes the offending config per default
-      (buildd chroot...) if not choosen otherwise via debconf (see #1030000)
+      (buildd chroot...) if not chosen otherwise via debconf (see #1030000)
   * debian/rules:
     - Do not add documentation symlinks when not building documentation,
       thanks Vagrant Cascadian (closes: #1030270)
