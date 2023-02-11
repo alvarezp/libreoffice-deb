@@ -539,7 +539,7 @@ Depends: libreoffice-style-colibre,
          ure,
          ${misc:Depends},
          ${numbertext-data-recommends}
-Suggests: libreoffice-style
+Suggests: libreoffice-style, python3-scriptforge
 Recommends: fonts-liberation2 | ttf-mscorefonts-installer, apparmor,
             poppler-data,
             xdg-utils,
@@ -843,7 +843,7 @@ Depends: libreoffice-base-core (= ${binary:Version}),
          libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Suggests: libreoffice-report-builder, python3-uno, unixodbc
+Suggests: libreoffice-report-builder, python3-access2base, unixodbc
 Recommends: libreoffice-writer, ${java-common-depends}, ${java-runtime-depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~)
 Breaks: libreoffice-common (<< 1:6.4.2~rc1~)

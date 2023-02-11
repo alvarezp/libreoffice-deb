@@ -301,7 +301,7 @@ Description: office productivity suite -- arch-dependent files (no GUI variant)
 Package: libreoffice-common
 Architecture: all
 Depends: libreoffice-style-colibre, ure, ${numbertext-data-recommends}, ${misc:Depends}
-Suggests: libreoffice-style,
+Suggests: libreoffice-style, python3-scriptforge
 Recommends: ${pyuno-depends}, ${textcat-data-recommends}, poppler-data, xdg-utils, fonts-liberation2 | ttf-mscorefonts-installer
 Conflicts: openoffice.org-unbundled,
            broffice,
@@ -589,7 +589,7 @@ Depends: libreoffice-base-core (= ${binary:Version}),
          ${shlibs:Depends}
 Suggests: libreoffice-report-builder,
           unixodbc,
-          python3-uno
+          python3-access2base
 Recommends: libreoffice-writer, ${java-common-depends}, ${java-runtime-depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~)
 Breaks: libreoffice-common (<< 1:6.4.2~rc1~)
