@@ -10,6 +10,10 @@ Tests: access2base-import
 Depends: python3, python3-access2base
 Restrictions: superficial
 
+Tests: scriptforge-import
+Depends: python3, python3-scriptforge
+Restrictions: superficial
+
 ## Is there a need for this small test given we run the UI tests etc.?
 #Tests: smoketest
 #Architecture: %OOO_CHECK_FATAL_ARCHS%
