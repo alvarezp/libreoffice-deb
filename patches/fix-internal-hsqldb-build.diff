@@ -36,9 +36,9 @@ index 389572377fa6..d43d1418049d 100644
 --- a/external/hsqldb/UnpackedTarball_hsqldb.mk
 +++ b/external/hsqldb/UnpackedTarball_hsqldb.mk
 @@ -27,6 +27,7 @@ $(eval $(call gb_UnpackedTarball_add_patches,hsqldb,\
- 	external/hsqldb/patches/hsqldb-runFinalizersOnExit.patch \
  	external/hsqldb/patches/jdbc-4.1.patch \
  	external/hsqldb/patches/multipleResultSets.patch \
+ 	external/hsqldb/patches/disable-dump-script.patch \
 +	external/hsqldb/patches/use-system-servlet-api.jar.diff \
  ))
  
