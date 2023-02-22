@@ -438,7 +438,7 @@ Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreeb
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
-         uno-libs-private (>= 1:7.5.0~),
+         uno-libs-private (>= 4:7.5.0~),
          ure (>= 1:7.4.0~),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -491,7 +491,7 @@ Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
-         uno-libs-private (>= 1:7.5.0~),
+         uno-libs-private (>= 4:7.5.0~),
          ure (>= 1:7.4.0~),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -584,13 +584,13 @@ Breaks: libreoffice-base (<< 1:6.4.0~beta1-2~),
         libreoffice-librelogo (<< 1:7.0.0~alpha),
         libreoffice-report-builder (<< 1:7.0.0~alpha),
         libreoffice-sdbc-postgresql (<< 1:7.0.0~alpha),
-        libreoffice-style-andromeda (<< 1:${oover}~),
-        libreoffice-style-crystal (<< 1:${oover}~),
-        libreoffice-style-crystal (>= 1:${next-oover}~),
-        libreoffice-style-galaxy (<< 1:${oover}~),
-        libreoffice-style-galaxy (>= 1:${next-oover}~),
-        libreoffice-style-hicontrast (<< 1:${oover}~),
-        libreoffice-style-hicontrast (>= 1:${next-oover}~),
+        libreoffice-style-andromeda (<< 4:${oover}~),
+        libreoffice-style-crystal (<< 4:${oover}~),
+        libreoffice-style-crystal (>= 4:${next-oover}~),
+        libreoffice-style-galaxy (<< 4:${oover}~),
+        libreoffice-style-galaxy (>= 4:${next-oover}~),
+        libreoffice-style-hicontrast (<< 4:${oover}~),
+        libreoffice-style-hicontrast (>= 4:${next-oover}~),
         libreoffice-style-tango,
         libreoffice-writer2latex (<< 1.0.2-9),
         libreoffice-writer2xhtml (<< 1.0.2-9),
@@ -4584,9 +4584,9 @@ Section: libs
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Replaces: uno-libs3
-Breaks: libreoffice-core (<< 1:7.5.0~),
-        libreoffice-core-nogui (<< 1:7.5.0~),
-        libuno-cppuhelpergcc3-3 (<< 1:7.5.0~),
+Breaks: libreoffice-core (<< 4:7.5.0~),
+        libreoffice-core-nogui (<< 4:7.5.0~),
+        libuno-cppuhelpergcc3-3 (<< 4:7.5.0~),
         uno-libs3
 Description: LibreOffice UNO runtime environment -- private libraries used by public ones
  The Uno Runtime Environment (URE) is the well-known UNO component model
