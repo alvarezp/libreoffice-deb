@@ -1,3 +1,12 @@
+libreoffice (4:7.5.2~rc1~git20230302-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot 
+
+  * merge from Ubuntu:
+    - Enable bn-IN and merge into l10n-bn
+ 
+ -- Rene Engelhard <rene@debian.org>  Thu, 09 Feb 2023 21:40:58 +0100
+
 libreoffice (4:7.5.1~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate

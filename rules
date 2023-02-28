@@ -1044,7 +1044,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	# one to that gid_Module_Root always is english and the other langpacks
 	# have gid_Module_Root.$iso
 	#ISOS=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
-	ISOS:=en-US af am ar as ast be bg bn br bs ca ca-valencia cs cy da de dz el \
+	ISOS:=en-US af am ar as ast be bg bn bn-IN br bs ca ca-valencia cs cy da de dz el \
 	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu id is it ja \
 	  ka kk km kmr-Latn kn ko lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
@@ -1057,7 +1057,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	  ja km ko nl om pl pt pt-BR ru sk sl sv tr vi zh-CN zh-TW
     endif
 	#LANGPACKISOS:=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
-	LANGPACKISOS:=en-US af am ar as ast be bg bn br bs ca ca-valencia cs cy da de dz el \
+	LANGPACKISOS:=en-US af am ar as ast be bg bn bn-IN br bs ca ca-valencia cs cy da de dz el \
 	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu id is it ja \
 	  ka kk km kmr-Latn kn ko lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
@@ -1822,6 +1822,7 @@ debian/control: $(wildcard debian/control*in) $(SOURCE_TREE)/bin/lo-xlate-lang  
 	for LNUM in $(filter-out en-US,$(LANGPACKISOS)) ; do \
 	    LNAME=`$(SOURCE_TREE)/bin/lo-xlate-lang -l $$LNUM | perl -e 'print ucfirst(<STDIN>);'`; \
 	    LCODE=`$(SOURCE_TREE)/bin/lo-xlate-lang -i $$LNUM | tr A-Z a-z`; \
+	    [ "$$LNUM" = bn-IN ] && continue; \
 	    [ "$$LNUM" = ca-valencia ] && continue; \
 	    [ "$$LNUM" = sr-Latn ] && continue; \
 	    [ "$$LCODE" = kmr-latn ] && LCODE=kmr; \
@@ -2356,6 +2357,14 @@ endif
 	cat debian/libreoffice-l10n-en-US.install >> debian/libreoffice-common.install
 	rm -f debian/libreoffice-l10n-en-US.dirs debian/libreoffice-l10n-en-US.install
 
+	# and bn-IN in -bn...
+ifeq (bn-IN,$(findstring bn-IN,$(LANGPACKISOS)))
+	if [ -f debian/libreoffice-l10n-bn-IN.dirs -a -f debian/libreoffice-l10n-bn-IN.install ]; then \
+		cat debian/libreoffice-l10n-bn-IN.dirs >> debian/libreoffice-l10n-bn.dirs; \
+		cat debian/libreoffice-l10n-bn-IN.install >> debian/libreoffice-l10n-bn.install; \
+		rm -f debian/libreoffice-l10n-bn-IN.dirs debian/libreoffice-l10n-bn-IN.install; \
+	fi
+endif
 	# and ca-valencia in -ca...
 ifeq (ca-valencia,$(findstring ca-valencia,$(LANGPACKISOS)))
 	if [ -f debian/libreoffice-l10n-ca-valencia.dirs -a -f debian/libreoffice-l10n-ca-valencia.install ]; then \
@@ -2833,6 +2842,7 @@ $(STAMP_DIR)/langpacks: $(STAMP_DIR)/build-indep $(STAMP_DIR)/install-indep $(SO
 	# install technical.dic
 	for iso in $(LANGPACKISOS); do \
 		if [ "$$iso" = "en-US" ]; then pkg=common; \
+		elif [ "$$iso" = "bn-IN" ]; then pkg=l10n-bn; \
 		elif [ "$$iso" = "ca-valencia" ]; then pkg=l10n-ca; \
 		elif [ "$$iso" = "sr-Latn" ]; then pkg=l10n-sr; \
 		elif [ "$$iso" = "kmr-Latn" ]; then pkg=l10n-kmr; \
