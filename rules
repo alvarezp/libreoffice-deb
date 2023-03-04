@@ -2859,6 +2859,7 @@ ifeq "$(DEB_VENDOR)" "Debian"
 	for iso in $(LANGPACKISOS); do \
 	  [ "$$iso" = "en-US" ] && continue; \
 	  pkgiso=`echo $$iso | tr \[:upper:\] \[:lower:\]`; \
+	  [ "$$pkgiso" = "bn-IN" ] && pkgiso=bn; \
 	  [ "$$pkgiso" = "ca-valencia" ] && pkgiso=ca; \
 	  [ "$$pkgiso" = "sr-latn" ] && pkgiso=sr; \
 	  [ "$$pkgiso" = "kmr-latn" ] && pkgiso=kmr; \
