@@ -1,7 +1,10 @@
-libreoffice (4:7.5.2~rc1~git20230302-1) UNRELEASED; urgency=medium
+libreoffice (4:7.5.2~rc1~git20230304-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
+  * debian/rules:
+    - actually generate ucf snippets for ca-valencia, kmr-Latn, sr-Latn and
+      the new bn-IN in their langpacks
   * merge from Ubuntu:
     - Enable bn-IN and merge into l10n-bn
  

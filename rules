@@ -2786,11 +2786,17 @@ $(STAMP_DIR)/maintscripts: $(wildcard debian/shell-lib*.sh) $(wildcard debian/*.
 	# create .ucf files for libreoffice-l10n-*. First generic ones
 	# libreoffice-l10n.ucf.in, but there also are CJK/CTL specific
 	# files, too...
+	rm -f debian/libreoffice-l10n-*.ucf
 	for iso in $(filter-out en-US,$(LANGPACKISOS)); do \
-	    pkgiso=`echo $$iso | tr \[:upper:\] \[:lower:\]`; \
+	    if [ "$$iso" = "bn-IN" ]; then pkgiso=bn; \
+	    elif [ "$$iso" = "ca-valencia" ]; then pkgisoca; \
+	    elif [ "$$iso" = "sr-Latn" ]; then pkgiso=sr; \
+	    elif [ "$$iso" = "kmr-Latn" ]; then pkgiso=kmr; \
+	    else pkgiso=`echo $$iso | tr \[:upper:\] \[:lower:\]`; \
+	    fi; \
 	    cat debian/libreoffice-l10n.ucf.in \
 		| sed -e "s/\@ISO\@/$$iso/g" \
-		> debian/libreoffice-l10n-$$pkgiso.ucf; \
+		>> debian/libreoffice-l10n-$$pkgiso.ucf; \
 	    if [ -f instdir/share/registry/ctl_$$iso.xcd ]; then \
 		echo "/usr/lib/libreoffice/share/.registry/ctl_$$iso.xcd /etc/libreoffice/registry/ctl_$$iso.xcd" \
 			>> debian/libreoffice-l10n-$$pkgiso.ucf; \
