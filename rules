@@ -2789,7 +2789,7 @@ $(STAMP_DIR)/maintscripts: $(wildcard debian/shell-lib*.sh) $(wildcard debian/*.
 	rm -f debian/libreoffice-l10n-*.ucf
 	for iso in $(filter-out en-US,$(LANGPACKISOS)); do \
 	    if [ "$$iso" = "bn-IN" ]; then pkgiso=bn; \
-	    elif [ "$$iso" = "ca-valencia" ]; then pkgisoca; \
+	    elif [ "$$iso" = "ca-valencia" ]; then pkgiso=ca; \
 	    elif [ "$$iso" = "sr-Latn" ]; then pkgiso=sr; \
 	    elif [ "$$iso" = "kmr-Latn" ]; then pkgiso=kmr; \
 	    else pkgiso=`echo $$iso | tr \[:upper:\] \[:lower:\]`; \
