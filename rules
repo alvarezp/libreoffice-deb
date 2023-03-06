@@ -331,9 +331,9 @@ SYSTEM_STUFF += cppunit
 SYSTEM_STUFF += dragonbox
 SYSTEM_STUFF += libfixmath
 DEFAULT_IMAGE=colibre
-IMAGES:=$(DEFAULT_IMAGE) colibre_dark colibre_svg colibre_dark_svg sifr sifr_dark sifr_dark_svg breeze breeze_dark breeze_dark_svg breeze_svg elementary elementary_svg karasa_jaga sukapura sukapura_svg sukapura_dark
+IMAGES:=$(DEFAULT_IMAGE) colibre_dark colibre_svg colibre_dark_svg sifr sifr_dark sifr_dark_svg breeze breeze_dark breeze_dark_svg breeze_svg elementary elementary_svg karasa_jaga sukapura sukapura_svg sukapura_dark sukapura_dark_svg
 # FIXME
-IMAGES_PACKAGES=$(subst _,-,$(filter-out sukapura_dark,$(filter-out colibre_svg,$(filter-out colibre_svg,$(filter-out colibre_dark_svg,$(filter-out sukapura_svg,$(filter-out sifr_dark_svg,$(filter-out breeze_dark_svg,$(filter-out sifr_dark,$(filter-out breeze_dark,$(filter-out breeze_svg,$(filter-out elementary_svg,$(IMAGES)))))))))))))
+IMAGES_PACKAGES=$(subst _,-,$(filter-out sukapura_dark_svg,$(filter-out sukapura_dark,$(filter-out colibre_svg,$(filter-out colibre_svg,$(filter-out colibre_dark_svg,$(filter-out sukapura_svg,$(filter-out sifr_dark_svg,$(filter-out breeze_dark_svg,$(filter-out sifr_dark,$(filter-out breeze_dark,$(filter-out breeze_svg,$(filter-out elementary_svg,$(IMAGES))))))))))))))
 CONFIGURE_FLAGS_INDEP += --with-theme="$(IMAGES)"
 ENABLE_MARIADB=y
 ifeq "$(ENABLE_MARIADB)" "y"
@@ -3419,6 +3419,7 @@ endif
 		if [ "$$i" = "karasa_jaga" ]; then p=karasa-jaga; fi; \
 		if [ "$$i" = "sukapura_svg" ]; then p=sukapura; fi; \
 		if [ "$$i" = "sukapura_dark" ]; then p=sukapura; fi; \
+		if [ "$$i" = "sukapura_dark_svg" ]; then p=sukapura; fi; \
 		mkdir -p $(PKGDIR)-style-$$p/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config; \
 		mv $(PKGDIR)-common/$(OODIR)/share/config/$$z \
 			$(PKGDIR)-style-$$p/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config/; \
