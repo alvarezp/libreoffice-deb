@@ -331,9 +331,7 @@ SYSTEM_STUFF += cppunit
 SYSTEM_STUFF += dragonbox
 SYSTEM_STUFF += libfixmath
 DEFAULT_IMAGE=colibre
-IMAGES:=$(DEFAULT_IMAGE) colibre_dark colibre_svg colibre_dark_svg sifr sifr_dark sifr_dark_svg breeze breeze_dark breeze_dark_svg breeze_svg elementary elementary_svg karasa_jaga sukapura sukapura_svg
-# FIXME
-IMAGES_PACKAGES=$(subst _,-,$(filter-out colibre_svg,$(filter-out colibre_svg,$(filter-out colibre_dark_svg,$(filter-out sukapura_svg,$(filter-out sifr_dark_svg,$(filter-out breeze_dark_svg,$(filter-out sifr_dark,$(filter-out breeze_dark,$(filter-out breeze_svg,$(filter-out elementary_svg,$(IMAGES))))))))))))
+IMAGES:=$(DEFAULT_IMAGE) colibre_dark colibre_svg colibre_dark_svg sifr sifr_svg sifr_dark sifr_dark_svg breeze breeze_dark breeze_dark_svg breeze_svg elementary elementary_svg karasa_jaga karasa_jaga_svg sukapura sukapura_svg sukapura_dark sukapura_dark_svg
 CONFIGURE_FLAGS_INDEP += --with-theme="$(IMAGES)"
 ENABLE_MARIADB=y
 ifeq "$(ENABLE_MARIADB)" "y"
@@ -1046,7 +1044,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	# one to that gid_Module_Root always is english and the other langpacks
 	# have gid_Module_Root.$iso
 	#ISOS=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
-	ISOS:=en-US af am ar as ast be bg bn br bs ca ca-valencia cs cy da de dz el \
+	ISOS:=en-US af am ar as ast be bg bn bn-IN br bs ca ca-valencia cs cy da de dz el \
 	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu id is it ja \
 	  ka kk km kmr-Latn kn ko lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
@@ -1059,7 +1057,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	  ja km ko nl om pl pt pt-BR ru sk sl sv tr vi zh-CN zh-TW
     endif
 	#LANGPACKISOS:=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
-	LANGPACKISOS:=en-US af am ar as ast be bg bn br bs ca ca-valencia cs cy da de dz el \
+	LANGPACKISOS:=en-US af am ar as ast be bg bn bn-IN br bs ca ca-valencia cs cy da de dz el \
 	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu id is it ja \
 	  ka kk km kmr-Latn kn ko lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
@@ -1827,6 +1825,7 @@ debian/control: $(wildcard debian/control*in) $(SOURCE_TREE)/bin/lo-xlate-lang  
 	for LNUM in $(filter-out en-US,$(LANGPACKISOS)) ; do \
 	    LNAME=`$(SOURCE_TREE)/bin/lo-xlate-lang -l $$LNUM | perl -e 'print ucfirst(<STDIN>);'`; \
 	    LCODE=`$(SOURCE_TREE)/bin/lo-xlate-lang -i $$LNUM | tr A-Z a-z`; \
+	    [ "$$LNUM" = bn-IN ] && continue; \
 	    [ "$$LNUM" = ca-valencia ] && continue; \
 	    [ "$$LNUM" = sr-Latn ] && continue; \
 	    [ "$$LCODE" = kmr-latn ] && LCODE=kmr; \
@@ -2361,6 +2360,14 @@ endif
 	cat debian/libreoffice-l10n-en-US.install >> debian/libreoffice-common.install
 	rm -f debian/libreoffice-l10n-en-US.dirs debian/libreoffice-l10n-en-US.install
 
+	# and bn-IN in -bn...
+ifeq (bn-IN,$(findstring bn-IN,$(LANGPACKISOS)))
+	if [ -f debian/libreoffice-l10n-bn-IN.dirs -a -f debian/libreoffice-l10n-bn-IN.install ]; then \
+		cat debian/libreoffice-l10n-bn-IN.dirs >> debian/libreoffice-l10n-bn.dirs; \
+		cat debian/libreoffice-l10n-bn-IN.install >> debian/libreoffice-l10n-bn.install; \
+		rm -f debian/libreoffice-l10n-bn-IN.dirs debian/libreoffice-l10n-bn-IN.install; \
+	fi
+endif
 	# and ca-valencia in -ca...
 ifeq (ca-valencia,$(findstring ca-valencia,$(LANGPACKISOS)))
 	if [ -f debian/libreoffice-l10n-ca-valencia.dirs -a -f debian/libreoffice-l10n-ca-valencia.install ]; then \
@@ -2787,11 +2794,17 @@ $(STAMP_DIR)/maintscripts: $(wildcard debian/shell-lib*.sh) $(wildcard debian/*.
 	# create .ucf files for libreoffice-l10n-*. First generic ones
 	# libreoffice-l10n.ucf.in, but there also are CJK/CTL specific
 	# files, too...
+	rm -f debian/libreoffice-l10n-*.ucf
 	for iso in $(filter-out en-US,$(LANGPACKISOS)); do \
-	    pkgiso=`echo $$iso | tr \[:upper:\] \[:lower:\]`; \
+	    if [ "$$iso" = "bn-IN" ]; then pkgiso=bn; \
+	    elif [ "$$iso" = "ca-valencia" ]; then pkgiso=ca; \
+	    elif [ "$$iso" = "sr-Latn" ]; then pkgiso=sr; \
+	    elif [ "$$iso" = "kmr-Latn" ]; then pkgiso=kmr; \
+	    else pkgiso=`echo $$iso | tr \[:upper:\] \[:lower:\]`; \
+	    fi; \
 	    cat debian/libreoffice-l10n.ucf.in \
 		| sed -e "s/\@ISO\@/$$iso/g" \
-		> debian/libreoffice-l10n-$$pkgiso.ucf; \
+		>> debian/libreoffice-l10n-$$pkgiso.ucf; \
 	    if [ -f instdir/share/registry/ctl_$$iso.xcd ]; then \
 		echo "/usr/lib/libreoffice/share/.registry/ctl_$$iso.xcd /etc/libreoffice/registry/ctl_$$iso.xcd" \
 			>> debian/libreoffice-l10n-$$pkgiso.ucf; \
@@ -2843,6 +2856,7 @@ $(STAMP_DIR)/langpacks: $(STAMP_DIR)/build-indep $(STAMP_DIR)/install-indep $(SO
 	# install technical.dic
 	for iso in $(LANGPACKISOS); do \
 		if [ "$$iso" = "en-US" ]; then pkg=common; \
+		elif [ "$$iso" = "bn-IN" ]; then pkg=l10n-bn; \
 		elif [ "$$iso" = "ca-valencia" ]; then pkg=l10n-ca; \
 		elif [ "$$iso" = "sr-Latn" ]; then pkg=l10n-sr; \
 		elif [ "$$iso" = "kmr-Latn" ]; then pkg=l10n-kmr; \
@@ -2859,6 +2873,7 @@ ifeq "$(DEB_VENDOR)" "Debian"
 	for iso in $(LANGPACKISOS); do \
 	  [ "$$iso" = "en-US" ] && continue; \
 	  pkgiso=`echo $$iso | tr \[:upper:\] \[:lower:\]`; \
+	  [ "$$pkgiso" = "bn-IN" ] && pkgiso=bn; \
 	  [ "$$pkgiso" = "ca-valencia" ] && pkgiso=ca; \
 	  [ "$$pkgiso" = "sr-latn" ] && pkgiso=sr; \
 	  [ "$$pkgiso" = "kmr-latn" ] && pkgiso=kmr; \
@@ -3407,10 +3422,14 @@ endif
 		if [ "$$i" = "breeze_dark_svg" ]; then p=breeze; fi; \
 		if [ "$$i" = "breeze_svg" ]; then p=breeze; fi; \
 		if [ "$$i" = "elementary_svg" ]; then p=elementary; fi; \
+		if [ "$$i" = "sifr_svg" ]; then p=sifr; fi; \
 		if [ "$$i" = "sifr_dark" ]; then p=sifr; fi; \
 		if [ "$$i" = "sifr_dark_svg" ]; then p=sifr; fi; \
 		if [ "$$i" = "karasa_jaga" ]; then p=karasa-jaga; fi; \
+		if [ "$$i" = "karasa_jaga_svg" ]; then p=karasa-jaga; fi; \
 		if [ "$$i" = "sukapura_svg" ]; then p=sukapura; fi; \
+		if [ "$$i" = "sukapura_dark" ]; then p=sukapura; fi; \
+		if [ "$$i" = "sukapura_dark_svg" ]; then p=sukapura; fi; \
 		mkdir -p $(PKGDIR)-style-$$p/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config; \
 		mv $(PKGDIR)-common/$(OODIR)/share/config/$$z \
 			$(PKGDIR)-style-$$p/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config/; \
