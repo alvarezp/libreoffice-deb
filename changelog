@@ -1,6 +1,6 @@
-libreoffice (4:7.5.2~rc1~git20230305-1) UNRELEASED; urgency=medium
+libreoffice (4:7.5.2~rc1-1) experimental; urgency=medium
 
-  * New upstream snapshot 
+  * New upstream release candidate
 
   * debian/rules:
     - actually generate ucf snippets for ca-valencia, kmr-Latn, sr-Latn and
@@ -8,7 +8,7 @@ libreoffice (4:7.5.2~rc1~git20230305-1) UNRELEASED; urgency=medium
   * merge from Ubuntu:
     - Enable bn-IN and merge into l10n-bn
  
- -- Rene Engelhard <rene@debian.org>  Thu, 09 Feb 2023 21:40:58 +0100
+ -- Rene Engelhard <rene@debian.org>  Sun, 12 Mar 2023 09:56:17 +0100
 
 libreoffice (4:7.5.1~rc2-1) experimental; urgency=medium
 
