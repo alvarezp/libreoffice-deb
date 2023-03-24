@@ -1,3 +1,9 @@
+libreoffice (4:7.5.2~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 24 Mar 2023 19:22:31 +0100
+
 libreoffice (4:7.5.2~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
