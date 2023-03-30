@@ -3405,21 +3405,15 @@ endif
 	set -e; \
 	for i in $(IMAGES); do \
 		z=images_$$i.zip; p=$$i; \
-		if [ "$$i" = "colibre_dark" ]; then p=colibre; fi; \
-		if [ "$$i" = "colibre_dark_svg" ]; then p=colibre; fi; \
-		if [ "$$i" = "colibre_svg" ]; then p=colibre; fi; \
-		if [ "$$i" = "breeze_dark" ]; then p=breeze; fi; \
-		if [ "$$i" = "breeze_dark_svg" ]; then p=breeze; fi; \
-		if [ "$$i" = "breeze_svg" ]; then p=breeze; fi; \
-		if [ "$$i" = "elementary_svg" ]; then p=elementary; fi; \
-		if [ "$$i" = "sifr_svg" ]; then p=sifr; fi; \
-		if [ "$$i" = "sifr_dark" ]; then p=sifr; fi; \
-		if [ "$$i" = "sifr_dark_svg" ]; then p=sifr; fi; \
-		if [ "$$i" = "karasa_jaga" ]; then p=karasa-jaga; fi; \
-		if [ "$$i" = "karasa_jaga_svg" ]; then p=karasa-jaga; fi; \
-		if [ "$$i" = "sukapura_svg" ]; then p=sukapura; fi; \
-		if [ "$$i" = "sukapura_dark" ]; then p=sukapura; fi; \
-		if [ "$$i" = "sukapura_dark_svg" ]; then p=sukapura; fi; \
+		case "$$i" in \
+			breeze*) p=breeze; ;; \
+			colibre*) p=colibre; ;; \
+			elementary*) p=elementary; ;; \
+			karasa_jaga*) p=karasa-jaga; ;; \
+			sifr*) p=sifr; ;; \
+			sukapura*) p=sukapura; ;; \
+			*) ;; \
+		esac; \
 		mkdir -p $(PKGDIR)-style-$$p/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config; \
 		mv $(PKGDIR)-common/$(OODIR)/share/config/$$z \
 			$(PKGDIR)-style-$$p/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config/; \
