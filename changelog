@@ -9,6 +9,12 @@ libreoffice (4:7.6.0~alpha0~git20230407-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 08 Dec 2022 20:43:55 +0100
 
+libreoffice (4:7.5.2~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 24 Mar 2023 19:22:31 +0100
+
 libreoffice (4:7.5.2~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
@@ -553,6 +559,8 @@ libreoffice (1:7.3.2~rc2-1) unstable; urgency=medium
 libreoffice (1:7.3.1-1) unstable; urgency=medium
 
   * LibreOffice 7.3.1 final release
+    - fixes CVE-2022-38745: "Empty entry in Java class path risks arbitrary
+      code execution"
 
  -- Rene Engelhard <rene@debian.org>  Thu, 03 Mar 2022 17:24:16 +0000
 
