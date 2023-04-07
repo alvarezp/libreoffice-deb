@@ -1597,7 +1597,7 @@ else
 endif
 
 ifeq "$(ENABLE_DCONF)" "y"
-	BUILD_DEPS += , libdconf-dev
+	BUILD_DEPS += , libdconf-dev (>= 0.40)
 else
 	CONFIGURE_FLAGS += --disable-dconf
 endif
