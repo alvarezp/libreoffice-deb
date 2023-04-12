@@ -24,7 +24,7 @@ BINARY_VERSION=$(DEB_VERSION)
 #HELP_L10N_VIRTUAL_VERSION:=$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d: -f2 | tr [~] [\\-])
 HELP_L10N_VIRTUAL_VERSION:=7.6
 OOVER:=7.6
-NEXT_OOVER:=$(shell echo "$(OOVER) + 0.1" | bc)
+NEXT_OOVER:=24.02
 
 ARCH_INDEP_PACKAGES := $(shell dh_listpackages -i)
 ARCH_DEP_PACKAGES := $(shell dh_listpackages -a)
