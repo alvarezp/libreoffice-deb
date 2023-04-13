@@ -38,7 +38,7 @@ fi
 echo
 echo "====== Enabling core dumps ======"
 # yes, we want core dumps and stack traces
-ulimit -c unlimited
+ulimit -c unlimited || true
 
 echo
 echo "====== Generating en_US.UTF-8 locale ======"

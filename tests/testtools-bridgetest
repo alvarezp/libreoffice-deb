@@ -32,7 +32,7 @@ patch -p1 < ./debian/tests/patches/testtools-standalone.diff
 echo
 echo "====== Enabling core dumps ======"
 # yes, we want core dumps and stack traces
-ulimit -c unlimited
+ulimit -c unlimited || true
 
 if [ ! -f config_host.mk ]; then
 	# this normally shouldn't be needed but otherwise it wants a automatic
