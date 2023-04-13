@@ -30,7 +30,7 @@ patch -p1 < ./debian/tests/patches/cppunit-standalone.diff
 echo
 echo "====== Enabling core dumps ======"
 # yes, we want core dumps and stack traces
-ulimit -c unlimited
+ulimit -c unlimited || true
 
 echo
 echo "====== Starting slowcheck with ${CHECK_PARALLELISM} job ======"
