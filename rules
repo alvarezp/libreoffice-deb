@@ -2248,7 +2248,7 @@ ifeq "$(RUN_MAKE_CHECK)" "y"
 		unset DISPLAY; \
 		unset CONNECTIVITY_TEST_MYSQL_DRIVER; \
 		export PARALLELISM=1; \
-		if [ -x /usr/bin/gdb ]; then ulimit -c unlimited; fi && \
+		if [ -x /usr/bin/gdb ]; then ulimit -c unlimited || true; fi && \
 		$(TEST_TIMEOUT) $(MAKE) -k check || $(TEST_TIMEOUT) $(MAKE) check && \
 	rm -rf $$t
 endif

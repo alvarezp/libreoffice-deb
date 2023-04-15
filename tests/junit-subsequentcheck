@@ -45,7 +45,7 @@ fi
 echo
 echo "====== Enabling core dumps ======"
 # yes, we want core dumps and stack traces
-ulimit -c unlimited
+ulimit -c unlimited || true
 
 OOO_TEST_SOFFICE="${1:-path:/usr/lib/libreoffice/program/soffice}"
 
