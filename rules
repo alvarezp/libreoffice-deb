@@ -670,6 +670,10 @@ ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
     ifeq "$(DEB_HOST_ARCH)" "riscv64"
 	ENABLE_LTO=n
     endif
+    # probably...
+    ifeq "$(DEB_HOST_ARCH)" "loong64"
+	ENABLE_LTO=n
+    endif
 	BUILD_DEPS += , clang (>= 1:12) [ppc64el]
 	# since the llvm-defaults packages pointing to llvm 13(?) it apparently doesn't
 	# automatically pull in llvm-xx-linker-tools anymore which contains the needed LLVMgold.so
