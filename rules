@@ -214,6 +214,7 @@ DWZ_ARGS:=-L 100000000
 endif
 endif
 SYSTEM_STUFF += xmlsec
+USE_SYSTEMD=n
 
 ifeq ($(filter noinsttest,$(DEB_BUILD_PROFILES)),)
  # this changes the packages built/contents of packages (-subsequentcheckbase)
@@ -974,6 +975,9 @@ endif
   ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , locales$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , gdb$(OOO_NO_CHECK_ARCHS) <!nocheck>
+    ifeq "$(USE_SYSTEMD)" "y"
+	BUILD_DEPS_ARCH += , systemd$(OOO_NO_CHECK_ARCHS) <!nocheck>, systemd-coredump$(OOO_NO_CHECK_ARCHS) <!nocheck>, jq$(OOO_NO_CHECK_ARCHS) <!nocheck>
+    endif
 	BUILD_DEPS_ARCH += , fontconfig$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , fonts-liberation2$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , fonts-crosextra-carlito$(OOO_NO_CHECK_ARCHS) <!nocheck>
@@ -1989,6 +1993,10 @@ endif
 ifneq "$(ALLOW_CLANG)" "y"
 	perl -pi -e "s/(Build-Conflicts: .*)/\1,clang,/" debian/control
 endif
+ifeq "$(USE_SYSTEMD)" "n"
+	perl -pi -e "s/(Build-Conflicts: .*)/\1,systemd-coredump <!nocheck>,/" debian/control
+endif
+
 	$(PYTHON) debian/scripts/joinctrl.py < debian/control > debian/control.tmp
 	mv debian/control.tmp debian/control
 
