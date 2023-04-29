@@ -14,6 +14,12 @@ libreoffice (4:7.6.0~alpha0~git20230422-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 08 Dec 2022 20:43:55 +0100
 
+libreoffice (4:7.5.3~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate 
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 29 Apr 2023 08:14:19 +0200
+
 libreoffice (4:7.5.3~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
