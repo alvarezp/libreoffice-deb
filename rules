@@ -2751,6 +2751,13 @@ endif
 	mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/modules/dbreport \
 		$(PKGDIR)-report-builder/$(OODIR)/share/config/soffice.cfg/modules
 
+	# fix up. Draw apparently needs those now to start
+	mkdir -p $(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/simpress; \
+	for i in layoutlist.xml objectlist.xml styles.xml; do \
+		mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg/simpress/$$i \
+			$(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/simpress/; \
+	done
+
 	find debian/tmp ! -perm -200 | xargs -r chmod u+w
 
 	touch $@
