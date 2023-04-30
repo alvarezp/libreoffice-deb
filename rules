@@ -2758,7 +2758,7 @@ endif
 		mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg/simpress/$$i \
 			$(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/simpress/; \
 	done
-	mv $(PKGDIR)-impress/$(OODIR)/share/config/modules/soffice.cfg/simpress/ui/sidebarslidebackground.ui \
+	mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui/sidebarslidebackground.ui \
 		$(PKGDIR)-draw/$(OODIR)/share/config/modules/soffice.cfg/simpress/ui
 
 	find debian/tmp ! -perm -200 | xargs -r chmod u+w
