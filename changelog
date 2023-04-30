@@ -3,6 +3,9 @@ libreoffice (4:7.5.3~rc2-2) UNRELEASED; urgency=medium
   * debian/rules, debian/control.in:
     - move share/config/soffice.cfg/simpress/{layoutlist,objectlist,styles}.xml
       from -impress to -draw since without them Draw doesn't start anymore
+  * debian/control.postgresql.in:
+    - depend on libreoffice-core-nogui | libreoffice-core (like the other
+      -sdbc-*) (closes: #1034792)
 
  -- Rene Engelhard <rene@debian.org>  Sun, 30 Apr 2023 14:29:34 +0200
 
