@@ -1,7 +1,7 @@
 Package: libreoffice-sdbc-postgresql
 Section: misc
 Architecture: %OOO_BASE_ARCHS%
-Depends: libreoffice-core,
+Depends: libreoffice-core-nogui | libreoffice-core,
          libreoffice-common (>= 1:7.0.0~alpha),
          ${misc:Depends},
          ${shlibs:Depends}
