@@ -2753,10 +2753,13 @@ endif
 
 	# fix up. Draw apparently needs those now to start
 	mkdir -p $(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/simpress; \
+	mkdir -p $(PKGDIR)-draw/$(OODIR)/share/config/modules/soffice.cfg/simpress/ui; \
 	for i in layoutlist.xml objectlist.xml styles.xml; do \
 		mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg/simpress/$$i \
 			$(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/simpress/; \
 	done
+	mv $(PKGDIR)-impress/$(OODIR)/share/config/modules/soffice.cfg/simpress/ui/sidebarslidebackground.ui \
+		$(PKGDIR)-draw/$(OODIR)/share/config/modules/soffice.cfg/simpress/ui
 
 	find debian/tmp ! -perm -200 | xargs -r chmod u+w
 
