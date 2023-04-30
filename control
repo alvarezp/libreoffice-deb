@@ -759,10 +759,10 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~),
           libreoffice-core (<< 1:6.4.1~rc1-3),
-          libreoffice-impress (<< 1:5.2.0-2)
+          libreoffice-impress (<< 4:7.5.3~rc2-2)
 Breaks: libreoffice-common (<< 1:6.4.2~rc1~),
         libreoffice-core (<< 1:6.4.1~rc1-3),
-        libreoffice-impress (<< 1:5.2.0-2)
+        libreoffice-impress (<< 4:7.5.3~rc2-2)
 Description: office productivity suite -- drawing
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
