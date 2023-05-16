@@ -67,6 +67,10 @@ Files: sysui/desktop/appstream-appdata/*.xml
 Copyright: Copyright (c) 2013-2019 LibreOffice contributors and/or their affiliates.
 License: CC0-1.0
 
+Files: msicreator/createmsi.py
+Copyright: Copyright 2017-2018 Jussi Pakkanen et al
+License: Apache-2.0
+
 Files: icon-themes/breeze*/*
 Copyright: Copyright 2014 Uri Herrera <kaisergreymon99@gmail.com>
            Copyright 2015 Andreas Kainz <kainz.a@gmail.com> and other contributors
