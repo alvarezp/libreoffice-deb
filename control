@@ -9,9 +9,7 @@ Build-Depends: autoconf,
                binutils (>= 2.37-9) [ppc64],
                bison,
                bzip2,
-               clang (>= 1:11) [armel],
                clang (>= 1:12) [ppc64el],
-               clang (>= 1:8.0.1) [alpha amd64 arm64 armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 mipsel mips64el riscv64],
                coinor-libcoinmp-dev (>= 1.8.3-3),
                coinor-libcoinutils-dev,
                debhelper-compat (= 12),
@@ -67,7 +65,8 @@ Build-Depends: autoconf,
                libformula-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                libfreehand-dev (<< 0.2~),
                libfreehand-dev (>= 0.1),
-               libfreetype-dev (>= 2.8.1),
+               libfreetype-dev (>= 2.2.0) [alpha ia64],
+               libfreetype-dev (>= 2.8.1) [amd64 arm64 armel armhf hppa i386 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64],
                libgirepository1.0-dev,
                libgl-dev,
                libglib2.0-dev,
@@ -166,7 +165,7 @@ Build-Depends: autoconf,
                libzmf-dev,
                libzmf-dev (<< 0.1~),
                libzxing-dev (>= 1.2.0),
-               llvm [alpha amd64 arm64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 mipsel mips64el ppc64el riscv64],
+               llvm [amd64 arm64 armhf i386 kfreebsd-amd64 kfreebsd-i386 loong64 mipsel mips64el ppc64el riscv64],
                lp-solve,
                maven-repo-helper,
                pkg-config,
@@ -236,7 +235,7 @@ Build-Conflicts: amd-libopencl1,
 Standards-Version: 4.0.1
 Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-7.5
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
-Bugs: mailto:debian-openoffice@lists.debian.org
+Bugs: 
 Homepage: http://www.libreoffice.org
 
 Package: libreoffice
@@ -438,6 +437,7 @@ Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreeb
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
+         libreoffice-gtk3 [alpha ia64] | libreoffice-gtk4 [alpha ia64] | libreoffice-qt5 [alpha ia64] | libreoffice-kf5 [alpha ia64] | libreoffice-qt6 [alpha ia64],
          uno-libs-private (>= 4:7.5.0~),
          ure (>= 1:7.4.0~),
          ${misc:Depends},

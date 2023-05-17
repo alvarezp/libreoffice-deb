@@ -311,13 +311,6 @@ BUILD_GTK3=y
     ENABLE_INTROSPECTION=y
   endif
 endif
-# DO NOT ENABLE. WILL NOT WORK.
-# as of 2021-11-29:
-# 14:41 < _rene_> caolanm: just wondering after I did a testbuild lately on (then) master: what is the state of gtk4? enable-able (even
-#                though there's no desktop actually using it ttbomk) or better wait?
-#[...]
-#14:45 <@caolanm> _rene_, I wouldn't enable it yet. There's too much basic stuff not working well enough yet, e.g.
-#                 https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/4124
 BUILD_GTK4=n
 ENABLE_EVO2=y
 ENABLE_GIO=y
@@ -365,15 +358,17 @@ ENABLE_PDFIMPORT=y
 ENABLE_POPPLER=y
 SYSTEM_STUFF += poppler
 ENABLE_PDFIUM=y
-ifneq (big,$(DEB_HOST_ARCH_ENDIAN))
-ENABLE_SKIA=y
+PACKAGE_GEN=n
+ifeq "$(PACKAGE_GEN)" "y"
+  ifneq (big,$(DEB_HOST_ARCH_ENDIAN))
+  ENABLE_SKIA=y
+  endif
+else
+  ENABLE_SKIA=n
 endif
 # see https://cgit.freedesktop.org/libreoffice/core/commit/?id=a0edcc68f94915a78fcc08e70d2cdd752abd9ebb
-ifeq "$(ENABLE_SKIA)" "y"
-    BUILD_DEPS += , libfreetype-dev (>= 2.8.1)
-else
-    BUILD_DEPS += , libfreetype-dev (>= 2.2.0)
-endif
+BUILD_DEPS += , libfreetype-dev (>= 2.8.1) [$(filter-out alpha ia64,$(OOO_ARCHS))]
+BUILD_DEPS += , libfreetype-dev (>= 2.2.0) [alpha ia64] # see architecture-specific stuff below
 SYSTEM_STUFF += libpng
 ENABLE_NSS=y
 ifeq "$(ENABLE_NSS)" "y"
@@ -527,6 +522,13 @@ OOO_JUNIT_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 #OOO_CHECK_FATAL_ARCHS := i386 amd64 armhf arm64
 OOO_CHECK_FATAL_ARCHS := amd64 arm64
+
+ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
+PACKAGE_GEN=n
+endif
+ifeq (ia64,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
+PACKAGE_GEN=n
+endif
 
 BUILD_TESTS=y
 ifeq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
@@ -684,9 +686,9 @@ ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
     else
       ifeq "$(ALLOW_CLANG)" "y"
         ifeq "$(CLANG_VERSION)" "default"
-	  BUILD_DEPS += , llvm [$(OOO_LE_ARCHS)]
+	  BUILD_DEPS += , llvm [$(filter-out armel alpha ia64,$(OOO_LE_ARCHS))]
         else
-	  BUILD_DEPS += , llvm-$(CLANG_VERSION)-linker-tools [$(OOO_LE_ARCHS)]
+	  BUILD_DEPS += , llvm-$(CLANG_VERSION)-linker-tools [$(filter-out armel alpha ia64,$(OOO_LE_ARCHS))]
         endif
       endif
     endif
@@ -761,7 +763,7 @@ endif
       ifeq "$(CLANG_VERSION)" "default"
 	export LO_CLANG_CC=clang
 	export LO_CLANG_CXX=clang++
-	BUILD_DEPS += , clang (>= 1:8.0.1) [$(filter-out armel ppc64el,$(OOO_LE_ARCHS))]
+	BUILD_DEPS += , clang (>= 1:8.0.1) [$(filter-out armel alpha ia64,$(OOO_LE_ARCHS))]
 	# see #963162, #963167 which apparently don't exist on 11
 	BUILD_DEPS += , clang (>= 1:11) [armel]
       else
@@ -2977,6 +2979,10 @@ ifeq "$(ENABLE_EVO2)" "y"
 endif
 
 ifeq "$(ENABLE_GUI)" "y"
+  ifneq "$(PACKAGE_GEN)" "y"
+	rm -f $(PKGDIR)-core/$(OODIR)/program/libvclplug_genlo.so
+  endif
+
   ifeq "$(BUILD_GTK3)" "y"
 	# split out gtk stuff
 	mkdir -p $(PKGDIR)-gtk3/$(OODIR)/program/

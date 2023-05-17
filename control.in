@@ -216,6 +216,7 @@ Architecture: %OOO_ARCHS%
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
+         libreoffice-gtk3 [alpha ia64] | libreoffice-gtk4 [alpha ia64] | libreoffice-qt5 [alpha ia64] | libreoffice-kf5 [alpha ia64] | libreoffice-qt6 [alpha ia64],
          ure (>= 1:7.4.0~),
          uno-libs-private (>= 4:7.5.0~),
          ${misc:Depends},
