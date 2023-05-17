@@ -1,4 +1,6 @@
-libreoffice (4:7.5.3~rc2-2) UNRELEASED; urgency=medium
+libreoffice (4:7.5.4~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
 
   * debian/rules, debian/control.in:
     - move share/config/soffice.cfg/simpress/{layoutlist,objectlist,styles}.xml
@@ -8,7 +10,7 @@ libreoffice (4:7.5.3~rc2-2) UNRELEASED; urgency=medium
     - depend on libreoffice-core-nogui | libreoffice-core (like the other
       -sdbc-*) (closes: #1034792)
 
- -- Rene Engelhard <rene@debian.org>  Sun, 30 Apr 2023 14:29:34 +0200
+ -- Rene Engelhard <rene@debian.org>  Wed, 17 May 2023 18:31:27 +0200
 
 libreoffice (4:7.5.3~rc2-1) experimental; urgency=medium
 
