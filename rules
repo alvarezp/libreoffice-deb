@@ -367,8 +367,8 @@ else
   ENABLE_SKIA=n
 endif
 # see https://cgit.freedesktop.org/libreoffice/core/commit/?id=a0edcc68f94915a78fcc08e70d2cdd752abd9ebb
-BUILD_DEPS += , libfreetype-dev (>= 2.8.1) [$(filter-out alpha ia64,$(OOO_ARCHS))]
-BUILD_DEPS += , libfreetype-dev (>= 2.2.0) [alpha ia64] # see architecture-specific stuff below
+BUILD_DEPS += , libfreetype-dev (>= 2.8.1) [$(filter-out alpha ia64,$(OOO_LE_ARCHS))]
+BUILD_DEPS += , libfreetype-dev (>= 2.2.0) [$(OOO_BE_ARCHS) alpha ia64] # see architecture-specific stuff below
 SYSTEM_STUFF += libpng
 ENABLE_NSS=y
 ifeq "$(ENABLE_NSS)" "y"

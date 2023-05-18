@@ -1,3 +1,12 @@
+libreoffice (4:7.5.4~rc1-3) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - micro-optimize freetype build-dep after the clang change in
+      4:7.5.4~rc1-1:
+      use OOO_LE_ARCHS for >= 2.8.1 and add any BE arch for >= 2.2.0
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 18 May 2023 13:06:29 +0200
+
 libreoffice (4:7.5.4~rc1-2) experimental; urgency=medium
 
   * oops, actually include tarballs/ 
