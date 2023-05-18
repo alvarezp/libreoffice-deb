@@ -359,8 +359,11 @@ ENABLE_PDFIMPORT=y
 ENABLE_POPPLER=y
 SYSTEM_STUFF += poppler
 ENABLE_PDFIUM=y
-PACKAGE_GEN=n
+PACKAGE_GEN=y
 ifeq "$(PACKAGE_GEN)" "y"
+  # keep packaging gen (s390x is a release arch...), just disable skia. In contrast for
+  # alpha and ia64 (ports-only) where skia also is disabled we set PACKAGE_GEN=n later in
+  # the architecture specific settings
   ifneq (big,$(DEB_HOST_ARCH_ENDIAN))
   ENABLE_SKIA=y
   endif
