@@ -1,10 +1,12 @@
 libreoffice (4:7.5.4~rc1-4) experimental; urgency=medium
 
-  * use $(OOO_NO_LE_ARCHS) for the the clang (>= 8.0.1) build-dep; otherwise
-    we got a double ppc64el in there (and with it the whole build-dep line doesn't
-    end up in the .dsc...)
+  * debian/rules:
+    - fix duplicate ppc64el in clang (>= 8.0.1) build-dep causing it now
+      ending up in the .dsc alltogether.
+      Introduce new OOO_{,NO_}CLANG_ARCHS.
+    - use the same architecture !-list for llvm, too
 
- -- Rene Engelhard <rene@debian.org>  Thu, 18 May 2023 21:08:40 +0200
+ -- Rene Engelhard <rene@debian.org>  Thu, 18 May 2023 21:34:31 +0200
 
 libreoffice (4:7.5.4~rc1-3) experimental; urgency=medium
 
