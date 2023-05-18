@@ -1,3 +1,10 @@
+libreoffice (4:7.5.4~rc1-4) experimental; urgency=medium
+
+  * filter-out ppc64el from the clang (>= 8.0.1) build-dep (has an own
+    and with it the whole build-dep line doesn't end up in the .dsc...)
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 18 May 2023 18:23:42 +0000
+
 libreoffice (4:7.5.4~rc1-3) experimental; urgency=medium
 
   * debian/rules:

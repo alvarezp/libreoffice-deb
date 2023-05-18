@@ -766,7 +766,8 @@ endif
       ifeq "$(CLANG_VERSION)" "default"
 	export LO_CLANG_CC=clang
 	export LO_CLANG_CXX=clang++
-	BUILD_DEPS += , clang (>= 1:8.0.1) [$(filter-out armel alpha ia64,$(OOO_LE_ARCHS))]
+	# ppc64el has a stricter build-dep
+	BUILD_DEPS += , clang (>= 1:8.0.1) [$(filter-out armel ppc64el alpha ia64,$(OOO_LE_ARCHS))]
 	# see #963162, #963167 which apparently don't exist on 11
 	BUILD_DEPS += , clang (>= 1:11) [armel]
       else
