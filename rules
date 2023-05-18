@@ -515,6 +515,7 @@ RTL_ARCH := $(shell grep RTL_ARCH debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
 OOO_64BIT_ARCHS = $(filter alpha amd64 arm64 ia64 kfreebsd-amd64 loong64 mips64 mips64el ppc64 ppc64el riscv64 s390x sparc64, $(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_64BIT_ARCHS))
 OOO_BE_ARCHS = $(filter hppa m68k mips mips64 powerpc powerpcspe ppc64 s390 s390x sparc sparc64,$(OOO_ARCHS))
+$(eval $(call gen_no_archs,OOO_BE_ARCHS))
 OOO_LE_ARCHS = $(filter-out $(OOO_BE_ARCHS),$(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_LE_ARCHS))
 
@@ -766,8 +767,7 @@ endif
       ifeq "$(CLANG_VERSION)" "default"
 	export LO_CLANG_CC=clang
 	export LO_CLANG_CXX=clang++
-	# ppc64el has a stricter build-dep
-	BUILD_DEPS += , clang (>= 1:8.0.1) [$(filter-out armel ppc64el alpha ia64,$(OOO_LE_ARCHS))]
+	BUILD_DEPS += , clang (>= 1:8.0.1)$(OOO_NO_LE_ARCHS)
 	# see #963162, #963167 which apparently don't exist on 11
 	BUILD_DEPS += , clang (>= 1:11) [armel]
       else
