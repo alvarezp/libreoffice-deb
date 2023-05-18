@@ -1,6 +1,6 @@
-libreoffice (4:7.6.0~alpha1-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~beta1~git20220518-1) UNRELEASED; urgency=medium
 
-  * New upstream alpha release
+  * New upstream snapshot
 
   * debian/rules, debian/control.in, debian/tests/control.in,
     debian/tests/scriptforge-import: split scriptforge.py into a new
