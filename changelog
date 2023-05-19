@@ -14,10 +14,17 @@ libreoffice (4:7.6.0~beta1~git20230519-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 
+libreoffice (4:7.5.4~rc1-5) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - don't remove tabviewbar.ui in -impress-nogui (closes: #1028290)
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 18 May 2023 21:34:31 +0200
+
 libreoffice (4:7.5.4~rc1-4) experimental; urgency=medium
 
   * debian/rules:
-    - fix duplicate ppc64el in clang (>= 8.0.1) build-dep causing it now
+    - fix duplicate ppc64el in clang (>= 8.0.1) build-dep causing it not
       ending up in the .dsc alltogether.
       Introduce new OOO_{,NO_}CLANG_ARCHS.
     - use the same architecture !-list for llvm, too
