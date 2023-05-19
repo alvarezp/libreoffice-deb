@@ -1,3 +1,10 @@
+libreoffice (4:7.5.4~rc1-5) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - don't remove tabviewbar.ui in -impress-nogui (closes: #1028290)
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 18 May 2023 21:34:31 +0200
+
 libreoffice (4:7.5.4~rc1-4) experimental; urgency=medium
 
   * debian/rules:

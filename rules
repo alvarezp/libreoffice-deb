@@ -3174,8 +3174,9 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 		-exec rm {} \;
 	rm -f debian/libreoffice-base-nogui/$(OODIR)/program/libdbulo.so
 	# and (no UI, so not needed) not needed .desktop and .ui files
+	# tabviewbar.ui is needed to make --convert-to work in impress... (#1028290)
 	find debian/libreoffice-*-nogui/usr/share/applications/*.desktop -exec rm {} \;
-	find debian/libreoffice-*-nogui/$(OODIR)/share/config/soffice.cfg -name "*.ui" -exec rm {} \;
+	find debian/libreoffice-*-nogui/$(OODIR)/share/config/soffice.cfg -name "*.ui" -a ! -name "tabviewbar.ui" -exec rm {} \;
 	# unneeded launchers
 	find debian/libreoffice-*-nogui/usr/bin/lo* -exec rm {} \;
 	# otherwise we get errors since the launchers are missing
