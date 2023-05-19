@@ -1,7 +1,7 @@
 libreoffice (4:7.5.4~rc1-4) experimental; urgency=medium
 
   * debian/rules:
-    - fix duplicate ppc64el in clang (>= 8.0.1) build-dep causing it now
+    - fix duplicate ppc64el in clang (>= 8.0.1) build-dep causing it not
       ending up in the .dsc alltogether.
       Introduce new OOO_{,NO_}CLANG_ARCHS.
     - use the same architecture !-list for llvm, too
