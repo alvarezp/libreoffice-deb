@@ -1,9 +1,11 @@
-libreoffice (4:7.4.5-3) unstable; urgency=medium
+libreoffice (4:7.4.5-3) unstable; urgency=high
 
   * debian/rules, debian/tests/*: don't fail if ulimit -c unlimited fails 
     (like in ci.d.n infrastructure after the bookworm upgrade...)
+  * debian/patches/CVE-2023-2255.diff:
+    fix CVE-2023-2555 ("Remote documents loaded without prompt via IFrame")
 
- -- Rene Engelhard <rene@debian.org>  Thu, 13 Apr 2023 21:07:10 +0200
+ -- Rene Engelhard <rene@debian.org>  Sat, 20 May 2023 07:36:24 +0000
 
 libreoffice (4:7.4.5-2) unstable; urgency=medium
 
