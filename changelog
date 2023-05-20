@@ -4,7 +4,9 @@ libreoffice (4:7.4.5-3) unstable; urgency=high
     (like in ci.d.n infrastructure after the bookworm upgrade...)
   * debian/patches/CVE-2023-2255.diff:
     fix CVE-2023-2555 ("Remote documents loaded without prompt via IFrame")
-  * debian/changelog: mention CVE-2022-38745 in 1:7.3.1-1s changelog
+  * debian/changelog:
+    - mention CVE-2022-38745 in 1:7.3.1-1s changelog
+    - fix typo in last upload (s/choosen/chosen/), thanks lintian
 
  -- Rene Engelhard <rene@debian.org>  Sat, 20 May 2023 07:36:24 +0000
 
