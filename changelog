@@ -1,5 +1,7 @@
 libreoffice (4:7.4.5-3) unstable; urgency=high
 
+  * debian/patches/sc-stack-parameter-count.diff: fix CVE-2023-0950
+    ("Array Index UnderFlow in Calc Formula Parsing")
   * debian/rules, debian/tests/*: don't fail if ulimit -c unlimited fails 
     (like in ci.d.n infrastructure after the bookworm upgrade...)
   * debian/patches/CVE-2023-2255.diff:
@@ -8,7 +10,7 @@ libreoffice (4:7.4.5-3) unstable; urgency=high
     - mention CVE-2022-38745 in 1:7.3.1-1s changelog
     - fix typo in last upload (s/choosen/chosen/), thanks lintian
 
- -- Rene Engelhard <rene@debian.org>  Sat, 20 May 2023 07:36:24 +0000
+ -- Rene Engelhard <rene@debian.org>  Mon, 22 May 2023 18:00:45 +0200
 
 libreoffice (4:7.4.5-2) unstable; urgency=medium
 
