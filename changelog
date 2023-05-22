@@ -1,9 +1,11 @@
 libreoffice (4:7.4.5-2+deb12u1) bookworm-security; urgency=high
 
+  * debian/patches/sc-stack-parameter-count.diff: fix CVE-2023-0950
+    ("Array Index UnderFlow in Calc Formula Parsing")
   * debian/patches/CVE-2023-2255.diff:
     fix CVE-2023-2555 ("Remote documents loaded without prompt via IFrame")
 
- -- Rene Engelhard <rene@debian.org>  Sat, 20 May 2023 07:36:24 +0000
+ -- Rene Engelhard <rene@debian.org>  Mon, 22 May 2023 17:43:34 +0200
 
 libreoffice (4:7.4.5-2) unstable; urgency=medium
 
