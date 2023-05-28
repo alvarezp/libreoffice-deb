@@ -25,6 +25,10 @@ BINARY_VERSION=$(DEB_VERSION)
 HELP_L10N_VIRTUAL_VERSION:=7.6
 OOVER:=7.6
 NEXT_OOVER:=24.2
+# for when the "new" scheme is adapted
+#OOVER:=24.2
+#HELP_L10N_VIRTUAL_VERSION:=$(OOVER)
+#NEXT_OOVER=$(shell echo "$(OOVER) + .6" | bc)
 
 ARCH_INDEP_PACKAGES := $(shell dh_listpackages -i)
 ARCH_DEP_PACKAGES := $(shell dh_listpackages -a)
