@@ -30,6 +30,7 @@ Build-Depends: autoconf,
                libabw-dev (<< 0.2~),
                libabw-dev (>= 0.1),
                libarchive-zip-perl [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nojava>,
+               libatk1.0-dev,
                libavahi-client-dev,
                libbase-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nojava>,
                libbluetooth-dev [linux-any],
@@ -80,6 +81,7 @@ Build-Depends: autoconf,
                libgstreamer-plugins-base1.0-dev,
                libgstreamer1.0-dev,
                libgtk-3-dev,
+               libgtk-4-dev,
                libharfbuzz-dev (>= 5.1.0),
                libhsqldb1.8.0-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nojava>,
                libhunspell-dev,
@@ -5038,6 +5040,23 @@ Description: common data for LOKDocView
  .
  This package contains architecture-independent data (e.g. the selection
  handlers).
+
+Package: libreoffice-gtk4
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
+Depends: libreoffice-core (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Suggests: libreofficekit-data
+Section: gnome
+Enhances: libreoffice
+Description: office productivity suite -- GTK+ 4 integration
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the Gtk plugin for drawing LibreOffices widgets
+ with Gtk+ 4 and Gtk/GNOMEish print dialog.
+ .
+ You need to enable it manually by export SAL_USE_VCLPLUGIN=gtk4.
 
 Package: libreoffice-kf5
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64

@@ -1,4 +1,4 @@
-libreoffice (4:7.6.0~beta1~git20230526-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~beta1~git20230528-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
@@ -11,6 +11,9 @@ libreoffice (4:7.6.0~beta1~git20230526-1) UNRELEASED; urgency=medium
     on archs running the tests if USE_SYSTEMD=y (off per default since it
     apparently doesn't work in chroots; add Build-Conflicts in that case)
     to handle their coredumps with coredumpctl upstream
+  * debian/rules:
+    - enable gtk4 (at least for experimental for now to save NEW if we want
+      to actually do it)
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 
