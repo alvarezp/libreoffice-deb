@@ -21,14 +21,16 @@ include /usr/share/dpkg/pkg-info.mk
 CURDIR ?= $(realpath $(dir $(firstword $(MAKEFILE_LIST)))/..)
 BASE_VERSION:=$(shell echo $(DEB_VERSION) | cut -d: -f1):$(DEB_VERSION_UPSTREAM)
 BINARY_VERSION=$(DEB_VERSION)
-#HELP_L10N_VIRTUAL_VERSION:=$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d: -f2 | tr [~] [\\-])
-HELP_L10N_VIRTUAL_VERSION:=7.6
-OOVER:=7.6
-NEXT_OOVER:=24.2
-# for when the "new" scheme is adapted
-#OOVER:=24.2
-#HELP_L10N_VIRTUAL_VERSION:=$(OOVER)
-#NEXT_OOVER=$(shell echo "$(OOVER) + .6" | bc)
+OOVER:=24.2
+HELP_L10N_VIRTUAL_VERSION:=$(OOVER)
+ifeq "$(shell echo $(OOVER) | cut -d. -f2)" "2"
+# 24.2 + .6 -> 24.8 -> OK
+NEXT_OOVER=$(shell echo "$(OOVER) + .6" | bc)
+else
+# 24.8 + .6 = 25.4 -> wrong, so substract 6 to get back to
+# February, which is supposed to be the schedule
+NEXT_OOVER=$(shell echo "$(OOVER) - .6" | bc)
+endif
 
 ARCH_INDEP_PACKAGES := $(shell dh_listpackages -i)
 ARCH_DEP_PACKAGES := $(shell dh_listpackages -a)
