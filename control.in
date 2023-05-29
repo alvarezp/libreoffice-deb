@@ -14,7 +14,7 @@ Build-Conflicts: nvidia-glx-dev,
                  fontconfig-config (= 2.14.1-2) <!nocheck>,
                  fontconfig-config (= 2.14.1-3) <!nocheck>
 Standards-Version: 4.0.1
-Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git
+Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-7.5
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
 Bugs: @BUGS@
 Homepage: http://www.libreoffice.org
@@ -216,7 +216,9 @@ Architecture: %OOO_ARCHS%
 Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
+         libreoffice-gtk3 [alpha ia64] | libreoffice-gtk4 [alpha ia64] | libreoffice-qt5 [alpha ia64] | libreoffice-kf5 [alpha ia64] | libreoffice-qt6 [alpha ia64],
          ure (>= 1:7.4.0~),
+         uno-libs-private (>= 4:7.5.0~),
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libpaper-utils, ${gstreamer-plugins-suggests}
@@ -263,6 +265,7 @@ Depends: fontconfig,
          fonts-opensymbol (>= 2:102.12),
          libreoffice-common (>> ${base-version}),
          ure (>= 1:7.4.0~),
+         uno-libs-private (>= 4:7.5.0~),
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libpaper-utils
@@ -341,13 +344,13 @@ Breaks: libreoffice-core (<< 4:${oover}~),
         python3-uno (<< 1:7.0.0~alpha),
         libreoffice-core (>= 4:${next-oover}~),
         libreoffice-core-nogui (>= 4:${next-oover}~),
-        libreoffice-style-andromeda (<< 1:${oover}~),
-        libreoffice-style-crystal (<< 1:${oover}~),
-        libreoffice-style-crystal (>= 1:${next-oover}~),
-        libreoffice-style-galaxy (<< 1:${oover}~),
-        libreoffice-style-galaxy (>= 1:${next-oover}~),
-        libreoffice-style-hicontrast (<< 1:${oover}~),
-        libreoffice-style-hicontrast (>= 1:${next-oover}~),
+        libreoffice-style-andromeda (<< 4:${oover}~),
+        libreoffice-style-crystal (<< 4:${oover}~),
+        libreoffice-style-crystal (>= 4:${next-oover}~),
+        libreoffice-style-galaxy (<< 4:${oover}~),
+        libreoffice-style-galaxy (>= 4:${next-oover}~),
+        libreoffice-style-hicontrast (<< 4:${oover}~),
+        libreoffice-style-hicontrast (>= 4:${next-oover}~),
         libreoffice-style-tango,
         libreoffice-writer2latex (<< 1.0.2-9),
         libreoffice-writer2xhtml (<< 1.0.2-9),
@@ -504,8 +507,8 @@ Depends: libreoffice-core (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
          ${misc:Depends},
          ${shlibs:Depends}
-Replaces: libreoffice-core (<< 1:6.4.1~rc1-3), libreoffice-impress (<< 1:5.2.0-2), libreoffice-common (<< 1:6.4.2~rc1~)
-Breaks: libreoffice-core (<< 1:6.4.1~rc1-3), libreoffice-impress (<< 1:5.2.0-2), libreoffice-common (<< 1:6.4.2~rc1~)
+Replaces: libreoffice-core (<< 1:6.4.1~rc1-3), libreoffice-impress (<< 4:7.5.3~rc2-2), libreoffice-common (<< 1:6.4.2~rc1~)
+Breaks: libreoffice-core (<< 1:6.4.1~rc1-3), libreoffice-impress (<< 4:7.5.3~rc2-2), libreoffice-common (<< 1:6.4.2~rc1~)
 Description: office productivity suite -- drawing
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.

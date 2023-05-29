@@ -113,8 +113,8 @@ index 37acfdc3730f..7d26342f179f 100644
 -    CppunitTest_chart2_dump \
      CppunitTest_chart2_pivot_chart_test \
      CppunitTest_chart2_geometry \
+     CppunitTest_chart2_uichart \
  ))
 +#    CppunitTest_chart2_dump \
  
- ifeq ($(ENABLE_CHART_TESTS),TRUE)
  ifeq ($(WITH_FONTS), TRUE)

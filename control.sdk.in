@@ -3,7 +3,6 @@ Section: devel
 Architecture: %OOO_ARCHS%
 Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          libreoffice-dev-common (= ${source:Version}),
-         ${idlc-cpp-depends},
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: g++, ${java-common-depends}, ${java-runtime-depends}

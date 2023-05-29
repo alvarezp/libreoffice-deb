@@ -22,8 +22,8 @@ CURDIR ?= $(realpath $(dir $(firstword $(MAKEFILE_LIST)))/..)
 BASE_VERSION:=$(shell echo $(DEB_VERSION) | cut -d: -f1):$(DEB_VERSION_UPSTREAM)
 BINARY_VERSION=$(DEB_VERSION)
 #HELP_L10N_VIRTUAL_VERSION:=$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d: -f2 | tr [~] [\\-])
-HELP_L10N_VIRTUAL_VERSION:=7.4
-OOVER:=7.4
+HELP_L10N_VIRTUAL_VERSION:=7.5
+OOVER:=7.5
 NEXT_OOVER:=$(shell echo "$(OOVER) + 0.1" | bc)
 
 ARCH_INDEP_PACKAGES := $(shell dh_listpackages -i)
@@ -76,7 +76,7 @@ lo_sources_ver=$(shell grep AC_INIT $(SOURCE_TREE)/configure.ac | grep documentf
 # NOT in proper libreoffice-3-6 branch
 # use ./g checkout -b tag-libreoffice-3.6.2.1 libreoffice-3.6.2.1
 GIT_TAG=libreoffice-$(lo_sources_ver)
-GIT_BRANCH=libreoffice-7-4-7
+GIT_BRANCH=libreoffice-7-5-4
 endif
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 lo_sources_ver=$(shell cat $(CURDIR)/sources.ver | cut -d= -f2)
@@ -85,7 +85,7 @@ endif
 #########
 # Default package configuration
 #
-OOO_ARCHS = alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+OOO_ARCHS = alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 PATCHSET=$(DEB_VENDOR)
 BUILD_DEPS=\
     autoconf,\
@@ -93,10 +93,9 @@ BUILD_DEPS=\
     bc,\
     bison,\
     bzip2,\
-    flex (>= 2.3.35), \
+    flex, \
     fontforge-nox | fontforge, \
-    gperf (>= 3.1),\
-    libc0.1 (>= 2.10.2-7) [kfreebsd-any],\
+    gperf,\
     libfontconfig-dev,\
     pkg-config,\
     unzip,\
@@ -150,7 +149,7 @@ ifeq ($(filter nojava,$(DEB_BUILD_PROFILES)),)
 else
   ENABLE_JAVA=n
 endif
-JAVAHELPER_MIN_VERSION= (>= 0.37~)
+#JAVAHELPER_MIN_VERSION=
 SYSTEM_STUFF += hunspell
 SYSTEM_STUFF += altlinuxhyph
 SYSTEM_STUFF += boost
@@ -192,7 +191,7 @@ SYSTEM_STUFF += cairo
 ifeq "$(ENABLE_GUI)" "y"
 BUILD_PLASMA=y
 ENABLE_QT5=n
-QT5_MINVER= (>= 5.6)
+#QT5_MINVER=
 endif
 ifeq "$(BUILD_PLASMA)" "y"
   ENABLE_KF5=y
@@ -202,7 +201,7 @@ ifeq "$(BUILD_PLASMA)" "y"
     KF5_QT5_DEPENDS := libreoffice-qt5 (= $${binary:Version})
   endif
 endif
-ENABLE_QT6=n
+ENABLE_QT6=y
 # for moc move to /usr/lib/qt6/libxexec
 QT6_MINVER= (>= 6.2.1+dfsg-2)
 # https://www.debian.org/doc/debian-policy/ says this is not defined and must
@@ -244,7 +243,7 @@ ifeq "$(ENABLE_JAVA)" "y"
 endif
 SYSTEM_STUFF += lpsolve
 USE_SHARED_LPSOLVE=y
-LPSOLVE_MIN_VERSION= (>= 5.5.0.13-5+b1)
+#LPSOLVE_MIN_VERSION=
 ENABLE_COINMP=y
 SYSTEM_STUFF += coinmp
 USE_DBUS=y
@@ -283,9 +282,9 @@ ENABLE_CHART_TESTS=n
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 ENABLE_EXPORT_VALIDATION_TESTS=n
 endif
-JUNIT_MIN_VER= (>= 4.8.2-2)
+#JUNIT_MIN_VER=
 USE_LIBSUITESPARSE=y
-SUITESPARSE_MIN_VERSION= (>= 1:3.4.0)
+#SUITESPARSE_MIN_VERSION=
 PARALLEL_BUILD=y
 ENABLE_LDAP=y
 SYSTEM_STUFF += openldap
@@ -312,13 +311,6 @@ BUILD_GTK3=y
     ENABLE_INTROSPECTION=y
   endif
 endif
-# DO NOT ENABLE. WILL NOT WORK.
-# as of 2021-11-29:
-# 14:41 < _rene_> caolanm: just wondering after I did a testbuild lately on (then) master: what is the state of gtk4? enable-able (even
-#                though there's no desktop actually using it ttbomk) or better wait?
-#[...]
-#14:45 <@caolanm> _rene_, I wouldn't enable it yet. There's too much basic stuff not working well enough yet, e.g.
-#                 https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/4124
 BUILD_GTK4=n
 ENABLE_EVO2=y
 ENABLE_GIO=y
@@ -332,9 +324,7 @@ SYSTEM_STUFF += cppunit
 SYSTEM_STUFF += dragonbox
 SYSTEM_STUFF += libfixmath
 DEFAULT_IMAGE=colibre
-IMAGES:=$(DEFAULT_IMAGE) colibre_dark colibre_svg colibre_dark_svg sifr sifr_dark sifr_dark_svg breeze breeze_dark breeze_dark_svg breeze_svg elementary elementary_svg karasa_jaga sukapura sukapura_svg
-# FIXME
-IMAGES_PACKAGES=$(subst _,-,$(filter-out colibre_svg,$(filter-out colibre_svg,$(filter-out colibre_dark_svg,$(filter-out sukapura_svg,$(filter-out sifr_dark_svg,$(filter-out breeze_dark_svg,$(filter-out sifr_dark,$(filter-out breeze_dark,$(filter-out breeze_svg,$(filter-out elementary_svg,$(IMAGES))))))))))))
+IMAGES:=$(DEFAULT_IMAGE) colibre_dark colibre_svg colibre_dark_svg sifr sifr_svg sifr_dark sifr_dark_svg breeze breeze_dark breeze_dark_svg breeze_svg elementary elementary_svg karasa_jaga karasa_jaga_svg sukapura sukapura_svg sukapura_dark sukapura_dark_svg
 CONFIGURE_FLAGS_INDEP += --with-theme="$(IMAGES)"
 ENABLE_MARIADB=y
 ifeq "$(ENABLE_MARIADB)" "y"
@@ -368,15 +358,20 @@ ENABLE_PDFIMPORT=y
 ENABLE_POPPLER=y
 SYSTEM_STUFF += poppler
 ENABLE_PDFIUM=y
-ifneq (big,$(DEB_HOST_ARCH_ENDIAN))
-ENABLE_SKIA=y
+PACKAGE_GEN=y
+ifeq "$(PACKAGE_GEN)" "y"
+  # keep packaging gen (s390x is a release arch...), just disable skia. In contrast for
+  # alpha and ia64 (ports-only) where skia also is disabled we set PACKAGE_GEN=n later in
+  # the architecture specific settings
+  ifneq (big,$(DEB_HOST_ARCH_ENDIAN))
+  ENABLE_SKIA=y
+  endif
+else
+  ENABLE_SKIA=n
 endif
 # see https://cgit.freedesktop.org/libreoffice/core/commit/?id=a0edcc68f94915a78fcc08e70d2cdd752abd9ebb
-ifeq "$(ENABLE_SKIA)" "y"
-    BUILD_DEPS += , libfreetype-dev (>= 2.8.1)
-else
-    BUILD_DEPS += , libfreetype-dev (>= 2.2.0)
-endif
+BUILD_DEPS += , libfreetype-dev (>= 2.8.1) [$(filter-out alpha ia64,$(OOO_LE_ARCHS))]
+BUILD_DEPS += , libfreetype-dev (>= 2.2.0) [$(OOO_BE_ARCHS) alpha ia64] # see architecture-specific stuff below
 SYSTEM_STUFF += libpng
 ENABLE_NSS=y
 ifeq "$(ENABLE_NSS)" "y"
@@ -391,6 +386,8 @@ ifeq "$(ENABLE_HELP)" "y"
   HELP_RECOMMENDS := firefox-esr | epiphany-browser | konqueror | chromium | firefox
   HELP_COMMON_DEPENDS := node-normalize.css
   BUILD_DEPS_INDEP += , node-normalize.css
+  HELP_COMMON_DEPENDS += , node-prismjs
+  BUILD_DEPS_INDEP += , node-prismjs
   else
   HELP_DEPENDS := libreoffice-writer
   DEBHELPER_OPTIONS += -Nlibreoffice-help-common
@@ -402,12 +399,6 @@ endif
 SYSTEM_STUFF += lcms2
 SYSTEM_STUFF += liblangtag
 SYSTEM_STUFF += orcus
-USE_UCPP=n
-ifeq "$(USE_UCPP)" "y"
-  SYSTEM_STUFF += ucpp
-else
-  CONFIGURE_FLAGS += --with-idlc-cpp=cpp
-endif
 # kfreebsd runs into SIZE_MAX problems, and the rest might
 # get OOM (mips(el)...) so enable mergelibs only for 64bit
 # archs
@@ -521,11 +512,14 @@ PLATFORMID := $(shell grep PLATFORMID debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -
 RTL_OS := $(shell grep RTL_OS debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
 RTL_ARCH := $(shell grep RTL_ARCH debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
 
-OOO_64BIT_ARCHS = $(filter alpha amd64 arm64 ia64 kfreebsd-amd64 mips64 mips64el ppc64 ppc64el s390x sparc64, $(OOO_ARCHS))
+OOO_64BIT_ARCHS = $(filter alpha amd64 arm64 ia64 kfreebsd-amd64 loong64 mips64 mips64el ppc64 ppc64el riscv64 s390x sparc64, $(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_64BIT_ARCHS))
 OOO_BE_ARCHS = $(filter hppa m68k mips mips64 powerpc powerpcspe ppc64 s390 s390x sparc sparc64,$(OOO_ARCHS))
+$(eval $(call gen_no_archs,OOO_BE_ARCHS))
 OOO_LE_ARCHS = $(filter-out $(OOO_BE_ARCHS),$(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_LE_ARCHS))
+OOO_CLANG_ARCHS := $(filter-out alpha ia64,$(OOO_LE_ARCHS))
+$(eval $(call gen_no_archs,OOO_CLANG_ARCHS))
 
 OOO_CHECK_ARCHS := $(filter-out kfreebsd-i386 kfreebsd-amd64 mips mipsel mips64el armel s390x,$(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
@@ -534,6 +528,13 @@ OOO_JUNIT_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 #OOO_CHECK_FATAL_ARCHS := i386 amd64 armhf arm64
 OOO_CHECK_FATAL_ARCHS := amd64 arm64
+
+ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
+PACKAGE_GEN=n
+endif
+ifeq (ia64,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
+PACKAGE_GEN=n
+endif
 
 BUILD_TESTS=y
 ifeq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
@@ -584,6 +585,8 @@ OOO_FIREBIRD_ARCHS := $(OOO_BASE_ARCHS)
 $(eval $(call gen_no_archs,OOO_FIREBIRD_ARCHS))
 OOO_NOGUI_ARCHS := $(filter amd64 i386 arm64 armhf s390x ppc64 ppc64el,$(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_NOGUI_ARCHS))
+OOO_PDFIUM_ARCHS := $(OOO_ARCHS)
+$(eval $(call gen_no_archs,OOO_PDFIUM_ARCHS))
 
 ifneq (,$(filter $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
   ifneq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_BASE_ARCHS)))
@@ -646,12 +649,10 @@ endif
 #############
 # Distro-specific overrides
 
-# Debian Bullseye
-ifeq "$(DEB_DISTRIBUTION)" "bullseye-backports"
+# Debian Bookworm
+ifeq "$(DEB_DISTRIBUTION)" "bookworm-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out zxing mdds orcus libnumbertext dragonbox libfixmath libmwaw,$(SYSTEM_STUFF))
-  BULLSEYE_BACKPORT=y
-  ENABLE_LTO=n
+  BOOKWORM_BACKPORT=y
 endif
 
 CONFIGURE_FLAGS += $(foreach i, $(SYSTEM_STUFF),--with-system-$(i))
@@ -667,9 +668,12 @@ CLANG_VERSION=default
 
 ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
   # /usr/bin/ld: /usr/lib/llvm-11/bin/../lib/LLVMgold.so: error loading plugin: /usr/lib/llvm-11/bin/../lib/LLVMgold.so: cannot open shared object file: No such file or directory
-  # for mips64el that doesn't exist so disable LTO there...
+  # for mips64el and riscv64 that doesn't exist so disable LTO there...
   ifeq "$(ENABLE_LTO)" "y"
     ifeq "$(DEB_HOST_ARCH)" "mips64el"
+	ENABLE_LTO=n
+    endif
+    ifeq "$(DEB_HOST_ARCH)" "riscv64"
 	ENABLE_LTO=n
     endif
 	BUILD_DEPS += , clang (>= 1:12) [ppc64el]
@@ -688,9 +692,9 @@ ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
     else
       ifeq "$(ALLOW_CLANG)" "y"
         ifeq "$(CLANG_VERSION)" "default"
-	  BUILD_DEPS += , llvm [$(OOO_LE_ARCHS)]
+	  BUILD_DEPS += , llvm$(OOO_NO_CLANG_ARCHS)
         else
-	  BUILD_DEPS += , llvm-$(CLANG_VERSION)-linker-tools [$(OOO_LE_ARCHS)]
+	  BUILD_DEPS += , llvm-$(CLANG_VERSION)-linker-tools$(OOO_NO_CLANG_ARCHS)
         endif
       endif
     endif
@@ -725,7 +729,6 @@ ifneq "$(USE_CLANG)" "y"
       CXX=$(CC_PREFIX)g++-$(GCC_VERSION)
     endif
   endif
-	BUILD_DEPS += , gcc (>= 4:7), g++ (>= 4:7)
   # Use -O0 for gcc 10 on armhf to avoid build/test failure with gcc 10
   # https://bugs.launchpad.net/ubuntu/+bug/1891623
   # In Debian this never appeared to be an actual build failure but
@@ -766,7 +769,7 @@ endif
       ifeq "$(CLANG_VERSION)" "default"
 	export LO_CLANG_CC=clang
 	export LO_CLANG_CXX=clang++
-	BUILD_DEPS += , clang (>= 1:8.0.1) [$(filter-out armel ppc64el,$(OOO_LE_ARCHS))]
+	BUILD_DEPS += , clang (>= 1:8.0.1)$(OOO_NO_CLANG_ARCHS)
 	# see #963162, #963167 which apparently don't exist on 11
 	BUILD_DEPS += , clang (>= 1:11) [armel]
       else
@@ -799,18 +802,10 @@ ALLOW_GOLD=n
 # leaves cruft around after building because it runs update_pch.sh..
 ENABLE_PCH=n
 
-ifeq "$(USE_DWZ)" "y"
-	BUILD_DEPS += , debhelper (>= 10.10.4)
-	# dwz 0.12-3 claims to have DW_OP_GNU support but still
-	# dwz: debian/libreoffice-core/usr/lib/libreoffice/program/libmergedlo.so: Couldn't find DIE referenced by DW_OP_GNU_parameter_ref
-	# happens
-	BUILD_DEPS += , dwz (>> 0.12-3)
-endif
-
 ifeq "$(PACKAGE_SDK)" "y"
 	CONFIGURE_FLAGS += --enable-odk
   ifeq "$(PACKAGE_SDK_DOCS)" "y"
-	BUILD_DEPS_INDEP += , doxygen (>= 1.8.4) <!nodoc>, graphviz <!nodoc>
+	BUILD_DEPS_INDEP += , doxygen <!nodoc>, graphviz <!nodoc>
   else
 	CONFIGURE_FLAGS += --without-doxygen --without-javadoc
   endif
@@ -818,7 +813,7 @@ endif
 
 ifeq "$(ENABLE_PDFIMPORT)" "y"
   ifeq "$(ENABLE_POPPLER)" "y"
-	BUILD_DEPS += , libpoppler-dev (>= 0.14.0), libpoppler-private-dev, libpoppler-cpp-dev
+	BUILD_DEPS += , libpoppler-dev, libpoppler-private-dev, libpoppler-cpp-dev
 	BUILD_DEPS_ARCH += , poppler-data$(OOO_NO_CHECK_ARCHS) <!nocheck>
   else
 	CONFIGURE_FLAGS += --disable-poppler
@@ -829,24 +824,24 @@ ifeq "$(ENABLE_PDFIMPORT)" "y"
 	SYSTEM_STUFF += abseil
 	SYSTEM_STUFF += openjpeg
     ifneq (,$(filter openjpeg, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libopenjp2-7-dev
+	BUILD_DEPS += , libopenjp2-7-dev [$(OOO_PDFIUM_ARCHS)]
     endif
     ifneq (,$(filter abseil, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libabsl-dev
+	BUILD_DEPS += , libabsl-dev [$(OOO_PDFIUM_ARCHS)]
     endif
   endif
 endif
 
 ifneq (,$(filter graphite, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libgraphite2-dev (>= 0.9.3)
+	BUILD_DEPS += , libgraphite2-dev
 endif
 
 ifneq (,$(filter harfbuzz, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libharfbuzz-dev (>= 2.1.0)
+	BUILD_DEPS += , libharfbuzz-dev (>= 5.1.0)
 endif
 
 ifneq (,$(filter libexttextcat, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libexttextcat-dev (>= 3.4.1)
+	BUILD_DEPS += , libexttextcat-dev
 	TEXTCAT_DATA_RECOMMENDS := libexttextcat-data
 endif
 
@@ -865,25 +860,25 @@ ifneq (,$(filter jpeg, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libjpeg-dev
 endif
 ifneq (,$(filter libxml, $(SYSTEM_STUFF)))
-       BUILD_DEPS += , libxml2-dev (>= 2.8), libxml2-utils
+       BUILD_DEPS += , libxml2-dev, libxml2-utils
        BUILD_DEPS += , libxslt1-dev
 else
        CONFIGURE_FLAGS += --without-system-libxml
 endif
 ifneq (,$(filter xmlsec, $(SYSTEM_STUFF)))
-       BUILD_DEPS += , libxmlsec1-dev (>= 1.2.28)
+       BUILD_DEPS += , libxmlsec1-dev (>= 1.2.35)
 endif
 ifneq (,$(filter expat, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libexpat1-dev
 endif
 ifneq (,$(filter odbc, $(SYSTEM_STUFF)))
-       BUILD_DEPS += , unixodbc-dev (>= 2.2.11)
+       BUILD_DEPS += , unixodbc-dev
 endif
 ifneq (,$(filter sane, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libsane-dev
 endif
 ifneq (,$(filter libpng, $(SYSTEM_STUFF)))
-       BUILD_DEPS += , libpng-dev (>= 1.6)
+       BUILD_DEPS += , libpng-dev
 endif
 
 ifeq "$(ENABLE_CURL)" "y"
@@ -906,10 +901,9 @@ ifneq (,$(filter libtiff, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libtiff-dev
 endif
 
-COINMP_MINVER=(>= 1.7.6+dfsg1-2)
-	COINUTILS_MINVER=(>= 2.10.14+repack1-1~)
 	# go sure given #873362
 	COINMP_MINVER=(>= 1.8.3-3)
+	#COINUTILS_MINVER=
 ifneq ($(ENABLE_COINMP),y)
 	CONFIGURE_FLAGS += --disable-coinmp
 else
@@ -969,7 +963,7 @@ endif
 
 	BUILD_DEPS += , $(PYTHON)
 ifeq "$(ENABLE_PYTHON)" "y"
-	BUILD_DEPS += , $(PYTHON)-dev (>= 3.3) <!nopython>
+	BUILD_DEPS += , $(PYTHON)-dev <!nopython>
 	BUILD_DEPS += , $(PYTHON)-distutils <!nopython>
 	BUILD_DEPS += , dh-python <!nopython>
   ifeq "$(RUN_MAKE_CHECK)" "y"
@@ -993,9 +987,9 @@ endif
 	# https://lists.freedesktop.org/archives/libreoffice/2017-May/077764.html
 	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
-	BUILD_DEPS_ARCH += , fonts-kacst$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-hosny-amiri$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# sdext/source/pdfimport/test/tests.cxx (the test PDF uses NaskhArabic) and the result of the import is
-	# checked which fails without the font.
+	# checked which fails without the font. Also used in /vcl/qa/cppunit/complextext.cxx (VclComplexTextTest::testCaching())
 	BUILD_DEPS_ARCH += , fonts-noto-core$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# FIXME: Linux Libertine G (does fonts-linuxlibertine even contain it?, I don't see the _G files?)
 	# now is used in test documents.
@@ -1005,7 +999,7 @@ endif
 	# to be sure there is no other failure mode makes sense (as with the other fonts above)
 	BUILD_DEPS_ARCH += , fonts-linuxlibertine$(OOO_NO_CHECK_ARCHS) <!nocheck>
     ifneq (,$(filter cppunit, $(SYSTEM_STUFF)))
-	BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.14)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , libcppunit-dev$(OOO_NO_CHECK_ARCHS) <!nocheck>
       # without the deterministic order patch the xmlsecurity_signing test fails. See
       # https://cgit.freedesktop.org/libreoffice/core/commit/external/cppunit/order.patch.0?id=2f2246d22e2a8ccbc1dc3e6f5243734a61edf270
       ifeq "$(ENABLE_LTO)" "y"
@@ -1056,7 +1050,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	# one to that gid_Module_Root always is english and the other langpacks
 	# have gid_Module_Root.$iso
 	#ISOS=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
-	ISOS:=en-US af am ar as ast be bg bn br bs ca ca-valencia cs cy da de dz el \
+	ISOS:=en-US af am ar as ast be bg bn bn-IN br bs ca ca-valencia cs cy da de dz el \
 	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu id is it ja \
 	  ka kk km kmr-Latn kn ko lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
@@ -1069,7 +1063,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	  ja km ko nl om pl pt pt-BR ru sk sl sv tr vi zh-CN zh-TW
     endif
 	#LANGPACKISOS:=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
-	LANGPACKISOS:=en-US af am ar as ast be bg bn br bs ca ca-valencia cs cy da de dz el \
+	LANGPACKISOS:=en-US af am ar as ast be bg bn bn-IN br bs ca ca-valencia cs cy da de dz el \
 	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu id is it ja \
 	  ka kk km kmr-Latn kn ko lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
@@ -1094,21 +1088,11 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
   endif
 endif
 
-
-ifeq "$(ENABLE_HELP)" "y"
-ifeq "$(ENABLE_HTML_HELP)" "y"
-    ifneq "$(BULLSEYE_BACKPORT)" "y"
-      HELP_COMMON_DEPENDS += , node-prismjs
-      BUILD_DEPS_INDEP += , node-prismjs
-    endif
-  endif
-endif
-
 ifeq "$(ENABLE_JAVA)" "y"
   BUILD_DEPS += , maven-repo-helper
   ifeq "$(JDK)" "default"
 	JAVA_HOME=/usr/lib/jvm/default-java
-	BUILD_DEPS += , java-common (>= 0.61) <!nojava>
+	BUILD_DEPS += , java-common <!nojava>
 	DEFAULT_JDK := $(call java_dependency, default-jdk)
 	# build-depend on 1.9 (upstream needs it anyway for module-info support)
 	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.9)/') <!nojava>
@@ -1119,13 +1103,13 @@ ifeq "$(ENABLE_JAVA)" "y"
   endif
         TEST_JAVA_HOME=$(JAVA_HOME)
   ifeq "$(ENABLE_MEDIAWIKI)" "y"
-	BUILD_DEPS_INDEP += , ant (>= 1.7.0)$(OOO_NO_JAVA_ARCHS) <!nojava>, ant-optional (>= 1.7.0)$(OOO_NO_JAVA_ARCHS) <!nojava>
+	BUILD_DEPS_INDEP += , ant$(OOO_NO_JAVA_ARCHS) <!nojava>, ant-optional$(OOO_NO_JAVA_ARCHS) <!nojava>
   else
     # report-builder is done in build-arch already
     ifneq (,$(filter jfreereport, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , ant (>= 1.6.5)$(OOO_NO_JAVA_ARCHS) <!nojava>
+	BUILD_DEPS += , ant$(OOO_NO_JAVA_ARCHS) <!nojava>
     else
-	BUILD_DEPS_INDEP += , ant (>= 1.6.5)$(OOO_NO_JAVA_ARCHS) <!nojava>
+	BUILD_DEPS_INDEP += , ant$(OOO_NO_JAVA_ARCHS) <!nojava>
     endif
   endif
 	JAVA_RUNTIME_DEPENDS = default-jre (>= 2:1.$(JAVA_RUNTIME_BASELINE))
@@ -1142,8 +1126,8 @@ export JAVA_HOME
   ifeq "$(ENABLE_REPORTBUILDER)" "y"
 	# report-builder
     ifneq (,$(filter jfreereport, $(SYSTEM_STUFF)))
-	REPORT_BUILDER_BUILD_DEPS += , libbase-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libsac-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libxml-java (>= 1.1.6)$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libflute-java (>= 1.1.6)$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libpentaho-reporting-flow-engine-java (>= 0.9.4)$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, liblayout-java (>= 0.2.10)$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libloader-java (>= 1.1.6)$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libformula-java (>= 1.1.7)$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, librepository-java (>= 1.1.6)$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libfonts-java (>= 1.1.6)$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libserializer-java (>= 1.1.6)$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>
-	REPORT_BUILDER_JAR_DEPENDS := , libbase-java, libsac-java, libxml-java (>= 1.1.6), libflute-java (>= 1.1.6), libpentaho-reporting-flow-engine-java (>= 0.9.4), liblayout-java (>= 0.2.10), libloader-java (>= 1.1.6), libformula-java (>= 1.1.7), librepository-java (>= 1.1.6), libfonts-java (>= 1.1.6), libserializer-java (>= 1.1.6)
+	REPORT_BUILDER_BUILD_DEPS += , libbase-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libsac-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libxml-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libflute-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libpentaho-reporting-flow-engine-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, liblayout-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libloader-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libformula-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, librepository-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libfonts-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>, libserializer-java$(OOO_NO_REPORTBUILDER_ARCHS) <!nojava>
+	REPORT_BUILDER_JAR_DEPENDS := , libbase-java, libsac-java, libxml-java, libflute-java, libpentaho-reporting-flow-engine-java, liblayout-java, libloader-java, libformula-java, librepository-java, libfonts-java, libserializer-java
 	CONFIGURE_FLAGS += --with-libbase-jar=/usr/share/java/libbase.jar --with-libxml-jar=/usr/share/java/libxml.jar --with-flute-jar=/usr/share/java/flute.jar --with-jfreereport-jar=/usr/share/java/flow-engine.jar --with-liblayout-jar=/usr/share/java/liblayout.jar --with-libloader-jar=/usr/share/java/libloader.jar --with-libformula-jar=/usr/share/java/libformula.jar --with-librepository-jar=/usr/share/java/librepository.jar --with-libfonts-jar=/usr/share/java/libfonts.jar --with-libserializer-jar=/usr/share/java/libserializer.jar
     endif
 	BUILD_DEPS += $(REPORT_BUILDER_BUILD_DEPS)
@@ -1169,7 +1153,7 @@ endif
 
 ifeq "$(ENABLE_NSS)" "y"
   ifneq (,$(filter nss, $(SYSTEM_STUFF)))
-	BUILD_DEPS+= , libnss3-dev (>= 3.12.3)
+	BUILD_DEPS+= , libnss3-dev
 	BUILD_DEPS+= , libnspr4-dev
   else
 	CONFIGURE_FLAGS += --without-system-nss
@@ -1178,23 +1162,13 @@ else
 	CONFIGURE_FLAGS += --disable-nss
 endif
 
-ifeq "$(USE_UCPP)" "y"
-  ifneq (,$(filter ucpp, $(SYSTEM_STUFF)))
-	IDLC_CPP_DEPENDS := ucpp
-  endif
-else
-	IDLC_CPP_DEPENDS := cpp
-	CONFIGURE_FLAGS += --with-idlc-cpp=cpp
-endif
-	BUILD_DEPS += , $(IDLC_CPP_DEPENDS)
-
 ifneq (,$(filter hunspell, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libhunspell-dev (>= 1.1.5-2)
+	BUILD_DEPS += , libhunspell-dev
 endif
 	CONFIGURE_FLAGS += --with-external-dict-dir=$(DICT_DIR)
 
 ifneq (,$(filter altlinuxhyph, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libhyphen-dev (>= 2.4)
+	BUILD_DEPS += , libhyphen-dev
 endif
 	CONFIGURE_FLAGS += --with-external-hyph-dir=$(HYPH_DIR)
 
@@ -1237,7 +1211,7 @@ endif
 
 ifeq "$(ENABLE_XMLHELP)" "y"
   ifneq (,$(filter clucene, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libclucene-dev (>= 2.3.3.4-4.1)
+	BUILD_DEPS += , libclucene-dev
   endif
 endif
 
@@ -1325,7 +1299,7 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   ifeq "$(ENABLE_ZXING)" "y"
     ifneq (,$(filter zxing, $(SYSTEM_STUFF)))
 	# https://cgit.freedesktop.org/libreoffice/core/commit/?id=d53340b2253537104abe6f95c8c63cc74487c3ec
-	BUILD_DEPS += , libzxingcore-dev (>= 1.2.0)
+	BUILD_DEPS += , libzxing-dev (>= 1.2.0)
     endif
   else
 	CONFIGURE_FLAGS += --disable-zxing
@@ -1352,15 +1326,15 @@ ifneq (,$(filter lcms2, $(SYSTEM_STUFF)))
 endif
 
 ifneq (,$(filter openldap, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libldap2-dev
+	BUILD_DEPS += , libldap-dev
 endif
 
 ifneq (,$(filter liblangtag, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , liblangtag-dev (>= 0.4)
+	BUILD_DEPS += , liblangtag-dev
 endif
 
 ifneq (,$(filter icu, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libicu-dev (>= 52)
+	BUILD_DEPS += , libicu-dev
 endif
 
 
@@ -1381,7 +1355,7 @@ ifeq "$(ENABLE_QT5)" "y"
 	CONFIGURE_FLAGS += --enable-qt5
 	BUILD_DEPS += , qtbase5-dev $(QT5_MINVER), qt5-qmake $(QT5_MINVER), qtbase5-dev-tools $(QT5_MINVER)
 	BUILD_DEPS += , libqt5x11extras5-dev $(QT5_MINVER)
-	BUILD_DEPS += , libglib2.0-dev (>= 2.4)
+	BUILD_DEPS += , libglib2.0-dev
 	BUILD_DEPS += , libxcb1-dev
 	BUILD_DEPS += , libxcb-icccm4-dev
 endif
@@ -1416,13 +1390,13 @@ endif
 ifeq "$(ENABLE_FIREBIRD)" "y"
 	BASE_FIREBIRD_RECOMMENDS = libreoffice-sdbc-firebird [$(OOO_FIREBIRD_ARCHS)]
   ifneq (,$(filter libatomic-ops, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libatomic-ops-dev (>= 7.3~alpha1+git20110913-1)$(OOO_NO_FIREBIRD_ARCHS)
+	BUILD_DEPS += , libatomic-ops-dev$(OOO_NO_FIREBIRD_ARCHS)
   endif
   ifneq (,$(filter libtommath, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libtommath-dev$(OOO_NO_FIREBIRD_ARCHS)
   endif
   ifneq (,$(filter firebird, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , firebird-dev (>= 3.0.0.32483.ds4-4)$(OOO_NO_FIREBIRD_ARCHS)
+	BUILD_DEPS += , firebird-dev$(OOO_NO_FIREBIRD_ARCHS)
 	# we need libEngine12.so
   ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , firebird3.0-server-core $(OOO_NO_FIREBIRD_ARCHS) <!nocheck>
@@ -1435,7 +1409,7 @@ else
 endif
 
 ifeq "$(BUILD_GTK3)" "y"
-	BUILD_DEPS += , libgtk-3-dev (>= 3.20.0), libglib2.0-dev (>= 2.38.0)
+	BUILD_DEPS += , libgtk-3-dev, libglib2.0-dev
   ifneq (cairo,$(findstring cairo,$(SYSTEM_STUFF)))
   $(error GTK3 build fails without system-cairo!!)
   endif
@@ -1444,7 +1418,7 @@ ifeq "$(BUILD_GTK3)" "y"
   endif
 	GNOME_GTK_RECOMMENDS += libreoffice-gtk3
   ifeq "$(ENABLE_INTROSPECTION)" "y"
-	BUILD_DEPS += , gobject-introspection (>= 1.32.0), libgirepository1.0-dev (>= 1.32)
+	BUILD_DEPS += , gobject-introspection, libgirepository1.0-dev 
 	CONFIGURE_FLAGS += --enable-introspection
   else
 	DEBHELPER_OPTIONS+= -Ngir1.2-lokdocview-0.1
@@ -1452,7 +1426,7 @@ ifeq "$(BUILD_GTK3)" "y"
 endif
 
 ifeq "$(BUILD_GTK4)" "y"
-	BUILD_DEPS += , libgtk-4-dev, libglib2.0-dev (>= 2.38.0), libcairo2-dev, libatk1.0-dev
+	BUILD_DEPS += , libgtk-4-dev, libglib2.0-dev, libcairo2-dev, libatk1.0-dev
 	CONFIGURE_FLAGS += --enable-gtk4
 endif
 
@@ -1467,7 +1441,7 @@ endif
 
 ifeq "$(ENABLE_SDBC_POSTGRESQL)" "y"
   ifneq (,$(filter postgresql, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libpq-dev (>= 9.0~)
+	BUILD_DEPS += , libpq-dev
   else
 	BUILD_DEPS += , libkrb5-dev
   endif
@@ -1486,7 +1460,7 @@ ifneq "$(ENABLE_PYTHON)" "y"
 	DEBHELPER_OPTIONS+= -Npython3-uno -Nlibreoffice-script-provider-python -Npython3-access2base
 	CONFIGURE_FLAGS += --disable-python
 else
-	PYUNO_DEPENDS = python3-uno (>= 4.4.0~beta2)
+	PYUNO_DEPENDS = python3-uno
   CONFIGURE_FLAGS += --enable-python=system
 endif
 
@@ -1497,7 +1471,7 @@ endif
 
 ifeq "$(ENABLE_JAVA)" "y"
   ifneq (,$(filter hsqldb, $(SYSTEM_STUFF)))
-	HSQLDB_MINVER= (>> 1.8.0.10)
+	#HSQLDB_MINVER=
 	HSQLDB_JAR=/usr/share/java/hsqldb1.8.0.jar
 	BUILD_DEPS += , libhsqldb1.8.0-java $(HSQLDB_MINVER)$(OOO_NO_JAVA_ARCHS) <!nojava>, libarchive-zip-perl$(OOO_NO_JAVA_ARCHS) <!nojava>
 	BASE_HSQLDB_DEPENDS = libhsqldb1.8.0-java $(HSQLDB_MINVER)
@@ -1507,7 +1481,7 @@ ifeq "$(ENABLE_JAVA)" "y"
   endif
   ifeq "$(ENABLE_SCRIPT_PROVIDER_BSH)" "y"
     ifneq (,$(filter beanshell, $(SYSTEM_STUFF)))
-	BUILD_DEPS_INDEP += , libbsh-java <!nojava>
+	BUILD_DEPS += , libbsh-java <!nojava>
     endif
 	CONFIGURE_FLAGS += --enable-scripting-beanshell
   else
@@ -1537,10 +1511,10 @@ ifneq (,$(filter lpsolve, $(SYSTEM_STUFF)))
 endif
 
 ifeq "$(USE_DBUS)" "y"
-	BUILD_DEPS += , libdbus-1-dev (>= 0.60)
+	BUILD_DEPS += , libdbus-1-dev
 	CONFIGURE_FLAGS += --enable-dbus
   ifeq "$(ENABLE_BLUETOOTH)" "y"
-	BUILD_DEPS += , libglib2.0-dev (>= 2.4)
+	BUILD_DEPS += , libglib2.0-dev
     ifneq (,$(filter bluez, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libbluetooth-dev [linux-any]
     endif
@@ -1594,18 +1568,18 @@ ifneq (,$(filter lockfile, $(SYSTEM_STUFF)))
 endif
 
 ifneq (,$(filter redland, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , librdf0-dev (>= 1.0.16-2)
+	BUILD_DEPS += , librdf0-dev 
 endif
 
 ifeq "$(ENABLE_GUI)" "y"
   ifneq (,$(filter epoxy, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libepoxy-dev (>= 1.2)
+	BUILD_DEPS += , libepoxy-dev
   else
 	BUILD_DEPS += , libegl1-mesa-dev
   endif
 endif
 ifneq (,$(filter glm, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libglm-dev (>= 0.9.9~a2)
+	BUILD_DEPS += , libglm-dev
 endif
 
 ifneq (,$(filter gpgmepp, $(SYSTEM_STUFF)))
@@ -1619,14 +1593,14 @@ endif
 
 ifeq "$(ENABLE_GIO)" "y"
   ifneq "$(BUILD_GTK3)" "y"
-	BUILD_DEPS += , libglib2.0-dev (>= 2.26.0)
+	BUILD_DEPS += , libglib2.0-dev
   endif
 else
 	CONFIGURE_FLAGS += --disable-gio
 endif
 
 ifeq "$(ENABLE_DCONF)" "y"
-	BUILD_DEPS += , libdconf-dev (>= 0.15.2)
+	BUILD_DEPS += , libdconf-dev
 else
 	CONFIGURE_FLAGS += --disable-dconf
 endif
@@ -1827,11 +1801,9 @@ endif
 
 	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
 		rm -f normalize.css
-ifneq "$(BULLSEYE_BACKPORT)" "y"
 	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
 		rm -f prism.js && \
 		rm -f prism.css
-endif
 
 	# Files created in debian directory
 	$(MAKE) -f debian/rules clean-debdir
@@ -1856,6 +1828,7 @@ debian/control: $(wildcard debian/control*in) $(SOURCE_TREE)/bin/lo-xlate-lang  
 	for LNUM in $(filter-out en-US,$(LANGPACKISOS)) ; do \
 	    LNAME=`$(SOURCE_TREE)/bin/lo-xlate-lang -l $$LNUM | perl -e 'print ucfirst(<STDIN>);'`; \
 	    LCODE=`$(SOURCE_TREE)/bin/lo-xlate-lang -i $$LNUM | tr A-Z a-z`; \
+	    [ "$$LNUM" = bn-IN ] && continue; \
 	    [ "$$LNUM" = ca-valencia ] && continue; \
 	    [ "$$LNUM" = sr-Latn ] && continue; \
 	    [ "$$LCODE" = kmr-latn ] && LCODE=kmr; \
@@ -1892,7 +1865,7 @@ debian/control: $(wildcard debian/control*in) $(SOURCE_TREE)/bin/lo-xlate-lang  
 			FONT_RECOMMENDS=", fonts-khmeros"; \
 			;; \
 		ar) \
-			FONT_RECOMMENDS=", fonts-kacst, fonts-hosny-amiri, fonts-sil-scheherazade, fonts-hosny-thabit"; \
+			FONT_RECOMMENDS=", fonts-hosny-amiri, fonts-sil-scheherazade, fonts-hosny-thabit"; \
 			;; \
 		fa) \
 			FONT_RECOMMENDS=", fonts-farsiweb"; \
@@ -1906,26 +1879,7 @@ debian/control: $(wildcard debian/control*in) $(SOURCE_TREE)/bin/lo-xlate-lang  
 		*) \
 			FONT_RECOMMENDS= ;; \
 	    esac; \
-	    case "$$LCODE" in \
-		rw) \
-			LOCALES_DEPENDS="locales (>= 2.3.6) | locales-all (>= 2.3.6)" \
-			;; \
-		ss|ts|km|ns|tn) \
-			LOCALES_DEPENDS="locales (>= 2.3.5-12) | locales-all" \
-			;; \
-		sr) \
-			LOCALES_DEPENDS="locales (>= 2.3.6.ds1-5) | locales-all" \
-			;; \
-		as|or|nr) \
-			LOCALES_DEPENDS="locales (>= 2.3.6.ds1-1) | locales-all (>= 2.3.6.ds1-1)" \
-			;; \
-		sw) \
-			LOCALES_DEPENDS="locales (>= 2.13-5) | locales-all (>= 2.13-5)" \
-			;; \
-		*) \
-			LOCALES_DEPENDS="locales | locales-all" \
-			;; \
-	    esac; \
+	    LOCALES_DEPENDS="locales | locales-all"; \
 	    sed -e "s|@LNAME@|$$LNAME|g" -e "s|@LCODE@|$$LCODE|g" \
 		-e "s|@CCODE@|$$CCODE|g" \
 	        -e "s|@FONT_RECOMMENDS@|$$FONT_RECOMMENDS|g" \
@@ -2058,8 +2012,8 @@ ifneq "$(DICT_DIR)" "/usr/share/hunspell"
 endif
 
 ifeq "$(ENABLE_APPARMOR_PROFILES)" "y"
-	perl -pi -e 's/ttf-mscorefonts-installer/ttf-mscorefonts-installer, apparmor (>= 2.13.1~)/' debian/control
-	perl -pi -e 's/openoffice-unbundled/openoffice-unbundled, apparmor (<< 2.13.1~)/' debian/control
+	perl -pi -e 's/ttf-mscorefonts-installer/ttf-mscorefonts-installer, apparmor/' debian/control
+	perl -pi -e 's/openoffice-unbundled/openoffice-unbundled, apparmor/' debian/control
 
 endif
 
@@ -2101,7 +2055,8 @@ $(STAMP_DIR)/prepare:
 
 	mkdir -p $(STAMP_DIR)
 
-	# Make sure we have /proc mounted - otherwise idlc will fail later.
+	# Make sure we have /proc mounted.
+	# Otherwise configure will fail since java -version fails without /proc...
 	test -r /proc/version
 
 ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
@@ -2122,11 +2077,9 @@ endif
 
 	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
 		ln -sf /usr/share/javascript/normalize.css/normalize.css
-ifneq "$(BULLSEYE_BACKPORT)" "y"
 	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
 		ln -sf /usr/share/nodejs/prismjs/prism.js && \
 		ln -sf /usr/share/nodejs/prismjs/themes/prism-coy.css prism.css
-endif
 
 	touch $@
 
@@ -2158,7 +2111,6 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--without-junit --without-cppunit \
 		--disable-ext-wiki-publisher \
-		--disable-scripting-javascript --disable-scripting-beanshell \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)" \
 		--disable-gui --disable-introspection --disable-qt5 --disable-kf5
@@ -2183,7 +2135,6 @@ endif
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--without-junit --without-cppunit \
 		--disable-ext-wiki-publisher \
-		--disable-scripting-javascript --disable-scripting-beanshell \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
 
@@ -2412,6 +2363,14 @@ endif
 	cat debian/libreoffice-l10n-en-US.install >> debian/libreoffice-common.install
 	rm -f debian/libreoffice-l10n-en-US.dirs debian/libreoffice-l10n-en-US.install
 
+	# and bn-IN in -bn...
+ifeq (bn-IN,$(findstring bn-IN,$(LANGPACKISOS)))
+	if [ -f debian/libreoffice-l10n-bn-IN.dirs -a -f debian/libreoffice-l10n-bn-IN.install ]; then \
+		cat debian/libreoffice-l10n-bn-IN.dirs >> debian/libreoffice-l10n-bn.dirs; \
+		cat debian/libreoffice-l10n-bn-IN.install >> debian/libreoffice-l10n-bn.install; \
+		rm -f debian/libreoffice-l10n-bn-IN.dirs debian/libreoffice-l10n-bn-IN.install; \
+	fi
+endif
 	# and ca-valencia in -ca...
 ifeq (ca-valencia,$(findstring ca-valencia,$(LANGPACKISOS)))
 	if [ -f debian/libreoffice-l10n-ca-valencia.dirs -a -f debian/libreoffice-l10n-ca-valencia.install ]; then \
@@ -2643,9 +2602,6 @@ ifeq "$(PACKAGE_SDK)" "y"
 		$(PKGDIR)-dev/usr/include/$(DEB_HOST_MULTIARCH)/libreoffice/sal
 	cd $(PKGDIR)-dev/usr/include/libreoffice/sal/ && \
 		ln -s /usr/include/$(DEB_HOST_MULTIARCH)/libreoffice/sal/typesizes.h
-	mkdir -p $(PKGDIR)-dev-common/usr/share/idl
-	mv $(PKGDIR)-dev/usr/share/idl/libreoffice \
-		$(PKGDIR)-dev-common/usr/share/idl
 	mkdir -p $(PKGDIR)-dev-common/$(OOSDKDIR)
 	mv $(PKGDIR)-dev/$(OOSDKDIR)/classes \
 		$(PKGDIR)-dev-common/$(OOSDKDIR)
@@ -2700,9 +2656,6 @@ ifeq "$(PACKAGE_SDK)" "y"
   endif
 	chmod 644 $(PKGDIR)-dev-common/$(OOSDKDIR)/configure.pl
 	chmod 755 $(PKGDIR)-dev-common/$(OOSDKDIR)/setsdkenv_unix
-
-	# fix permissions
-	find $(PKGDIR)-dev-common/usr/share/idl/$(OODIRNAME) -type f -exec chmod 644 {} \;
 endif
 
 ifeq "$(ENABLE_EVO2)" "y"
@@ -2806,6 +2759,16 @@ endif
 	mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/modules/dbreport \
 		$(PKGDIR)-report-builder/$(OODIR)/share/config/soffice.cfg/modules
 
+	# fix up. Draw apparently needs those now to start
+	mkdir -p $(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/simpress; \
+	mkdir -p $(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui; \
+	for i in layoutlist.xml objectlist.xml styles.xml; do \
+		mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg/simpress/$$i \
+			$(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/simpress/; \
+	done
+	mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui/sidebarslidebackground.ui \
+		$(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui
+
 	find debian/tmp ! -perm -200 | xargs -r chmod u+w
 
 	touch $@
@@ -2839,11 +2802,17 @@ $(STAMP_DIR)/maintscripts: $(wildcard debian/shell-lib*.sh) $(wildcard debian/*.
 	# create .ucf files for libreoffice-l10n-*. First generic ones
 	# libreoffice-l10n.ucf.in, but there also are CJK/CTL specific
 	# files, too...
+	rm -f debian/libreoffice-l10n-*.ucf
 	for iso in $(filter-out en-US,$(LANGPACKISOS)); do \
-	    pkgiso=`echo $$iso | tr \[:upper:\] \[:lower:\]`; \
+	    if [ "$$iso" = "bn-IN" ]; then pkgiso=bn; \
+	    elif [ "$$iso" = "ca-valencia" ]; then pkgiso=ca; \
+	    elif [ "$$iso" = "sr-Latn" ]; then pkgiso=sr; \
+	    elif [ "$$iso" = "kmr-Latn" ]; then pkgiso=kmr; \
+	    else pkgiso=`echo $$iso | tr \[:upper:\] \[:lower:\]`; \
+	    fi; \
 	    cat debian/libreoffice-l10n.ucf.in \
 		| sed -e "s/\@ISO\@/$$iso/g" \
-		> debian/libreoffice-l10n-$$pkgiso.ucf; \
+		>> debian/libreoffice-l10n-$$pkgiso.ucf; \
 	    if [ -f instdir/share/registry/ctl_$$iso.xcd ]; then \
 		echo "/usr/lib/libreoffice/share/.registry/ctl_$$iso.xcd /etc/libreoffice/registry/ctl_$$iso.xcd" \
 			>> debian/libreoffice-l10n-$$pkgiso.ucf; \
@@ -2895,6 +2864,7 @@ $(STAMP_DIR)/langpacks: $(STAMP_DIR)/build-indep $(STAMP_DIR)/install-indep $(SO
 	# install technical.dic
 	for iso in $(LANGPACKISOS); do \
 		if [ "$$iso" = "en-US" ]; then pkg=common; \
+		elif [ "$$iso" = "bn-IN" ]; then pkg=l10n-bn; \
 		elif [ "$$iso" = "ca-valencia" ]; then pkg=l10n-ca; \
 		elif [ "$$iso" = "sr-Latn" ]; then pkg=l10n-sr; \
 		elif [ "$$iso" = "kmr-Latn" ]; then pkg=l10n-kmr; \
@@ -2911,6 +2881,7 @@ ifeq "$(DEB_VENDOR)" "Debian"
 	for iso in $(LANGPACKISOS); do \
 	  [ "$$iso" = "en-US" ] && continue; \
 	  pkgiso=`echo $$iso | tr \[:upper:\] \[:lower:\]`; \
+	  [ "$$pkgiso" = "bn-IN" ] && pkgiso=bn; \
 	  [ "$$pkgiso" = "ca-valencia" ] && pkgiso=ca; \
 	  [ "$$pkgiso" = "sr-latn" ] && pkgiso=sr; \
 	  [ "$$pkgiso" = "kmr-latn" ] && pkgiso=kmr; \
@@ -3014,6 +2985,10 @@ ifeq "$(ENABLE_EVO2)" "y"
 endif
 
 ifeq "$(ENABLE_GUI)" "y"
+  ifneq "$(PACKAGE_GEN)" "y"
+	rm -f $(PKGDIR)-core/$(OODIR)/program/libvclplug_genlo.so
+  endif
+
   ifeq "$(BUILD_GTK3)" "y"
 	# split out gtk stuff
 	mkdir -p $(PKGDIR)-gtk3/$(OODIR)/program/
@@ -3453,17 +3428,15 @@ endif
 	set -e; \
 	for i in $(IMAGES); do \
 		z=images_$$i.zip; p=$$i; \
-		if [ "$$i" = "colibre_dark" ]; then p=colibre; fi; \
-		if [ "$$i" = "colibre_dark_svg" ]; then p=colibre; fi; \
-		if [ "$$i" = "colibre_svg" ]; then p=colibre; fi; \
-		if [ "$$i" = "breeze_dark" ]; then p=breeze; fi; \
-		if [ "$$i" = "breeze_dark_svg" ]; then p=breeze; fi; \
-		if [ "$$i" = "breeze_svg" ]; then p=breeze; fi; \
-		if [ "$$i" = "elementary_svg" ]; then p=elementary; fi; \
-		if [ "$$i" = "sifr_dark" ]; then p=sifr; fi; \
-		if [ "$$i" = "sifr_dark_svg" ]; then p=sifr; fi; \
-		if [ "$$i" = "karasa_jaga" ]; then p=karasa-jaga; fi; \
-		if [ "$$i" = "sukapura_svg" ]; then p=sukapura; fi; \
+		case "$$i" in \
+			breeze*) p=breeze; ;; \
+			colibre*) p=colibre; ;; \
+			elementary*) p=elementary; ;; \
+			karasa_jaga*) p=karasa-jaga; ;; \
+			sifr*) p=sifr; ;; \
+			sukapura*) p=sukapura; ;; \
+			*) ;; \
+		esac; \
 		mkdir -p $(PKGDIR)-style-$$p/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config; \
 		mv $(PKGDIR)-common/$(OODIR)/share/config/$$z \
 			$(PKGDIR)-style-$$p/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config/; \
@@ -3733,7 +3706,6 @@ endif
 		if [ -e debian/$$i.postinst.debhelper ] && grep -q ucf debian/$$i.postinst.debhelper; then \
 			sed -i "s/ucf\ /ucf --three-way /" debian/$$i.postinst.debhelper; \
 			sed -i "s/ucfr\ /ucfr --force /" debian/$$i.postinst.debhelper; \
-			sed -i "s/ucf/ucf (>= 0.8)/" debian/$$i.substvars; \
 		fi ; \
 		if [ -e debian/$$i.postrm.debhelper ] && grep -q ucf debian/$$i.postrm.debhelper; then \
 			sed -i "s/ucfr\ /ucfr --force /" debian/$$i.postrm.debhelper; \
@@ -3841,9 +3813,9 @@ ifeq "$(ENABLE_INTROSPECTION)" "y"
 endif
 	dh_strip_nondeterminism -a
 	for i in sal3 cppu3 salhelpergcc3-3 cppuhelpergcc3-3 purpenvhelpergcc3-3; do \
-		dh_makeshlibs -plibuno-$$i -V"libuno-$$i (>= 1:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -c2 -V -v$(BINARY_VERSION); \
+		dh_makeshlibs -plibuno-$$i -V"libuno-$$i (>= 4:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -c2 -V -v$(BINARY_VERSION); \
 	done
-	dh_makeshlibs -n -pure -V"ure (>= 1:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -d -V -v$(BINARY_VERSION)
+	dh_makeshlibs -n -pure -V"ure (>= 4:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -d -V -v$(BINARY_VERSION)
 	dh_installdeb -a
 	rm -f debian/shlibs.local
 ifeq "$(BUILD_KFREEBSD)" "y"
@@ -3954,7 +3926,6 @@ endif
 		-V'lpsolve-dep=$(LPSOLVE_DEP)' \
 		-V'gstreamer-plugins-suggests=$(GSTREAMER_PLUGINS_SUGGESTS)' \
 		-V'libebook-dep=$(LIBEBOOK_DEP)' \
-		-V'idlc-cpp-depends=$(IDLC_CPP_DEPENDS)' \
 		-V'pyuno-depends=$(PYUNO_DEPENDS)' \
 		-V'gnome-gtk-recommends=$(GNOME_GTK_RECOMMENDS)' \
 		-V'firebird-engine-depends=$(FIREBIRD_ENGINE_DEPENDS)' \
@@ -4016,7 +3987,6 @@ endif
 		if [ -e debian/$$i.postinst.debhelper ] && grep -q ucf debian/$$i.postinst.debhelper; then \
 			sed -i "s/ucf\ /ucf --three-way /" debian/$$i.postinst.debhelper; \
 			sed -i "s/ucfr\ /ucfr --force /" debian/$$i.postinst.debhelper; \
-			sed -i "s/ucf/ucf (>= 0.8)/" debian/$$i.substvars; \
 		fi ; \
 		if [ -e debian/$$i.postrm.debhelper ] && grep -q ucf debian/$$i.postrm.debhelper; then \
 			sed -i "s/ucfr\ /ucfr --force /" debian/$$i.postrm.debhelper; \
@@ -4049,11 +4019,7 @@ ifeq "$(ENABLE_HELP)" "y"
 endif
 	dh_lintian -i
 	dh_bugfiles -i -A
-ifeq "$(BULLSEYE_BACKPORT)" "y"
-	dh_link -i -Xprism
-else
 	dh_link -i
-endif
 	dh_fixperms -i
 	dh_icons -i
 ifeq "$(INSTALL_APPARMOR_PROFILES)" "y"
