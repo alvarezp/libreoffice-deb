@@ -1,4 +1,8 @@
-libreoffice (4:7.5.4~rc2-2) UNRELEASED; urgency=medium
+libreoffice (4:7.5.4-1) unstable; urgency=medium
+
+  * LibreOffice 7.5.4 final release (identical to rc2)
+
+  * upload to unstable 
 
   * debian/rules:
     - give up and don't remove ui files anymore in nogui for now; planned
