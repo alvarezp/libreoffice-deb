@@ -4,6 +4,7 @@ Architecture: all
 Depends: libreoffice-core | libreoffice-core-nogui,
          libreoffice-report-builder-bin (>= ${base-version}),
          libreoffice-common (>= 1:7.0.0~alpha),
+         libreoffice-uiconfig-report-builder,
          liblibreoffice-java,
          ${java:Depends},
          ${java-common-depends},
@@ -52,4 +53,17 @@ Description: LibreOffice component for building database reports -- libraries (n
  .
  This package contains some architecture-dependent support libraries
  (librpt*.so) for the report builder component.
+
+Package: libreoffice-uiconfig-report-builder
+Section: misc
+Architecture: all
+Replaces: libreoffice-report-builder (<< 1:7.6.0~beta1), libreoffice-common (<< 1:7.6.0~beta1)
+Description: UI data ("config") for the LibreOffice Report Builder
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains internal "configuration" of various UI components. It is not
+ meant to be editable. It is just split out for dependencies of other packaes. You
+ will usually not need to install this package manually but it should just be pulled in
+ by other packages.
 

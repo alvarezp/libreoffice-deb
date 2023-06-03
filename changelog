@@ -1,4 +1,4 @@
-libreoffice (4:7.6.0~beta1~git20230531-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~beta1~git20230603-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
@@ -16,6 +16,10 @@ libreoffice (4:7.6.0~beta1~git20230531-1) UNRELEASED; urgency=medium
   * debian/rules:
     - enable gtk4 (at least for experimental for now to save NEW if we want
       to actually do it)
+  * debian/rules, debian/control*.in:
+    - remove UI related workarounds and split all the .xml/.ui into extra
+      -uiconfig-xyz packages. Make impress-nogui depend on uiconfig-impress
+      - and also draw depend on it in addition to -uiconfig-draw
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 

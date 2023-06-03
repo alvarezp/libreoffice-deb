@@ -541,6 +541,7 @@ Description: office productivity suite -- arch-dependent files (no GUI variant)
 Package: libreoffice-common
 Architecture: all
 Depends: libreoffice-style-colibre,
+         libreoffice-uiconfig-common (= ${binary:Version}),
          ure,
          ${misc:Depends},
          ${numbertext-data-recommends}
@@ -646,6 +647,7 @@ Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreeb
 Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc],
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
+         libreoffice-uiconfig-writer (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libreoffice-math
@@ -689,6 +691,7 @@ Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreeb
 Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc],
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
+         libreoffice-uiconfig-calc (= ${binary:Version}),
          ${lpsolve-dep},
          ${misc:Depends},
          ${shlibs:Depends}
@@ -724,6 +727,7 @@ Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreeb
 Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
          libreoffice-draw (= ${binary:Version}),
+         libreoffice-uiconfig-impress (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~),
@@ -743,6 +747,7 @@ Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
 Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          libreoffice-draw-nogui (= ${binary:Version}) | libreoffice-draw (= ${binary:Version}),
+         libreoffice-uiconfig-impress (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~), libreoffice-impress
@@ -759,6 +764,8 @@ Package: libreoffice-draw
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
 Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
+         libreoffice-uiconfig-draw (= ${binary:Version}),
+         libreoffice-uiconfig-impress (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~),
@@ -795,6 +802,7 @@ Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreeb
 Depends: fonts-opensymbol (>= 2:102.11),
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
+         libreoffice-uiconfig-math (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~)
@@ -846,6 +854,7 @@ Depends: libreoffice-base-core (= ${binary:Version}),
          libreoffice-base-drivers (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
+         libreoffice-uiconfig-base (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Suggests: libreoffice-report-builder, python3-access2base, unixodbc
@@ -1195,6 +1204,104 @@ Description: generic Java Bean wrapper for LibreOffice components
  .
  This package contains the Java library for the LibreOffice Office Bean
  for embedding LibreOffice in custom Java applications.
+
+Package: libreoffice-uiconfig-common
+Section: misc
+Architecture: all
+Replaces: libreoffice-common (<< 1:7.6.0~beta1)
+Description: UI data ("config") for LibreOffice ("common" set)
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains internal "configuration" of various UI components. It is not
+ meant to be editable. It is just split out for dependencies of other packaes. You
+ will usually not need to install this package manually but it should just be pulled in
+ by other packages.
+
+Package: libreoffice-uiconfig-base
+Section: misc
+Architecture: all
+Replaces: libreoffice-base (<< 1:7.6.0~beta1),
+          libreoffice-common (<< 1:7.6.0~beta1)
+Description: UI data ("config") for LibreOffice Base
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains internal "configuration" of various UI components. It is not
+ meant to be editable. It is just split out for dependencies of other packaes. You
+ will usually not need to install this package manually but it should just be pulled in
+ by other packages.
+
+Package: libreoffice-uiconfig-calc
+Section: misc
+Architecture: all
+Replaces: libreoffice-calc (<< 1:7.6.0~beta1),
+          libreoffice-common (<< 1:7.6.0~beta1)
+Description: UI data ("config") for LibreOffice Calc
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains internal "configuration" of various UI components. It is not
+ meant to be editable. It is just split out for dependencies of other packaes. You
+ will usually not need to install this package manually but it should just be pulled in
+ by other packages.
+
+Package: libreoffice-uiconfig-draw
+Section: misc
+Architecture: all
+Replaces: libreoffice-common (<< 1:7.6.0~beta1),
+          libreoffice-draw (<< 1:7.6.0~beta1)
+Description: UI data ("config") for LibreOffice Draw
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains internal "configuration" of various UI components. It is not
+ meant to be editable. It is just split out for dependencies of other packaes. You
+ will usually not need to install this package manually but it should just be pulled in
+ by other packages.
+
+Package: libreoffice-uiconfig-impress
+Section: misc
+Architecture: all
+Replaces: libreoffice-common (<< 1:7.6.0~beta1),
+          libreoffice-impress (<< 1:7.6.0~beta1)
+Description: UI data ("config") for LibreOffice Impress
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains internal "configuration" of various UI components. It is not
+ meant to be editable. It is just split out for dependencies of other packaes. You
+ will usually not need to install this package manually but it should just be pulled in
+ by other packages.
+
+Package: libreoffice-uiconfig-math
+Section: misc
+Architecture: all
+Replaces: libreoffice-common (<< 1:7.6.0~beta1),
+          libreoffice-math (<< 1:7.6.0~beta1)
+Description: UI data ("config") for LibreOffice Math
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains internal "configuration" of various UI components. It is not
+ meant to be editable. It is just split out for dependencies of other packaes. You
+ will usually not need to install this package manually but it should just be pulled in
+ by other packages.
+
+Package: libreoffice-uiconfig-writer
+Section: misc
+Architecture: all
+Replaces: libreoffice-common (<< 1:7.6.0~beta1),
+          libreoffice-writer (<< 1:7.6.0~beta1)
+Description: UI data ("config") for LibreOffice Writer
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains internal "configuration" of various UI components. It is not
+ meant to be editable. It is just split out for dependencies of other packaes. You
+ will usually not need to install this package manually but it should just be pulled in
+ by other packages.
+
 
 Package: libreoffice-l10n-af
 Section: localization
@@ -4827,6 +4934,7 @@ Depends: liblibreoffice-java,
          libreoffice-common (>= 1:7.0.0~alpha),
          libreoffice-core | libreoffice-core-nogui,
          libreoffice-report-builder-bin (>= ${base-version}),
+         libreoffice-uiconfig-report-builder,
          ${java-common-depends},
          ${java:Depends},
          ${misc:Depends},
@@ -4871,6 +4979,20 @@ Description: LibreOffice component for building database reports -- libraries (n
  .
  This package contains some architecture-dependent support libraries
  (librpt*.so) for the report builder component.
+
+Package: libreoffice-uiconfig-report-builder
+Section: misc
+Architecture: all
+Replaces: libreoffice-common (<< 1:7.6.0~beta1),
+          libreoffice-report-builder (<< 1:7.6.0~beta1)
+Description: UI data ("config") for the LibreOffice Report Builder
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains internal "configuration" of various UI components. It is not
+ meant to be editable. It is just split out for dependencies of other packaes. You
+ will usually not need to install this package manually but it should just be pulled in
+ by other packages.
 
 Package: libreoffice-nlpsolver
 Architecture: all

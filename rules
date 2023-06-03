@@ -2760,40 +2760,30 @@ endif
 
 	# move soffice.cfg files into the "correct" packages
 	for i in base calc draw impress math writer; do \
-		mkdir -p $(PKGDIR)-$$i/$(OODIR)/share/config/soffice.cfg/modules; \
+		mkdir -p $(PKGDIR)-uiconfig-$$i/$(OODIR)/share/config/soffice.cfg/modules; \
 		mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/modules/s$$i \
-			$(PKGDIR)-$$i/$(OODIR)/share/config/soffice.cfg/modules; \
+			$(PKGDIR)-uiconfig-$$i/$(OODIR)/share/config/soffice.cfg/modules; \
 		if [ $$i = writer ]; then \
 			for i in sweb swform swreport swxform; do \
 			mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/modules/$$i \
-				$(PKGDIR)-writer/$(OODIR)/share/config/soffice.cfg/modules; \
+				$(PKGDIR)-uiconfig-writer/$(OODIR)/share/config/soffice.cfg/modules; \
 			done; \
 		fi; \
 		if [ $$i = base ]; then \
 			for i in dbapp dbbrowser dbquery dbrelation dbtable dbtdata \
 				sabpilot sbibliography; do \
 				mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/modules/$$i \
-					$(PKGDIR)-base/$(OODIR)/share/config/soffice.cfg/modules; \
+					$(PKGDIR)-uiconfig-base/$(OODIR)/share/config/soffice.cfg/modules; \
 			done; \
 		fi; \
 	done
 	mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/dbaccess \
-		$(PKGDIR)-base/$(OODIR)/share/config/soffice.cfg
+		$(PKGDIR)-uiconfig-base/$(OODIR)/share/config/soffice.cfg
 	mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/writerperfect \
-		$(PKGDIR)-writer/$(OODIR)/share/config/soffice.cfg
-	mkdir -p $(PKGDIR)-report-builder/$(OODIR)/share/config/soffice.cfg/modules
+		$(PKGDIR)-uiconfig-writer/$(OODIR)/share/config/soffice.cfg
+	mkdir -p $(PKGDIR)-uiconfig-report-builder/$(OODIR)/share/config/soffice.cfg/modules
 	mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/modules/dbreport \
-		$(PKGDIR)-report-builder/$(OODIR)/share/config/soffice.cfg/modules
-
-	# fix up. Draw apparently needs those now to start
-	mkdir -p $(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/simpress; \
-	mkdir -p $(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui; \
-	for i in layoutlist.xml objectlist.xml styles.xml; do \
-		mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg/simpress/$$i \
-			$(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/simpress/; \
-	done
-	mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui/sidebarslidebackground.ui \
-		$(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui
+		$(PKGDIR)-uiconfig-report-builder/$(OODIR)/share/config/soffice.cfg/modules
 
 	find debian/tmp ! -perm -200 | xargs -r chmod u+w
 
@@ -3200,9 +3190,8 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 		-exec rm {} \;
 	rm -f debian/libreoffice-base-nogui/$(OODIR)/program/libdbulo.so
 	# and (no UI, so not needed) not needed .desktop and .ui files
-	# tabviewbar.ui is needed to make --convert-to work in impress... (#1028290)
 	find debian/libreoffice-*-nogui/usr/share/applications/*.desktop -exec rm {} \;
-	find debian/libreoffice-*-nogui/$(OODIR)/share/config/soffice.cfg -name "*.ui" -a ! -name "tabviewbar.ui" -exec rm {} \;
+	find debian/libreoffice-*-nogui/$(OODIR)/share/config/soffice.cfg -name "*.ui" -exec rm {} \;
 	# unneeded launchers
 	find debian/libreoffice-*-nogui/usr/bin/lo* -exec rm {} \;
 	# otherwise we get errors since the launchers are missing
