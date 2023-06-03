@@ -937,10 +937,12 @@ Description: UI data ("config") for LibreOffice ("common" set)
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains internal "configuration" of various UI components. It is not
- meant to be editable. It is just split out for dependencies of other packages. You
- will usually not need to install this package manually but it should just be pulled in
- by other packages.
+ This package contains internal "configuration" of various UI components.
+ It is not meant to be editable. It is just split out for dependencies of
+ other packages.
+ .
+ You will usually not need to install this package manually but it should
+ just be pulled in by other packages.
 
 Package: libreoffice-uiconfig-base
 Section: misc
@@ -950,10 +952,12 @@ Description: UI data ("config") for LibreOffice Base
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains internal "configuration" of various UI components. It is not
- meant to be editable. It is just split out for dependencies of other packages. You
- will usually not need to install this package manually but it should just be pulled in
- by other packages.
+ This package contains internal "configuration" of various UI components.
+ It is not meant to be editable. It is just split out for dependencies of
+ other packages.
+ .
+ You will usually not need to install this package manually but it should
+ just be pulled in by other packages.
 
 Package: libreoffice-uiconfig-calc
 Section: misc
@@ -963,10 +967,12 @@ Description: UI data ("config") for LibreOffice Calc
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains internal "configuration" of various UI components. It is not
- meant to be editable. It is just split out for dependencies of other packages. You
- will usually not need to install this package manually but it should just be pulled in
- by other packages.
+ This package contains internal "configuration" of various UI components.
+ It is not meant to be editable. It is just split out for dependencies of
+ other packages.
+ .
+ You will usually not need to install this package manually but it should
+ just be pulled in by other packages.
 
 Package: libreoffice-uiconfig-draw
 Section: misc
@@ -976,10 +982,12 @@ Description: UI data ("config") for LibreOffice Draw
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains internal "configuration" of various UI components. It is not
- meant to be editable. It is just split out for dependencies of other packages. You
- will usually not need to install this package manually but it should just be pulled in
- by other packages.
+ This package contains internal "configuration" of various UI components.
+ It is not meant to be editable. It is just split out for dependencies of
+ other packages.
+ .
+ You will usually not need to install this package manually but it should
+ just be pulled in by other packages.
 
 Package: libreoffice-uiconfig-impress
 Section: misc
@@ -989,10 +997,12 @@ Description: UI data ("config") for LibreOffice Impress
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains internal "configuration" of various UI components. It is not
- meant to be editable. It is just split out for dependencies of other packages. You
- will usually not need to install this package manually but it should just be pulled in
- by other packages.
+ This package contains internal "configuration" of various UI components.
+ It is not meant to be editable. It is just split out for dependencies of
+ other packages.
+ .
+ You will usually not need to install this package manually but it should
+ just be pulled in by other packages.
 
 Package: libreoffice-uiconfig-math
 Section: misc
@@ -1002,10 +1012,12 @@ Description: UI data ("config") for LibreOffice Math
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains internal "configuration" of various UI components. It is not
- meant to be editable. It is just split out for dependencies of other packages. You
- will usually not need to install this package manually but it should just be pulled in
- by other packages.
+ This package contains internal "configuration" of various UI components.
+ It is not meant to be editable. It is just split out for dependencies of
+ other packages.
+ .
+ You will usually not need to install this package manually but it should
+ just be pulled in by other packages.
 
 Package: libreoffice-uiconfig-writer
 Section: misc
@@ -1015,9 +1027,11 @@ Description: UI data ("config") for LibreOffice Writer
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains internal "configuration" of various UI components. It is not
- meant to be editable. It is just split out for dependencies of other packages. You
- will usually not need to install this package manually but it should just be pulled in
- by other packages.
+ This package contains internal "configuration" of various UI components.
+ It is not meant to be editable. It is just split out for dependencies of
+ other packages.
+ .
+ You will usually not need to install this package manually but it should
+ just be pulled in by other packages.
 
 
