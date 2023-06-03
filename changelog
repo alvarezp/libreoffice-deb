@@ -6,10 +6,12 @@ libreoffice (4:7.6.0~beta1~git20230531-1) UNRELEASED; urgency=medium
     debian/tests/scriptforge-import: split scriptforge.py into a new
     python3-scriptforge and install to standard path as it (as for
     access2base) is supposed to be a import'able library
-  * debian/rules: build-depend on
-    add systemd <!nocheck>, systemd-coredump) <!nocheck>, jq <!nocheck>
-    on archs running the tests if USE_SYSTEMD=y (off per default since it
-    apparently doesn't work in chroots; add Build-Conflicts in that case)
+  * debian/rules: handle upstream feature to handle their coredumps with
+    coredumpctl on test failures during tests. build-depend on
+    add systemd <!nocheck>, systemd-coredump <!nocheck>, jq <!nocheck>
+    on archs running the tests if USE_SYSTEMD=y (That one is off per default
+    since it apparently doesn't work in chroots); add Build-Conflicts to
+    systemd-coredump to not "accidentially" enable it somewhere
     to handle their coredumps with coredumpctl upstream
   * debian/rules:
     - enable gtk4 (at least for experimental for now to save NEW if we want
