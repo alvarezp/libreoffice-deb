@@ -63,7 +63,7 @@ Description: UI data ("config") for the LibreOffice Report Builder
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains internal "configuration" of various UI components. It is not
- meant to be editable. It is just split out for dependencies of other packaes. You
+ meant to be editable. It is just split out for dependencies of other packages. You
  will usually not need to install this package manually but it should just be pulled in
  by other packages.
 
