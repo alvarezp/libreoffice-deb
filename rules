@@ -2759,6 +2759,9 @@ ifeq "$(ENABLE_FIREBIRD)" "y"
 endif
 
 	# move soffice.cfg files into the "correct" packages
+	mkdir -p $(PKGDIR)-uiconfig-common/$(OODIR)/share/config/
+	mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg \
+		$(PKGDIR)-uiconfig-common/$(OODIR)/share/config
 	for i in base calc draw impress math writer; do \
 		mkdir -p $(PKGDIR)-uiconfig-$$i/$(OODIR)/share/config/soffice.cfg/modules; \
 		mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/modules/s$$i \
