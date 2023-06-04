@@ -906,8 +906,8 @@ Architecture: all
 Depends: libreoffice-common (>= 1:7.1.0~), python3-uno, ${python3:Depends}, ${misc:Depends}
 Replaces: libreoffice-common (<< 4:7.6.0~)
 Description: interface between Python and the LibreOffice ScriptForge library
- ScriptForge libraries build up an extensible collection of macro scripting resources
- for LibreOffice to be invoked from Basic macros or Python scripts.
+ ScriptForge libraries build up an extensible collection of macro scripting
+ resources for LibreOffice to be invoked from Basic macros or Python scripts.
  .
  This package contains the public scriptforge python library.
 
