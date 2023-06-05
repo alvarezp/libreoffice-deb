@@ -1,3 +1,11 @@
+libreoffice (4:7.5.4~rc2-2) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - give up and don't remove ui files anymore in nogui for now; planned
+      to be changed to shared packages later
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 05 Jun 2023 20:26:03 +0200
+
 libreoffice (4:7.5.4~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate

@@ -2768,6 +2768,8 @@ endif
 	done
 	mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui/sidebarslidebackground.ui \
 		$(PKGDIR)-draw/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui
+	mv $(PKGDIR)-impress-nogui/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui/sidebarslidebackground.ui \
+		$(PKGDIR)-draw-nogui/$(OODIR)/share/config/soffice.cfg/modules/simpress/ui
 
 	find debian/tmp ! -perm -200 | xargs -r chmod u+w
 
@@ -3173,10 +3175,9 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	find debian/libreoffice-*-nogui/$(OODIR)/program -name "lib*uilo.so" -a ! -name "libuuilo.so" \
 		-exec rm {} \;
 	rm -f debian/libreoffice-base-nogui/$(OODIR)/program/libdbulo.so
-	# and (no UI, so not needed) not needed .desktop and .ui files
-	# tabviewbar.ui is needed to make --convert-to work in impress... (#1028290)
+	# and (no UI, so not needed) not needed .desktop files. .ui files are needed though because otherwise
+	# it obscurely fails (#1028290) or just crashes (https://lists.debian.org/debian-backports/2023/06/msg00000.html) :(
 	find debian/libreoffice-*-nogui/usr/share/applications/*.desktop -exec rm {} \;
-	find debian/libreoffice-*-nogui/$(OODIR)/share/config/soffice.cfg -name "*.ui" -a ! -name "tabviewbar.ui" -exec rm {} \;
 	# unneeded launchers
 	find debian/libreoffice-*-nogui/usr/bin/lo* -exec rm {} \;
 	# otherwise we get errors since the launchers are missing
