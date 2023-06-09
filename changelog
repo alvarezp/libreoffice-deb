@@ -27,7 +27,7 @@ libreoffice (4:7.6.0~beta1-1) experimental; urgency=medium
       -uiconfig-xyz packages. Make impress-nogui depend on uiconfig-impress
       - and also draw depend on it in addition to -uiconfig-draw
 
- -- Rene Engelhard <rene@debian.org>  Wed, 07 Jun 2023 19:12:26 +0200
+ -- Rene Engelhard <rene@debian.org>  Fri, 09 Jun 2023 16:29:31 +0200
 
 libreoffice (4:7.5.4-1) unstable; urgency=medium
 
@@ -99,7 +99,7 @@ libreoffice (4:7.5.4~rc1-1) experimental; urgency=medium
 libreoffice (4:7.5.3~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate 
-    - fixes CVE-2023-2555 ("Remote documents loaded without prompt via IFrame")
+    - fixes CVE-2023-2255 ("Remote documents loaded without prompt via IFrame")
 
  -- Rene Engelhard <rene@debian.org>  Sat, 29 Apr 2023 08:14:19 +0200
 

@@ -4,7 +4,7 @@ Architecture: all
 Depends: libreoffice-core | libreoffice-core-nogui,
          libreoffice-report-builder-bin (>= ${base-version}),
          libreoffice-common (>= 1:7.0.0~alpha),
-         libreoffice-uiconfig-report-builder,
+         libreoffice-uiconfig-report-builder (= ${source:Version}),
          liblibreoffice-java,
          ${java:Depends},
          ${java-common-depends},

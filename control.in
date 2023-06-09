@@ -301,7 +301,7 @@ Description: office productivity suite -- arch-dependent files (no GUI variant)
 
 Package: libreoffice-common
 Architecture: all
-Depends: libreoffice-style-colibre, ure, libreoffice-uiconfig-common (= ${binary:Version}), ${numbertext-data-recommends}, ${misc:Depends}
+Depends: libreoffice-style-colibre, ure, libreoffice-uiconfig-common (= ${source:Version}), ${numbertext-data-recommends}, ${misc:Depends}
 Suggests: libreoffice-style, python3-scriptforge
 Recommends: ${pyuno-depends}, ${textcat-data-recommends}, poppler-data, xdg-utils, fonts-liberation2 | ttf-mscorefonts-installer
 Conflicts: openoffice.org-unbundled,
@@ -395,7 +395,7 @@ Architecture: %OOO_ARCHS%
 Depends: libreoffice-base-core (= ${binary:Version})%OOO_NO_BASE_ARCHS%,
          libreoffice-core (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
-         libreoffice-uiconfig-writer (= ${binary:Version}),
+         libreoffice-uiconfig-writer (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libreoffice-math,
@@ -439,7 +439,7 @@ Architecture: %OOO_ARCHS%
 Depends: libreoffice-base-core (= ${binary:Version})%OOO_NO_BASE_ARCHS%,
          libreoffice-core (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
-         libreoffice-uiconfig-calc (= ${binary:Version}),
+         libreoffice-uiconfig-calc (= ${source:Version}),
          ${lpsolve-dep},
          ${misc:Depends},
          ${shlibs:Depends}
@@ -457,6 +457,7 @@ Architecture: %OOO_NOGUI_ARCHS%
 Depends: libreoffice-base-core (= ${binary:Version})%OOO_NO_BASE_ARCHS%,
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
+         libreoffice-uiconfig-calc (= ${source:Version}),
          ${lpsolve-dep},
          ${misc:Depends},
          ${shlibs:Depends}
@@ -475,7 +476,7 @@ Architecture: %OOO_ARCHS%
 Depends: libreoffice-core (= ${binary:Version}),
          libreoffice-draw (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
-         libreoffice-uiconfig-impress (= ${binary:Version}),
+         libreoffice-uiconfig-impress (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~), libreoffice-ogltrans (<< 1:6.1.4-2~)
@@ -493,7 +494,7 @@ Architecture: %OOO_NOGUI_ARCHS%
 Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          libreoffice-draw-nogui (= ${binary:Version}) | libreoffice-draw (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
-         libreoffice-uiconfig-impress (= ${binary:Version}),
+         libreoffice-uiconfig-impress (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~), libreoffice-impress
@@ -509,7 +510,7 @@ Package: libreoffice-draw
 Architecture: %OOO_ARCHS%
 Depends: libreoffice-core (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
-         libreoffice-uiconfig-draw (= ${binary:Version}), libreoffice-uiconfig-impress (= ${binary:Version}),
+         libreoffice-uiconfig-draw (= ${source:Version}), libreoffice-uiconfig-impress (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-core (<< 1:6.4.1~rc1-3), libreoffice-impress (<< 4:7.5.3~rc2-2), libreoffice-common (<< 1:6.4.2~rc1~)
@@ -524,6 +525,7 @@ Package: libreoffice-draw-nogui
 Architecture: %OOO_NOGUI_ARCHS%
 Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
+         libreoffice-uiconfig-draw (= ${source:Version}), libreoffice-uiconfig-impress (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-impress (<< 1:5.2.0-2), libreoffice-common (<< 1:6.4.2~rc1~), libreoffice-draw
@@ -540,7 +542,7 @@ Architecture: %OOO_ARCHS%
 Depends: fonts-opensymbol (>= 2:102.11),
          libreoffice-core (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
-         libreoffice-uiconfig-math (= ${binary:Version}),
+         libreoffice-uiconfig-math (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~)
@@ -556,6 +558,7 @@ Architecture: %OOO_NOGUI_ARCHS%
 Depends: fonts-opensymbol (>= 2:102.11),
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
+         libreoffice-uiconfig-math (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~), libreoffice-math
@@ -592,7 +595,7 @@ Depends: libreoffice-base-core (= ${binary:Version}),
          libreoffice-base-drivers (= ${binary:Version}),
          libreoffice-core (= ${binary:Version}),
          libreoffice-common (>= 1:7.0.0~alpha~),
-         libreoffice-uiconfig-base (= ${binary:Version}),
+         libreoffice-uiconfig-base (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Suggests: libreoffice-report-builder,
