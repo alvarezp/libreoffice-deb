@@ -527,7 +527,7 @@ $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
 OOO_JUNIT_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 #OOO_CHECK_FATAL_ARCHS := i386 amd64 armhf arm64
-OOO_CHECK_FATAL_ARCHS := amd64 arm64
+OOO_CHECK_FATAL_ARCHS := $(OOO_ARCHS)
 
 ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
 PACKAGE_GEN=n

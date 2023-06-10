@@ -1,3 +1,12 @@
+libreoffice (4:7.5.4-2) unstable; urgency=medium
+
+  * debian/rules:
+    - make all architectures' make check fatal again based on discussion
+      on #debian-release (especially needed to prevent riscv64 entering
+      the archive with miserably failing the tests) 
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 10 Jun 2023 17:36:26 +0200
+
 libreoffice (4:7.5.4-1) unstable; urgency=medium
 
   * LibreOffice 7.5.4 final release (identical to rc2)

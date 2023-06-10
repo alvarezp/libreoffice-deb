@@ -12,7 +12,7 @@ Restrictions: superficial
 
 ## Is there a need for this small test given we run the UI tests etc.?
 #Tests: smoketest
-#Architecture: amd64 arm64
+#Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 #Depends: @builddeps@, libreoffice-smoketest-data, libreoffice-dev, libreoffice-core, libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-math, libreoffice-base, libreoffice-sdbc-hsqldb, libreoffice-sdbc-firebird
 #Restrictions: allow-stderr, build-needed, rw-build-tree, superficial
 
@@ -97,7 +97,7 @@ Depends: @builddeps@, libreoffice-core-nogui, libreoffice-dev, libreoffice-dev-d
 Restrictions: allow-stderr, skippable
 
 #Tests: cppunit-subsequentcheck
-#Architecture: amd64 arm64
+#Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 #Depends: @builddeps@, libreoffice,libreoffice-core,libreoffice-common,libreoffice-java-common,libreoffice-writer,libreoffice-calc,libreoffice-impress,libreoffice-draw,libreoffice-math,libreoffice-base-core,libreoffice-base,libreoffice-style-breeze,libreoffice-style-colibre,libreoffice-style-sifr,libreoffice-style-elementary,libreoffice-style-karasa-jaga,libreoffice-style-sukapura,libreoffice-gnome,python3-uno,libreoffice-script-provider-python,libreoffice-script-provider-bsh,libreoffice-script-provider-js,libreoffice-sdbc-hsqldb,libreoffice-sdbc-mysql,libreoffice-base-drivers,python3-access2base,libofficebean-java,uno-libs-private,libuno-sal3,libuno-cppu3,ure,ure-java,libunoloader-java,liblibreoffice-java,libreoffice-wiki-publisher,libreoffice-report-builder,libreoffice-report-builder-bin,libreoffice-nlpsolver,fonts-opensymbol,libreoffice-dev,libreoffice-dev-gui,libreoffice-dev-common,libreofficekit-dev,libreoffice-gtk3,gir1.2-lokdocview-0.1,liblibreofficekitgtk,libreofficekit-data,libreoffice-kf5,libreoffice-qt5,libreoffice-qt6,libreoffice-plasma,libreoffice-sdbc-postgresql,libreoffice-evolution,libreoffice-subsequentcheckbase,libreoffice-smoketest-data,libreoffice-librelogo,libreoffice-sdbc-firebird
 #Restrictions: build-needed, rw-build-tree, allow-stderr
 #
@@ -105,12 +105,12 @@ Restrictions: allow-stderr, skippable
 ## That strictly violates the autopkgtest stuff thus mark them as superficial. But if a library
 ## or whatever update broke it we should know
 #Tests: slowcheck
-#Architecture: amd64 arm64
+#Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 ##Depends: @builddeps@, libreoffice,libreoffice-core,libreoffice-common,libreoffice-java-common,libreoffice-writer,libreoffice-calc,libreoffice-impress,libreoffice-draw,libreoffice-math,libreoffice-base-core,libreoffice-base,libreoffice-style-breeze,libreoffice-style-colibre,libreoffice-style-sifr,libreoffice-style-elementary,libreoffice-style-karasa-jaga,libreoffice-style-sukapura,libreoffice-gnome,python3-uno,libreoffice-script-provider-python,libreoffice-script-provider-bsh,libreoffice-script-provider-js,libreoffice-sdbc-hsqldb,libreoffice-sdbc-mysql,libreoffice-base-drivers,python3-access2base,libofficebean-java,uno-libs-private,libuno-sal3,libuno-cppu3,ure,ure-java,libunoloader-java,liblibreoffice-java,libreoffice-wiki-publisher,libreoffice-report-builder,libreoffice-report-builder-bin,libreoffice-nlpsolver,fonts-opensymbol,libreoffice-dev,libreoffice-dev-gui,libreoffice-dev-common,libreofficekit-dev,libreoffice-gtk3,gir1.2-lokdocview-0.1,liblibreofficekitgtk,libreofficekit-data,libreoffice-kf5,libreoffice-qt5,libreoffice-qt6,libreoffice-plasma,libreoffice-sdbc-postgresql,libreoffice-evolution,libreoffice-subsequentcheckbase,libreoffice-smoketest-data,libreoffice-librelogo,libreoffice-sdbc-firebird
 #Restrictions: build-needed, rw-build-tree, allow-stderr, superficial
 #
 #Tests: unitcheck
-#Architecture: amd64 arm64
+#Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 #Depends: @builddeps@, libreoffice,libreoffice-core,libreoffice-common,libreoffice-java-common,libreoffice-writer,libreoffice-calc,libreoffice-impress,libreoffice-draw,libreoffice-math,libreoffice-base-core,libreoffice-base,libreoffice-style-breeze,libreoffice-style-colibre,libreoffice-style-sifr,libreoffice-style-elementary,libreoffice-style-karasa-jaga,libreoffice-style-sukapura,libreoffice-gnome,python3-uno,libreoffice-script-provider-python,libreoffice-script-provider-bsh,libreoffice-script-provider-js,libreoffice-sdbc-hsqldb,libreoffice-sdbc-mysql,libreoffice-base-drivers,python3-access2base,libofficebean-java,uno-libs-private,libuno-sal3,libuno-cppu3,ure,ure-java,libunoloader-java,liblibreoffice-java,libreoffice-wiki-publisher,libreoffice-report-builder,libreoffice-report-builder-bin,libreoffice-nlpsolver,fonts-opensymbol,libreoffice-dev,libreoffice-dev-gui,libreoffice-dev-common,libreofficekit-dev,libreoffice-gtk3,gir1.2-lokdocview-0.1,liblibreofficekitgtk,libreofficekit-data,libreoffice-kf5,libreoffice-qt5,libreoffice-qt6,libreoffice-plasma,libreoffice-sdbc-postgresql,libreoffice-evolution,libreoffice-subsequentcheckbase,libreoffice-smoketest-data,libreoffice-librelogo,libreoffice-sdbc-firebird
 #Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
 
@@ -123,6 +123,6 @@ Restrictions: allow-stderr, superficial
 ## specific library to the one in libreoffice-sdbc-mysql
 ## Should probably always be last due to breaks-testbed?
 #Tests: cppunit-connectivity-mysql
-#Architecture: amd64 arm64
+#Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 #Depends: @builddeps@, pwgen, libreoffice-sdbc-mysql, libreoffice-core, default-mysql-server, default-mysql-client
 #Restrictions: build-needed, allow-stderr, needs-root, isolation-container, breaks-testbed, superficial
