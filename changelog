@@ -2,6 +2,9 @@ libreoffice (4:7.6.0~beta1-2) UNRELEASED; urgency=medium
 
   * merge from Ubuntu:
     - Update tests/patches/testtools-standalone.diff 
+  * debian/rules, debian/control.in:
+    - remove version constraints on build-deps and pre-depends fullfillable
+      since oldstable (or stable if oldstable didn't contain it even)
 
  -- Rene Engelhard <rene@debian.org>  Sat, 10 Jun 2023 16:49:46 +0200
 
