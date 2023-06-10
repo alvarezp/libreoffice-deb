@@ -521,10 +521,12 @@ $(eval $(call gen_no_archs,OOO_LE_ARCHS))
 OOO_CLANG_ARCHS := $(filter-out alpha ia64,$(OOO_LE_ARCHS))
 $(eval $(call gen_no_archs,OOO_CLANG_ARCHS))
 
-OOO_CHECK_ARCHS := $(filter-out kfreebsd-i386 kfreebsd-amd64 mips mipsel mips64el armel s390x,$(OOO_ARCHS))
+#OOO_CHECK_ARCHS := $(filter-out kfreebsd-i386 kfreebsd-amd64 mips mipsel mips64el armel s390x,$(OOO_ARCHS))
+OOO_CHECK_ARCHS := $(OOO_ARCHS)
 $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
 #OOO_JUNIT_ARCHS := i386 amd64 armhf arm64
-OOO_JUNIT_ARCHS := amd64 arm64
+#OOO_JUNIT_ARCHS := amd64 arm64
+OOO_JUNIT_ARCHS := $(OOO_ARCHS)
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 #OOO_CHECK_FATAL_ARCHS := i386 amd64 armhf arm64
 OOO_CHECK_FATAL_ARCHS := $(OOO_ARCHS)

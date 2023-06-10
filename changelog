@@ -4,6 +4,7 @@ libreoffice (4:7.5.4-2) unstable; urgency=medium
     - make all architectures' make check fatal again based on discussion
       on #debian-release (especially needed to prevent riscv64 entering
       the archive with miserably failing the tests) 
+    - also enable the junit tests on all architectures
 
  -- Rene Engelhard <rene@debian.org>  Sat, 10 Jun 2023 17:36:26 +0200
 

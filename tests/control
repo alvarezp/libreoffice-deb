@@ -77,7 +77,7 @@ Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-calc, li
 Restrictions: allow-stderr
 
 Tests: junit-subsequentcheck
-Architecture: amd64 arm64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-math, libreoffice-base, libreoffice-subsequentcheckbase, libreoffice-sdbc-hsqldb, libreoffice-sdbc-firebird
 Restrictions: allow-stderr, skippable
 
