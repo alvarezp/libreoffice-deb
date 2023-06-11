@@ -1,3 +1,10 @@
+libreoffice (4:7.5.4-3) unstable; urgency=medium
+
+  * fix install-common target, don't try to move sidebarslidebackground.ui
+    for -nogui (which doesn't exist yet at that time)
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 11 Jun 2023 23:13:45 +0200
+
 libreoffice (4:7.5.4-2) unstable; urgency=medium
 
   * debian/rules:
