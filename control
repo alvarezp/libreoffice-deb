@@ -237,7 +237,7 @@ Build-Conflicts: amd-libopencl1,
 Standards-Version: 4.0.1
 Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-7.5
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
-Bugs: 
+Bugs: mailto:debian-openoffice@lists.debian.org
 Homepage: http://www.libreoffice.org
 
 Package: libreoffice

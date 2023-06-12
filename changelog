@@ -1,3 +1,12 @@
+libreoffice (4:7.5.4-4) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - restrict -2 changes to make test failures only fatal on release
+      architectures + upcoming release architectures (like riscv64). 
+      Still build and run the tests on all architectures.
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 12 Jun 2023 06:55:09 +0200
+
 libreoffice (4:7.5.4-3) unstable; urgency=medium
 
   * fix install-common target, don't try to move sidebarslidebackground.ui
