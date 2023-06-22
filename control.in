@@ -590,7 +590,6 @@ Description: office productivity suite -- shared library
 Package: libreoffice-base
 Architecture: %OOO_BASE_ARCHS%
 Section: database
-Pre-Depends: dpkg (>= 1.19.1)
 Depends: libreoffice-base-core (= ${binary:Version}),
          libreoffice-base-drivers (= ${binary:Version}),
          libreoffice-core (= ${binary:Version}),

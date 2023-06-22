@@ -4,6 +4,27 @@ libreoffice (4:24.2~alpha0~git20230607-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 
+libreoffice (4:7.6.0~beta2~git20230622-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 19 Jun 2023 20:34:41 +0200
+
+libreoffice (4:7.6.0~beta1-2) experimental; urgency=medium
+
+  * merge from Ubuntu:
+    - Update tests/patches/testtools-standalone.diff 
+  * debian/rules, debian/control.in:
+    - remove version constraints on build-deps and pre-depends fullfillable
+      since oldstable (or stable if oldstable didn't contain it even)
+  * debian/rules:
+    - make all architectures' make check fatal again based on discussion
+      on #debian-release (especially needed to prevent riscv64 entering
+      the archive with miserably failing the tests) 
+    - also enable the junit tests on all architectures
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 10 Jun 2023 17:50:50 +0200
+
 libreoffice (4:7.6.0~beta1-1) experimental; urgency=medium
 
   * New upstream beta release

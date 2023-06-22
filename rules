@@ -102,6 +102,7 @@ BUILD_DEPS=\
     flex, \
     fontforge-nox | fontforge, \
     gperf,\
+    libfreetype-dev,\
     libfontconfig-dev,\
     pkg-config,\
     unzip,\
@@ -160,9 +161,6 @@ SYSTEM_STUFF += hunspell
 SYSTEM_STUFF += altlinuxhyph
 SYSTEM_STUFF += boost
 BOOST_VERSION=default
-ifeq "$(BOOST_VERSION)" "default"
-  BOOST_MINVER= (>= 1.71)
-endif
 # libmdds-dev depends on libboost-dev, which will be removed
 # when you install a non-default libboostX.Y-dev
 ifeq "$(BOOST_VERSION)" "default"
@@ -208,8 +206,6 @@ ifeq "$(BUILD_PLASMA)" "y"
   endif
 endif
 ENABLE_QT6=y
-# for moc move to /usr/lib/qt6/libxexec
-QT6_MINVER= (>= 6.2.1+dfsg-2)
 # https://www.debian.org/doc/debian-policy/ says this is not defined and must
 # be ignored, but dh_strip mentions (and honours) it, so...
 ifneq (noautodbgsym,$(findstring noautodbgsym,$(DEB_BUILD_OPTIONS)))
@@ -376,9 +372,6 @@ ifeq "$(PACKAGE_GEN)" "y"
 else
   ENABLE_SKIA=n
 endif
-# see https://cgit.freedesktop.org/libreoffice/core/commit/?id=a0edcc68f94915a78fcc08e70d2cdd752abd9ebb
-BUILD_DEPS += , libfreetype-dev (>= 2.8.1) [$(filter-out alpha ia64,$(OOO_LE_ARCHS))]
-BUILD_DEPS += , libfreetype-dev (>= 2.2.0) [$(OOO_BE_ARCHS) alpha ia64] # see architecture-specific stuff below
 SYSTEM_STUFF += libpng
 ENABLE_NSS=y
 ifeq "$(ENABLE_NSS)" "y"
@@ -445,6 +438,7 @@ SYSTEM_STUFF += libnumbertext
 SYSTEM_STUFF += box2d
 SYSTEM_STUFF += libwebp
 SYSTEM_STUFF += libtiff
+SYSTEM_STUFF += frozen
 
 # Default flags to pass to configure
 CONFIGURE_FLAGS+= \
@@ -528,13 +522,15 @@ $(eval $(call gen_no_archs,OOO_LE_ARCHS))
 OOO_CLANG_ARCHS := $(filter-out alpha ia64,$(OOO_LE_ARCHS))
 $(eval $(call gen_no_archs,OOO_CLANG_ARCHS))
 
-OOO_CHECK_ARCHS := $(filter-out kfreebsd-i386 kfreebsd-amd64 mips mipsel mips64el armel s390x,$(OOO_ARCHS))
+#OOO_CHECK_ARCHS := $(filter-out kfreebsd-i386 kfreebsd-amd64 mips mipsel mips64el armel s390x,$(OOO_ARCHS))
+OOO_CHECK_ARCHS := $(OOO_ARCHS)
 $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
 #OOO_JUNIT_ARCHS := i386 amd64 armhf arm64
-OOO_JUNIT_ARCHS := amd64 arm64
+#OOO_JUNIT_ARCHS := amd64 arm64
+OOO_JUNIT_ARCHS := $(OOO_ARCHS)
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 #OOO_CHECK_FATAL_ARCHS := i386 amd64 armhf arm64
-OOO_CHECK_FATAL_ARCHS := amd64 arm64
+OOO_CHECK_FATAL_ARCHS := $(OOO_ARCHS)
 
 ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
 PACKAGE_GEN=n
@@ -781,9 +777,7 @@ endif
       ifeq "$(CLANG_VERSION)" "default"
 	export LO_CLANG_CC=clang
 	export LO_CLANG_CXX=clang++
-	BUILD_DEPS += , clang (>= 1:8.0.1)$(OOO_NO_CLANG_ARCHS)
-	# see #963162, #963167 which apparently don't exist on 11
-	BUILD_DEPS += , clang (>= 1:11) [armel]
+	BUILD_DEPS += , clang$(OOO_NO_CLANG_ARCHS)
       else
 	export LO_CLANG_CC=clang-$(CLANG_VERSION)
 	export LO_CLANG_CXX=clang++-$(CLANG_VERSION)
@@ -793,7 +787,7 @@ endif
   endif
 else
   ifeq "$(CLANG_VERSION)" "default"
-	BUILD_DEPS += , clang (>= 1:8.0.1)
+	BUILD_DEPS += , clang
 	CONFIGURE_FLAGS+= CC=clang CXX=clang++
   else
 	BUILD_DEPS += , clang-$(CLANG_VERSION)
@@ -862,7 +856,7 @@ ifneq "$(ENABLE_LDAP)" "y"
 endif
 
 ifneq (,$(filter libnumbertext, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libnumbertext-dev (>= 1.0.6)
+	BUILD_DEPS += , libnumbertext-dev
 	# https://cgit.freedesktop.org/libreoffice/core/commit/?h=libreoffice-7-3&id=09dfe214a30f58ddcd7a857db8f5eee68d4cef2a
 	BUILD_DEPS_ARCH += , libnumbertext-data (>= 1.0.11) <!nocheck>
 	NUMBERTEXT_DATA_RECOMMENDS := libnumbertext-data
@@ -895,7 +889,7 @@ endif
 
 ifeq "$(ENABLE_CURL)" "y"
   ifneq (,$(filter curl, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libcurl4-$(CURL_SECTYPE)-dev (>= 7.68)
+	BUILD_DEPS += , libcurl4-$(CURL_SECTYPE)-dev
   endif
 else
 	CONFIGURE_FLAGS += --disable-curl
@@ -913,9 +907,6 @@ ifneq (,$(filter libtiff, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libtiff-dev
 endif
 
-	# go sure given #873362
-	COINMP_MINVER=(>= 1.8.3-3)
-	#COINUTILS_MINVER=
 ifneq ($(ENABLE_COINMP),y)
 	CONFIGURE_FLAGS += --disable-coinmp
 else
@@ -988,7 +979,6 @@ ifeq "$(ENABLE_PYTHON)" "y"
 endif
 
 	BUILD_DEPS += , debhelper-compat (= 12)
-	BUILD_DEPS += , dpkg-dev (>= 1.20.1)
 
   ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , locales$(OOO_NO_CHECK_ARCHS) <!nocheck>
@@ -1206,7 +1196,7 @@ ifneq (,$(filter boost, $(SYSTEM_STUFF)))
   	CONFIGURE_FLAGS += --with-boost-libdir=/usr/lib/$(DEB_HOST_MULTIARCH)
   endif
   ifneq (,$(filter dragonbox, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libdragonbox-dev (>= 1.1.3)
+	BUILD_DEPS += , libdragonbox-dev
   endif
   ifneq (,$(filter libfixmath, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libfixmath-dev
@@ -1242,13 +1232,10 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
 	BUILD_DEPS += , libwpd-dev (>= 0.10), libwpd-dev (<< 0.11~)
   endif
   ifneq (,$(filter mythes, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libmythes-dev (>= 2:1.2)
+	BUILD_DEPS += , libmythes-dev
   endif
   ifneq (,$(filter libwps, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libwps-dev (>= 0.4), libwps-dev (<< 0.5~)
-    ifeq "$(RUN_MAKE_CHECK)" "y"
-	BUILD_DEPS_ARCH += , libwps-dev (>= 0.4.12)$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    endif
   endif
   ifneq (,$(filter libwpg, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libwpg-dev (>= 0.3), libwpg-dev (<< 0.4~)
@@ -1277,9 +1264,6 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   endif
   ifneq (,$(filter libetonyek, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libetonyek-dev, libetonyek-dev (<< 0.2~)
-    ifeq "$(RUN_MAKE_CHECK)" "y"
-	BUILD_DEPS_ARCH += , libetonyek-dev (>= 0.1.8)$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    endif
   endif
   ifneq (,$(filter libfreehand, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libfreehand-dev (>= 0.1), libfreehand-dev (<< 0.2~)
@@ -1295,18 +1279,12 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   endif
   ifneq (,$(filter libstaroffice, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libstaroffice-dev, libstaroffice-dev (<< 0.1~)
-    ifeq "$(RUN_MAKE_CHECK)" "y"
-	BUILD_DEPS_ARCH += , libstaroffice-dev (>= 0.0.3)$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    endif
   endif
   ifneq (,$(filter libqxp, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libqxp-dev, libqxp-dev (<< 0.1~)
   endif
   ifneq (,$(filter libebook, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libe-book-dev (>= 0.1), libe-book-dev (<< 0.2~)
-    ifeq "$(RUN_MAKE_CHECK)" "y"
-	BUILD_DEPS_ARCH += , libe-book-dev (>= 0.1.2)$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    endif
   endif
   ifeq "$(ENABLE_LIBCMIS)" "y"
     ifneq (,$(filter libcmis, $(SYSTEM_STUFF)))
@@ -1317,8 +1295,7 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   endif
   ifeq "$(ENABLE_ZXING)" "y"
     ifneq (,$(filter zxing, $(SYSTEM_STUFF)))
-	# https://cgit.freedesktop.org/libreoffice/core/commit/?id=d53340b2253537104abe6f95c8c63cc74487c3ec
-	BUILD_DEPS += , libzxing-dev (>= 1.2.0)
+	BUILD_DEPS += , libzxing-dev
     endif
   else
 	CONFIGURE_FLAGS += --disable-zxing
@@ -1561,7 +1538,7 @@ endif
 
 ifeq "$(ENABLE_WEBDAV)" "y"
     ifneq (,$(filter curl, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libcurl4-$(CURL_SECTYPE)-dev (>= 7.68)
+	BUILD_DEPS += , libcurl4-$(CURL_SECTYPE)-dev
     endif
     ENABLE_CURL=y
 else
@@ -1586,6 +1563,10 @@ ifneq (,$(filter lockfile, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , liblockfile-bin
 endif
 
+ifneq (,$(filter frozen, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , libfrozen-dev 
+endif
+
 ifneq (,$(filter redland, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , librdf0-dev 
 endif
@@ -1602,7 +1583,7 @@ ifneq (,$(filter glm, $(SYSTEM_STUFF)))
 endif
 
 ifneq (,$(filter gpgmepp, $(SYSTEM_STUFF)))
-	BUILD_DEPS+= , libgpgmepp-dev (>= 1.14), libgpgme-dev, libgpg-error-dev
+	BUILD_DEPS+= , libgpgmepp-dev, libgpgme-dev, libgpg-error-dev
 endif
 ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , gpg$(OOO_NO_CHECK_ARCHS) <!nocheck>
