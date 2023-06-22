@@ -436,6 +436,7 @@ SYSTEM_STUFF += libnumbertext
 SYSTEM_STUFF += box2d
 SYSTEM_STUFF += libwebp
 SYSTEM_STUFF += libtiff
+SYSTEM_STUFF += frozen
 
 # Default flags to pass to configure
 CONFIGURE_FLAGS+= \
@@ -1558,6 +1559,10 @@ endif
 SYSTEM_STUFF += lockfile
 ifneq (,$(filter lockfile, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , liblockfile-bin
+endif
+
+ifneq (,$(filter frozen, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , libfrozen-dev 
 endif
 
 ifneq (,$(filter redland, $(SYSTEM_STUFF)))
