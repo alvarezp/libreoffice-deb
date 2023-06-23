@@ -4,8 +4,12 @@ libreoffice (4:7.5.4-4) UNRELEASED; urgency=medium
     - restrict -2 changes to make test failures only fatal on release
       architectures + upcoming release architectures (like riscv64). 
       Still build and run the tests on all architectures.
+  * debian/rules, debian/control.in: 
+    - recommend fonts-liberation+fonts-liberation-sans-narrow instead of both
+      fonts-liberation and fonts-liberation2; keep old recommends
+      for bookwork_backports, thanks Fabian Greffrath for the MR
 
- -- Rene Engelhard <rene@debian.org>  Mon, 12 Jun 2023 06:55:09 +0200
+ -- Rene Engelhard <rene@debian.org>  Fri, 23 Jun 2023 23:31:19 +0200
 
 libreoffice (4:7.5.4-3) unstable; urgency=medium
 
@@ -117,6 +121,7 @@ libreoffice (4:7.5.2~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
     - fixes CVE-2023-0950 ("Array Index UnderFlow in Calc Formula Parsing")
+    - fixes CVE-2023-1183 ("Arbitrary File Write in LibreOffice Base")
 
   * debian/rules:
     - actually generate ucf snippets for ca-valencia, kmr-Latn, sr-Latn and
