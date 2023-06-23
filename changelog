@@ -7,7 +7,7 @@ libreoffice (4:7.5.4-4) UNRELEASED; urgency=medium
   * debian/rules, debian/control.in: 
     - recommend fonts-liberation+fonts-liberation-sans-narrow instead of both
       fonts-liberation and fonts-liberation2; keep old recommends
-      for bookwork_backports, thanks Fabian Greffrath for the MR
+      for bookworm-backports, thanks Fabian Greffrath for the MR
 
  -- Rene Engelhard <rene@debian.org>  Fri, 23 Jun 2023 23:31:19 +0200
 
