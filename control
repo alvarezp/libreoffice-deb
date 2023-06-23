@@ -256,8 +256,6 @@ Depends: libreoffice-base [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64
 Recommends: fonts-crosextra-caladea,
             fonts-crosextra-carlito,
             fonts-dejavu,
-            fonts-liberation,
-            fonts-liberation2,
             fonts-linuxlibertine,
             fonts-noto-core,
             fonts-noto-extra,
@@ -272,7 +270,8 @@ Recommends: fonts-crosextra-caladea,
             libreoffice-sdbc-mysql,
             libreoffice-sdbc-postgresql,
             libreoffice-wiki-publisher,
-            ${java-common-depends}
+            ${java-common-depends},
+            ${liberation-fonts-recommends}
 Suggests: cups-bsd,
           firefox-esr | thunderbird | firefox,
           ghostscript,
