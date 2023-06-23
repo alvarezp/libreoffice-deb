@@ -1616,6 +1616,12 @@ ifeq ($(ENABLE_LTO),y)
 	# see https://lists.debian.org/debian-devel-changes/2021/11/msg02548.html
 	BUILD_DEPS += , binutils (>= 2.37-9) [ppc64]
 endif
+
+ifeq ($(BOOKWORM_BACKPORT),y)
+	LIBERATION_FONTS_RECOMMENDS += , fonts-liberation2, fonts-liberation
+else
+	LIBERATION_FONTS_RECOMMENDS += , fonts-liberation, fonts-liberation-sans-narrow
+endif
 # go sure. if we explicitely disable LTO when it is enabled we don't want it to sneak in
 # (and vice-versa). See https://lists.debian.org/debian-devel/2022/06/msg00092.html
 ifeq ($(ENABLE_LTO),y)
@@ -3931,6 +3937,7 @@ endif
 		-V'gnome-gtk-recommends=$(GNOME_GTK_RECOMMENDS)' \
 		-V'firebird-engine-depends=$(FIREBIRD_ENGINE_DEPENDS)' \
 		-V'libsane-suggests=$(shell dpkg -S /usr/lib/$(DEB_HOST_MULTIARCH)/libsane.so.1 | cut -d: -f1)' \
+		-V'liberation-fonts-recommends=$(LIBERATION_FONTS_RECOMMENDS)' \
 		-v$(BINARY_VERSION)
 ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 	for i in libuno-sal3 libuno-cppu3 libuno-salhelpergcc3-3 libuno-cppuhelpergcc3-3 libuno-purpenvhelpergcc3-3 \
