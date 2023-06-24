@@ -2,6 +2,10 @@ libreoffice (4:24.2~alpha0~git20230607-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
+  * debian/rules, debian/control.kf6.in: add initial support for kf6 backend
+    added upstream (not enable yet obviously). Only build one of kf5/kf6 at a
+    time since I guess we won't ship plasma 5 and plasma 6 in parallel
+
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 
 libreoffice (4:7.6.0~beta2~git20230622-1) UNRELEASED; urgency=medium

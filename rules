@@ -194,15 +194,27 @@ BUILD_CAIROCANVAS=y
 SYSTEM_STUFF += cairo
 ifeq "$(ENABLE_GUI)" "y"
 BUILD_PLASMA=y
+# let's assume we won't ship two plasmas parallel..
+KF_VERSION=5
+PLASMA_VERSION=$(KF_VERSION)
 ENABLE_QT5=n
 #QT5_MINVER=
 endif
 ifeq "$(BUILD_PLASMA)" "y"
-  ENABLE_KF5=y
-  # KF5 depends on Qt5
-  ifeq "$(ENABLE_KF5)" "y"
-    ENABLE_QT5=y
-    KF5_QT5_DEPENDS := libreoffice-qt5 (= $${binary:Version})
+   ifeq "$(PLASMA_VERSION)" "5"
+     ENABLE_KF5=y
+     # KF5 depends on Qt5
+     ifeq "$(ENABLE_KF5)" "y"
+       ENABLE_QT5=y
+       KF5_QT5_DEPENDS := libreoffice-qt5 (= $${binary:Version})
+     endif
+  else
+	ENABLE_KF6=y
+	# KF6 depends on Qt6
+     ifeq "$(ENABLE_KF6)" "y"
+       ENABLE_QT6=y
+       KF6_QT6_DEPENDS := libreoffice-qt6 (= $${binary:Version})
+     endif
   endif
 endif
 ENABLE_QT6=y
@@ -1346,6 +1358,10 @@ ifeq "$(ENABLE_KF5)" "y"
 	CONFIGURE_FLAGS += --enable-kf5
 	BUILD_DEPS += , libkf5coreaddons-dev, libkf5i18n-dev, libkf5config-dev, libkf5windowsystem-dev, libkf5kio-dev
 endif
+ifeq "$(ENABLE_KF6)" "y"
+	CONFIGURE_FLAGS += --enable-kf6
+	BUILD_DEPS += , libkf6coreaddons-dev, libkf6i18n-dev, libkf6config-dev, libkf6windowsystem-dev, libkf6kio-dev
+endif
 	PLASMA_ICONSET_DEP=libreoffice-style-breeze
 ifeq "$(ENABLE_QT5)" "y"
 	CONFIGURE_FLAGS += --enable-qt5
@@ -1932,6 +1948,9 @@ endif
 ifeq "$(ENABLE_KF5)" "y"
 	cat debian/control.kf5.in >> debian/control
 endif
+ifeq "$(ENABLE_KF6)" "y"
+	cat debian/control.kf6.in >> debian/control
+endif
 ifeq "$(ENABLE_QT5)" "y"
 	cat debian/control.qt5.in >> debian/control
 endif
@@ -2334,15 +2353,15 @@ ifeq "$(ENABLE_QT6)" "y"
 	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt6lo.so\
 		debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program
 endif
-ifeq "$(ENABLE_KF5)" "y"
+ifeq "$(shell echo $(ENABLE_KF5)$(ENABLE_KF6) | grep -q y && true)" "true"
 	mv debian/tmp/pkg/libreoffice-kde \
-		debian/tmp/pkg/libreoffice-kf5
+		debian/tmp/pkg/libreoffice-kf$(KF_VERSION)
 ifeq "$(BUILD_PLASMA)" "y"
 	mkdir -p debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program
-	mv debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program/libkf5be1lo.so \
+	mv debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program/libkf$(KF_VERSION)be1lo.so \
 		debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program
 else
-	rm -f debian/tmp/pkg/libreoffice-kf5/$(OODIR)/libkf5be1lo.so
+	rm -f debian/tmp/pkg/libreoffice-kf5/$(OODIR)/libkf$(KF_VERSION)be1lo.so
 endif
 endif
 
@@ -3924,6 +3943,7 @@ endif
 		-V'ooo-officebean-dep=$(OOO_OFFICEBEAN_DEP)' \
 		-V'plasma-iconset-dep=$(PLASMA_ICONSET_DEP)' \
 		-V'kf5-qt5-depends=$(KF5_QT5_DEPENDS)' \
+		-V'kf6-qt6-depends=$(KF6_QT6_DEPENDS)' \
 		-V'lpsolve-dep=$(LPSOLVE_DEP)' \
 		-V'gstreamer-plugins-suggests=$(GSTREAMER_PLUGINS_SUGGESTS)' \
 		-V'libebook-dep=$(LIBEBOOK_DEP)' \
