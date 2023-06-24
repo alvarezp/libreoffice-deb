@@ -92,6 +92,9 @@ endif
 # Default package configuration
 #
 OOO_ARCHS = alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
+# riscv64 contained here since it's supposed to be added soonish and even considered
+# to be a release architecture in trixie
+DEBIAN_MAIN_ARCHITECTURES = amd64 arm64 armel armhf i386 mipsel mips64el ppc64el riscv64 s390x
 PATCHSET=$(DEB_VENDOR)
 BUILD_DEPS=\
     autoconf,\
@@ -542,7 +545,7 @@ $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
 OOO_JUNIT_ARCHS := $(OOO_ARCHS)
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 #OOO_CHECK_FATAL_ARCHS := i386 amd64 armhf arm64
-OOO_CHECK_FATAL_ARCHS := $(OOO_ARCHS)
+OOO_CHECK_FATAL_ARCHS := $(DEBIAN_MAIN_ARCHITECTURES)
 
 ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
 PACKAGE_GEN=n
@@ -1629,6 +1632,12 @@ ifeq ($(ENABLE_LTO),y)
 	CONFIGURE_FLAGS += --enable-lto
 	# see https://lists.debian.org/debian-devel-changes/2021/11/msg02548.html
 	BUILD_DEPS += , binutils (>= 2.37-9) [ppc64]
+endif
+
+ifeq ($(BOOKWORM_BACKPORT),y)
+	LIBERATION_FONTS_RECOMMENDS += , fonts-liberation2, fonts-liberation
+else
+	LIBERATION_FONTS_RECOMMENDS += , fonts-liberation, fonts-liberation-sans-narrow
 endif
 # go sure. if we explicitely disable LTO when it is enabled we don't want it to sneak in
 # (and vice-versa). See https://lists.debian.org/debian-devel/2022/06/msg00092.html
@@ -3951,6 +3960,7 @@ endif
 		-V'gnome-gtk-recommends=$(GNOME_GTK_RECOMMENDS)' \
 		-V'firebird-engine-depends=$(FIREBIRD_ENGINE_DEPENDS)' \
 		-V'libsane-suggests=$(shell dpkg -S /usr/lib/$(DEB_HOST_MULTIARCH)/libsane.so.1 | cut -d: -f1)' \
+		-V'liberation-fonts-recommends=$(LIBERATION_FONTS_RECOMMENDS)' \
 		-v$(BINARY_VERSION)
 ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 	for i in libuno-sal3 libuno-cppu3 libuno-salhelpergcc3-3 libuno-cppuhelpergcc3-3 libuno-purpenvhelpergcc3-3 \
