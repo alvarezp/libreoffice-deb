@@ -989,7 +989,11 @@ endif
     endif
 	BUILD_DEPS_ARCH += , fontconfig$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , fonts-liberation2$(OOO_NO_CHECK_ARCHS) <!nocheck>
-	BUILD_DEPS_ARCH += , fonts-crosextra-carlito$(OOO_NO_CHECK_ARCHS) <!nocheck>
+    ifneq "$(BOOKWORM_BACKPORT)" "y"
+	BUILD_DEPS_ARCH += , fonts-crosextra-carlito$(OOO_NO_CHECK_ARCHS) (>= 20230309) <!nocheck>
+    else
+	BUILD_DEPS_ARCH += , fonts-crosextra-carlito$(OOO_NO_CHECK_ARCHS) (<< 20230309) <!nocheck>
+    endif
 	# https://lists.freedesktop.org/archives/libreoffice/2017-May/077764.html
 	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
@@ -2227,6 +2231,9 @@ ifeq "$(BUILD_TESTS)" "y"
 	cd $(SOURCE_TREE)/smoketest && \
 		patch -p1 < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff
   endif
+  ifeq "$(BOOKWORM_BACKPORT)" "y"
+	patch -p1 -R < debian/patches/adapt-for-new-carlito.diff
+  endif
 	# enable cppunit etc.
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) \
 	CLANGDIR=$(CLANGDIR) \
@@ -2275,6 +2282,9 @@ ifeq "$(BUILD_TESTS)" "y"
   ifeq (,$(filter $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
 	cd $(SOURCE_TREE)/smoketest && \
 		patch -p1 -R < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff
+  endif
+  ifeq "$(BOOKWORM_BACKPORT)" "y"
+	patch -p1 < debian/patches/adapt-for-new-carlito.diff
   endif
 endif
 
