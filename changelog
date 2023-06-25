@@ -10,8 +10,6 @@ libreoffice (4:7.5.4-4) UNRELEASED; urgency=medium
       CVE which was a memory leak in tiff and a excpected failure here anyway.
       Fixed in tiff ages ago and we're not really supposed to test others' CVEs as
       we use external libs anyway
-    - only run testtools' bridgetest and "smoketest" as smoketest on all
-      architectures except amd64/arm64
   * debian/rules, debian/control.in: 
     - recommend fonts-liberation+fonts-liberation-sans-narrow instead of both
       fonts-liberation and fonts-liberation2; keep old recommends
