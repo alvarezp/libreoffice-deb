@@ -1636,7 +1636,7 @@ endif
 ifeq ($(BOOKWORM_BACKPORT),y)
 	LIBERATION_FONTS_RECOMMENDS += , fonts-liberation2, fonts-liberation
 else
-	LIBERATION_FONTS_RECOMMENDS += , fonts-liberation, fonts-liberation-sans-narrow
+	LIBERATION_FONTS_RECOMMENDS += , fonts-liberation (>= 1:2), fonts-liberation-sans-narrow
 endif
 # go sure. if we explicitely disable LTO when it is enabled we don't want it to sneak in
 # (and vice-versa). See https://lists.debian.org/debian-devel/2022/06/msg00092.html

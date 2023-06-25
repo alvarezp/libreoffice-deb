@@ -12,10 +12,12 @@ libreoffice (4:7.5.4-4) unstable; urgency=medium
       we use external libs anyway
   * debian/rules, debian/control.in: 
     - recommend fonts-liberation+fonts-liberation-sans-narrow instead of both
-      fonts-liberation and fonts-liberation2; keep old recommends
-      for bookworm-backports, thanks Fabian Greffrath for the MR
+      fonts-liberation and fonts-liberation2; keep old Recommends
+      for bookworm-backports, thanks Fabian Greffrath for the MR. Make clear
+      the Recommends is for fonts-liberation (>= 1:2) by adding that to the
+      Recommends
 
- -- Rene Engelhard <rene@debian.org>  Sun, 25 Jun 2023 23:50:24 +0200
+ -- Rene Engelhard <rene@debian.org>  Sun, 25 Jun 2023 22:20:45 +0000
 
 libreoffice (4:7.5.4-3) unstable; urgency=medium
 
