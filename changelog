@@ -1,4 +1,4 @@
-libreoffice (4:7.5.4-4) UNRELEASED; urgency=medium
+libreoffice (4:7.5.4-4) unstable; urgency=medium
 
   * debian/patches/adapt-for-new-carlito.diff: as name says; adapt one
     (and disable one for now since iit has calculated values..) test which
@@ -15,7 +15,7 @@ libreoffice (4:7.5.4-4) UNRELEASED; urgency=medium
       fonts-liberation and fonts-liberation2; keep old recommends
       for bookworm-backports, thanks Fabian Greffrath for the MR
 
- -- Rene Engelhard <rene@debian.org>  Fri, 23 Jun 2023 23:31:19 +0200
+ -- Rene Engelhard <rene@debian.org>  Sun, 25 Jun 2023 23:50:24 +0200
 
 libreoffice (4:7.5.4-3) unstable; urgency=medium
 
