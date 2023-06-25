@@ -1,6 +1,9 @@
-libreoffice (4:7.6.0~beta2~git20230622-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~beta2~git20230625-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
+
+  * debian/patches/we-dont-have-the-needed-fonts.diff: disable test which
+    needs fonts neither provided in Debian (nor even upstream)
 
   * debian/rules:
     - restrict -2 changes to make test failures only fatal on release
