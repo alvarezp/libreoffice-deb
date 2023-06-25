@@ -549,9 +549,9 @@ endif
 ifeq "$(DEB_HOST_ARCH_BITS)" "32"
        # consistently crash in vcl_filters_test when
        # Testing load file:///<<PKGBUILDDIR>>//vcl/qa/cppunit/graphicfilter/data/tiff/fail/CVE-2017-9936-1.tiff:
-       # CVE-2017-9936 is a memory leak. And we are not supposed to test for others' packages CVEs anyway, especially
-       # since this is fixed in libtiff in 4.0.8-3(see https://security-tracker.debian.org/tracker/CVE-2017-9936)
-       # so ages ago
+       # CVE-2017-9936 is a memory leak and even a expected failure.
+       # And we are not supposed to test for others' packages CVEs anyway, especially since this is fixed in libtiff
+       # in 4.0.8-3(see https://security-tracker.debian.org/tracker/CVE-2017-9936) so ages ago
        CONFIGURE_FLAGS += --disable-cve-tests
 endif
 
