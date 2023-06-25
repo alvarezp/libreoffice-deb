@@ -1,5 +1,10 @@
 libreoffice (4:7.5.4-4) UNRELEASED; urgency=medium
 
+  * debian/patches/adapt-for-new-carlito.diff: as name says; adapt one
+    (and disable one for now since iit has calculated values..) test which
+    break with fonts-crosextra-carlito 20230309. Bump build-dependency.
+    Revert all of this for bookworm-backports.
+
   * debian/rules:
     - use --disable-cve-tests on 32bit archs. Fail consistently there on one
       CVE which was a memory leak in tiff and a excpected failure here anyway.
