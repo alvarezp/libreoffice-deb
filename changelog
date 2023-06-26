@@ -16,6 +16,7 @@ libreoffice (4:7.5.4-4) unstable; urgency=medium
       for bookworm-backports, thanks Fabian Greffrath for the MR. Make clear
       the Recommends is for fonts-liberation (>= 1:2) by adding that to the
       Recommends
+    - change fonts-liberation2 Build-Depends to fonts-liberation (>= 1:2)
 
  -- Rene Engelhard <rene@debian.org>  Sun, 25 Jun 2023 22:20:45 +0000
 

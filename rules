@@ -996,7 +996,11 @@ endif
 	BUILD_DEPS_ARCH += , locales$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , gdb$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , fontconfig$(OOO_NO_CHECK_ARCHS) <!nocheck>
+ifeq ($(BOOKWORM_BACKPORT),y)
 	BUILD_DEPS_ARCH += , fonts-liberation2$(OOO_NO_CHECK_ARCHS) <!nocheck>
+else
+	BUILD_DEPS_ARCH += , fonts-liberation (>= 1:2)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+endif
     ifneq "$(BOOKWORM_BACKPORT)" "y"
 	BUILD_DEPS_ARCH += , fonts-crosextra-carlito$(OOO_NO_CHECK_ARCHS) (>= 20230309) <!nocheck>
     else
