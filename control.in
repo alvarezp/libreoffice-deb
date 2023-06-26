@@ -302,7 +302,7 @@ Package: libreoffice-common
 Architecture: all
 Depends: libreoffice-style-colibre, ure, ${numbertext-data-recommends}, ${misc:Depends}
 Suggests: libreoffice-style,
-Recommends: ${pyuno-depends}, ${textcat-data-recommends}, poppler-data, xdg-utils, fonts-liberation2 | ttf-mscorefonts-installer
+Recommends: ${pyuno-depends}, ${textcat-data-recommends}, poppler-data, xdg-utils, ${liberation2-font-recommends} | ttf-mscorefonts-installer
 Conflicts: openoffice.org-unbundled,
            broffice,
            libreoffice-filter-mobiledev,

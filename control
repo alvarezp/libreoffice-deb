@@ -540,9 +540,9 @@ Depends: libreoffice-style-colibre,
          ${misc:Depends},
          ${numbertext-data-recommends}
 Suggests: libreoffice-style
-Recommends: fonts-liberation2 | ttf-mscorefonts-installer, apparmor,
-            poppler-data,
+Recommends: poppler-data,
             xdg-utils,
+            ${liberation2-font-recommends} | ttf-mscorefonts-installer, apparmor,
             ${pyuno-depends},
             ${textcat-data-recommends}
 Conflicts: broffice,
