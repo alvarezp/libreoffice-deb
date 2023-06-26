@@ -10,6 +10,8 @@ libreoffice (4:7.6.0~beta1-3) experimental; urgency=medium
     libreoffice-7-6 branch
   * debian/source/include-binaries: add changed .emf files
 
+  * debian/patches/we-dont-have-the-needed-fonts.diff: disable test which
+    needs fonts neither provided in Debian (nor even upstream)
   * debian/patches/adapt-for-new-carlito.diff: as name says; adapt two
     (and disable one for now since iit has calculated values..) test(s) which
     break with fonts-crosextra-carlito 20230309. Bump build-dependency.
