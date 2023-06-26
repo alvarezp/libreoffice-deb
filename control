@@ -191,7 +191,7 @@ Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i38
                     fonts-crosextra-carlito (>= 20230309) <!nocheck>,
                     fonts-dejavu <!nocheck>,
                     fonts-hosny-amiri <!nocheck>,
-                    fonts-liberation2 <!nocheck>,
+                    fonts-liberation (>= 1:2) <!nocheck>,
                     fonts-linuxlibertine <!nocheck>,
                     fonts-noto-core <!nocheck>,
                     gdb <!nocheck>,

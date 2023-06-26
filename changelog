@@ -2,6 +2,17 @@ libreoffice (4:7.6.0~rc1~git20230625-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
+  * debian/patches/we-dont-have-the-needed-fonts.diff: disable test which
+    needs fonts neither provided in Debian (nor even upstream)
+
+  * debian/rules:
+    - use --disable-cve-tests on 32bit archs. Fail consistently there on one
+      CVE which was a memory leak in tiff and a excpected failure here anyway.
+      Fixed in tiff ages ago and we're not really supposed to test others' CVEs as
+      we use external libs anyway
+  * debian/rules, debian/control.in: 
+    - change fonts-liberation2 Build-Depends to fonts-liberation (>= 1:2)
+
  -- Rene Engelhard <rene@debian.org>  Mon, 26 Jun 2023 18:37:32 +0200
 
 libreoffice (4:7.6.0~beta1-3) experimental; urgency=medium
@@ -10,8 +21,6 @@ libreoffice (4:7.6.0~beta1-3) experimental; urgency=medium
     libreoffice-7-6 branch
   * debian/source/include-binaries: add changed .emf files
 
-  * debian/patches/we-dont-have-the-needed-fonts.diff: disable test which
-    needs fonts neither provided in Debian (nor even upstream)
   * debian/patches/adapt-for-new-carlito.diff: as name says; adapt two
     (and disable one for now since iit has calculated values..) test(s) which
     break with fonts-crosextra-carlito 20230309. Bump build-dependency.
