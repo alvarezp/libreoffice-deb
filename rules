@@ -1634,10 +1634,14 @@ ifeq ($(ENABLE_LTO),y)
 endif
 
 ifeq ($(BOOKWORM_BACKPORT),y)
-	LIBERATION_FONTS_RECOMMENDS += , fonts-liberation2, fonts-liberation
+	LIBERATION_FONT_RECOMMENDS += fonts-liberation
+	LIBERATION2_FONT_RECOMMENDS += , fonts-liberation2
 else
-	LIBERATION_FONTS_RECOMMENDS += , fonts-liberation (>= 1:2), fonts-liberation-sans-narrow
+	LIBERATION_FONT_RECOMMENDS += , fonts-liberation-sans-narrow
+	LIBERATION2_FONT_RECOMMENDS += , fonts-liberation (>= 1:2)
 endif
+LIBERATION_FONTS_RECOMMENDS += $(LIBERATION2_FONT_RECOMMENDS) $(LIBERATION_FONT_RECOMMENDS)
+
 # go sure. if we explicitely disable LTO when it is enabled we don't want it to sneak in
 # (and vice-versa). See https://lists.debian.org/debian-devel/2022/06/msg00092.html
 ifeq ($(ENABLE_LTO),y)
@@ -3962,6 +3966,7 @@ endif
 		-V'firebird-engine-depends=$(FIREBIRD_ENGINE_DEPENDS)' \
 		-V'libsane-suggests=$(shell dpkg -S /usr/lib/$(DEB_HOST_MULTIARCH)/libsane.so.1 | cut -d: -f1)' \
 		-V'liberation-fonts-recommends=$(LIBERATION_FONTS_RECOMMENDS)' \
+		-V'liberation2-font-recommends=$(LIBERATION2_FONT_RECOMMENDS)' \
 		-v$(BINARY_VERSION)
 ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 	for i in libuno-sal3 libuno-cppu3 libuno-salhelpergcc3-3 libuno-cppuhelpergcc3-3 libuno-purpenvhelpergcc3-3 \

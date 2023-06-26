@@ -11,6 +11,8 @@ libreoffice (4:7.6.0~rc1~git20230625-1) UNRELEASED; urgency=medium
       Fixed in tiff ages ago and we're not really supposed to test others' CVEs as
       we use external libs anyway
   * debian/rules, debian/control.in: 
+    - change fonts-liberation2 Build-Depends/Recommends in -common to
+      fonts-liberation (>= 1:2)
     - change fonts-liberation2 Build-Depends to fonts-liberation (>= 1:2)
 
  -- Rene Engelhard <rene@debian.org>  Mon, 26 Jun 2023 18:37:32 +0200
