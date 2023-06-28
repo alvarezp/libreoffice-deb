@@ -10,6 +10,10 @@ libreoffice (4:7.5.4-4) unstable; urgency=medium
       CVE which was a memory leak in tiff and a excpected failure here anyway.
       Fixed in tiff ages ago and we're not really supposed to test others' CVEs as
       we use external libs anyway
+  * debian/rules:
+    - restrict -2 changes to make test failures only fatal on release
+      architectures + upcoming release architectures (like riscv64).
+      Still build and run the tests on all architectures.
   * debian/rules, debian/control.in: 
     - recommend fonts-liberation+fonts-liberation-sans-narrow instead of both
       fonts-liberation and fonts-liberation2; keep old Recommends
