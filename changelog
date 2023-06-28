@@ -25,7 +25,7 @@ libreoffice (4:7.5.4-4) unstable; urgency=medium
     - change fonts-liberation2 Build-Depends/Recommends in -common to
       fonts-liberation (>= 1:2)
 
- -- Rene Engelhard <rene@debian.org>  Wed, 28 Jun 2023 02:35:58 +0200
+ -- Rene Engelhard <rene@debian.org>  Wed, 28 Jun 2023 06:21:52 +0200
 
 libreoffice (4:7.5.4-3) unstable; urgency=medium
 
