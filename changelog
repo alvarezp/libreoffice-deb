@@ -1,8 +1,13 @@
-libreoffice (4:7.5.5~rc1~git20230627-1) UNRELEASED; urgency=medium
+libreoffice (4:7.5.5~rc1~git20230628-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
- -- Rene Engelhard <rene@debian.org>  Mon, 26 Jun 2023 19:11:04 +0200
+  * debian/rules:
+    - again run full make check on amd64/arm64 only; make fatal
+    - only run testtools' bridgetest and "smoketest" as smoketest on all
+      architectures except amd64/arm64
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 26 Jun 2023 20:10:02 +0200
 
 libreoffice (4:7.5.4-4) unstable; urgency=medium
 
