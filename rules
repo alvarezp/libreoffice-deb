@@ -3968,7 +3968,6 @@ endif
 		-V'firebird-engine-depends=$(FIREBIRD_ENGINE_DEPENDS)' \
 		-V'libsane-suggests=$(shell dpkg -S /usr/lib/$(DEB_HOST_MULTIARCH)/libsane.so.1 | cut -d: -f1)' \
 		-V'liberation-fonts-recommends=$(LIBERATION_FONTS_RECOMMENDS)' \
-		-V'liberation2-font-recommends=$(LIBERATION2_FONT_RECOMMENDS)' \
 		-v$(BINARY_VERSION)
 ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 	for i in libuno-sal3 libuno-cppu3 libuno-salhelpergcc3-3 libuno-cppuhelpergcc3-3 libuno-purpenvhelpergcc3-3 \
@@ -4098,6 +4097,7 @@ endif
 		-V'help-recommends=$(HELP_RECOMMENDS)' \
 		-V'help-common-depends=$(HELP_COMMON_DEPENDS)' \
 		-V'report-builder-jar-depends=$(REPORT_BUILDER_JAR_DEPENDS)' \
+		-V'liberation2-font-recommends=$(LIBERATION2_FONT_RECOMMENDS)' \
 		-V'Binary-Version=$(BINARY_VERSION)' \
 		-v$(BINARY_VERSION)
 	dh_gencontrol -pfonts-opensymbol -- \
