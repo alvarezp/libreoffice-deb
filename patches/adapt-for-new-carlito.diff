@@ -24,15 +24,3 @@ index 0a519c117b52..e4b504dcddbd 100644
  
      // Without the accompanying fix in place, this test would have failed with:
      // - Expected: 0 (drawing::TextFitToSizeType_NONE)
---- a/sw/qa/extras/ooxmlexport/ooxmlexport14.cxx-old	2023-06-26 06:30:09.119195022 +0200
-+++ b/sw/qa/extras/ooxmlexport/ooxmlexport14.cxx	2023-06-26 06:30:18.891263759 +0200
-@@ -1346,8 +1346,7 @@
- #if !defined(MACOSX)
- DECLARE_OOXMLEXPORT_TEST(testTdf146346, "tdf146346.docx")
- {
--    // This was 2 (by bad docDefault vertical margins around tables in footnotes)
--    CPPUNIT_ASSERT_EQUAL(1, getPages());
-+    CPPUNIT_ASSERT_EQUAL(2, getPages());
- }
- #endif
- 
