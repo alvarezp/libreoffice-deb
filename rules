@@ -2297,7 +2297,7 @@ else
 	# don't run make check but *do* run "bridgetest" and "smoketest" as a smoketest
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE) && \
-		$(TEST_TIMEOUT) make testtools.allcheck verbose=t \
+		$(TEST_TIMEOUT) make testtools.allcheck verbose=t && \
 		cd smoketest && $(TEST_TIMEOUT) make -rk CppunitTest_smoketest verbose=t
 endif
 endif
