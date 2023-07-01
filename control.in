@@ -993,7 +993,7 @@ Description: UI data ("config") for LibreOffice Draw
 Package: libreoffice-uiconfig-impress
 Section: misc
 Architecture: all
-Replaces: libreoffice-impress (<< 4:7.6.0~beta1), libreoffice-impress-nogui (<< 4:7.6.0~beta1), libreoffice-draw (<< 4:7.6.0~beta1), libreoffice-draw-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
+Replaces: libreoffice-impress (<< 4:7.6.0~rc1), libreoffice-impress-nogui (<< 4:7.6.0~rc1), libreoffice-draw (<< 4:7.6.0~rc1), libreoffice-draw-nogui (<< 4:7.6.0~rc1), libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Impress
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.

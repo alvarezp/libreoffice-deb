@@ -17,6 +17,9 @@ libreoffice (4:7.6.0~rc1~git20230701-1) UNRELEASED; urgency=medium
     - again run full make check on amd64/arm64/riscv64(!) (and armhf); make fatal
     - only run testtools' bridgetest and "smoketest" as smoketest on all
       architectures except amd64/amd64/riscv64/armhf
+    - move impress' own soffice.cfg which didn't yet end up in
+      uiconfig-impress actually there (e.g. layoutlist.xml, which is needed by
+      Draw)
   * debian/rules, debian/control.in: 
     - change fonts-liberation2 Build-Depends/Recommends in -common to
       fonts-liberation (>= 1:2)
