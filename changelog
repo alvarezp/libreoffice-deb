@@ -1,9 +1,11 @@
-libreoffice (4:7.6.0~rc1~git20230625-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~rc1~git20230701-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
   * debian/patches/we-dont-have-the-needed-fonts.diff: disable test which
     needs fonts neither provided in Debian (nor even upstream)
+  * debian/patches/bash-completion-updates.diff: add pages to lowriters bash
+    completion (closes: #1033186)
 
   * debian/rules:
     - use --disable-cve-tests on 32bit archs. Fail consistently there on one
