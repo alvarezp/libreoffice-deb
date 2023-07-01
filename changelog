@@ -3,11 +3,11 @@ libreoffice (4:7.5.5~rc1-1) UNRELEASED; urgency=medium
   * New upstream release candidate
 
   * debian/rules:
-    - again run full make check on amd64/arm64 only; make fatal
+    - again run full make check on amd64/arm64/riscv64(!) (and armhf); make fatal
     - only run testtools' bridgetest and "smoketest" as smoketest on all
-      architectures except amd64/arm64
+      architectures except amd64/amd64/riscv64/armhf
 
- -- Rene Engelhard <rene@debian.org>  Fri, 30 Jun 2023 06:54:03 +0200
+ -- Rene Engelhard <rene@debian.org>  Sat, 01 Jul 2023 17:08:24 +0200
 
 libreoffice (4:7.5.4-4) unstable; urgency=medium
 
