@@ -7,6 +7,8 @@ libreoffice (4:7.6.0~rc1~git20230701-1) UNRELEASED; urgency=medium
   * debian/patches/bash-completion-updates.diff: add pages to lowriters bash
     completion (closes: #1033186)
 
+  * debian/control.in:
+    - fix version in Replaces: in -uiconfig-*
   * debian/rules:
     - use --disable-cve-tests on 32bit archs. Fails consistently there on one
       CVE which was a memory leak in tiff and a excpected failure here anyway.
