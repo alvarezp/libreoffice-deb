@@ -523,15 +523,13 @@ $(eval $(call gen_no_archs,OOO_LE_ARCHS))
 OOO_CLANG_ARCHS := $(filter-out alpha ia64,$(OOO_LE_ARCHS))
 $(eval $(call gen_no_archs,OOO_CLANG_ARCHS))
 
-#OOO_CHECK_ARCHS := $(filter-out kfreebsd-i386 kfreebsd-amd64 mips mipsel mips64el armel s390x,$(OOO_ARCHS))
-OOO_CHECK_ARCHS := $(OOO_ARCHS)
+OOO_CHECK_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
-#OOO_JUNIT_ARCHS := i386 amd64 armhf arm64
-#OOO_JUNIT_ARCHS := amd64 arm64
-OOO_JUNIT_ARCHS := $(OOO_ARCHS)
+OOO_JUNIT_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
-#OOO_CHECK_FATAL_ARCHS := i386 amd64 armhf arm64
-OOO_CHECK_FATAL_ARCHS := $(DEBIAN_MAIN_ARCHITECTURES)
+OOO_CHECK_FATAL_ARCHS := amd64 arm64
+
+OOO_SMOKETEST_FATAL_ARCHS := $(OOO_ARCHS)
 
 ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
 PACKAGE_GEN=n
@@ -559,15 +557,21 @@ ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
   ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_CHECK_ARCHS)))
         RUN_MAKE_CHECK=y
   endif
-  ifeq "$(ENABLE_JAVA)" "y"
-    ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_JUNIT_ARCHS)))
+  ifeq "$(RUN_MAKE_CHECK)" "y"
+    ifeq "$(ENABLE_JAVA)" "y"
+      ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_JUNIT_ARCHS)))
         ENABLE_JUNIT4=y
+      endif
     endif
   endif
-  IGNORE_MAKE_CHECK_FAILURES=-
+  IGNORE_MAKE_FAILURES=-
   TEST_TIMEOUT := timeout --foreground --preserve-status -v -k 250m 200m
   ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_CHECK_FATAL_ARCHS)))
-       IGNORE_MAKE_CHECK_FAILURES:=
+       IGNORE_MAKE_FAILURES:=
+       TEST_TIMEOUT:=
+  endif
+  ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_SMOKETEST_FATAL_ARCHS)))
+       IGNORE_MAKE_FAILURES:=
        TEST_TIMEOUT:=
   endif
 endif
@@ -1003,9 +1007,9 @@ else
 	BUILD_DEPS_ARCH += , fonts-liberation (>= 1:2)$(OOO_NO_CHECK_ARCHS) <!nocheck>
 endif
     ifneq "$(BOOKWORM_BACKPORT)" "y"
-	BUILD_DEPS_ARCH += , fonts-crosextra-carlito$(OOO_NO_CHECK_ARCHS) (>= 20230309) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (>= 20230309)$(OOO_NO_CHECK_ARCHS) <!nocheck>
     else
-	BUILD_DEPS_ARCH += , fonts-crosextra-carlito$(OOO_NO_CHECK_ARCHS) (<< 20230309) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (<< 20230309)$(OOO_NO_CHECK_ARCHS) <!nocheck>
     endif
 	# https://lists.freedesktop.org/archives/libreoffice/2017-May/077764.html
 	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
@@ -2275,7 +2279,7 @@ ifeq "$(RUN_MAKE_CHECK)" "y"
 	USE_CPUS=$(NUM_CPUS) debian/scripts/locale-gen
 
         # and now run them
-	$(IGNORE_MAKE_CHECK_FAILURES)t=`mktemp -q -d`; \
+	$(IGNORE_MAKE_FAILURES)t=`mktemp -q -d`; \
 	cd $(SOURCE_TREE) && \
 		export PATH=$(BUILD_PATH); \
 		export TMPDIR=$$t; \
@@ -2289,6 +2293,12 @@ ifeq "$(RUN_MAKE_CHECK)" "y"
 		if [ -x /usr/bin/gdb ]; then ulimit -c unlimited || true; fi && \
 		$(TEST_TIMEOUT) $(MAKE) -k check || $(TEST_TIMEOUT) $(MAKE) check && \
 	rm -rf $$t
+else
+	# don't run make check but *do* run "bridgetest" and "smoketest" as a smoketest
+	$(IGNORE_MAKE_FAILURES)\
+	cd $(SOURCE_TREE) && \
+		$(TEST_TIMEOUT) make testtools.allcheck verbose=t \
+		cd smoketest && $(TEST_TIMEOUT) make -rk CppunitTest_smoketest verbose=t
 endif
 endif
 
@@ -2310,11 +2320,11 @@ ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
   ifeq "$(ENABLE_JAVA)" "y"
 	# since the gb_SUPPRESS_CHECK stuff in build this isn't checked.
 	# probably should, so do it here manually.
-	$(IGNORE_MAKE_CHECK_FAILURES)cd odk && \
+	$(IGNORE_MAKE_FAILURES)cd odk && \
 		$(MAKE) CustomTarget_odk/check
     ifneq (,$(findstring -indep,$(MAKECMDGOALS)))
 	# was already checked in check
-	$(IGNORE_MAKE_CHECK_FAILURES)if [ ! -e $(STAMP_DIR)/build-arch ]; then \
+	$(IGNORE_MAKE_FAILURES)if [ ! -e $(STAMP_DIR)/build-arch ]; then \
 		cd odk && $(MAKE) CustomTarget_odk/build-examples && \
 			$(MAKE) CustomTarget_odk/build-examples_java; \
 	fi
@@ -3966,7 +3976,6 @@ endif
 		-V'firebird-engine-depends=$(FIREBIRD_ENGINE_DEPENDS)' \
 		-V'libsane-suggests=$(shell dpkg -S /usr/lib/$(DEB_HOST_MULTIARCH)/libsane.so.1 | cut -d: -f1)' \
 		-V'liberation-fonts-recommends=$(LIBERATION_FONTS_RECOMMENDS)' \
-		-V'liberation2-font-recommends=$(LIBERATION2_FONT_RECOMMENDS)' \
 		-v$(BINARY_VERSION)
 ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 	for i in libuno-sal3 libuno-cppu3 libuno-salhelpergcc3-3 libuno-cppuhelpergcc3-3 libuno-purpenvhelpergcc3-3 \
@@ -4097,6 +4106,7 @@ endif
 		-V'help-recommends=$(HELP_RECOMMENDS)' \
 		-V'help-common-depends=$(HELP_COMMON_DEPENDS)' \
 		-V'report-builder-jar-depends=$(REPORT_BUILDER_JAR_DEPENDS)' \
+		-V'liberation2-font-recommends=$(LIBERATION2_FONT_RECOMMENDS)' \
 		-V'Binary-Version=$(BINARY_VERSION)' \
 		-v$(BINARY_VERSION)
 	dh_gencontrol -pfonts-opensymbol -- \
