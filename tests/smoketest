@@ -46,9 +46,9 @@ echo "====== Starting smoketest with ${CHECK_PARALLELISM} job against ${OOO_TEST
 export PARALLELISM=$CHECK_PARALLELISM
 
 export LD_LIBRARY_PATH=/usr/lib/libreoffice/program:$LD_LIBRARY_PATH
-cd smoketest && make -rk \
+cd smoketest && make \
     OOO_TEST_SOFFICE=${OOO_TEST_SOFFICE} \
-    CppunitTest_smoketest INSTDIR=/usr/lib/libreoffice verbose=t
+    subsequentcheck INSTDIR=/usr/lib/libreoffice verbose=t
 
 cd $SRCDIR
 

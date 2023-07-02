@@ -1,3 +1,19 @@
+libreoffice (4:7.5.5~rc1-2) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - actually enable cppunit also in the testtools/smoketest-only case
+    - build some smoketest pre-requisites ourselves since they are not built
+      even with module.allcheck (or .allbuild)
+      in smoketest afterwards
+    - build-depend on libcppunit-dev on all archs
+    - clean up some make-check-only Build-Depends(-Arch)
+    - also run the tests in pyuno since shipping a python3-uno which doesn't
+      work is also bad
+  * debian/rules, debian/tests/smoketest: run smoketest using make
+    subsquentcheck in smoketest
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 02 Jul 2023 14:54:03 +0200
+
 libreoffice (4:7.5.5~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
