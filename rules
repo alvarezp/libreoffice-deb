@@ -850,7 +850,9 @@ endif
 ifeq "$(ENABLE_PDFIMPORT)" "y"
   ifeq "$(ENABLE_POPPLER)" "y"
 	BUILD_DEPS += , libpoppler-dev, libpoppler-private-dev, libpoppler-cpp-dev
+    ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , poppler-data$(OOO_NO_CHECK_ARCHS) <!nocheck>
+    endif
   else
 	CONFIGURE_FLAGS += --disable-poppler
   endif
@@ -887,8 +889,10 @@ endif
 
 ifneq (,$(filter libnumbertext, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libnumbertext-dev
+    ifeq "$(RUN_MAKE_CHECK)" "y"
 	# https://cgit.freedesktop.org/libreoffice/core/commit/?h=libreoffice-7-3&id=09dfe214a30f58ddcd7a857db8f5eee68d4cef2a
 	BUILD_DEPS_ARCH += , libnumbertext-data (>= 1.0.11) <!nocheck>
+    endif
 	NUMBERTEXT_DATA_RECOMMENDS := libnumbertext-data
 endif
 
@@ -1041,14 +1045,6 @@ endif
 	# it isn't the case in --without-fonts) but... And while we disable that abort via patch having this
 	# to be sure there is no other failure mode makes sense (as with the other fonts above)
 	BUILD_DEPS_ARCH += , fonts-linuxlibertine$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    ifneq (,$(filter cppunit, $(SYSTEM_STUFF)))
-	BUILD_DEPS_ARCH += , libcppunit-dev$(OOO_NO_CHECK_ARCHS) <!nocheck>
-      # without the deterministic order patch the xmlsecurity_signing test fails. See
-      # https://cgit.freedesktop.org/libreoffice/core/commit/external/cppunit/order.patch.0?id=2f2246d22e2a8ccbc1dc3e6f5243734a61edf270
-      ifeq "$(ENABLE_LTO)" "y"
-        BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.15.1-4) [$(filter $(OOO_CHECK_ARCHS),$(OOO_64BIT_ARCHS))] <!nocheck>
-      endif
-    endif
 	# 17:35 <@sberg_> vmiklos, oh, what kind of poor test is that? "warn:sal.osl:3785:2:sal/osl/unx/process.cxx:344: ChildStatusProc : starting 'pstoedit' failed" etc. is what I see in workdir/CppunitTest/filter_eps_test.test.log...
 	BUILD_DEPS_ARCH += , pstoedit$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , imagemagick$(OOO_NO_CHECK_ARCHS) <!nocheck>
@@ -1056,14 +1052,20 @@ endif
 
 	BUILD_DEPS_ARCH += , hunspell-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , hyphen-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    # we don't run any cppunit check in all builds
-    ifneq "$(AUTOPKGTEST_BUILD)" "y"
-      ifeq ($(MAKECMDGOALS),build-indep)
-	CONFIGURE_FLAGS_INDEP += --without-cppunit
+  endif
+  # we don't run any cppunit check in all builds
+  ifneq "$(AUTOPKGTEST_BUILD)" "y"
+    ifneq (,$(filter cppunit, $(SYSTEM_STUFF)))
+	BUILD_DEPS_ARCH += , libcppunit-dev <!nocheck>
+      # without the deterministic order patch the xmlsecurity_signing test fails. See
+      # https://cgit.freedesktop.org/libreoffice/core/commit/external/cppunit/order.patch.0?id=2f2246d22e2a8ccbc1dc3e6f5243734a61edf270
+      ifeq "$(ENABLE_LTO)" "y"
+        BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.15.1-4) [$(filter $(OOO_CHECK_ARCHS),$(OOO_64BIT_ARCHS))] <!nocheck>
       endif
     endif
-  else
-	CONFIGURE_FLAGS += --without-cppunit
+    ifeq ($(MAKECMDGOALS),build-indep)
+	CONFIGURE_FLAGS_INDEP += --without-cppunit
+    endif
   endif
   ifeq "$(ENABLE_JUNIT4)" "y"
 	BUILD_DEPS += , junit4 $(JUNIT_MIN_VER) [$(OOO_JUNIT_ARCHS)] <!nocheck !nojava>
@@ -1288,10 +1290,11 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
 	BUILD_DEPS += , libmspub-dev (>= 0.1), libmspub-dev (<< 0.2~)
   endif
   ifneq (,$(filter libmwaw, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libmwaw-dev (>= 0.3.1), libmwaw-dev (<< 0.4~)
+#	BUILD_DEPS += , libmwaw-dev (>= 0.3.1), libmwaw-dev (<< 0.4~)
+# configure.ac checks for >= 0.3.21
+	BUILD_DEPS += , libmwaw-dev (>= 0.3.21), libmwaw-dev (<< 0.4~)
 #    ifeq "$(RUN_MAKE_CHECK)" "y"
 #	BUILD_DEPS_ARCH += , libmwaw-dev (>= 0.3.21)$(OOO_NO_CHECK_ARCHS) <!nocheck>
-	BUILD_DEPS_ARCH += , libmwaw-dev (>= 0.3.21)
 #    endif
   endif
   ifneq (,$(filter libodfgen, $(SYSTEM_STUFF)))
@@ -2241,14 +2244,11 @@ ifeq "$(BUILD_TEST_PACKAGES)" "y"
 endif
 
 ifeq "$(BUILD_TEST_PACKAGES)" "y"
-	# doesn't necessarily exist unless you also ran check...
-	if [ -d workdir/Zip ]; then \
-		find workdir/Zip -name "smoketestdoc*" | xargs rm; \
-		patch -p0 < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff; \
-		cd smoketest && $(MAKE) Zip_smoketestdoc; cd ..; \
-		patch -p0 -R < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff; \
-		cp workdir/Zip/smoketestdoc.zip workdir/Zip/smoketestdoc.sxw; \
-	fi
+	find workdir/Zip -name "smoketestdoc*" | xargs rm; \
+	patch -p0 < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff; \
+	cd smoketest && $(MAKE) Zip_smoketestdoc; cd ..; \
+	patch -p0 -R < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff; \
+	cp workdir/Zip/smoketestdoc.zip workdir/Zip/smoketestdoc.sxw
 endif
 
 ifneq "$(AUTOPKGTEST_BUILD)" "y"
@@ -2260,10 +2260,9 @@ endif
 	touch $@
 
 check:
-ifeq "$(BUILD_TESTS)" "y"
-  ifneq (,$(filter $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
+ifneq (,$(filter $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
 	patch -p1 < $(CURDIR)/debian/tests/patches/disable-db-tests.diff
-  endif
+endif
   ifeq (,$(filter $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
 	cd $(SOURCE_TREE)/smoketest && \
 		patch -p1 < $(CURDIR)/debian/tests/patches/smoketest-disable-extension-tests.diff
@@ -2283,6 +2282,7 @@ ifeq "$(BUILD_TESTS)" "y"
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
 
+ifeq "$(BUILD_TESTS)" "y"
 	# build the tests (first)
 	export gb_SUPPRESS_TESTS=true; \
 		$(MAKE) check
@@ -2310,11 +2310,35 @@ ifeq "$(RUN_MAKE_CHECK)" "y"
 		$(TEST_TIMEOUT) $(MAKE) -k check || $(TEST_TIMEOUT) $(MAKE) check && \
 	rm -rf $$t
 else
-	# don't run make check but *do* run "bridgetest" and "smoketest" as a smoketest
+	# don't run make check but *do* run selected tests here which are deemed too important
+	# to fail
+	# - "bridgetest"
+	# - "smoketest" as a smoketest
+	# - pyuno (as we shiup python3-uno..)
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE) && \
-		$(TEST_TIMEOUT) make testtools.allcheck verbose=t && \
-		cd smoketest && $(TEST_TIMEOUT) make -rk CppunitTest_smoketest verbose=t
+		$(TEST_TIMEOUT) make testtools.allcheck
+	# build smoketest prerequisites
+	# and it only builds unotest but not test so build that manually...
+	# sal only builds cppunittester on make check due to cppunit-optional.diff
+	# smoketest.allcheck actually does NOT run it... Do it manually later..
+	# allcheck actually does NOT run it... Do it manually later..
+	cd $(SOURCE_TREE) && \
+		$(TEST_TIMEOUT) ( \
+			make unotest.allbuild && \
+			make test.allbuild && \
+			gb_SUPPRESS_TESTS=true make sal.allcheck && \
+			make smoketest.allcheck \
+		)
+	# run the smoketest
+	cd $(SOURCE_TREE)/smoketest && \
+		$(TEST_TIMEOUT) make subsequentcheck
+
+  ifeq "$(ENABLE_PYTHON)" "y"
+	# does pyuno work?
+	cd $(SOURCE_TREE)/pyuno && \
+		$(TEST_TIMEOUT) make check subsequentcheck 
+  endif
 endif
 endif
 

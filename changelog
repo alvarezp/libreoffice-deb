@@ -1,4 +1,4 @@
-libreoffice (4:7.6.0~rc1~git20230701-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~rc1~git20230702-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
@@ -15,11 +15,16 @@ libreoffice (4:7.6.0~rc1~git20230701-1) UNRELEASED; urgency=medium
       Fixed in tiff ages ago and we're not really supposed to test others' CVEs as
       we use external libs anyway
     - again run full make check on amd64/arm64/riscv64(!) (and armhf); make fatal
-    - only run testtools' bridgetest and "smoketest" as smoketest on all
-      architectures except amd64/amd64/riscv64/armhf
+    - only run testtools' bridgetestm "smoketest" as smoketest and the pyuno
+      tests on all architectures except amd64/amd64/riscv64/armhf
+    - actually enable cppunit also in the testtools/smoketest-only case
+    - build-depend on libcppunit-dev on all archs
+    - clean up some make-check-only Build-Depends(-Arch)
     - move impress' own soffice.cfg which didn't yet end up in
       uiconfig-impress actually there (e.g. layoutlist.xml, which is needed by
       Draw)
+  * debian/rules, debian/tests/smoketest: run smoketest using make
+    subsquentcheck in smoketest
   * debian/rules, debian/control.in: 
     - change fonts-liberation2 Build-Depends/Recommends in -common to
       fonts-liberation (>= 1:2)
