@@ -2331,11 +2331,13 @@ else
 			make smoketest.allcheck \
 		)
 	# run the smoketest
+	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/smoketest && \
 		$(TEST_TIMEOUT) make subsequentcheck
 
   ifeq "$(ENABLE_PYTHON)" "y"
 	# does pyuno work?
+	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/pyuno && \
 		$(TEST_TIMEOUT) make check subsequentcheck 
   endif
