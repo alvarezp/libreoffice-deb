@@ -41,7 +41,6 @@ disable-shortcuts_tab_navigation-uitest.diff
 no-opencl-per-default.diff
 apparmor-updates.diff
 apparmor-gnupg-tofu.diff
-temporarily-disable-test-metadata-test.diff
 arm-fp-mode.diff
 moreIconsDialog-accesses-internet.diff
 do-not-abort-on-NON_APPLICATION_FONT_USE.diff

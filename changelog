@@ -6,6 +6,8 @@ libreoffice (4:7.6.0~rc1~git20230702-1) UNRELEASED; urgency=medium
     needs fonts neither provided in Debian (nor even upstream)
   * debian/patches/bash-completion-updates.diff: add pages to lowriters bash
     completion (closes: #1033186)
+  * debian/temporarily-disable-test-metadata-test.diff: remove, apparently
+    works now
 
   * debian/control.in:
     - fix version in Replaces: in -uiconfig-*
