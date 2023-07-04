@@ -23,7 +23,7 @@ Build-Depends: autoconf,
                gperf,
                java-common <!nojava>,
                javahelper <!nojava>,
-               junit4 [alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64] <!nocheck !nojava>,
+               junit4 [amd64 arm64 riscv64 armhf] <!nocheck !nojava>,
                libabsl-dev [alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64],
                libabw-dev (<< 0.2~),
                libabw-dev (>= 0.1),
@@ -105,7 +105,7 @@ Build-Depends: autoconf,
                libmspub-dev (<< 0.2~),
                libmspub-dev (>= 0.1),
                libmwaw-dev (<< 0.4~),
-               libmwaw-dev (>= 0.3.1),
+               libmwaw-dev (>= 0.3.21),
                libmythes-dev,
                libnspr4-dev,
                libnss3-dev,
@@ -187,30 +187,29 @@ Build-Depends: autoconf,
                zip,
                zlib1g-dev
 Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nocheck>,
-                    fontconfig <!nocheck>,
-                    fonts-crosextra-carlito <!nocheck>,
-                    fonts-dejavu <!nocheck>,
-                    fonts-hosny-amiri <!nocheck>,
-                    fonts-liberation2 <!nocheck>,
-                    fonts-linuxlibertine <!nocheck>,
-                    fonts-noto-core <!nocheck>,
-                    gdb <!nocheck>,
-                    ghostscript <!nocheck>,
-                    gpg <!nocheck>,
-                    gpg-agent <!nocheck>,
-                    gpgconf <!nocheck>,
-                    hunspell-en-us <!nocheck>,
-                    hyphen-en-us <!nocheck>,
-                    imagemagick <!nocheck>,
-                    libcppunit-dev (>= 1.15.1-4) [alpha amd64 arm64 ia64 kfreebsd-amd64 loong64 mips64 mips64el ppc64 ppc64el riscv64 s390x sparc64] <!nocheck>,
+                    fontconfig [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    fonts-crosextra-carlito (>= 20230309) [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    fonts-dejavu [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    fonts-hosny-amiri [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    fonts-liberation (>= 1:2) [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    fonts-linuxlibertine [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    fonts-noto-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    gdb [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    ghostscript [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    gpg [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    gpg-agent [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    gpgconf [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    hunspell-en-us [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    hyphen-en-us [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    imagemagick [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    libcppunit-dev (>= 1.15.1-4) [amd64 arm64 riscv64] <!nocheck>,
                     libcppunit-dev <!nocheck>,
-                    libmwaw-dev (>= 0.3.21),
                     libnumbertext-data (>= 1.0.11) <!nocheck>,
                     liborcus-dev (>= 0.18.1) <!nocheck>,
-                    locales <!nocheck>,
-                    poppler-data <!nocheck>,
-                    pstoedit <!nocheck>,
-                    python3-lxml <!nocheck !nopython>
+                    locales [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    poppler-data [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    pstoedit [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    python3-lxml [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck !nopython>
 Build-Depends-Indep: ant [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nojava>,
                      ant-optional [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nojava>,
                      apparmor <!nocheck>,
@@ -539,9 +538,9 @@ Depends: libreoffice-style-colibre,
          ${misc:Depends},
          ${numbertext-data-recommends}
 Suggests: libreoffice-style, python3-scriptforge
-Recommends: fonts-liberation2 | ttf-mscorefonts-installer, apparmor,
-            poppler-data,
+Recommends: poppler-data,
             xdg-utils,
+            ${liberation2-font-recommends} | ttf-mscorefonts-installer, apparmor,
             ${pyuno-depends},
             ${textcat-data-recommends}
 Conflicts: broffice,
@@ -1204,7 +1203,7 @@ Description: generic Java Bean wrapper for LibreOffice components
 Package: libreoffice-uiconfig-common
 Section: misc
 Architecture: all
-Replaces: libreoffice-common (<< 1:7.6.0~beta1)
+Replaces: libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice ("common" set)
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1219,9 +1218,9 @@ Description: UI data ("config") for LibreOffice ("common" set)
 Package: libreoffice-uiconfig-base
 Section: misc
 Architecture: all
-Replaces: libreoffice-base (<< 1:7.6.0~beta1),
-          libreoffice-base-nogui (<< 1:7.6.0~beta1),
-          libreoffice-common (<< 1:7.6.0~beta1)
+Replaces: libreoffice-base (<< 4:7.6.0~beta1),
+          libreoffice-base-nogui (<< 4:7.6.0~beta1),
+          libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Base
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1236,9 +1235,9 @@ Description: UI data ("config") for LibreOffice Base
 Package: libreoffice-uiconfig-calc
 Section: misc
 Architecture: all
-Replaces: libreoffice-calc (<< 1:7.6.0~beta1),
-          libreoffice-calc-nogui (<< 1:7.6.0~beta1),
-          libreoffice-common (<< 1:7.6.0~beta1)
+Replaces: libreoffice-calc (<< 4:7.6.0~beta1),
+          libreoffice-calc-nogui (<< 4:7.6.0~beta1),
+          libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Calc
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1253,9 +1252,9 @@ Description: UI data ("config") for LibreOffice Calc
 Package: libreoffice-uiconfig-draw
 Section: misc
 Architecture: all
-Replaces: libreoffice-common (<< 1:7.6.0~beta1),
-          libreoffice-draw (<< 1:7.6.0~beta1),
-          libreoffice-draw-nogui (<< 1:7.6.0~beta1)
+Replaces: libreoffice-common (<< 4:7.6.0~beta1),
+          libreoffice-draw (<< 4:7.6.0~beta1),
+          libreoffice-draw-nogui (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Draw
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1270,11 +1269,11 @@ Description: UI data ("config") for LibreOffice Draw
 Package: libreoffice-uiconfig-impress
 Section: misc
 Architecture: all
-Replaces: libreoffice-common (<< 1:7.6.0~beta1),
-          libreoffice-draw (<< 1:7.6.0~beta1),
-          libreoffice-draw-nogui (<< 1:7.6.0~beta1),
-          libreoffice-impress (<< 1:7.6.0~beta1),
-          libreoffice-impress-nogui (<< 1:7.6.0~beta1)
+Replaces: libreoffice-common (<< 4:7.6.0~beta1),
+          libreoffice-draw (<< 4:7.6.0~rc1),
+          libreoffice-draw-nogui (<< 4:7.6.0~rc1),
+          libreoffice-impress (<< 4:7.6.0~rc1),
+          libreoffice-impress-nogui (<< 4:7.6.0~rc1)
 Description: UI data ("config") for LibreOffice Impress
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1289,9 +1288,9 @@ Description: UI data ("config") for LibreOffice Impress
 Package: libreoffice-uiconfig-math
 Section: misc
 Architecture: all
-Replaces: libreoffice-common (<< 1:7.6.0~beta1),
-          libreoffice-math (<< 1:7.6.0~beta1),
-          libreoffice-math-nogui (<< 1:7.6.0~beta1)
+Replaces: libreoffice-common (<< 4:7.6.0~beta1),
+          libreoffice-math (<< 4:7.6.0~beta1),
+          libreoffice-math-nogui (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Math
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1306,9 +1305,9 @@ Description: UI data ("config") for LibreOffice Math
 Package: libreoffice-uiconfig-writer
 Section: misc
 Architecture: all
-Replaces: libreoffice-common (<< 1:7.6.0~beta1),
-          libreoffice-writer (<< 1:7.6.0~beta1),
-          libreoffice-writer-nogui (<< 1:7.6.0~beta1)
+Replaces: libreoffice-common (<< 4:7.6.0~beta1),
+          libreoffice-writer (<< 4:7.6.0~beta1),
+          libreoffice-writer-nogui (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Writer
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.

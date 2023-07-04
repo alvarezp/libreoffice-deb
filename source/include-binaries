@@ -6,3 +6,5 @@ tarballs/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
 tarballs/pdfium-5778.tar.bz2
 tarballs/skia-m111-a31e897fb3dcbc96b2b40999751611d029bf5404.tar.xz
 tarballs/dtoa-20180411.tgz
+emfio/qa/cppunit/emf/data/TestEmfPlusDrawCurve.emf
+emfio/qa/cppunit/emf/data/TestEmfPlusFillClosedCurve.emf
