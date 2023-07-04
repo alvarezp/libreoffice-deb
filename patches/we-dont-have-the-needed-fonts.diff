@@ -11,7 +11,7 @@ index a4d4540ab228..46d262f6f0b8 100644
  #include <memory>
  
  #include <com/sun/star/text/BibliographyDataField.hpp>
-@@ -1363,6 +1365,8 @@ CPPUNIT_TEST_FIXTURE(SwCoreTextTest, testParaUpperMarginFlyIntersect)
+@@ -1425,6 +1425,8 @@ CPPUNIT_TEST_FIXTURE(SwCoreTextTest, testParaUpperMarginFlyIntersect)
      CPPUNIT_ASSERT_EQUAL(521, nHeight);
  }
  
@@ -19,7 +19,7 @@ index a4d4540ab228..46d262f6f0b8 100644
 +#if HAVE_MORE_FONTS
  CPPUNIT_TEST_FIXTURE(SwCoreTextTest, testTdf129810)
  {
-     // Load the document, which embeds a CJK font.
+     // Load the document.
 @@ -1394,6 +1398,7 @@ CPPUNIT_TEST_FIXTURE(SwCoreTextTest, testTdf129810)
          }
      }
