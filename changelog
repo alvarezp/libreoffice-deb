@@ -1,4 +1,4 @@
-libreoffice (4:7.6.0~rc1~git20230702-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~rc1~git20230705-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
@@ -8,8 +8,6 @@ libreoffice (4:7.6.0~rc1~git20230702-1) UNRELEASED; urgency=medium
     completion (closes: #1033186)
   * debian/temporarily-disable-test-metadata-test.diff: remove, apparently
     works now
-  * debian/patches/i386-skia-no-SSE.diff: fix upstream regression; don't
-    require SSE on i386
 
   * debian/control.in:
     - fix version in Replaces: in -uiconfig-*
