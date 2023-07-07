@@ -8,6 +8,7 @@ libreoffice (4:7.6.0~rc1-1) experimental; urgency=medium
     completion (closes: #1033186)
   * debian/temporarily-disable-test-metadata-test.diff: remove, apparently
     works now
+  * debian/patches/fix-i386-build.diff: as name says, from upstream gerrit
 
   * debian/control.in:
     - fix version in Replaces: in -uiconfig-*
@@ -30,7 +31,7 @@ libreoffice (4:7.6.0~rc1-1) experimental; urgency=medium
       fonts-liberation (>= 1:2)
     - change fonts-liberation2 Build-Depends to fonts-liberation (>= 1:2)
 
- -- Rene Engelhard <rene@debian.org>  Fri, 07 Jul 2023 18:55:06 +0200
+ -- Rene Engelhard <rene@debian.org>  Fri, 07 Jul 2023 19:25:47 +0200
 
 libreoffice (4:7.6.0~beta1-3) experimental; urgency=medium
 
