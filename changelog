@@ -1,3 +1,9 @@
+libreoffice (4:7.6.0~rc2~git20230707-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot 
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 07 Jul 2023 21:50:42 +0200
+
 libreoffice (4:7.6.0~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate 
