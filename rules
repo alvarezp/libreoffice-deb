@@ -2278,7 +2278,6 @@ endif
 	QT5DIR=/usr/lib/$(DEB_HOST_MULTIARCH)/qt5 QT6DIR=/usr/lib/qt6 \
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--disable-ext-wiki-publisher \
-		--disable-scripting-javascript --disable-scripting-beanshell \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
 
