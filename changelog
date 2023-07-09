@@ -2,6 +2,8 @@ libreoffice (4:7.5.5~rc1-3) UNRELEASED; urgency=medium
 
   * debian/rules:
     - add more "no-make-check checks". sal, cppu(helper), comphelper, unoidl 
+  * debian/tests/control.in, debian/tests/test-extension-bundled:
+    - add a test-extension-bundled autopkgtest
 
  -- Rene Engelhard <rene@debian.org>  Sun, 09 Jul 2023 23:28:21 +0200
 
