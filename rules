@@ -758,6 +758,15 @@ ifeq "$(USE_CLANG)" "y"
   ENABLE_COMPILER_PLUGINS=n
 endif
 
+ifeq "$(ENABLE_SKIA)" "y"
+  ifeq "$(ALLOW_CLANG)" "y"
+  BUILD_DEPS += , clang-14 [ppc64el] | clang (<< 1:15~) [ppc64el]
+    ifeq "$(DEB_HOST_ARCH)" "ppc64el"
+	CLANG_VERSION := 14
+    endif
+  endif
+endif
+
 ifneq "$(USE_CLANG)" "y"
   ifneq "$(GCC_VERSION)" ""
   ifneq "$(SYSTEM_GCC_VERSION)" "$(GCC_VERSION)"
