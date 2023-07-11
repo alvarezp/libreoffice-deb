@@ -12,8 +12,6 @@ libreoffice (4:7.5.5~rc1-3) unstable; urgency=medium
   * debian/rules:
     - add more "no-make-check checks". sal, cppu(helper), comphelper, unoidl
     - build with noopt (aka -O0) on riscv64 (closes: #1039906)
-  * debian/tests/control.in, debian/tests/test-extension-bundled:
-    - add a test-extension-bundled autopkgtest
 
  -- Rene Engelhard <rene@debian.org>  Tue, 11 Jul 2023 22:22:34 +0200
 
