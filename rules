@@ -2336,9 +2336,9 @@ else
 			make smoketest.allcheck \
 		)
 	# build some more tests
-        for i in cppu cppuhelper comphelper unoidl; do \
-                $(TEST_TIMEOUT) gb_SUPPRESS_TESTS=true make $i.allcheck; \
-        done
+ 	for i in cppu cppuhelper comphelper unoidl; do \
+		$(TEST_TIMEOUT) gb_SUPPRESS_TESTS=true make $i.allcheck; \
+	done
 	# run the sal tests. We built them anyways and it does make sense to test
 	# the system abstraction layer anyways. And it contains system-operating tests
 	# and types test which might become relevant for new architectures
@@ -2358,7 +2358,7 @@ else
 	cd $(SOURCE_TREE)/pyuno && \
 		$(TEST_TIMEOUT) make check subsequentcheck 
   endif
-  	# shipped in the SDK
+	# shipped in the SDK
   ifeq "$(PACKAGE_SDK)" "y"
 	cd $(SOURCE_TREE)/unoidl && \
 		$(TEST_TIMEOUT) make check

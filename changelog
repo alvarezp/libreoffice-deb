@@ -1,3 +1,10 @@
+libreoffice (4:7.5.5~rc1-4) unstable; urgency=medium
+
+  * debian/rules:
+    - fix new tests' part of rules 
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 11 Jul 2023 22:02:51 +0000
+
 libreoffice (4:7.5.5~rc1-3) unstable; urgency=medium
 
   * upload to unstable
