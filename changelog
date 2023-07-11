@@ -1,3 +1,47 @@
+libreoffice (4:7.5.5~rc1-3) UNRELEASED; urgency=medium
+
+  * debian/patches/dp_platform-riscv64-and-loongarch64.diff: actually make
+    riscv64 and loongarch64 known to "the deployment"
+  * debian/patches/bash-completion-updates.diff: add pages to lowriters bash
+    completion (closes: #1033186)
+  * debian/patches/work-around-against-harfbuzz-API-break.diff: as name says;
+    work around API break in Debians libharfbuzz-dev 8.0.0-1
+
+  * debian/rules:
+    - add more "no-make-check checks". sal, cppu(helper), comphelper, unoidl
+    - build with noopt (aka -O0) on riscv64 (closes: #1039906)
+  * debian/tests/control.in, debian/tests/test-extension-bundled:
+    - add a test-extension-bundled autopkgtest
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 10 Jul 2023 22:52:33 +0200
+
+libreoffice (4:7.5.5~rc1-2) experimental; urgency=medium
+
+  * debian/rules:
+    - actually enable cppunit also in the testtools/smoketest-only case
+    - build some smoketest pre-requisites ourselves since they are not built
+      even with module.allcheck (or .allbuild)
+      in smoketest afterwards
+    - build-depend on libcppunit-dev on all archs
+    - clean up some make-check-only Build-Depends(-Arch)
+    - also run the tests in pyuno since shipping a python3-uno which doesn't
+      work is also bad
+  * debian/rules, debian/tests/smoketest: run smoketest using make
+    subsquentcheck in smoketest
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 02 Jul 2023 16:47:26 +0200
+
+libreoffice (4:7.5.5~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/rules:
+    - again run full make check on amd64/arm64/riscv64(!) (and armhf); make fatal
+    - only run testtools' bridgetest and "smoketest" as smoketest on all
+      architectures except amd64/amd64/riscv64/armhf
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 01 Jul 2023 15:15:30 +0000
+
 libreoffice (4:7.5.4-4) unstable; urgency=medium
 
   * debian/patches/adapt-for-new-carlito.diff: as name says; adapt one

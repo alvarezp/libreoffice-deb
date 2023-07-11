@@ -29,6 +29,11 @@ Architecture: %OOO_NOGUI_ARCHS%
 Depends: libreoffice-core-nogui, libreoffice-common, libreoffice-java-common, libreoffice-smoketest-data, default-jdk
 Restrictions: allow-stderr, needs-root, superficial
 
+Tests: test-extension-bundled
+Architecture: %OOO_NOGUI_ARCHS%
+Depends: libreoffice-core-nogui, libreoffice-common, libreoffice-java-common, libreoffice-smoketest-data, default-jdk, libreoffice-nlpsolver, libreoffice-lightproof-en
+Restrictions: allow-stderr, needs-root, superficial
+
 # in the following some tests need RTL and CJK language packs installed to pass.
 # he is the example for RTL, zh-tw for CJK (and zh-tw was choosen to also test xx-YY locales)
 
