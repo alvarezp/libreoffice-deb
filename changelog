@@ -1,6 +1,4 @@
-libreoffice (4:7.6.0~rc2~git20230707-1) UNRELEASED; urgency=medium
-
-  * New upstream snapshot
+libreoffice (4:7.6.0~rc1-2) UNRELEASED; urgency=medium
 
   * debian/patches/dp_platform-riscv64-and-loongarch64.diff: actually make
     riscv64 and loongarch64 known to "the deployment"
