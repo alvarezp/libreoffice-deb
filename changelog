@@ -1,5 +1,8 @@
 libreoffice (4:7.5.5~rc1-3) UNRELEASED; urgency=medium
 
+  * debian/patches/dp_platform-riscv64-and-loongarch64.diff: actually make
+    riscv64 and loongarch64 known to "the deployment"
+
   * debian/rules:
     - add more "no-make-check checks". sal, cppu(helper), comphelper, unoidl
     - build with noopt (aka -O0) on riscv64 (closes: #1039906)
