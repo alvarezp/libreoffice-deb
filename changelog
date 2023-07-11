@@ -1,4 +1,6 @@
-libreoffice (4:7.5.5~rc1-3) UNRELEASED; urgency=medium
+libreoffice (4:7.5.5~rc1-3) unstable; urgency=medium
+
+  * upload to unstable
 
   * debian/patches/dp_platform-riscv64-and-loongarch64.diff: actually make
     riscv64 and loongarch64 known to "the deployment"
@@ -13,7 +15,7 @@ libreoffice (4:7.5.5~rc1-3) UNRELEASED; urgency=medium
   * debian/tests/control.in, debian/tests/test-extension-bundled:
     - add a test-extension-bundled autopkgtest
 
- -- Rene Engelhard <rene@debian.org>  Mon, 10 Jul 2023 22:52:33 +0200
+ -- Rene Engelhard <rene@debian.org>  Tue, 11 Jul 2023 22:22:34 +0200
 
 libreoffice (4:7.5.5~rc1-2) experimental; urgency=medium
 
