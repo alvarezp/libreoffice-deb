@@ -794,10 +794,16 @@ ifeq "$(DEB_HOST_ARCH)" "armhf"
   endif
 endif
   # and also on s390x since it otherwise gets miscompiled.
-  # Upstream tacked it down to a gcc bug: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106355
+  # Upstream tracked it down to a gcc bug: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106355
   # but
   # 16:37 <@sberg> _rene_, I couldn't reproduce the issue with an -O0 (--enable-dbgutil) build, and can with a -O2 (no --enable-debug etc.) one
 ifeq "$(DEB_HOST_ARCH)" "s390x"
+  ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	DEB_BUILD_OPTIONS += noopt
+  endif
+endif
+# see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1039906#26
+ifeq "$(DEB_HOST_ARCH)" "riscv64"
   ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	DEB_BUILD_OPTIONS += noopt
   endif
@@ -2287,7 +2293,6 @@ endif
 	QT5DIR=/usr/lib/$(DEB_HOST_MULTIARCH)/qt5 QT6DIR=/usr/lib/qt6 \
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--disable-ext-wiki-publisher \
-		--disable-scripting-javascript --disable-scripting-beanshell \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
 
@@ -2339,16 +2344,33 @@ else
 			gb_SUPPRESS_TESTS=true make sal.allcheck && \
 			make smoketest.allcheck \
 		)
+	# build some more tests
+        for i in cppu cppuhelper comphelper unoidl; do \
+                $(TEST_TIMEOUT) gb_SUPPRESS_TESTS=true make $i.allcheck; \
+        done
+	# run the sal tests. We built them anyways and it does make sense to test
+	# the system abstraction layer anyways. And it contains system-operating tests
+	# and types test which might become relevant for new architectures
+	cd $(SOURCE_TREE)/sal && \
+		$(TEST_TIMEOUT) make check
+	# more public library checks
+	for i in cppu cppuhelper comphelper; do \
+		$(TEST_TIMEOUT) make $i.allcheck; \
+	done
 	# run the smoketest
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/smoketest && \
 		$(TEST_TIMEOUT) make subsequentcheck
-
   ifeq "$(ENABLE_PYTHON)" "y"
 	# does pyuno work?
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/pyuno && \
 		$(TEST_TIMEOUT) make check subsequentcheck 
+  endif
+  	# shipped in the SDK
+  ifeq "$(PACKAGE_SDK)" "y"
+	cd $(SOURCE_TREE)/unoidl && \
+		$(TEST_TIMEOUT) make check
   endif
 endif
 endif

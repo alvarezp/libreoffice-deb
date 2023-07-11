@@ -1,0 +1,18 @@
+diff --git a/vcl/source/font/PhysicalFontFace.cxx b/vcl/source/font/PhysicalFontFace.cxx
+index aa9a9327f708..a19b393be098 100644
+--- a/vcl/source/font/PhysicalFontFace.cxx
++++ b/vcl/source/font/PhysicalFontFace.cxx
+@@ -38,6 +38,13 @@
+ 
+ #include <hb-ot.h>
+ 
++#if HB_VERSION_ATLEAST(8, 0, 0) // Debian-only, see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1040872
++#if HB_LANGUAGE_INVALID == 0
++#undef HB_LANGUAGE_INVALID
++#define HB_LANGUAGE_INVALID ((hb_language_t) 0)
++#endif
++#endif
++
+ namespace vcl::font
+ {
+ PhysicalFontFace::PhysicalFontFace(const FontAttributes& rDFA)
