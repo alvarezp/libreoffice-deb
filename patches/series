@@ -46,4 +46,5 @@ arm-fp-mode.diff
 moreIconsDialog-accesses-internet.diff
 do-not-abort-on-NON_APPLICATION_FONT_USE.diff
 adapt-for-new-carlito.diff
+bash-completion-updates.diff
 dp_platform-riscv64-and-loongarch64.diff

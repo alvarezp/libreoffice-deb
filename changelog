@@ -2,6 +2,8 @@ libreoffice (4:7.5.5~rc1-3) UNRELEASED; urgency=medium
 
   * debian/patches/dp_platform-riscv64-and-loongarch64.diff: actually make
     riscv64 and loongarch64 known to "the deployment"
+  * debian/patches/bash-completion-updates.diff: add pages to lowriters bash
+    completion (closes: #1033186)
 
   * debian/rules:
     - add more "no-make-check checks". sal, cppu(helper), comphelper, unoidl
