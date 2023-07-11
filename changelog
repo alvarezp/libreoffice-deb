@@ -1,4 +1,4 @@
-libreoffice (4:7.6.0~rc1-2) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~rc1-2) experimental; urgency=medium
 
   * debian/patches/dp_platform-riscv64-and-loongarch64.diff: actually make
     riscv64 and loongarch64 known to "the deployment"
@@ -9,7 +9,7 @@ libreoffice (4:7.6.0~rc1-2) UNRELEASED; urgency=medium
     - build with noopt (aka -O0) on riscv64 (closes: #1039906)
     - force clang-14 | clang (<< 1:15~) on ppc64el for now
 
- -- Rene Engelhard <rene@debian.org>  Tue, 11 Jul 2023 22:46:50 +0200
+ -- Rene Engelhard <rene@debian.org>  Tue, 11 Jul 2023 23:15:14 +0200
 
 libreoffice (4:7.6.0~rc1-1) experimental; urgency=medium
 
