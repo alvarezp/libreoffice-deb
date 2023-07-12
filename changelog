@@ -2,14 +2,12 @@ libreoffice (4:7.6.0~rc1-2) experimental; urgency=medium
 
   * debian/patches/dp_platform-riscv64-and-loongarch64.diff: actually make
     riscv64 and loongarch64 known to "the deployment"
-  * debian/patches/work-around-against-harfbuzz-API-break.diff: as name says;
-    work around API break in Debians libharfbuzz-dev 8.0.0-1
   * debian/rules:
     - add more "no-make-check checks". sal, cppu(helper), comphelper, unoidl
     - build with noopt (aka -O0) on riscv64 (closes: #1039906)
     - force clang-14 | clang (<< 1:15~) on ppc64el for now
 
- -- Rene Engelhard <rene@debian.org>  Tue, 11 Jul 2023 23:15:14 +0200
+ -- Rene Engelhard <rene@debian.org>  Wed, 12 Jul 2023 05:29:22 +0200
 
 libreoffice (4:7.6.0~rc1-1) experimental; urgency=medium
 

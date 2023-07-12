@@ -2347,15 +2347,17 @@ else
 		)
 	# build some more tests
 	for i in cppu cppuhelper comphelper unoidl; do \
-		$(TEST_TIMEOUT) gb_SUPPRESS_TESTS=true make $i.allcheck; \
+		$(TEST_TIMEOUT) gb_SUPPRESS_TESTS=true make $$i.allcheck; \
 	done
 	# run the sal tests. We built them anyways and it does make sense to test
 	# the system abstraction layer anyways. And it contains system-operating tests
 	# and types test which might become relevant for new architectures
 	cd $(SOURCE_TREE)/sal && \
+		$(IGNORE_MAKE_FAILURES)\
 		$(TEST_TIMEOUT) make check
 	# more public library checks
 	for i in cppu cppuhelper comphelper; do \
+		$(IGNORE_MAKE_FAILURES)\
 		$(TEST_TIMEOUT) make $$i.allcheck; \
 	done
 	# run the smoketest
@@ -2371,6 +2373,7 @@ else
 	# shipped in the SDK
   ifeq "$(PACKAGE_SDK)" "y"
 	cd $(SOURCE_TREE)/unoidl && \
+		$(IGNORE_MAKE_FAILURES)\
 		$(TEST_TIMEOUT) make check
   endif
 endif

@@ -49,4 +49,3 @@ adapt-for-new-carlito.diff
 bash-completion-updates.diff
 fix-i386-build.diff
 dp_platform-riscv64-and-loongarch64.diff
-work-around-against-harfbuzz-API-break.diff
