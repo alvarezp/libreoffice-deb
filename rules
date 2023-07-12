@@ -2342,8 +2342,11 @@ else
 	# run the sal tests. We built them anyways and it does make sense to test
 	# the system abstraction layer anyways. And it contains system-operating tests
 	# and types test which might become relevant for new architectures
+	$(IGNORE_MAKE_FAILURES)t=`mktemp -q -d`; \
 	cd $(SOURCE_TREE)/sal && \
-		$(IGNORE_MAKE_FAILURES)\
+		export PATH=$(BUILD_PATH); \
+		export TMPDIR=$$t; \
+		export HOME=$$t; \
 		$(TEST_TIMEOUT) make check
 	# more public library checks
 	for i in cppu cppuhelper comphelper; do \
