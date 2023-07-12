@@ -1,9 +1,11 @@
-libreoffice (4:7.5.5~rc1-5) UNRELEASED; urgency=medium
+libreoffice (4:7.5.5~rc2-1) unstable; urgency=medium
+
+  * New upstream release candidate
 
   * debian/rules:
     - run the sal tests with custom TMPDIR/HOME as "normal" make check
 
- -- Rene Engelhard <rene@debian.org>  Wed, 12 Jul 2023 05:19:08 +0200
+ -- Rene Engelhard <rene@debian.org>  Wed, 12 Jul 2023 20:20:59 +0200
 
 libreoffice (4:7.5.5~rc1-5) unstable; urgency=medium
 

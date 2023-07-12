@@ -121,7 +121,7 @@ index 37acfdc3730f..7d26342f179f 100644
 --- a/sw/qa/extras/ooxmlexport/ooxmlexport14.cxx-old	2023-06-27 06:39:53.823053991 +0200
 +++ b/sw/qa/extras/ooxmlexport/ooxmlexport14.cxx	2023-06-27 06:40:14.303246401 +0200
 @@ -1342,6 +1342,7 @@
-     CPPUNIT_ASSERT_EQUAL( OUString("Footnote for pg4."), xFootnote4->getString().trim() );
+     CPPUNIT_ASSERT_EQUAL( OUString("Footnote for pg5"), xLastButOne->getString().trim() );
  }
  
 +/*
