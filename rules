@@ -2347,26 +2347,31 @@ else
 		export PATH=$(BUILD_PATH); \
 		export TMPDIR=$$t; \
 		export HOME=$$t; \
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make check
 	# more public library checks
+	$(IGNORE_MAKE_FAILURES)\
 	for i in cppu cppuhelper comphelper; do \
-		$(IGNORE_MAKE_FAILURES)\
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make $$i.allcheck; \
 	done
 	# run the smoketest
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/smoketest && \
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make subsequentcheck
   ifeq "$(ENABLE_PYTHON)" "y"
 	# does pyuno work?
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/pyuno && \
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make check subsequentcheck 
   endif
 	# shipped in the SDK
   ifeq "$(PACKAGE_SDK)" "y"
+	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/unoidl && \
-		$(IGNORE_MAKE_FAILURES)\
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make check
   endif
 endif
