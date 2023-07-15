@@ -1667,7 +1667,7 @@ ifeq ($(ENABLE_LTO),y)
 endif
 
 ifeq ($(BOOKWORM_BACKPORT),y)
-	LIBERATION_FONT_RECOMMENDS += fonts-liberation
+	LIBERATION_FONT_RECOMMENDS += , fonts-liberation
 	LIBERATION2_FONT_RECOMMENDS += , fonts-liberation2
 else
 	LIBERATION_FONT_RECOMMENDS += , fonts-liberation-sans-narrow
