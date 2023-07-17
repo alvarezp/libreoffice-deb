@@ -2329,7 +2329,7 @@ else
 	# smoketest.allcheck actually does NOT run it... Do it manually later..
 	# allcheck actually does NOT run it... Do it manually later..
 	cd $(SOURCE_TREE) && \
-		$(TEST_TIMEOUT) ( \
+		( \
 			make unotest.allbuild && \
 			make test.allbuild && \
 			gb_SUPPRESS_TESTS=true make sal.allcheck && \
@@ -2337,7 +2337,7 @@ else
 		)
 	# build some more tests
 	for i in cppu cppuhelper comphelper unoidl; do \
-		$(TEST_TIMEOUT) gb_SUPPRESS_TESTS=true make $$i.allcheck; \
+		gb_SUPPRESS_TESTS=true make $$i.allcheck; \
 	done
 	# run the sal tests. We built them anyways and it does make sense to test
 	# the system abstraction layer anyways. And it contains system-operating tests
