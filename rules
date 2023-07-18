@@ -1032,29 +1032,29 @@ endif
 	BUILD_DEPS_ARCH += , gdb$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , fontconfig$(OOO_NO_CHECK_ARCHS) <!nocheck>
 ifeq ($(BOOKWORM_BACKPORT),y)
-	BUILD_DEPS_ARCH += , fonts-liberation2$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-liberation2 <!nocheck>
 else
-	BUILD_DEPS_ARCH += , fonts-liberation (>= 1:2)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-liberation (>= 1:2) <!nocheck>
 endif
     ifneq "$(BOOKWORM_BACKPORT)" "y"
-	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (>= 20230309)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (>= 20230309) <!nocheck>
     else
-	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (<< 20230309)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (<< 20230309) <!nocheck>
     endif
 	# https://lists.freedesktop.org/archives/libreoffice/2017-May/077764.html
-	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-dejavu <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
-	BUILD_DEPS_ARCH += , fonts-hosny-amiri$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-hosny-amiri <!nocheck>
 	# sdext/source/pdfimport/test/tests.cxx (the test PDF uses NaskhArabic) and the result of the import is
 	# checked which fails without the font. Also used in /vcl/qa/cppunit/complextext.cxx (VclComplexTextTest::testCaching())
-	BUILD_DEPS_ARCH += , fonts-noto-core$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-noto-core <!nocheck>
 	# FIXME: Linux Libertine G (does fonts-linuxlibertine even contain it?, I don't see the _G files?)
 	# now is used in test documents.
 	# now we get a abort if fonts is not found and replaced in layout tests (even though
 	# https://cgit.freedesktop.org/libreoffice/core/commit/?id=172270a8f04388a8f8062f672f9c3f3144a01a1f suggests that
 	# it isn't the case in --without-fonts) but... And while we disable that abort via patch having this
 	# to be sure there is no other failure mode makes sense (as with the other fonts above)
-	BUILD_DEPS_ARCH += , fonts-linuxlibertine$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-linuxlibertine <!nocheck>
 	# 17:35 <@sberg_> vmiklos, oh, what kind of poor test is that? "warn:sal.osl:3785:2:sal/osl/unx/process.cxx:344: ChildStatusProc : starting 'pstoedit' failed" etc. is what I see in workdir/CppunitTest/filter_eps_test.test.log...
 	BUILD_DEPS_ARCH += , pstoedit$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , imagemagick$(OOO_NO_CHECK_ARCHS) <!nocheck>
