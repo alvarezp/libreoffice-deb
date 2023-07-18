@@ -3,6 +3,13 @@ libreoffice (4:7.5.5~rc2-2) UNRELEASED; urgency=medium
   [ merge from Ubuntu ]
   * debian/rules:
     + Use gcc-12 on s390x 
+    + Build-dep on fonts-* regardless to provide a more complete testbed
+
+  [ Rene Engelhard ]
+  * debian/rules:
+    - introduce new OOO_AUTOPKGTEST_ARCHS ("archs where autopkgtest
+      theoretically are ran") and restrict the fonts-* build-deps to those
+      (so that fonts-* needed in the uitests are there)
 
  -- Rene Engelhard <rene@debian.org>  Tue, 18 Jul 2023 17:52:33 +0200
 
