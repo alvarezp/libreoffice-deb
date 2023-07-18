@@ -784,6 +784,7 @@ endif
   # Upstream tracked it down to a gcc bug: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106355
   # but
   # 16:37 <@sberg> _rene_, I couldn't reproduce the issue with an -O0 (--enable-dbgutil) build, and can with a -O2 (no --enable-debug etc.) one
+  # and: bridgetest fails when built with gcc 13, works with 12
   BUILD_DEPS += , gcc-12 [s390x], g++-12 [s390x]
 ifeq "$(DEB_HOST_ARCH)" "s390x"
     CONFIGURE_FLAGS+= \
