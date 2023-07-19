@@ -641,7 +641,7 @@ endif
 ifeq (,$(filter $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
 	ENABLE_MEDIAWIKI=n
 	ENABLE_NLPSOLVER=n
-	DEBHELPER_OPTIONS += -Nlibreoffice-wiki-publisher -Nlibreoffice-script-provider-python -Nlibreoffice-nlpsolver
+	DEBHELPER_OPTIONS += -Nlibreoffice-wiki-publisher -Nlibreoffice-nlpsolver
 	CONFIGURE_FLAGS += --disable-extension-integration --disable-extensions
 endif
 
