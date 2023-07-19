@@ -3382,7 +3382,7 @@ endif
 		done; \
 	done
 
-ifneq (,$(findstring $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS))
+ifeq (,$(findstring $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
 	rm -f $(PKGDIR)-core/$(OODIR)/libdeploymentgui.so
 endif
 
