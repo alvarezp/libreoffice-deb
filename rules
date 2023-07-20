@@ -8,7 +8,7 @@
 # Authors:
 # Chris Halls <halls@debian.org>
 # Rene Engelhard <rene@debian.org>
-# Copyright 2002-2022 Software in the Public Interest, Inc.
+# Copyright 2002-2023 Software in the Public Interest, Inc.
 # Portions Copyright 2010 Canonical Ltd. Author: Matthias Klose
 # Portions Copyright 2011-2013 Canonical Ltd. Author: Bjoern Michaelsen
 # Licensed under the GNU General Public License, version 2.  See the file
@@ -640,7 +640,7 @@ endif
 ifeq (,$(filter $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
 	ENABLE_MEDIAWIKI=n
 	ENABLE_NLPSOLVER=n
-	DEBHELPER_OPTIONS += -Nlibreoffice-wiki-publisher -Nlibreoffice-script-provider-python -Nlibreoffice-nlpsolver
+	DEBHELPER_OPTIONS += -Nlibreoffice-wiki-publisher -Nlibreoffice-nlpsolver
 	CONFIGURE_FLAGS += --disable-extension-integration --disable-extensions
 endif
 
@@ -1673,7 +1673,7 @@ ifeq ($(ENABLE_LTO),y)
 endif
 
 ifeq ($(BOOKWORM_BACKPORT),y)
-	LIBERATION_FONT_RECOMMENDS += fonts-liberation
+	LIBERATION_FONT_RECOMMENDS += , fonts-liberation
 	LIBERATION2_FONT_RECOMMENDS += , fonts-liberation2
 else
 	LIBERATION_FONT_RECOMMENDS += , fonts-liberation-sans-narrow
@@ -2339,7 +2339,7 @@ else
 	# smoketest.allcheck actually does NOT run it... Do it manually later..
 	# allcheck actually does NOT run it... Do it manually later..
 	cd $(SOURCE_TREE) && \
-		$(TEST_TIMEOUT) ( \
+		( \
 			make unotest.allbuild && \
 			make test.allbuild && \
 			gb_SUPPRESS_TESTS=true make sal.allcheck && \
@@ -2347,33 +2347,41 @@ else
 		)
 	# build some more tests
 	for i in cppu cppuhelper comphelper unoidl; do \
-		$(TEST_TIMEOUT) gb_SUPPRESS_TESTS=true make $$i.allcheck; \
+		gb_SUPPRESS_TESTS=true make $$i.allcheck; \
 	done
 	# run the sal tests. We built them anyways and it does make sense to test
 	# the system abstraction layer anyways. And it contains system-operating tests
 	# and types test which might become relevant for new architectures
+	$(IGNORE_MAKE_FAILURES)t=`mktemp -q -d`; \
 	cd $(SOURCE_TREE)/sal && \
-		$(IGNORE_MAKE_FAILURES)\
+		export PATH=$(BUILD_PATH); \
+		export TMPDIR=$$t; \
+		export HOME=$$t; \
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make check
 	# more public library checks
+	$(IGNORE_MAKE_FAILURES)\
 	for i in cppu cppuhelper comphelper; do \
-		$(IGNORE_MAKE_FAILURES)\
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make $$i.allcheck; \
 	done
 	# run the smoketest
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/smoketest && \
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make subsequentcheck
   ifeq "$(ENABLE_PYTHON)" "y"
 	# does pyuno work?
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/pyuno && \
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make check subsequentcheck 
   endif
 	# shipped in the SDK
   ifeq "$(PACKAGE_SDK)" "y"
+	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/unoidl && \
-		$(IGNORE_MAKE_FAILURES)\
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make check
   endif
 endif
