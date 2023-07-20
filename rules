@@ -3309,7 +3309,7 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 		-exec rm {} \;
 	rm -f debian/libreoffice-base-nogui/$(OODIR)/program/libdbulo.so
 	# no need to have the Extension Manager GUI
-	rm -f debian/libreoffice-core-nogui/$(OODIR)/libdeploymentgui.so
+	rm -f debian/libreoffice-core-nogui/$(OODIR)/program/libdeploymentgui.so
 	# and (no UI, so not needed) not needed .desktop files. .ui files are needed though because otherwise
 	# it obscurely fails (#1028290) or just crashes (https://lists.debian.org/debian-backports/2023/06/msg00000.html) :(
 	find debian/libreoffice-*-nogui/usr/share/applications/*.desktop -exec rm {} \;
@@ -3383,7 +3383,7 @@ endif
 	done
 
 ifeq (,$(findstring $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
-	rm -f $(PKGDIR)-core/$(OODIR)/libdeploymentgui.so
+	rm -f $(PKGDIR)-core/$(OODIR)/program/libdeploymentgui.so
 endif
 
 	touch $@

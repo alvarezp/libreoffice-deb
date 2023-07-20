@@ -19,7 +19,7 @@ libreoffice (4:7.5.5-1) unstable; urgency=medium
     - rm -f libdeploymentgui.so unconditionally for core-nogui; also remove when the
       arch is not in OOO_EXTENSIONS_ARCHS
 
- -- Rene Engelhard <rene@debian.org>  Wed, 19 Jul 2023 21:31:45 +0200
+ -- Rene Engelhard <rene@debian.org>  Thu, 20 Jul 2023 19:07:57 +0200
 
 libreoffice (4:7.5.5~rc2-1) unstable; urgency=medium
 
