@@ -1,7 +1,7 @@
 libreoffice (4:7.5.5-2) unstable; urgency=medium
 
   * debian/rules:
-    - also remove unoppkg.bin and libunopkgapp.so from core if we built
+    - also remove unopkg.bin and libunopkgapp.so from core if we built
       without extension support 
     - also force gcc-12 for i386
 
