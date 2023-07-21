@@ -96,3 +96,22 @@
 -
  End Sub
  </script:module>
+
+run the smoketest also when extensions are disabled; we patch that out of the smoketest anyway
+
+--- smoketest/Module_smoketest.mk-old	2023-07-19 06:46:58.379072423 +0200
++++ smoketest/Module_smoketest.mk	2023-07-19 06:47:09.547147319 +0200
+@@ -34,13 +34,11 @@
+ 
+ ifeq ($(ENABLE_CPPUNIT),TRUE)
+ ifneq (MACOSX/TRUE,$(OS)/$(ENABLE_MACOSX_SANDBOX))
+-ifneq ($(filter EXTENSIONS,$(BUILD_TYPE)),)
+ $(eval $(call gb_Module_add_subsequentcheck_targets,smoketest,\
+ 	CppunitTest_smoketest \
+ ))
+ endif
+ endif
+-endif
+ 
+ endif
+ 

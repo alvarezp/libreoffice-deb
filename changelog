@@ -1,13 +1,30 @@
-libreoffice (4:7.6.0~rc2~git20230720-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~rc2~git20230721-1) UNRELEASED; urgency=medium
 
+  [ merge from Ubuntu ]
+  * debian/rules:
+    + Use gcc-12 on s390x 
+    + Build-dep on fonts-* regardless to provide a more complete testbed
+
+  [ Rene Engelhard ]
   * New upstream snapshot
 
   * debian/patches/dp_platform-riscv64-and-loongarch64.diff: actually make
     riscv64 and loongarch64 known to "the deployment"
+  * debian/tests/patches/smoketest-disable-extension-tests.diff: run the smoketest
+    also when extensions are disabled; we patch that out of the smoketest then
+    anyway
+
   * debian/rules:
     - add more "no-make-check checks". sal, cppu(helper), comphelper, unoidl
     - build with noopt (aka -O0) on riscv64 (closes: #1039906)
     - force clang-14 | clang (<< 1:15~) on ppc64el for now
+    - introduce new OOO_AUTOPKGTEST_ARCHS ("archs where autopkgtest
+      theoretically are ran") and restrict the fonts-* build-deps to those
+      (so that fonts-* needed in the uitests are there)
+    - rm -f libdeploymentgui.so unconditionally for core-nogui; also remove when the
+      arch is not in OOO_EXTENSIONS_ARCHS; also remove unoppkg.bin and libunopkgapp.so
+      from core if we built without extension support 
+    - also force gcc-12 for i386
 
  -- Rene Engelhard <rene@debian.org>  Wed, 12 Jul 2023 05:29:22 +0200
 

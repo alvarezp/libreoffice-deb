@@ -547,6 +547,9 @@ OOO_CHECK_FATAL_ARCHS += armhf
 # we would want in the archive
 OOO_SMOKETEST_FATAL_ARCHS := $(OOO_ARCHS)
 
+# archs where the archive/ci runs autopkgtests
+OOO_AUTOPKGTEST_ARCHS := $(filter-out riscv64,$(OOO_CHECK_ARCHS) i386 ppc64el s390x)
+
 ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
 PACKAGE_GEN=n
 endif
@@ -798,9 +801,29 @@ endif
   # Upstream tracked it down to a gcc bug: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106355
   # but
   # 16:37 <@sberg> _rene_, I couldn't reproduce the issue with an -O0 (--enable-dbgutil) build, and can with a -O2 (no --enable-debug etc.) one
+  # and: bridgetest fails when built with gcc 13, works with 12
+ifneq "$(BOOKWORM_BACKPORT)" "y"
+  BUILD_DEPS += , gcc-12 [s390x], g++-12 [s390x]
+endif
 ifeq "$(DEB_HOST_ARCH)" "s390x"
+  ifneq "$(BOOKWORM_BACKPORT)" "y"
+    CONFIGURE_FLAGS+= \
+      CC=$(CC_PREFIX)gcc-12 \
+      CXX=$(CC_PREFIX)g++-12
+  endif
   ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	DEB_BUILD_OPTIONS += noopt
+  endif
+endif
+# same as s390x above, bridgetest fails when built with gcc 13, works with 12
+ifneq "$(BOOKWORM_BACKPORT)" "y"
+  BUILD_DEPS += , gcc-12 [i386], g++-12 [i386]
+endif
+ifeq "$(DEB_HOST_ARCH)" "i386"
+  ifneq "$(BOOKWORM_BACKPORT)" "y"
+    CONFIGURE_FLAGS+= \
+      CC=$(CC_PREFIX)gcc-12 \
+      CXX=$(CC_PREFIX)g++-12
   endif
 endif
 # see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1039906#26
@@ -1036,31 +1059,31 @@ endif
     ifeq "$(USE_SYSTEMD)" "y"
 	BUILD_DEPS_ARCH += , systemd$(OOO_NO_CHECK_ARCHS) <!nocheck>, systemd-coredump$(OOO_NO_CHECK_ARCHS) <!nocheck>, jq$(OOO_NO_CHECK_ARCHS) <!nocheck>
     endif
-	BUILD_DEPS_ARCH += , fontconfig$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fontconfig [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 ifeq ($(BOOKWORM_BACKPORT),y)
-	BUILD_DEPS_ARCH += , fonts-liberation2$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-liberation2 [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 else
-	BUILD_DEPS_ARCH += , fonts-liberation (>= 1:2)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-liberation (>= 1:2) [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 endif
     ifneq "$(BOOKWORM_BACKPORT)" "y"
-	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (>= 20230309)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (>= 20230309) [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
     else
-	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (<< 20230309)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (<< 20230309) [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
     endif
 	# https://lists.freedesktop.org/archives/libreoffice/2017-May/077764.html
-	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-dejavu [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
-	BUILD_DEPS_ARCH += , fonts-hosny-amiri$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-hosny-amiri [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# sdext/source/pdfimport/test/tests.cxx (the test PDF uses NaskhArabic) and the result of the import is
 	# checked which fails without the font. Also used in /vcl/qa/cppunit/complextext.cxx (VclComplexTextTest::testCaching())
-	BUILD_DEPS_ARCH += , fonts-noto-core$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-noto-core [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# FIXME: Linux Libertine G (does fonts-linuxlibertine even contain it?, I don't see the _G files?)
 	# now is used in test documents.
 	# now we get a abort if fonts is not found and replaced in layout tests (even though
 	# https://cgit.freedesktop.org/libreoffice/core/commit/?id=172270a8f04388a8f8062f672f9c3f3144a01a1f suggests that
 	# it isn't the case in --without-fonts) but... And while we disable that abort via patch having this
 	# to be sure there is no other failure mode makes sense (as with the other fonts above)
-	BUILD_DEPS_ARCH += , fonts-linuxlibertine$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-linuxlibertine [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# 17:35 <@sberg_> vmiklos, oh, what kind of poor test is that? "warn:sal.osl:3785:2:sal/osl/unx/process.cxx:344: ChildStatusProc : starting 'pstoedit' failed" etc. is what I see in workdir/CppunitTest/filter_eps_test.test.log...
 	BUILD_DEPS_ARCH += , pstoedit$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , imagemagick$(OOO_NO_CHECK_ARCHS) <!nocheck>
@@ -3307,6 +3330,8 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	find debian/libreoffice-*-nogui/$(OODIR)/program -name "lib*uilo.so" -a ! -name "libuuilo.so" \
 		-exec rm {} \;
 	rm -f debian/libreoffice-base-nogui/$(OODIR)/program/libdbulo.so
+	# no need to have the Extension Manager GUI
+	rm -f debian/libreoffice-core-nogui/$(OODIR)/program/libdeploymentgui.so
 	# and (no UI, so not needed) not needed .desktop files. .ui files are needed though because otherwise
 	# it obscurely fails (#1028290) or just crashes (https://lists.debian.org/debian-backports/2023/06/msg00000.html) :(
 	find debian/libreoffice-*-nogui/usr/share/applications/*.desktop -exec rm {} \;
@@ -3378,6 +3403,12 @@ endif
 			mv $$i `echo $$i | sed -e s/registry/.registry/`; \
 		done; \
 	done
+
+ifeq (,$(findstring $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
+	rm -f $(PKGDIR)-core/$(OODIR)/program/libunopkgapp.so
+	rm -f $(PKGDIR)-core/$(OODIR)/program/unopkg.bin
+	rm -f $(PKGDIR)-core/$(OODIR)/program/libdeploymentgui.so
+endif
 
 	touch $@
 
