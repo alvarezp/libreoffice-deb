@@ -3383,6 +3383,8 @@ endif
 	done
 
 ifeq (,$(findstring $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
+	rm -f $(PKGDIR)-core/$(OODIR)/program/libunopkgapp.so
+	rm -f $(PKGDIR)-core/$(OODIR)/program/unopkg.bin
 	rm -f $(PKGDIR)-core/$(OODIR)/program/libdeploymentgui.so
 endif
 

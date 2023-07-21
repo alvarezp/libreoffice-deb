@@ -1,3 +1,11 @@
+libreoffice (4:7.5.5-3) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - also remove unoppkg.bin and libunopkgapp.so from core if we built
+      without extension support 
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 21 Jul 2023 19:39:14 +0200
+
 libreoffice (4:7.5.5-1) unstable; urgency=medium
 
   * LibreOffice 7.5.5 final release (identical to rc2)
