@@ -1,4 +1,4 @@
-libreoffice (4:7.5.5-3) UNRELEASED; urgency=medium
+libreoffice (4:7.5.5-2) unstable; urgency=medium
 
   * debian/rules:
     - also remove unoppkg.bin and libunopkgapp.so from core if we built
