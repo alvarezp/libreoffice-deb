@@ -512,7 +512,7 @@ Depends: libreoffice-core (= ${binary:Version}),
          libreoffice-uiconfig-draw (= ${source:Version}), libreoffice-uiconfig-impress (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Replaces: libreoffice-core (<< 1:6.4.1~rc1-3), libreoffice-impress (<< 4:7.5.3~rc2-2), libreoffice-common (<< 1:6.4.2~rc1~)
+Replaces: libreoffice-core (<< 1:6.4.1~rc1-3), libreoffice-impress (<< 4:7.5.4~rc1-1), libreoffice-impress-nogui (<< 4:7.5.4~rc1-1), libreoffice-common (<< 1:6.4.2~rc1~) 
 Breaks: libreoffice-core (<< 1:6.4.1~rc1-3), libreoffice-impress (<< 4:7.5.3~rc2-2), libreoffice-common (<< 1:6.4.2~rc1~)
 Description: office productivity suite -- drawing
  LibreOffice is a full-featured office productivity suite that provides
@@ -527,7 +527,7 @@ Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${bi
          libreoffice-uiconfig-draw (= ${source:Version}), libreoffice-uiconfig-impress (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Replaces: libreoffice-impress (<< 1:5.2.0-2), libreoffice-common (<< 1:6.4.2~rc1~), libreoffice-draw
+Replaces: libreoffice-impress (<< 4:7.5.4~rc1-1), libreoffice-impress-nogui (<< 4:7.5.4~rc1-1), libreoffice-common (<< 1:6.4.2~rc1~), libreoffice-draw
 Breaks: libreoffice-impress (<< 1:5.2.0-2), libreoffice-common (<< 1:6.4.2~rc1~)
 Conflicts: libreoffice-draw
 Description: office productivity suite -- drawing (no GUI variant)

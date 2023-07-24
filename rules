@@ -2349,8 +2349,10 @@ else
 	# don't run make check but *do* run selected tests here which are deemed too important
 	# to fail
 	# - "bridgetest"
+	# - the public libraries (sal, cppu(helper), comphelper)
 	# - "smoketest" as a smoketest
 	# - pyuno (as we shiup python3-uno..)
+	# - unoidl for the SDK
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE) && \
 		$(TEST_TIMEOUT) make testtools.allcheck
