@@ -761,7 +761,8 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~),
           libreoffice-core (<< 1:6.4.1~rc1-3),
-          libreoffice-impress (<< 4:7.5.3~rc2-2)
+          libreoffice-impress (<< 4:7.5.4~rc1-1),
+          libreoffice-impress-nogui (<< 4:7.5.4~rc1-1)
 Breaks: libreoffice-common (<< 1:6.4.2~rc1~),
         libreoffice-core (<< 1:6.4.1~rc1-3),
         libreoffice-impress (<< 4:7.5.3~rc2-2)
@@ -779,7 +780,8 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~),
           libreoffice-draw,
-          libreoffice-impress (<< 1:5.2.0-2)
+          libreoffice-impress (<< 4:7.5.4~rc1-1),
+          libreoffice-impress-nogui (<< 4:7.5.4~rc1-1)
 Breaks: libreoffice-common (<< 1:6.4.2~rc1~), libreoffice-impress (<< 1:5.2.0-2)
 Conflicts: libreoffice-draw
 Description: office productivity suite -- drawing (no GUI variant)
