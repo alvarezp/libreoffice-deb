@@ -5,9 +5,6 @@ libreoffice (4:7.6.0~rc2~git20230721-1) UNRELEASED; urgency=medium
     + Use gcc-12 on s390x 
     + Build-dep on fonts-* regardless to provide a more complete testbed
 
-  [ Rene Engelhard ]
-  * New upstream snapshot
-
   * debian/patches/dp_platform-riscv64-and-loongarch64.diff: actually make
     riscv64 and loongarch64 known to "the deployment"
   * debian/tests/patches/smoketest-disable-extension-tests.diff: run the smoketest
