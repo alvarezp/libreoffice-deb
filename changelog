@@ -1,4 +1,6 @@
-libreoffice (4:7.6.0~rc1-3) UNRELEASED; urgency=medium
+libreoffice (4:7.6.0~rc2~git20230707-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot
 
   [ Rene Engelhard ]
   * debian/control.reportbuilder.in: also fix version in Replaces: here
