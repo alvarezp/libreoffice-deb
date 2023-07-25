@@ -5195,6 +5195,7 @@ Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Suggests: libreofficekit-data
+Replaces: libreoffice-core (<< 4:7.6.0~rc2)
 Section: gnome
 Enhances: libreoffice
 Description: office productivity suite -- GTK+ 4 integration

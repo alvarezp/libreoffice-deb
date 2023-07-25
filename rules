@@ -3162,6 +3162,7 @@ ifeq "$(ENABLE_GUI)" "y"
   ifeq "$(BUILD_GTK4)" "y"
 	mkdir -p $(PKGDIR)-gtk4/$(OODIR)/program/
 	mv $(PKGDIR)-gnome/$(OODIR)/program/*gtk4* $(PKGDIR)-gtk4/$(OODIR)/program
+	mv $(PKGDIR)-core/$(OODIR)/program/libavmediagtk.so $(PKGDIR)-gtk4/$(OODIR)/program
   endif
 endif
 

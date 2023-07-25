@@ -3,6 +3,7 @@ libreoffice (4:7.6.0~rc1-3) UNRELEASED; urgency=medium
   * debian/control.reportbuilder.in: also fix version in Replaces: here
     (closes: #1041899)
   * debian/watch: watch rcs again
+  * debian/rules, debian/control.gtk4.in: move libavmediagtk.so to -gtk4
   
   - Rene Engelhard <rene@debian.org>  Mon, 24 Jul 2023 20:33:16 +0000
 
