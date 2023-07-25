@@ -57,7 +57,7 @@ Description: LibreOffice component for building database reports -- libraries (n
 Package: libreoffice-uiconfig-report-builder
 Section: misc
 Architecture: all
-Replaces: libreoffice-report-builder (<< 1:7.6.0~beta1), libreoffice-common (<< 1:7.6.0~beta1)
+Replaces: libreoffice-report-builder (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for the LibreOffice Report Builder
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
