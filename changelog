@@ -1,8 +1,8 @@
-libreoffice (4:7.6.0~rc2~git20230721-1) UNRELEASED; urgency=medium
-
-  * New upstream snapshot
+libreoffice (4:7.6.0~rc2-1) experimental; urgency=medium
 
   [ Rene Engelhard ]
+  * New upstream release candidate
+
   * debian/control.reportbuilder.in: also fix version in Replaces: here
     (closes: #1041899)
   * debian/watch: watch rcs again
@@ -12,7 +12,7 @@ libreoffice (4:7.6.0~rc2~git20230721-1) UNRELEASED; urgency=medium
   * debian/rules:
     - use gcc for skia on ppc64el for now
 
- -- Rene Engelhard <rene@debian.org>  Wed, 26 Jul 2023 17:53:45 +0200
+ -- Rene Engelhard <rene@debian.org>  Wed, 26 Jul 2023 20:19:42 +0200
 
 libreoffice (4:7.6.0~rc1-2) experimental; urgency=medium
 
