@@ -521,7 +521,7 @@ $(eval $(call gen_no_archs,OOO_LE_ARCHS))
 # s390x: bigendian, so no skia at all
 # ppc64el: see https://git.launchpad.net/~libreoffice/ubuntu/+source/libreoffice/patch/?id=be47aa72aad414537d27f0a18af7d067f1398666 and
 #          https://github.com/llvm/llvm-project/issues/63214
-OOO_CLANG_ARCHS := $(filter-out alpha ia64 ppc64el,$(OOO_LE_ARCHS))
+OOO_CLANG_ARCHS := $(filter-out alpha ia64 ppc64el mipsel mips64el,$(OOO_LE_ARCHS))
 $(eval $(call gen_no_archs,OOO_CLANG_ARCHS))
 
 # supported upstream (upstream does aarch64 flatpak builds)
