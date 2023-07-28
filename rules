@@ -8,7 +8,7 @@
 # Authors:
 # Chris Halls <halls@debian.org>
 # Rene Engelhard <rene@debian.org>
-# Copyright 2002-2022 Software in the Public Interest, Inc.
+# Copyright 2002-2023 Software in the Public Interest, Inc.
 # Portions Copyright 2010 Canonical Ltd. Author: Matthias Klose
 # Portions Copyright 2011-2013 Canonical Ltd. Author: Bjoern Michaelsen
 # Licensed under the GNU General Public License, version 2.  See the file
@@ -92,8 +92,6 @@ endif
 # Default package configuration
 #
 OOO_ARCHS = alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
-# riscv64 contained here since it's supposed to be added soonish and even considered
-# to be a release architecture in trixie
 DEBIAN_MAIN_ARCHITECTURES = amd64 arm64 armel armhf i386 mipsel mips64el ppc64el riscv64 s390x
 PATCHSET=$(DEB_VENDOR)
 BUILD_DEPS=\
@@ -534,7 +532,10 @@ OOO_BE_ARCHS = $(filter hppa m68k mips mips64 powerpc powerpcspe ppc64 s390 s390
 $(eval $(call gen_no_archs,OOO_BE_ARCHS))
 OOO_LE_ARCHS = $(filter-out $(OOO_BE_ARCHS),$(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_LE_ARCHS))
-OOO_CLANG_ARCHS := $(filter-out alpha ia64,$(OOO_LE_ARCHS))
+# s390x: bigendian, so no skia at all
+# ppc64el: see https://git.launchpad.net/~libreoffice/ubuntu/+source/libreoffice/patch/?id=be47aa72aad414537d27f0a18af7d067f1398666 and
+#          https://github.com/llvm/llvm-project/issues/63214
+OOO_CLANG_ARCHS := $(filter-out alpha ia64 ppc64el mipsel mips64el,$(OOO_LE_ARCHS))
 $(eval $(call gen_no_archs,OOO_CLANG_ARCHS))
 
 # supported upstream (upstream does aarch64 flatpak builds)
@@ -560,6 +561,9 @@ OOO_CHECK_FATAL_ARCHS += armhf
 # if bridgetest and smoketest fail this is surely not working in a way
 # we would want in the archive
 OOO_SMOKETEST_FATAL_ARCHS := $(OOO_ARCHS)
+
+# archs where the archive/ci runs autopkgtests
+OOO_AUTOPKGTEST_ARCHS := $(filter-out riscv64,$(OOO_CHECK_ARCHS) i386 ppc64el s390x)
 
 ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
 PACKAGE_GEN=n
@@ -654,7 +658,7 @@ endif
 ifeq (,$(filter $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
 	ENABLE_MEDIAWIKI=n
 	ENABLE_NLPSOLVER=n
-	DEBHELPER_OPTIONS += -Nlibreoffice-wiki-publisher -Nlibreoffice-script-provider-python -Nlibreoffice-nlpsolver
+	DEBHELPER_OPTIONS += -Nlibreoffice-wiki-publisher -Nlibreoffice-nlpsolver
 	CONFIGURE_FLAGS += --disable-extension-integration --disable-extensions
 endif
 
@@ -728,7 +732,6 @@ ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
     ifeq "$(DEB_HOST_ARCH)" "loong64"
 	ENABLE_LTO=n
     endif
-	BUILD_DEPS += , clang (>= 1:12) [ppc64el]
 	# since the llvm-defaults packages pointing to llvm 13(?) it apparently doesn't
 	# automatically pull in llvm-xx-linker-tools anymore which contains the needed LLVMgold.so
 	# (see above).
@@ -799,10 +802,36 @@ ifeq "$(DEB_HOST_ARCH)" "armhf"
   endif
 endif
   # and also on s390x since it otherwise gets miscompiled.
-  # Upstream tacked it down to a gcc bug: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106355
+  # Upstream tracked it down to a gcc bug: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106355
   # but
   # 16:37 <@sberg> _rene_, I couldn't reproduce the issue with an -O0 (--enable-dbgutil) build, and can with a -O2 (no --enable-debug etc.) one
+  # and: bridgetest fails when built with gcc 13, works with 12
+ifneq "$(BOOKWORM_BACKPORT)" "y"
+  BUILD_DEPS += , gcc-12 [s390x], g++-12 [s390x]
+endif
 ifeq "$(DEB_HOST_ARCH)" "s390x"
+  ifneq "$(BOOKWORM_BACKPORT)" "y"
+    CONFIGURE_FLAGS+= \
+      CC=$(CC_PREFIX)gcc-12 \
+      CXX=$(CC_PREFIX)g++-12
+  endif
+  ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	DEB_BUILD_OPTIONS += noopt
+  endif
+endif
+# same as s390x above, bridgetest fails when built with gcc 13, works with 12
+ifneq "$(BOOKWORM_BACKPORT)" "y"
+  BUILD_DEPS += , gcc-12 [i386], g++-12 [i386]
+endif
+ifeq "$(DEB_HOST_ARCH)" "i386"
+  ifneq "$(BOOKWORM_BACKPORT)" "y"
+    CONFIGURE_FLAGS+= \
+      CC=$(CC_PREFIX)gcc-12 \
+      CXX=$(CC_PREFIX)g++-12
+  endif
+endif
+# see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1039906#26
+ifeq "$(DEB_HOST_ARCH)" "riscv64"
   ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	DEB_BUILD_OPTIONS += noopt
   endif
@@ -1034,31 +1063,31 @@ endif
     ifeq "$(USE_SYSTEMD)" "y"
 	BUILD_DEPS_ARCH += , systemd$(OOO_NO_CHECK_ARCHS) <!nocheck>, systemd-coredump$(OOO_NO_CHECK_ARCHS) <!nocheck>, jq$(OOO_NO_CHECK_ARCHS) <!nocheck>
     endif
-	BUILD_DEPS_ARCH += , fontconfig$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fontconfig [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 ifeq ($(BOOKWORM_BACKPORT),y)
-	BUILD_DEPS_ARCH += , fonts-liberation2$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-liberation2 [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 else
-	BUILD_DEPS_ARCH += , fonts-liberation (>= 1:2)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-liberation (>= 1:2) [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 endif
     ifneq "$(BOOKWORM_BACKPORT)" "y"
-	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (>= 20230309)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (>= 20230309) [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
     else
-	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (<< 20230309)$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (<< 20230309) [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
     endif
 	# https://lists.freedesktop.org/archives/libreoffice/2017-May/077764.html
-	BUILD_DEPS_ARCH += , fonts-dejavu$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-dejavu [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
-	BUILD_DEPS_ARCH += , fonts-hosny-amiri$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-hosny-amiri [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# sdext/source/pdfimport/test/tests.cxx (the test PDF uses NaskhArabic) and the result of the import is
 	# checked which fails without the font. Also used in /vcl/qa/cppunit/complextext.cxx (VclComplexTextTest::testCaching())
-	BUILD_DEPS_ARCH += , fonts-noto-core$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-noto-core [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# FIXME: Linux Libertine G (does fonts-linuxlibertine even contain it?, I don't see the _G files?)
 	# now is used in test documents.
 	# now we get a abort if fonts is not found and replaced in layout tests (even though
 	# https://cgit.freedesktop.org/libreoffice/core/commit/?id=172270a8f04388a8f8062f672f9c3f3144a01a1f suggests that
 	# it isn't the case in --without-fonts) but... And while we disable that abort via patch having this
 	# to be sure there is no other failure mode makes sense (as with the other fonts above)
-	BUILD_DEPS_ARCH += , fonts-linuxlibertine$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , fonts-linuxlibertine [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# 17:35 <@sberg_> vmiklos, oh, what kind of poor test is that? "warn:sal.osl:3785:2:sal/osl/unx/process.cxx:344: ChildStatusProc : starting 'pstoedit' failed" etc. is what I see in workdir/CppunitTest/filter_eps_test.test.log...
 	BUILD_DEPS_ARCH += , pstoedit$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , imagemagick$(OOO_NO_CHECK_ARCHS) <!nocheck>
@@ -1681,7 +1710,7 @@ ifeq ($(ENABLE_LTO),y)
 endif
 
 ifeq ($(BOOKWORM_BACKPORT),y)
-	LIBERATION_FONT_RECOMMENDS += fonts-liberation
+	LIBERATION_FONT_RECOMMENDS += , fonts-liberation
 	LIBERATION2_FONT_RECOMMENDS += , fonts-liberation2
 else
 	LIBERATION_FONT_RECOMMENDS += , fonts-liberation-sans-narrow
@@ -2305,7 +2334,6 @@ endif
 	QT5DIR=/usr/lib/$(DEB_HOST_MULTIARCH)/qt5 QT6DIR=/usr/lib/qt6 \
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--disable-ext-wiki-publisher \
-		--disable-scripting-javascript --disable-scripting-beanshell \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
 
@@ -2340,8 +2368,10 @@ else
 	# don't run make check but *do* run selected tests here which are deemed too important
 	# to fail
 	# - "bridgetest"
+	# - the public libraries (sal, cppu(helper), comphelper)
 	# - "smoketest" as a smoketest
 	# - pyuno (as we shiup python3-uno..)
+	# - unoidl for the SDK
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE) && \
 		$(TEST_TIMEOUT) make testtools.allcheck
@@ -2351,20 +2381,50 @@ else
 	# smoketest.allcheck actually does NOT run it... Do it manually later..
 	# allcheck actually does NOT run it... Do it manually later..
 	cd $(SOURCE_TREE) && \
-		$(TEST_TIMEOUT) ( \
+		( \
 			make unotest.allbuild && \
 			make test.allbuild && \
 			gb_SUPPRESS_TESTS=true make sal.allcheck && \
 			make smoketest.allcheck \
 		)
+	# build some more tests
+	for i in cppu cppuhelper comphelper unoidl; do \
+		gb_SUPPRESS_TESTS=true make $$i.allcheck; \
+	done
+	# run the sal tests. We built them anyways and it does make sense to test
+	# the system abstraction layer anyways. And it contains system-operating tests
+	# and types test which might become relevant for new architectures
+	$(IGNORE_MAKE_FAILURES)t=`mktemp -q -d`; \
+	cd $(SOURCE_TREE)/sal && \
+		export PATH=$(BUILD_PATH); \
+		export TMPDIR=$$t; \
+		export HOME=$$t; \
+		export PARALLELISM=1; \
+		$(TEST_TIMEOUT) make check
+	# more public library checks
+	$(IGNORE_MAKE_FAILURES)\
+	for i in cppu cppuhelper comphelper; do \
+		export PARALLELISM=1; \
+		$(TEST_TIMEOUT) make $$i.allcheck; \
+	done
 	# run the smoketest
+	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/smoketest && \
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make subsequentcheck
-
   ifeq "$(ENABLE_PYTHON)" "y"
 	# does pyuno work?
+	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE)/pyuno && \
+		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make check subsequentcheck 
+  endif
+	# shipped in the SDK
+  ifeq "$(PACKAGE_SDK)" "y"
+	$(IGNORE_MAKE_FAILURES)\
+	cd $(SOURCE_TREE)/unoidl && \
+		export PARALLELISM=1; \
+		$(TEST_TIMEOUT) make check
   endif
 endif
 endif
@@ -3121,6 +3181,7 @@ ifeq "$(ENABLE_GUI)" "y"
   ifeq "$(BUILD_GTK4)" "y"
 	mkdir -p $(PKGDIR)-gtk4/$(OODIR)/program/
 	mv $(PKGDIR)-gnome/$(OODIR)/program/*gtk4* $(PKGDIR)-gtk4/$(OODIR)/program
+	mv $(PKGDIR)-core/$(OODIR)/program/libavmediagtk.so $(PKGDIR)-gtk4/$(OODIR)/program
   endif
 endif
 
@@ -3289,6 +3350,8 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	find debian/libreoffice-*-nogui/$(OODIR)/program -name "lib*uilo.so" -a ! -name "libuuilo.so" \
 		-exec rm {} \;
 	rm -f debian/libreoffice-base-nogui/$(OODIR)/program/libdbulo.so
+	# no need to have the Extension Manager GUI
+	rm -f debian/libreoffice-core-nogui/$(OODIR)/program/libdeploymentgui.so
 	# and (no UI, so not needed) not needed .desktop files. .ui files are needed though because otherwise
 	# it obscurely fails (#1028290) or just crashes (https://lists.debian.org/debian-backports/2023/06/msg00000.html) :(
 	find debian/libreoffice-*-nogui/usr/share/applications/*.desktop -exec rm {} \;
@@ -3360,6 +3423,12 @@ endif
 			mv $$i `echo $$i | sed -e s/registry/.registry/`; \
 		done; \
 	done
+
+ifeq (,$(findstring $(DEB_HOST_ARCH),$(OOO_EXTENSIONS_ARCHS)))
+	rm -f $(PKGDIR)-core/$(OODIR)/program/libunopkgapp.so
+	rm -f $(PKGDIR)-core/$(OODIR)/program/unopkg.bin
+	rm -f $(PKGDIR)-core/$(OODIR)/program/libdeploymentgui.so
+endif
 
 	touch $@
 

@@ -9,8 +9,7 @@ Build-Depends: autoconf,
                binutils (>= 2.37-9) [ppc64],
                bison,
                bzip2,
-               clang (>= 1:12) [ppc64el],
-               clang [!alpha !hppa !ia64 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390x !sparc !sparc64],
+               clang [!alpha !hppa !ia64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64],
                coinor-libcoinmp-dev,
                coinor-libcoinutils-dev,
                debhelper-compat (= 12),
@@ -19,6 +18,10 @@ Build-Depends: autoconf,
                firebird-dev [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc],
                flex,
                fontforge-nox | fontforge,
+               g++-12 [i386],
+               g++-12 [s390x],
+               gcc-12 [i386],
+               gcc-12 [s390x],
                gobject-introspection,
                gperf,
                java-common <!nojava>,
@@ -167,7 +170,7 @@ Build-Depends: autoconf,
                libzmf-dev,
                libzmf-dev (<< 0.1~),
                libzxing-dev,
-               llvm [!alpha !hppa !ia64 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390x !sparc !sparc64],
+               llvm [!alpha !hppa !ia64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64],
                lp-solve,
                maven-repo-helper,
                pkg-config,
@@ -188,13 +191,13 @@ Build-Depends: autoconf,
                zlib1g-dev
 Build-Depends-Arch: dbus-x11 [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
                     firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nocheck>,
-                    fontconfig [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
-                    fonts-crosextra-carlito (>= 20230309) [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
-                    fonts-dejavu [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
-                    fonts-hosny-amiri [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
-                    fonts-liberation (>= 1:2) [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
-                    fonts-linuxlibertine [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
-                    fonts-noto-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    fontconfig [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
+                    fonts-crosextra-carlito (>= 20230309) [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
+                    fonts-dejavu [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
+                    fonts-hosny-amiri [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
+                    fonts-liberation (>= 1:2) [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
+                    fonts-linuxlibertine [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
+                    fonts-noto-core [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
                     gdb [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
                     ghostscript [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
                     gpg [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
@@ -767,7 +770,8 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~),
           libreoffice-core (<< 1:6.4.1~rc1-3),
-          libreoffice-impress (<< 4:7.5.3~rc2-2)
+          libreoffice-impress (<< 4:7.5.4~rc1-1),
+          libreoffice-impress-nogui (<< 4:7.5.4~rc1-1)
 Breaks: libreoffice-common (<< 1:6.4.2~rc1~),
         libreoffice-core (<< 1:6.4.1~rc1-3),
         libreoffice-impress (<< 4:7.5.3~rc2-2)
@@ -787,7 +791,8 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${shlibs:Depends}
 Replaces: libreoffice-common (<< 1:6.4.2~rc1~),
           libreoffice-draw,
-          libreoffice-impress (<< 1:5.2.0-2)
+          libreoffice-impress (<< 4:7.5.4~rc1-1),
+          libreoffice-impress-nogui (<< 4:7.5.4~rc1-1)
 Breaks: libreoffice-common (<< 1:6.4.2~rc1~), libreoffice-impress (<< 1:5.2.0-2)
 Conflicts: libreoffice-draw
 Description: office productivity suite -- drawing (no GUI variant)
@@ -5004,8 +5009,8 @@ Description: LibreOffice component for building database reports -- libraries (n
 Package: libreoffice-uiconfig-report-builder
 Section: misc
 Architecture: all
-Replaces: libreoffice-common (<< 1:7.6.0~beta1),
-          libreoffice-report-builder (<< 1:7.6.0~beta1)
+Replaces: libreoffice-common (<< 4:7.6.0~beta1),
+          libreoffice-report-builder (<< 4:7.6.0~beta1)
 Description: UI data ("config") for the LibreOffice Report Builder
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -5192,6 +5197,7 @@ Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Suggests: libreofficekit-data
+Replaces: libreoffice-core (<< 4:7.6.0~rc2)
 Section: gnome
 Enhances: libreoffice
 Description: office productivity suite -- GTK+ 4 integration
