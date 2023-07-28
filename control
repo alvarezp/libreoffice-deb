@@ -186,7 +186,8 @@ Build-Depends: autoconf,
                xsltproc,
                zip,
                zlib1g-dev
-Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nocheck>,
+Build-Depends-Arch: dbus-x11 [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nocheck>,
                     fontconfig [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
                     fonts-crosextra-carlito (>= 20230309) [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
                     fonts-dejavu [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
@@ -202,6 +203,7 @@ Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i38
                     hunspell-en-us [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
                     hyphen-en-us [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
                     imagemagick [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    libatspi2.0-dev [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
                     libcppunit-dev (>= 1.15.1-4) [amd64 arm64 riscv64] <!nocheck>,
                     libcppunit-dev <!nocheck>,
                     libnumbertext-data (>= 1.0.11) <!nocheck>,
@@ -209,7 +211,9 @@ Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i38
                     locales [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
                     poppler-data [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
                     pstoedit [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
-                    python3-lxml [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck !nopython>
+                    python3-lxml [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck !nopython>,
+                    xauth [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>,
+                    xvfb [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64] <!nocheck>
 Build-Depends-Indep: ant [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nojava>,
                      ant-optional [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !sparc] <!nojava>,
                      apparmor <!nocheck>,
@@ -234,7 +238,7 @@ Build-Conflicts: amd-libopencl1,
 Standards-Version: 4.0.1
 Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-7.6
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
-Bugs: 
+Bugs: mailto:debian-openoffice@lists.debian.org
 Homepage: http://www.libreoffice.org
 
 Package: libreoffice

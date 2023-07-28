@@ -1,10 +1,12 @@
-libreoffice (4:24.2~alpha0~git20230707-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2~alpha0~git20230727-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
   * debian/rules, debian/control.kf6.in: add initial support for kf6 backend
     added upstream (not enable yet obviously). Only build one of kf5/kf6 at a
     time since I guess we won't ship plasma 5 and plasma 6 in parallel
+  * debian/rules: enable the new atspi tests, add xvfb, xauth, dbus-x11
+    and at-spi builddeps
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 
