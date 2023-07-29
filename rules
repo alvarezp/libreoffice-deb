@@ -1508,8 +1508,7 @@ ifeq "$(BUILD_GTK3)" "y"
 	DEBHELPER_OPTIONS+= -Ngir1.2-lokdocview-0.1
   endif
   ifeq "$(RUN_MAKE_CHECK)" "y"
-	# ensure to run the accessibiliy checks
-	CONFIGURE_FLAGS += --enable-atspi-tests
+	CONFIGURE_FLAGS_TESTS += --enable-atspi-tests
 	BUILD_DEPS_ARCH += , libatspi2.0-dev$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , xvfb$(OOO_NO_CHECK_ARCHS) <!nocheck>, xauth$(OOO_NO_CHECK_ARCHS) <!nocheck>, dbus-x11$(OOO_NO_CHECK_ARCHS) <!nocheck>
   endif
@@ -2332,7 +2331,7 @@ endif
 	MARIADBCONFIG=$(MARIADBCONFIG) \
 	FIREBIRD_CFLAGS=$(FIREBIRD_CFLAGS) FIREBIRD_LIBS=$(FIREBIRD_LIBS) \
 	QT5DIR=/usr/lib/$(DEB_HOST_MULTIARCH)/qt5 QT6DIR=/usr/lib/qt6 \
-	./autogen.sh $(CONFIGURE_FLAGS) \
+	./autogen.sh $(CONFIGURE_FLAGS) $(CONFIGURE_FLAGS_TESTS) \
 		--disable-ext-wiki-publisher \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
