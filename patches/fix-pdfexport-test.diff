@@ -1,0 +1,55 @@
+From 1473c89583bca10c0f29652db78beed67a9b0288 Mon Sep 17 00:00:00 2001
+From: Michael Stahl <michael.stahl@allotropia.de>
+Date: Tue, 11 Jul 2023 14:04:14 +0200
+Subject: [PATCH] tdf#154982 drawinglayer: post-order traversal of
+ ObjectInfoPrimitive2D
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+For the signature line, the wrong alt-text is exported to PDF, because
+the cui/source/dialogs/signature-line.svg contains lots of "desc"
+elements, which are converted to ObjectInfoPrimitive2D, and currently
+these are applied after the ObjectInfoPrimitive2D for the SdrObject.
+
+So let's try to switch the order, fixes the bugdoc at least.
+
+Change-Id: I7b5f6f4e68a3421ab33d7780995080deb6cf2238
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/154308
+Tested-by: Jenkins
+Reviewed-by: Michael Stahl <michael.stahl@allotropia.de>
+(cherry picked from commit 9a148e4fb402d203ab0d2683dc316aa8217b576c)
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/154425
+Reviewed-by: Caolán McNamara <caolan.mcnamara@collabora.com>
+(cherry picked from commit 00c7728e128c52c6acecf022823408da2cee0be9)
+---
+ drawinglayer/source/processor2d/vclmetafileprocessor2d.cxx | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/drawinglayer/source/processor2d/vclmetafileprocessor2d.cxx b/drawinglayer/source/processor2d/vclmetafileprocessor2d.cxx
+index 6e1f07efefbb..e529dbe13c1c 100644
+--- a/drawinglayer/source/processor2d/vclmetafileprocessor2d.cxx
++++ b/drawinglayer/source/processor2d/vclmetafileprocessor2d.cxx
+@@ -926,6 +926,9 @@ void VclMetafileProcessor2D::processBasePrimitive2D(const primitive2d::BasePrimi
+ void VclMetafileProcessor2D::processObjectInfoPrimitive2D(
+     primitive2d::ObjectInfoPrimitive2D const& rObjectInfoPrimitive2D)
+ {
++    // tdf#154982 process content first, so this object overrides any nested one
++    process(rObjectInfoPrimitive2D.getChildren());
++
+     // currently StructureTagPrimitive2D is only used for SdrObjects - have to
+     // avoid adding Alt text if the SdrObject is not actually tagged, as it
+     // would then end up on an unrelated structure element.
+@@ -963,9 +966,6 @@ void VclMetafileProcessor2D::processObjectInfoPrimitive2D(
+             }
+         }
+     }
+-
+-    // process content
+-    process(rObjectInfoPrimitive2D.getChildren());
+ }
+ 
+ void VclMetafileProcessor2D::processGraphicPrimitive2D(
+-- 
+2.39.2
+
