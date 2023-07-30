@@ -1509,7 +1509,7 @@ ifeq "$(BUILD_GTK3)" "y"
   endif
   ifeq "$(RUN_MAKE_CHECK)" "y"
 	CONFIGURE_FLAGS_TESTS += --enable-atspi-tests
-	BUILD_DEPS_ARCH += , libatspi2.0-dev$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , libatspi2.0-dev$(OOO_NO_CHECK_ARCHS) <!nocheck>, at-spi2-core$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , xvfb$(OOO_NO_CHECK_ARCHS) <!nocheck>, xauth$(OOO_NO_CHECK_ARCHS) <!nocheck>, dbus-x11$(OOO_NO_CHECK_ARCHS) <!nocheck>
   endif
 endif
