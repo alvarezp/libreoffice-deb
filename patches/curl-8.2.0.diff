@@ -1,0 +1,83 @@
+From 2a68dc02bd19a717d3c86873206fabed1098f228 Mon Sep 17 00:00:00 2001
+From: Stephan Bergmann <sbergman@redhat.com>
+Date: Mon, 31 Jul 2023 17:09:32 +0200
+Subject: Adapt test code to cURL 8.2.0
+
+...for which CppunitTest_ucb_webdav_core would fail with
+
+> ucb/qa/cppunit/webdav/webdav_local_neon.cxx:60:(anonymous namespace)::webdav_local_test::WebdavUriTest
+> equality assertion failed
+> - Expected: ?query#fragment
+> - Actual  : /?query#fragment
+
+and
+
+> ucb/qa/cppunit/webdav/webdav_local_neon.cxx:89:(anonymous namespace)::webdav_local_test::WebdavUriTest2
+> equality assertion failed
+> - Expected: ?query
+> - Actual  : /?query
+
+because of
+<https://github.com/bch/curl/commit/5752e71080cb3aafa8b24c3261419345b832bc92>
+"urlapi: have *set(PATH) prepend a slash if one is missing".
+
+All that test code had been added with b03e070420606d407df2ec5e9dfa7043ecc46177
+"ucb: webdav-curl: fix CurlUri::CloneWithRelativeRefPathAbsolute()", and it
+looks harmless for our use cases that cURL started to behave differently there
+now.  So instead of accepting either of the outcomes depending on what cURL
+version is being used, just change the test code to not leave out the
+path-absolute in the calls to CloneWithRelativeRefPathAbsolute (which is
+documented in ucb/source/ucp/webdav-curl/CurlUri.hxx to take
+
+>     /// @param matches: relative-ref = path-absolute [ "?" query ] [ "#" fragment ]
+
+and path-absolute cannot be empty as per RFC 3986 "Uniform Resource Identifier
+(URI): Generic Syntax").
+
+Change-Id: If07a28598dfa047ebe89d8bcda19e8fcaa36aed0
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/155099
+Reviewed-by: Michael Stahl <michael.stahl@allotropia.de>
+Tested-by: Jenkins
+Reviewed-by: Stephan Bergmann <sbergman@redhat.com>
+---
+ ucb/qa/cppunit/webdav/webdav_local_neon.cxx | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/ucb/qa/cppunit/webdav/webdav_local_neon.cxx b/ucb/qa/cppunit/webdav/webdav_local_neon.cxx
+index bde7652b9ffa..a457bc6d2b28 100644
+--- a/ucb/qa/cppunit/webdav/webdav_local_neon.cxx
++++ b/ucb/qa/cppunit/webdav/webdav_local_neon.cxx
+@@ -52,12 +52,12 @@ namespace
+         CPPUNIT_ASSERT_EQUAL( OUString("/foo/bar"), uri2.GetRelativeReference() );
+         CPPUNIT_ASSERT_EQUAL( OUString("http://user%40anothername@server.biz:8040/foo/bar"), uri2.GetURI() );
+ 
+-        CurlUri uri3(aURI.CloneWithRelativeRefPathAbsolute(u"?query#fragment"));
++        CurlUri uri3(aURI.CloneWithRelativeRefPathAbsolute(u"/?query#fragment"));
+         CPPUNIT_ASSERT_EQUAL( OUString("http"), uri3.GetScheme() );
+         CPPUNIT_ASSERT_EQUAL( OUString("server.biz"), uri3.GetHost() );
+         CPPUNIT_ASSERT_EQUAL( OUString("user%40anothername"), uri3.GetUser() );
+         CPPUNIT_ASSERT_EQUAL( sal_uInt16(8040), uri3.GetPort() );
+-        CPPUNIT_ASSERT_EQUAL( OUString("?query#fragment"), uri3.GetRelativeReference() );
++        CPPUNIT_ASSERT_EQUAL( OUString("/?query#fragment"), uri3.GetRelativeReference() );
+         CPPUNIT_ASSERT_EQUAL( OUString("http://user%40anothername@server.biz:8040/?query#fragment"), uri3.GetURI() );
+     }
+ 
+@@ -80,13 +80,13 @@ namespace
+         CPPUNIT_ASSERT_EQUAL( OUString("/foo/bar"), uri2.GetRelativeReference() );
+         CPPUNIT_ASSERT_EQUAL( OUString("https://foo:bar@server.biz:8040/foo/bar"), uri2.GetURI() );
+ 
+-        CurlUri uri3(aURI.CloneWithRelativeRefPathAbsolute(u"?query"));
++        CurlUri uri3(aURI.CloneWithRelativeRefPathAbsolute(u"/?query"));
+         CPPUNIT_ASSERT_EQUAL( OUString("https"), uri3.GetScheme() );
+         CPPUNIT_ASSERT_EQUAL( OUString("server.biz"), uri3.GetHost() );
+         CPPUNIT_ASSERT_EQUAL( OUString("foo"), uri3.GetUser() );
+         CPPUNIT_ASSERT_EQUAL( OUString("bar"), uri3.GetPassword() );
+         CPPUNIT_ASSERT_EQUAL( sal_uInt16(8040), uri3.GetPort() );
+-        CPPUNIT_ASSERT_EQUAL( OUString("?query"), uri3.GetRelativeReference() );
++        CPPUNIT_ASSERT_EQUAL( OUString("/?query"), uri3.GetRelativeReference() );
+         CPPUNIT_ASSERT_EQUAL( OUString("https://foo:bar@server.biz:8040/?query"), uri3.GetURI() );
+     }
+ 
+-- 
+cgit v1.2.1
+
