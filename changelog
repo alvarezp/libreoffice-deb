@@ -1,4 +1,4 @@
-libreoffice (4:24.2~alpha0~git20230729-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2~alpha0~git20230731-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
@@ -9,6 +9,13 @@ libreoffice (4:24.2~alpha0~git20230729-1) UNRELEASED; urgency=medium
     and at-spi builddeps
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
+
+libreoffice (4:7.6.0~rc2-3) UNRELEASED; urgency=medium
+
+  * debian/patches/fix-{riscv64,loong64}-bridges.diff: as name says; from
+    upstream master 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 31 Jul 2023 18:04:21 +0200
 
 libreoffice (4:7.6.0~rc2-2) experimental; urgency=medium
 
