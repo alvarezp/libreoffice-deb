@@ -50,3 +50,4 @@ bash-completion-updates.diff
 dp_platform-riscv64-and-loongarch64.diff
 fix-loong64-bridges.diff
 fix-riscv64-bridges.diff
+curl-8.2.0.diff
