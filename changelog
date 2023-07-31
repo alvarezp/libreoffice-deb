@@ -1,3 +1,10 @@
+libreoffice (4:7.5.5-4) UNRELEASED; urgency=medium
+
+  * debian/patches/fix-{riscv64,loong64}-bridges.diff: as name says; from
+    upstream master 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 31 Jul 2023 18:04:21 +0200
+
 libreoffice (4:7.5.5-3) unstable; urgency=medium
 
   * debian/control.in:
