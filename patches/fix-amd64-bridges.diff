@@ -1,0 +1,98 @@
+From 3bcc14b4e2b226f97e937ca7a152218f8276ee39 Mon Sep 17 00:00:00 2001
+From: Stephan Bergmann <sbergman@redhat.com>
+Date: Thu, 3 Aug 2023 13:21:44 +0200
+Subject: Fix handling of float vs. double values
+
+...which had been broken ever since f424e55b4e66ffbee5b34f45ef5ea18d77c4d15c
+"INTEGRATION: CWS sixtyfour11 (1.7.22); FILE MERGED" had merged the
+typelib_TypeClass_FLOAT case into the typelib_TypeClass_DOUBLE case, and which
+caused
+
+> ==612573==ERROR: AddressSanitizer: dynamic-stack-buffer-overflow on address 0x7fff4e6b0700 at pc 0x7f45a9d77d9e bp 0x7fff4e6af3f0 sp 0x7fff4e6af3e8
+> WRITE of size 8 at 0x7fff4e6b0700 thread T0
+>  #0 in gcc3::callVirtualMethod(void*, unsigned int, void*, _typelib_TypeDescriptionReference*, bool, unsigned long*, unsigned int, unsigned long*, double*) at bridges/source/cpp_uno/gcc3_linux_x86-64/callvirtualmethod.cxx:155:51 (instdir/program/libgcc3_uno.so +0x118d9d)
+>  #1 in cpp_call(bridges::cpp_uno::shared::UnoInterfaceProxy*, bridges::cpp_uno::shared::VtableSlot, _typelib_TypeDescriptionReference*, int, _typelib_MethodParameter*, void*, void**, _uno_Any**) at bridges/source/cpp_uno/gcc3_linux_x86-64/uno2cpp.cxx:233:13 (instdir/program/libgcc3_uno.so +0x112c1e)
+>  #2 in unoInterfaceProxyDispatch at bridges/source/cpp_uno/gcc3_linux_x86-64/uno2cpp.cxx:330:13 (instdir/program/libgcc3_uno.so +0x10e333)
+>  #3 in stoc_corefl::(anonymous namespace)::IdlAttributeFieldImpl::get(com::sun::star::uno::Any const&) at stoc/source/corereflection/criface.cxx:141:9 (instdir/program/libreflectionlo.so +0x1f89e0)
+>  #4 in non-virtual thunk to stoc_corefl::(anonymous namespace)::IdlAttributeFieldImpl::get(com::sun::star::uno::Any const&) at stoc/source/corereflection/criface.cxx (instdir/program/libreflectionlo.so +0x1fc5fb)
+>  #5 in cppu::PropertySetMixinImpl::Impl::getProperty(com::sun::star::uno::Reference<com::sun::star::uno::XInterface> const&, rtl::OUString const&, com::sun::star::beans::PropertyState*) const at cppuhelper/source/propertysetmixin.cxx:563:24 (instdir/program/libuno_cppuhelpergcc3.so.3 +0x7d5059)
+>  #6 in cppu::PropertySetMixinImpl::getPropertyValue(rtl::OUString const&) at cppuhelper/source/propertysetmixin.cxx:994:20 (instdir/program/libuno_cppuhelpergcc3.so.3 +0x7e462f)
+>  #7 in reportdesign::OFixedText::getPropertyValue(rtl::OUString const&) at reportdesign/source/core/api/FixedText.cxx:143:34 (instdir/program/../program/librptlo.so +0x7452ad)
+>  #8 in non-virtual thunk to reportdesign::OFixedText::getPropertyValue(rtl::OUString const&) at reportdesign/source/core/api/FixedText.cxx (instdir/program/../program/librptlo.so +0x7452eb)
+>  #9 in rptui::OPropertyMediator::OPropertyMediator(com::sun::star::uno::Reference<com::sun::star::beans::XPropertySet> const&, com::sun::star::uno::Reference<com::sun::star::beans::XPropertySet> const&, std::__debug::map<rtl::OUString, std::pair<rtl::OUString, std::shared_ptr<rptui::AnyConverter>>, std::less<rtl::OUString>, std::allocator<std::pair<rtl::OUString const, std::pair<rtl::OUString, std::shared_ptr<rptui::AnyConverter>>>>>&&, bool) at reportdesign/source/core/sdr/PropertyForward.cxx:68:119 (instdir/program/../program/librptlo.so +0xbbbdb7)
+>  #10 in rptui::OUnoObject::CreateMediator(bool) at reportdesign/source/core/sdr/RptObject.cxx:878:31 (instdir/program/../program/librptlo.so +0xc16451)
+>
+> Address 0x7fff4e6b0700 is located in stack of thread T0 at offset 4288 in frame
+>  #0 in gcc3::callVirtualMethod(void*, unsigned int, void*, _typelib_TypeDescriptionReference*, bool, unsigned long*, unsigned int, unsigned long*, double*) at bridges/source/cpp_uno/gcc3_linux_x86-64/callvirtualmethod.cxx:50 (instdir/program/libgcc3_uno.so +0x1181d7)
+>
+>   This frame has 3 object(s):
+>     [32, 104) 'data' (line 53)
+>     [144, 160) 'longs' (line 162)
+>     [176, 192) 'doubles' (line 166) <== Memory access at offset 4288 overflows this variable
+> HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+>       (longjmp and C++ exceptions *are* supported)
+> SUMMARY: AddressSanitizer: dynamic-stack-buffer-overflow bridges/source/cpp_uno/gcc3_linux_x86-64/callvirtualmethod.cxx:155:51 in gcc3::callVirtualMethod(void*, unsigned int, void*, _typelib_TypeDescriptionReference*, bool, unsigned long*, unsigned int, unsigned long*, double*)
+> Shadow bytes around the buggy address:
+>   0x7fff4e6b0480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>   0x7fff4e6b0500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>   0x7fff4e6b0580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>   0x7fff4e6b0600: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>   0x7fff4e6b0680: 00 00 00 00 00 00 00 00 00 00 00 00 ca ca ca ca
+> =>0x7fff4e6b0700:[04]cb cb cb cb cb cb cb 00 00 00 00 00 00 00 00
+>   0x7fff4e6b0780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>   0x7fff4e6b0800: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>   0x7fff4e6b0880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>   0x7fff4e6b0900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>   0x7fff4e6b0980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+> Shadow byte legend (one shadow byte represents 8 application bytes):
+>   Addressable:           00
+>   Partially addressable: 01 02 03 04 05 06 07
+>   Heap left redzone:       fa
+>   Freed heap region:       fd
+>   Stack left redzone:      f1
+>   Stack mid redzone:       f2
+>   Stack right redzone:     f3
+>   Stack after return:      f5
+>   Stack use after scope:   f8
+>   Global redzone:          f9
+>   Global init order:       f6
+>   Poisoned by user:        f7
+>   Container overflow:      fc
+>   Array cookie:            ac
+>   Intra object redzone:    bb
+>   ASan internal:           fe
+>   Left alloca redzone:     ca
+>   Right alloca redzone:    cb
+> ==612573==ABORTING
+
+when opening <https://bugs.documentfoundation.org/attachment.cgi?id=174542>
+Example2Fields.odb attached to
+<https://bugs.documentfoundation.org/show_bug.cgi?id=144072> "LibreofficeBase
+crashed when 2 fields selected in report builder from different sections and
+width is adjusted 2nd time" and clicking "Edit..." in the context menu of the
+"RptTasks" report.
+
+Change-Id: I318765aede68353d475a0d672e0aea36ed12af29
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/155286
+Reviewed-by: Noel Grandin <noel.grandin@collabora.co.uk>
+Tested-by: Jenkins
+Reviewed-by: Stephan Bergmann <sbergman@redhat.com>
+---
+ bridges/source/cpp_uno/gcc3_linux_x86-64/callvirtualmethod.cxx | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/bridges/source/cpp_uno/gcc3_linux_x86-64/callvirtualmethod.cxx b/bridges/source/cpp_uno/gcc3_linux_x86-64/callvirtualmethod.cxx
+index b0f699dba1c7..04dd2dc6a5f6 100644
+--- a/bridges/source/cpp_uno/gcc3_linux_x86-64/callvirtualmethod.cxx
++++ b/bridges/source/cpp_uno/gcc3_linux_x86-64/callvirtualmethod.cxx
+@@ -151,6 +151,8 @@ void CPPU_CURRENT_NAMESPACE::callVirtualMethod(
+         *static_cast<sal_uInt8 *>( pRegisterReturn ) = *reinterpret_cast<sal_uInt8*>( &data.rax );
+         break;
+     case typelib_TypeClass_FLOAT:
++        *static_cast<float *>(pRegisterReturn) = *reinterpret_cast<float *>(&data.xmm0);
++        break;
+     case typelib_TypeClass_DOUBLE:
+         *static_cast<double *>( pRegisterReturn ) = data.xmm0;
+         break;
+-- 
+cgit v1.2.1
