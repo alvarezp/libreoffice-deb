@@ -1,0 +1,43 @@
+From 45f6b03349b2626c5e75008bccd4e094f96e2769 Mon Sep 17 00:00:00 2001
+From: Khaled Hosny <khaled@libreoffice.org>
+Date: Sun, 4 Jun 2023 21:47:32 +0300
+Subject: Fix ccache cache size detection
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+I have ccache 4.8.1 and it reports:
+
+(/home/khaled/.config/ccache/ccache.conf) max_size = 30.0 GB
+
+With a space between the number and the unit and the configure check
+with then see a unit-less 30 and will warn:
+
+ccache's cache size is less than 1GB using it is counter-productive: Disabling auto-ccache detection
+
+Change-Id: I12bad9204feddfe06be7207d9367586da871a5e5
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/152592
+Tested-by: Jenkins
+Reviewed-by: خالد حسني <khaled@libreoffice.org>
+---
+ configure.ac | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index e86e3c30141d..bb2e3bcd6999 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -3317,8 +3317,9 @@ AC_SUBST(CCACHE_DEPEND_MODE)
+ # sccache defaults are good enough
+ if test "$CCACHE" != "" -a -z "$SCCACHE"; then
+     # e.g. (/home/rene/.config/ccache/ccache.conf) max_size = 20.0G
++    # or (...) max_size = 20.0 G
+     # -p works with both 4.2 and 4.4
+-    ccache_size_msg=$([$CCACHE -p | $AWK /max_size/'{ print $4 }' | sed -e 's/\.[0-9]*//'])
++    ccache_size_msg=$([$CCACHE -p | $AWK /max_size/'{ print $4 $5 }' | sed -e 's/\.[0-9]*//'])
+     ccache_size=$(echo "$ccache_size_msg" | grep "G" | sed -e 's/G.*$//')
+     if test "$ccache_size" = ""; then
+         ccache_size=$(echo "$ccache_size_msg" | grep "M" | sed -e 's/\ M.*$//')
+-- 
+cgit v1.2.1
+
