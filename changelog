@@ -55,7 +55,7 @@ libreoffice (4:7.6.0~rc1-2) experimental; urgency=medium
       theoretically are ran") and restrict the fonts-* build-deps to those
       (so that fonts-* needed in the uitests are there)
     - rm -f libdeploymentgui.so unconditionally for core-nogui; also remove when the
-      arch is not in OOO_EXTENSIONS_ARCHS; also remove unoppkg.bin and libunopkgapp.so
+      arch is not in OOO_EXTENSIONS_ARCHS; also remove unopkg.bin and libunopkgapp.so
       from core if we built without extension support 
     - also force gcc-12 for i386
 
