@@ -12,7 +12,7 @@ libreoffice (4:24.2~alpha0~git20230804-1) UNRELEASED; urgency=medium
 
 libreoffice (4:7.6.0~rc2-3) UNRELEASED; urgency=medium
 
-  * debian/patches/fix-{riscv64,loong64}-bridges.diff: as name says; from
+  * debian/patches/fix-{riscv64,loong64,amd64}-bridges.diff: as name says; from
     upstream master 
   * debian/patches/curl-8.2.0.diff: add from upstream master; Adapt test
     code to cURL 8.2.0
@@ -67,7 +67,7 @@ libreoffice (4:7.6.0~rc1-2) experimental; urgency=medium
       theoretically are ran") and restrict the fonts-* build-deps to those
       (so that fonts-* needed in the uitests are there)
     - rm -f libdeploymentgui.so unconditionally for core-nogui; also remove when the
-      arch is not in OOO_EXTENSIONS_ARCHS; also remove unoppkg.bin and libunopkgapp.so
+      arch is not in OOO_EXTENSIONS_ARCHS; also remove unopkg.bin and libunopkgapp.so
       from core if we built without extension support 
     - also force gcc-12 for i386
 
