@@ -326,6 +326,10 @@ BUILD_GTK3=y
   ifeq "$(BUILD_GTK3)" "y"
     ENABLE_INTROSPECTION=y
   endif
+  # run the atspi tests
+  ifeq "$(BUILD_GTK3)" "y"
+    ENABLE_ATSPI_TESTS=y
+  endif
 endif
 BUILD_GTK4=y
 ENABLE_EVO2=y
@@ -1507,10 +1511,14 @@ ifeq "$(BUILD_GTK3)" "y"
   else
 	DEBHELPER_OPTIONS+= -Ngir1.2-lokdocview-0.1
   endif
-  ifeq "$(RUN_MAKE_CHECK)" "y"
+  ifeq "$(ENABLE_ATSPI_TESTS)" "y"
+	# make sure it is enabled; it is auto-enabled if the below is there, though
 	CONFIGURE_FLAGS_TESTS += --enable-atspi-tests
 	BUILD_DEPS_ARCH += , libatspi2.0-dev$(OOO_NO_CHECK_ARCHS) <!nocheck>, at-spi2-core$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , xvfb$(OOO_NO_CHECK_ARCHS) <!nocheck>, xauth$(OOO_NO_CHECK_ARCHS) <!nocheck>, dbus-x11$(OOO_NO_CHECK_ARCHS) <!nocheck>
+  else
+	# explicitely disable it if not wanted as t is auto-enabled if the above is there
+	CONFIGURE_FLAGS += --disable-atspi-tests
   endif
 endif
 
