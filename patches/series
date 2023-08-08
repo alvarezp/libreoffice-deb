@@ -47,8 +47,6 @@ do-not-abort-on-NON_APPLICATION_FONT_USE.diff
 we-dont-have-the-needed-fonts.diff
 adapt-for-new-carlito.diff
 bash-completion-updates.diff
-fix-pdfexport-test.diff
 fix-loong64-bridges.diff
 fix-riscv64-bridges.diff
 curl-8.2.0.diff
-fix-amd64-bridges.diff
