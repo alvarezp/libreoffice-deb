@@ -12,7 +12,7 @@ index a4d4540ab228..46d262f6f0b8 100644
  
  #include <com/sun/star/text/BibliographyDataField.hpp>
 @@ -1363,6 +1365,8 @@ CPPUNIT_TEST_FIXTURE(SwCoreTextTest, testParaUpperMarginFlyIntersect)
-     CPPUNIT_ASSERT_EQUAL(521, nHeight);
+     CPPUNIT_ASSERT_EQUAL(542, nHeight);
  }
  
 +/* needs Source Han Serif SC*/
@@ -26,5 +26,5 @@ index a4d4540ab228..46d262f6f0b8 100644
  }
 +#endif
  
- CPPUNIT_PLUGIN_IMPLEMENT();
- 
+ CPPUNIT_TEST_FIXTURE(SwCoreTextTest, testScriptinfosurrogatePairs)
+ {
