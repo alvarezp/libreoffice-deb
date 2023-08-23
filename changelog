@@ -1,6 +1,7 @@
-libreoffice (4:24.2~alpha0~git20230815-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2~alpha0~git20230823-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
+    - Border line style control is now a11y accessible (closes: #870612)
 
   * debian/rules, debian/control.kf6.in: add initial support for kf6 backend
     added upstream (not enable yet obviously). Only build one of kf5/kf6 at a

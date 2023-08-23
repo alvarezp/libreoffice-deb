@@ -1,50 +1,21 @@
-diff --git a/sw/qa/uitest/options/optionsDialog.py b/sw/qa/uitest/options/optionsDialog.py
-index 086d16726a1a..0ef5458f7192 100644
---- a/sw/qa/uitest/options/optionsDialog.py
-+++ b/sw/qa/uitest/options/optionsDialog.py
-@@ -5,27 +5,32 @@
- # file, You can obtain one at http://mozilla.org/MPL/2.0/.
- #
- from uitest.framework import UITestCase
-+import os
- 
- class optionsDialog(UITestCase):
- 
-+    # does network access (checks extensions.libreoffice.org), so disable it in "standard" make check
-+    # but allow it on autopkgtest which has the needs-internet restriction
-     def test_moreIconsDialog(self):
--        with self.ui_test.create_doc_in_start_center("writer"):
+diff --git a/cui/source/dialogs/AdditionsDialog.cxx b/cui/source/dialogs/AdditionsDialog.cxx
+index f0dedf626acf..ec330b584acd 100644
+--- a/cui/source/dialogs/AdditionsDialog.cxx
++++ b/cui/source/dialogs/AdditionsDialog.cxx
+@@ -276,9 +276,13 @@ SearchAndParseThread::SearchAndParseThread(AdditionsDialog* pDialog, const bool
+     , m_bIsFirstLoading(isFirstLoading)
+ {
+     // if we are running a UITest, e.g. UITest_sw_options then
+-    // don't attempt to downloading anything
+-    static const bool bUITest = getenv("LIBO_TEST_UNIT");
 -
--            with self.ui_test.execute_dialog_through_command(".uno:OptionsTreeDialog") as xDialog:
-+        if "AUTOPKGTEST_TMP" in os.environ:
-+            with self.ui_test.create_doc_in_start_center("writer"):
++    // don't attempt to downloading anything. Use AUTOPKGTEST_TMP in Debian
++    // so that the test actually is run in autopkgtest where we are sure
++    // we have internet (needs-internet)
++    static const bool bUITest;
++    if (getenv(AUTOPKGTEST_TMP)) { bUITest = true; }
++    else { bUITest = false; }
++ 
+     m_bUITest = bUITest;
+ }
  
--                xPages = xDialog.getChild("pages")
--                xLOEntry = xPages.getChild('0')
--                xLOEntry.executeAction("EXPAND", tuple())
--                xViewEntry = xLOEntry.getChild('2')
--                xViewEntry.executeAction("SELECT", tuple())
-+                with self.ui_test.execute_dialog_through_command(".uno:OptionsTreeDialog") as xDialog:
- 
--                xMoreIconsBtn = xDialog.getChild("btnMoreIcons")
-+                    xPages = xDialog.getChild("pages")
-+                    xLOEntry = xPages.getChild('0')
-+                    xLOEntry.executeAction("EXPAND", tuple())
-+                    xViewEntry = xLOEntry.getChild('2')
-+                    xViewEntry.executeAction("SELECT", tuple())
- 
--                with self.ui_test.execute_blocking_action(xMoreIconsBtn.executeAction, args=('CLICK', ()), close_button="buttonClose") as dialog:
--                    # Check it doesn't crash while opening it
--                    xCloseBtn = dialog.getChild("buttonClose")
--                    self.ui_test.wait_until_property_is_updated(xCloseBtn, "Enabled", "true")
-+                    xMoreIconsBtn = xDialog.getChild("btnMoreIcons")
- 
-+                    with self.ui_test.execute_blocking_action(xMoreIconsBtn.executeAction, args=('CLICK', ()), close_button="buttonClose") as dialog:
-+                        # Check it doesn't crash while opening it
-+                        xCloseBtn = dialog.getChild("buttonClose")
-+                        self.ui_test.wait_until_property_is_updated(xCloseBtn, "Enabled", "true")
-+        else:
-+                print("Skipped")
- 
- 
-     def test_tdf138596(self):
