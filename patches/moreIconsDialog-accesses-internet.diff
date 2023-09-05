@@ -12,8 +12,8 @@ index f0dedf626acf..ec330b584acd 100644
 +    // don't attempt to downloading anything. Use AUTOPKGTEST_TMP in Debian
 +    // so that the test actually is run in autopkgtest where we are sure
 +    // we have internet (needs-internet)
-+    static const bool bUITest;
-+    if (getenv(AUTOPKGTEST_TMP)) { bUITest = true; }
++    static bool bUITest;
++    if (getenv("AUTOPKGTEST_TMP")) { bUITest = true; }
 +    else { bUITest = false; }
 + 
      m_bUITest = bUITest;
