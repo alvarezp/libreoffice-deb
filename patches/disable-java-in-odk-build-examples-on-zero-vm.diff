@@ -2,9 +2,9 @@ diff --git a/config_host.mk.in b/config_host.mk.in
 index 6cea6ccf795e..d08fac922239 100644
 --- a/config_host.mk.in
 +++ b/config_host.mk.in
-@@ -324,6 +324,7 @@ export JAVAIFLAGS=@JAVAIFLAGS@
+@@ -324,6 +324,7 @@ export JAVACFLAGS=@JAVACFLAGS@
+ export JAVAIFLAGS=@JAVAIFLAGS@
  export JAVAIFLAGS_FOR_BUILD=@JAVAIFLAGS_FOR_BUILD@
- export JAVA_CLASSPATH_NOT_SET=@JAVA_CLASSPATH_NOT_SET@
  export JAVAINTERPRETER=@JAVAINTERPRETER@
 +export JAVA_HAS_ZERO_VM=@JAVA_HAS_ZERO_VM@
  export JAVA_HOME=@JAVA_HOME@
