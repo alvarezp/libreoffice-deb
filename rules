@@ -2920,8 +2920,8 @@ endif
 	mkdir -p $(PKGDIR)-uiconfig-common/$(OODIR)/share/config/
 	mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg \
 		$(PKGDIR)-uiconfig-common/$(OODIR)/share/config
-	mkdir -p $(PKGDIR)-uiconfig-impress/$(OODIR)/share/config
-	mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg \
+	mkdir -p $(PKGDIR)-uiconfig-impress/$(OODIR)/share/config/soffice.cfg
+	mv $(PKGDIR)-impress/$(OODIR)/share/config/soffice.cfg/simpress \
 		$(PKGDIR)-uiconfig-impress/$(OODIR)/share/config/soffice.cfg
 
 	find debian/tmp ! -perm -200 | xargs -r chmod u+w
