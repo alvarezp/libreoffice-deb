@@ -1,6 +1,7 @@
 libreoffice (4:7.6.1~rc2-2) UNRELEASED; urgency=medium
 
-  * merge from Ubuntu (Rico Tschichholz):
+  * merge from Ubuntu:
+    [ Rico Tzschichholz ]
    - debian/rules: Fix move of
      /usr/lib/libreoffice/share/config/soffice.cfg/simpress
    - debian/tests/control: testtools-bridgetest requires default-jdk
@@ -10,7 +11,7 @@ libreoffice (4:7.6.1~rc2-2) UNRELEASED; urgency=medium
   * debian/tests/control.in: go sure and add ure-java to
     testtools-bridgetests' dependencies, too
 
- -- Rene Engelhard <rene@debian.org>  Sun, 10 Sep 2023 11:42:33 +0530
+ -- Rene Engelhard <rene@debian.org>  Sun, 10 Sep 2023 12:05:46 +0530
 
 libreoffice (4:7.6.1~rc2-1) experimental; urgency=medium
 
