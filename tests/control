@@ -1,5 +1,5 @@
 Tests: testtools-bridgetest
-Depends: @builddeps@, ure, default-jdk
+Depends: @builddeps@, ure-java, default-jdk
 Restrictions: allow-stderr, rw-build-tree, superficial
 
 Tests: pyuno-import, uno-import
