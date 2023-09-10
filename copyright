@@ -332,6 +332,10 @@ License: other
  // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+Files: tarballs/Java-WebSocket*
+Copyright: Copyright (c) 2010-2020 Nathan Rajlich
+License: MIT
+
 Files: debian/patches/add-access2base-doc.diff wizards/source/access2base/access2base.html
 Copyright: Copyright (c) Jeremy Ruston 2004-2007
            Copyright (c) UnaMesa Association 2007-2012
