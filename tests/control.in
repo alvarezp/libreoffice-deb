@@ -1,5 +1,5 @@
 Tests: testtools-bridgetest
-Depends: @builddeps@, ure-java, libreoffice-java-common, default-jdk
+Depends: @builddeps@, ure-java, liblibreoffice-java, default-jdk
 Restrictions: allow-stderr, rw-build-tree, superficial
 
 Tests: pyuno-import, uno-import
