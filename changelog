@@ -11,14 +11,38 @@ libreoffice (4:24.2~alpha0~git20230905-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 
-libreoffice (4:7.6.1~rc1~git20230812-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.1~rc2-2) experimental; urgency=medium
 
-  * New upstream snapshot
+  * merge from Ubuntu:
+    [ Rico Tzschichholz ]
+   - debian/rules: Fix move of
+     /usr/lib/libreoffice/share/config/soffice.cfg/simpress
+   - debian/tests/control: testtools-bridgetest requires default-jdk
+   - debian/patches/fix-armhf-linker.diff:  Fix linking of libswlo.so
+     on armhf
+
+  * debian/tests/control.in: add ure-java and liblibreoffice-java to
+    testtools-bridgetests' dependencies, too
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 11 Sep 2023 10:16:34 +0530
+
+libreoffice (4:7.6.1~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/rules:
+    - build with -ffp-contract=off on ppc64el 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 07 Sep 2023 17:29:44 +0200
+
+libreoffice (4:7.6.1~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
 
   * debian/rules:
     - fix install of template(s) on bn-IN
 
- -- Rene Engelhard <rene@debian.org>  Fri, 11 Aug 2023 19:24:52 +0200
+ -- Rene Engelhard <rene@debian.org>  Wed, 23 Aug 2023 18:51:26 +0200
 
 libreoffice (4:7.6.0~rc3-1) experimental; urgency=medium
 
