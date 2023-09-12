@@ -1,0 +1,203 @@
+From 57641f9124eb5e6539879671ff612cf9cfe25aea Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Dan=20Hor=C3=A1k?= <dan@danny.cz>
+Date: Tue, 12 Sep 2023 10:04:47 +0200
+Subject: [PATCH] bridge: modernize printf debugging in powerpc64
+
+Use correct types and also typecasts to avoid compiler warnings.
+
+Change-Id: I3b58ec6a4be54ecd8bc07a7febbaf721eba9b945
+---
+ .../cpp_uno/gcc3_linux_powerpc64/uno2cpp.cxx  | 20 +++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
+
+From 0effeef3dc952959af50c045514bbcd135c37fb7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Dan=20Hor=C3=A1k?= <dan@danny.cz>
+Date: Tue, 12 Sep 2023 10:20:51 +0200
+Subject: [PATCH] bridge/powerpc64: fix integer ABI
+
+The ABI document for PowerPC64 specifies that integer values shorter than
+a doubleword are sign or zero extended as necessary. Until now the smaller
+values were treated as unsigned values and only zero-extended. Handling of
+signed values was incorrect.
+
+Change-Id: Icbbe8fc8d4facfa6d1b3252c99ec2d8c2552d9f0
+---
+ .../cpp_uno/gcc3_linux_powerpc64/uno2cpp.cxx  | 58 +++++++++++++++++--
+ 1 file changed, 52 insertions(+), 6 deletions(-)
+
+diff --git a/bridges/source/cpp_uno/gcc3_linux_powerpc64/uno2cpp.cxx b/bridges/source/cpp_uno/gcc3_linux_powerpc64/uno2cpp.cxx
+index 612495d83395..37d75659fdb6 100644
+--- a/bridges/source/cpp_uno/gcc3_linux_powerpc64/uno2cpp.cxx
++++ b/bridges/source/cpp_uno/gcc3_linux_powerpc64/uno2cpp.cxx
+@@ -161,13 +161,13 @@ static void callVirtualMethod(void * pThis, sal_uInt32 nVtableIndex,
+         // Let's figure out what is really going on here
+         {
+                 fprintf( stderr, "= callVirtualMethod() =\nGPR's (%d): ", nGPR );
+-                for ( int i = 0; i < nGPR; ++i )
++                for ( sal_uInt32 i = 0; i < nGPR; ++i )
+                         fprintf( stderr, "0x%lx, ", pGPR[i] );
+                 fprintf( stderr, "\nFPR's (%d): ", nFPR );
+-                for ( int i = 0; i < nFPR; ++i )
+-                        fprintf( stderr, "0x%lx (%f), ", pFPR[i], pFPR[i] );
++                for ( sal_uInt32 i = 0; i < nFPR; ++i )
++                        fprintf( stderr, "0x%lx (%lf), ", (sal_Int64)pFPR[i], pFPR[i] );
+                 fprintf( stderr, "\nStack (%d): ", nStack );
+-                for ( int i = 0; i < nStack; ++i )
++                for ( sal_uInt32 i = 0; i < nStack; ++i )
+                         fprintf( stderr, "0x%lx, ", pStack[i] );
+                 fprintf( stderr, "\n" );
+         }
+@@ -256,6 +256,14 @@ static void callVirtualMethod(void * pThis, sal_uInt32 nVtableIndex,
+                 *pDS++ = *reinterpret_cast<sal_uInt64 *>( pSV ); // verbatim!
+ 
+ #define INSERT_INT64( pSV, nr, pGPR, pDS, bOverflow ) \
++        if ( nr < ppc64::MAX_GPR_REGS ) \
++                pGPR[nr++] = *reinterpret_cast<sal_Int64 *>( pSV ); \
++        else \
++        bOverflow = true; \
++    if (bOverflow) \
++                *pDS++ = *reinterpret_cast<sal_Int64 *>( pSV );
++
++#define INSERT_UINT64( pSV, nr, pGPR, pDS, bOverflow ) \
+         if ( nr < ppc64::MAX_GPR_REGS ) \
+                 pGPR[nr++] = *reinterpret_cast<sal_uInt64 *>( pSV ); \
+         else \
+@@ -264,6 +272,14 @@ static void callVirtualMethod(void * pThis, sal_uInt32 nVtableIndex,
+                 *pDS++ = *reinterpret_cast<sal_uInt64 *>( pSV );
+ 
+ #define INSERT_INT32( pSV, nr, pGPR, pDS, bOverflow ) \
++        if ( nr < ppc64::MAX_GPR_REGS ) \
++                pGPR[nr++] = *reinterpret_cast<sal_Int32 *>( pSV ); \
++        else \
++                bOverflow = true; \
++        if (bOverflow) \
++                *pDS++ = *reinterpret_cast<sal_Int32 *>( pSV );
++
++#define INSERT_UINT32( pSV, nr, pGPR, pDS, bOverflow ) \
+         if ( nr < ppc64::MAX_GPR_REGS ) \
+                 pGPR[nr++] = *reinterpret_cast<sal_uInt32 *>( pSV ); \
+         else \
+@@ -272,6 +288,14 @@ static void callVirtualMethod(void * pThis, sal_uInt32 nVtableIndex,
+                 *pDS++ = *reinterpret_cast<sal_uInt32 *>( pSV );
+ 
+ #define INSERT_INT16( pSV, nr, pGPR, pDS, bOverflow ) \
++        if ( nr < ppc64::MAX_GPR_REGS ) \
++                pGPR[nr++] = *reinterpret_cast<sal_Int16 *>( pSV ); \
++        else \
++                bOverflow = true; \
++        if (bOverflow) \
++                *pDS++ = *reinterpret_cast<sal_Int16 *>( pSV );
++
++#define INSERT_UINT16( pSV, nr, pGPR, pDS, bOverflow ) \
+         if ( nr < ppc64::MAX_GPR_REGS ) \
+                 pGPR[nr++] = *reinterpret_cast<sal_uInt16 *>( pSV ); \
+         else \
+@@ -280,6 +304,14 @@ static void callVirtualMethod(void * pThis, sal_uInt32 nVtableIndex,
+                 *pDS++ = *reinterpret_cast<sal_uInt16 *>( pSV );
+ 
+ #define INSERT_INT8( pSV, nr, pGPR, pDS, bOverflow ) \
++        if ( nr < ppc64::MAX_GPR_REGS ) \
++                pGPR[nr++] = *reinterpret_cast<sal_Int8 *>( pSV ); \
++        else \
++                bOverflow = true; \
++        if (bOverflow) \
++                *pDS++ = *reinterpret_cast<sal_Int8 *>( pSV );
++
++#define INSERT_UINT8( pSV, nr, pGPR, pDS, bOverflow ) \
+         if ( nr < ppc64::MAX_GPR_REGS ) \
+                 pGPR[nr++] = *reinterpret_cast<sal_uInt8 *>( pSV ); \
+         else \
+@@ -294,6 +326,10 @@ static void cpp_call(
+     sal_Int32 nParams, typelib_MethodParameter * pParams,
+     void * pUnoReturn, void * pUnoArgs[], uno_Any ** ppUnoExc )
+ {
++#if OSL_DEBUG_LEVEL > 2
++    fprintf( stderr, "= cpp_call() =\n" );
++#endif
++
+       // max space for: [complex ret ptr], values|ptr ...
+       sal_uInt64 * pStack = (sal_uInt64 *)alloca( (nParams+3) * sizeof(sal_Int64) );
+       sal_uInt64 * pStackStart = pStack;
+@@ -333,9 +369,9 @@ static void cpp_call(
+             pCppReturn = (bridges::cpp_uno::shared::relatesToInterfaceType( pReturnTypeDescr )
+                    ? alloca( pReturnTypeDescr->nSize ) : pUnoReturn);
+ #if OSL_DEBUG_LEVEL > 2
+-            fprintf(stderr, "pCppReturn/pUnoReturn is %lx/%lx", pCppReturn, pUnoReturn);
++            fprintf(stderr, "pCppReturn/pUnoReturn is %p/%p\n", pCppReturn, pUnoReturn);
+ #endif
+-            INSERT_INT64( &pCppReturn, nGPR, pGPR, pStack, bOverflow );
++            INSERT_UINT64( &pCppReturn, nGPR, pGPR, pStack, bOverflow );
+         }
+     }
+     // push "this" pointer
+@@ -343,7 +379,7 @@ static void cpp_call(
+ #if OSL_DEBUG_LEVEL > 2
+     fprintf(stderr, "this pointer is %p\n", pAdjustedThisPtr);
+ #endif
+-    INSERT_INT64( &pAdjustedThisPtr, nGPR, pGPR, pStack, bOverflow );
++    INSERT_UINT64( &pAdjustedThisPtr, nGPR, pGPR, pStack, bOverflow );
+ 
+         // Args
+         void ** pCppArgs = (void **)alloca( 3 * sizeof(void *) * nParams );
+@@ -376,26 +412,40 @@ static void cpp_call(
+                 switch (pParamTypeDescr->eTypeClass)
+                         {
+                         case typelib_TypeClass_HYPER:
+-                        case typelib_TypeClass_UNSIGNED_HYPER:
+ #if OSL_DEBUG_LEVEL > 2
+-                                fprintf(stderr, "hyper is %lx\n", pCppArgs[nPos]);
++                                fprintf(stderr, "hyper is 0x%lx\n", *(sal_Int64 *)pCppArgs[nPos]);
+ #endif
+                                 INSERT_INT64( pCppArgs[nPos], nGPR, pGPR, pStack, bOverflow );
+                                 break;
++                        case typelib_TypeClass_UNSIGNED_HYPER:
++#if OSL_DEBUG_LEVEL > 2
++                                fprintf(stderr, "uhyper is 0x%lx\n", *(sal_Int64 *)pCppArgs[nPos]);
++#endif
++                                INSERT_UINT64( pCppArgs[nPos], nGPR, pGPR, pStack, bOverflow );
++                                break;
+                         case typelib_TypeClass_LONG:
+-                        case typelib_TypeClass_UNSIGNED_LONG:
+                         case typelib_TypeClass_ENUM:
+ #if OSL_DEBUG_LEVEL > 2
+-                                fprintf(stderr, "long is %x\n", pCppArgs[nPos]);
++                                fprintf(stderr, "long is 0x%x\n", *(sal_Int32 *)pCppArgs[nPos]);
+ #endif
+                                 INSERT_INT32( pCppArgs[nPos], nGPR, pGPR, pStack, bOverflow );
+                                 break;
++                        case typelib_TypeClass_UNSIGNED_LONG:
++#if OSL_DEBUG_LEVEL > 2
++                                fprintf(stderr, "ulong is 0x%x\n", *(sal_Int32 *)pCppArgs[nPos]);
++#endif
++                                INSERT_UINT32( pCppArgs[nPos], nGPR, pGPR, pStack, bOverflow );
++                                break;
+                         case typelib_TypeClass_SHORT:
++                                INSERT_INT16( pCppArgs[nPos], nGPR, pGPR, pStack, bOverflow );
++                                break;
+                         case typelib_TypeClass_CHAR:
+                         case typelib_TypeClass_UNSIGNED_SHORT:
+-                                INSERT_INT16( pCppArgs[nPos], nGPR, pGPR, pStack, bOverflow );
++                                INSERT_UINT16( pCppArgs[nPos], nGPR, pGPR, pStack, bOverflow );
+                                 break;
+                         case typelib_TypeClass_BOOLEAN:
++                                INSERT_UINT8( pCppArgs[nPos], nGPR, pGPR, pStack, bOverflow );
++                                break;
+                         case typelib_TypeClass_BYTE:
+                                 INSERT_INT8( pCppArgs[nPos], nGPR, pGPR, pStack, bOverflow );
+                                 break;
+@@ -448,13 +498,13 @@ static void cpp_call(
+                         else // direct way
+                         {
+ #if OSL_DEBUG_LEVEL > 2
+-                fprintf(stderr, "that one, passing %lx through\n", pUnoArgs[nPos]);
++                fprintf(stderr, "that one, passing %p through\n", pUnoArgs[nPos]);
+ #endif
+                                 pCppArgs[nPos] = pUnoArgs[nPos];
+                                 // no longer needed
+                                 TYPELIB_DANGER_RELEASE( pParamTypeDescr );
+                         }
+-                        INSERT_INT64( &(pCppArgs[nPos]), nGPR, pGPR, pStack, bOverflow );
++                        INSERT_UINT64( &(pCppArgs[nPos]), nGPR, pGPR, pStack, bOverflow );
+         }
+     }
+ 
