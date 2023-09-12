@@ -1,8 +1,10 @@
-libreoffice (4:7.6.1~rc2-4) UNRELEASED; urgency=medium
+libreoffice (4:7.6.1~rc2-3) UNRELEASED; urgency=medium
 
   * merge from Ubuntu:
     [ Rico Tzschichholz ]
     -  debian/rules: build with -ffp-contract=off on s390x, too
+
+  * debian/patches/fix-ppc64el-bridges.diff: add from upstream gerrit
 
  -- Rene Engelhard <rene@debian.org>  Mon, 11 Sep 2023 14:36:59 +0530
 
