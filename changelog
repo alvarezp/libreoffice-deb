@@ -5,6 +5,10 @@ libreoffice (4:7.6.1~rc2-3) UNRELEASED; urgency=medium
     -  debian/rules: build with -ffp-contract=off on s390x, too
 
   * debian/patches/fix-ppc64el-bridges.diff: add from upstream gerrit
+  * debian/rules:
+    - go sure and add Build-Conflicts: against clang if arch is not in
+      OOO_CLANG_ARCHS since ./configure will pick up an installed clang
+      anyways otherwise
 
  -- Rene Engelhard <rene@debian.org>  Mon, 11 Sep 2023 14:36:59 +0530
 

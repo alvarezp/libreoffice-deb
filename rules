@@ -2077,6 +2077,8 @@ endif
 
 ifneq "$(ALLOW_CLANG)" "y"
 	perl -pi -e "s/(Build-Conflicts: .*)/\1,clang,/" debian/control
+else
+	perl -pi -e "s/(Build-Conflicts: .*)/\1,clang [$(filter-out $(OOO_CLANG_ARCHS),$(OOO_ARCHS))],/" debian/control
 endif
 ifeq "$(USE_SYSTEMD)" "n"
 	perl -pi -e "s/(Build-Conflicts: .*)/\1,systemd-coredump <!nocheck>,/" debian/control
