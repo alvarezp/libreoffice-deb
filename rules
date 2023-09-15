@@ -791,21 +791,12 @@ endif
   # Upstream tracked it down to a gcc bug: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106355
   # but
   # 16:37 <@sberg> _rene_, I couldn't reproduce the issue with an -O0 (--enable-dbgutil) build, and can with a -O2 (no --enable-debug etc.) one
-  # and: bridgetest fails when built with gcc 13, works with 12
-ifneq "$(BOOKWORM_BACKPORT)" "y"
-  BUILD_DEPS += , gcc-12 [s390x], g++-12 [s390x]
-endif
 ifeq "$(DEB_HOST_ARCH)" "s390x"
-  ifneq "$(BOOKWORM_BACKPORT)" "y"
-    CONFIGURE_FLAGS+= \
-      CC=$(CC_PREFIX)gcc-12 \
-      CXX=$(CC_PREFIX)g++-12
-  endif
   ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	DEB_BUILD_OPTIONS += noopt
   endif
 endif
-# same as s390x above, bridgetest fails when built with gcc 13, works with 12
+# bridgetest fails when built with gcc 13, works with 12
 ifneq "$(BOOKWORM_BACKPORT)" "y"
   BUILD_DEPS += , gcc-12 [i386], g++-12 [i386]
 endif

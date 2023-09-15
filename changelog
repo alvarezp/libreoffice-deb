@@ -9,8 +9,11 @@ libreoffice (4:7.6.1~rc2-3) UNRELEASED; urgency=medium
     - go sure and add Build-Conflicts: against clang if arch is not in
       OOO_CLANG_ARCHS since ./configure will pick up an installed clang
       anyways otherwise
+    - remove special-casing of using gcc-12 on s390x. While it fails with
+      gcc 12 *and* 13 13 actually somehow has *lesser* failures, so just use
+      that one
 
- -- Rene Engelhard <rene@debian.org>  Mon, 11 Sep 2023 14:36:59 +0530
+ -- Rene Engelhard <rene@debian.org>  Fri, 15 Sep 2023 10:31:53 +0530
 
 libreoffice (4:7.6.1~rc2-2) experimental; urgency=medium
 
