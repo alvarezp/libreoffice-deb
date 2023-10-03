@@ -1,4 +1,6 @@
-libreoffice (4:7.6.1~rc2-3) UNRELEASED; urgency=medium
+libreoffice (4:7.6.2-1) experimental; urgency=medium
+
+  * New upstream release
 
   * merge from Ubuntu:
     [ Rico Tzschichholz ]
@@ -13,7 +15,7 @@ libreoffice (4:7.6.1~rc2-3) UNRELEASED; urgency=medium
       gcc 12 *and* 13 13 actually somehow has *lesser* failures, so just use
       that one
 
- -- Rene Engelhard <rene@debian.org>  Fri, 15 Sep 2023 10:31:53 +0530
+ -- Rene Engelhard <rene@debian.org>  Mon, 02 Oct 2023 21:53:56 +0200
 
 libreoffice (4:7.6.1~rc2-2) experimental; urgency=medium
 
