@@ -787,6 +787,8 @@ ifneq "$(USE_CLANG)" "y"
       CC=$(CC_PREFIX)gcc-$(GCC_VERSION) \
       CXX=$(CC_PREFIX)g++-$(GCC_VERSION)
     endif
+  else
+	BUILD_DEPS += , gcc (>= 4:12), g++ (>= 4:12)
   endif
   # Use -O0 for gcc 10 on armhf to avoid build/test failure with gcc 10
   # https://bugs.launchpad.net/ubuntu/+bug/1891623
