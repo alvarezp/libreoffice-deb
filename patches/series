@@ -51,4 +51,3 @@ dp_platform-riscv64-and-loongarch64.diff
 fix-loong64-bridges.diff
 fix-riscv64-bridges.diff
 fix-ccache-size-detection.diff
-fix-ppc64el-bridges.diff
