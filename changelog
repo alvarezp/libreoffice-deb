@@ -11,6 +11,14 @@ libreoffice (4:24.2~alpha0~git20230905-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 
+libreoffice (4:7.6.1~rc2-4) UNRELEASED; urgency=medium
+
+  * merge from Ubuntu:
+    [ Rico Tzschichholz ]
+    -  debian/rules: build with -ffp-contract=off on s390x, too
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 11 Sep 2023 14:36:59 +0530
+
 libreoffice (4:7.6.1~rc2-2) experimental; urgency=medium
 
   * merge from Ubuntu:
