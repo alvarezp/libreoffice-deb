@@ -346,7 +346,7 @@ SYSTEM_STUFF += postgresql
 DICT_DIR=/usr/share/hunspell
 HYPH_DIR=/usr/share/hyphen
 THES_DIR=/usr/share/mythes
-ENABLE_LIBCMIS=n
+ENABLE_LIBCMIS=y
 ifeq "$(ENABLE_LIBCMIS)" "y"
 SYSTEM_STUFF += libcmis
 endif
