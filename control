@@ -18,7 +18,7 @@ Build-Depends: autoconf,
                default-jdk (>= 2:1.9) [!hppa !hurd-i386 !kfreebsd-amd64 !kfreebsd-i386 !hurd-i386 !powerpcspe !s390 !sparc] <!nojava>,
                dh-python <!nopython>,
                dpkg-dev (>= 1.20.1),
-               firebird-dev [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc],
+               firebird-dev [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc],
                flex,
                fontforge-nox | fontforge,
                g++-12 [i386],
@@ -33,9 +33,9 @@ Build-Depends: autoconf,
                libabsl-dev [alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64],
                libabw-dev (<< 0.2~),
                libabw-dev (>= 0.1),
-               libarchive-zip-perl [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libarchive-zip-perl [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                libavahi-client-dev,
-               libbase-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libbase-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                libbluetooth-dev [linux-any],
                libboost-date-time-dev (>= 1.71),
                libboost-dev (>= 1.71),
@@ -65,10 +65,10 @@ Build-Depends: autoconf,
                libexpat1-dev,
                libexttextcat-dev,
                libfixmath-dev,
-               libflute-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libflute-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                libfontconfig-dev,
-               libfonts-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
-               libformula-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libfonts-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libformula-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                libfreehand-dev (<< 0.2~),
                libfreehand-dev (>= 0.1),
                libfreetype-dev (>= 2.2.0) [hppa m68k mips mips64 powerpc powerpcspe ppc64 s390 s390x sparc sparc64 alpha ia64],
@@ -85,7 +85,7 @@ Build-Depends: autoconf,
                libgstreamer1.0-dev,
                libgtk-3-dev,
                libharfbuzz-dev (>= 5.1.0),
-               libhsqldb1.8.0-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libhsqldb1.8.0-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                libhunspell-dev,
                libhyphen-dev,
                libice-dev,
@@ -97,10 +97,10 @@ Build-Depends: autoconf,
                libkf5kio-dev,
                libkf5windowsystem-dev,
                liblangtag-dev,
-               liblayout-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               liblayout-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                liblcms2-dev,
                libldap-dev,
-               libloader-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libloader-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                liblockfile-bin,
                liblpsolve55-dev,
                libmariadb-dev,
@@ -121,7 +121,7 @@ Build-Depends: autoconf,
                liborcus-dev (>= 0.17.2),
                libpagemaker-dev,
                libpagemaker-dev (<< 0.1~),
-               libpentaho-reporting-flow-engine-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libpentaho-reporting-flow-engine-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                libpng-dev,
                libpoppler-cpp-dev,
                libpoppler-dev,
@@ -131,12 +131,12 @@ Build-Depends: autoconf,
                libqxp-dev,
                libqxp-dev (<< 0.1~),
                librdf0-dev,
-               librepository-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               librepository-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                librevenge-dev,
                librevenge-dev (<< 0.1~),
-               libsac-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libsac-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                libsane-dev,
-               libserializer-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libserializer-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                libsm-dev,
                libstaroffice-dev,
                libstaroffice-dev (<< 0.1~),
@@ -159,7 +159,7 @@ Build-Depends: autoconf,
                libxext-dev,
                libxinerama-dev,
                libxkbfile-dev,
-               libxml-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+               libxml-java [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                libxml2-dev,
                libxml2-utils,
                libxmlsec1-dev (>= 1.2.35),
@@ -190,7 +190,7 @@ Build-Depends: autoconf,
                xsltproc,
                zip,
                zlib1g-dev
-Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nocheck>,
+Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nocheck>,
                     fontconfig [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
                     fonts-crosextra-carlito (>= 20230309) [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
                     fonts-dejavu [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
@@ -217,8 +217,8 @@ Build-Depends-Arch: firebird3.0-server-core [!hppa !kfreebsd-amd64 !kfreebsd-i38
                     poppler-data [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390 !s390x !sparc !sparc64] <!nocheck>,
                     pstoedit [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390 !s390x !sparc !sparc64] <!nocheck>,
                     python3-lxml [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390 !s390x !sparc !sparc64] <!nocheck !nopython>
-Build-Depends-Indep: ant [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
-                     ant-optional [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+Build-Depends-Indep: ant [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
+                     ant-optional [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc] <!nojava>,
                      apparmor <!nocheck>,
                      dh-apparmor,
                      doxygen <!nodoc>,
@@ -246,13 +246,13 @@ Homepage: http://www.libreoffice.org
 Package: libreoffice
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
 Section: metapackages
-Depends: libreoffice-base [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc],
+Depends: libreoffice-base [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc],
          libreoffice-calc,
          libreoffice-core (= ${binary:Version}),
          libreoffice-draw,
          libreoffice-impress,
          libreoffice-math,
-         libreoffice-report-builder-bin [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc],
+         libreoffice-report-builder-bin [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc],
          libreoffice-writer,
          ${misc:Depends},
          ${pyuno-depends}
@@ -266,7 +266,7 @@ Recommends: fonts-crosextra-caladea,
             fonts-noto-ui-core,
             fonts-sil-gentium-basic,
             libreoffice-nlpsolver,
-            libreoffice-report-builder [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc],
+            libreoffice-report-builder [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc],
             libreoffice-script-provider-bsh,
             libreoffice-script-provider-js,
             libreoffice-script-provider-python,
@@ -346,13 +346,13 @@ Description: office productivity suite (metapackage)
 Package: libreoffice-nogui
 Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
 Section: metapackages
-Depends: libreoffice-base-nogui [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc],
+Depends: libreoffice-base-nogui [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc],
          libreoffice-calc-nogui,
          libreoffice-core-nogui (= ${binary:Version}),
          libreoffice-draw-nogui,
          libreoffice-impress-nogui,
          libreoffice-math-nogui,
-         libreoffice-report-builder-bin-nogui [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc],
+         libreoffice-report-builder-bin-nogui [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc],
          libreoffice-writer-nogui,
          ${misc:Depends},
          ${pyuno-depends}
@@ -641,7 +641,7 @@ Description: office productivity suite -- common files for LibreOffice help
 
 Package: libreoffice-writer
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
-Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc],
+Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc],
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -662,7 +662,7 @@ Description: office productivity suite -- word processor
 
 Package: libreoffice-writer-nogui
 Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
-Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc],
+Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc],
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -684,7 +684,7 @@ Description: office productivity suite -- word processor (no GUI variant)
 
 Package: libreoffice-calc
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390 s390x sparc sparc64
-Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc],
+Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc],
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core (= ${binary:Version}),
          ${lpsolve-dep},
@@ -701,7 +701,7 @@ Description: office productivity suite -- spreadsheet
 
 Package: libreoffice-calc-nogui
 Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
-Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !loong64 !mips64 !powerpcspe !s390 !sparc],
+Depends: libreoffice-base-core (= ${binary:Version}) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !s390 !sparc],
          libreoffice-common (>= 1:7.0.0~alpha~),
          libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          ${lpsolve-dep},
@@ -821,7 +821,7 @@ Description: office productivity suite -- equation editor (no GUI variant)
  This package contains the equation editor component for LibreOffice.
 
 Package: libreoffice-base-core
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -839,7 +839,7 @@ Description: office productivity suite -- shared library
  libreoffice-sdbc-*).
 
 Package: libreoffice-base
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Section: database
 Pre-Depends: dpkg (>= 1.19.1)
 Depends: libreoffice-base-core (= ${binary:Version}),
@@ -1071,7 +1071,7 @@ Depends: libreoffice-core-nogui | libreoffice-core,
          ${java:Depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Section: database
 Enhances: libreoffice-base-drivers
 Description: HSQLDB SDBC driver for LibreOffice
@@ -1083,7 +1083,7 @@ Description: HSQLDB SDBC driver for LibreOffice
 
 Package: libreoffice-sdbc-mysql
 Section: database
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Depends: libreoffice-core-nogui | libreoffice-core,
          ${misc:Depends},
          ${shlibs:Depends}
@@ -1099,13 +1099,13 @@ Package: libreoffice-base-drivers
 Depends: libreoffice-core-nogui | libreoffice-core,
          ${misc:Depends},
          ${shlibs:Depends}
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Section: database
 Suggests: libjtds-java,
           libreoffice-sdbc-mysql | libmyodbc | libmariadb-java,
           libreoffice-sdbc-postgresql | odbc-postgresql | libpg-java,
           libsqliteodbc | tdsodbc | odbc-mdbtools
-Recommends: libreoffice-sdbc-hsqldb [alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips],
+Recommends: libreoffice-sdbc-hsqldb [alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips],
             ${base-firebird-recommends}
 Replaces: libreoffice-base (<< 1:4.3.0-3), libreoffice-core (<< 1:6.2.0~beta1~)
 Breaks: libreoffice-base (<< 1:4.3.0-3)
@@ -1172,7 +1172,7 @@ Depends: liblibreoffice-java,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libreoffice-core-nogui | libreoffice-core
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Replaces: libreoffice-officebean (<< 1:6.4.0~rc2-1)
 Breaks: libreoffice-officebean (<< 1:6.4.0~rc2-1)
 Description: generic Java Bean wrapper for LibreOffice components
@@ -4833,7 +4833,7 @@ Description: LibreOffice component for building database reports
 
 Package: libreoffice-report-builder-bin
 Section: misc
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Depends: libreoffice-base, libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
 Description: LibreOffice component for building database reports -- libraries
  LibreOffice is a full-featured office productivity suite that provides
@@ -4844,7 +4844,7 @@ Description: LibreOffice component for building database reports -- libraries
 
 Package: libreoffice-report-builder-bin-nogui
 Section: misc
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Depends: libreoffice-base-nogui | libreoffice-base,
          libreoffice-core-nogui | libreoffice-core,
          ${misc:Depends},
@@ -5092,7 +5092,7 @@ Description: office productivity suite -- some Plasma integration
 
 Package: libreoffice-sdbc-postgresql
 Section: misc
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Depends: libreoffice-common (>= 1:7.0.0~alpha),
          libreoffice-core-nogui | libreoffice-core,
          ${misc:Depends},
@@ -5108,7 +5108,7 @@ Description: PostgreSQL SDBC driver for LibreOffice
 Homepage: http://wiki.documentfoundation.org/PostgreSQL-SDBC
 
 Package: libreoffice-evolution
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Section: gnome
 Depends: libreoffice-base,
          libreoffice-common (>= 1:7.0.0~alpha~),
@@ -5169,7 +5169,7 @@ Depends: libreoffice-core-nogui | libreoffice-core,
          ${firebird-engine-depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Section: database
 Enhances: libreoffice-base-drivers
 Description: Firebird SDBC driver for LibreOffice
