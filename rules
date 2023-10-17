@@ -4008,11 +4008,6 @@ endif
 ifeq (,$(filter liblangtag, $(SYSTEM_STUFF)))
 	cat debian/shlibs.override.liblangtag >> debian/shlibs.local
 endif
-	# the other way as the above, depend on a newer libcmis to that the
-	# advertised google 2-factor-auth fixes are present
-ifneq (,$(filter libcmis, $(SYSTEM_STUFF)))
-	cat debian/shlibs.override.libcmis >> debian/shlibs.local
-endif
 ifeq "$(ENABLE_FIREBIRD)" "y"
 ifneq (,$(filter firebird, $(SYSTEM_STUFF)))
 	# force the values of .shlibs which  gives us a (wanted) (>= 3.0.0~)
