@@ -11,9 +11,8 @@ libreoffice (4:7.6.2-2) experimental; urgency=medium
 
   * debian/rules:
     - allow liborcus 0.20, it's supposed to be API/ABI-compatible with 0.19
-    - re-enable cmis; bump libcmis build-dep to >= 0.6.0
 
- -- Rene Engelhard <rene@debian.org>  Thu, 12 Oct 2023 20:11:21 +0200
+ -- Rene Engelhard <rene@debian.org>  Tue, 03 Oct 2023 14:13:35 +0200
 
 libreoffice (4:7.6.2-1) experimental; urgency=medium
 
