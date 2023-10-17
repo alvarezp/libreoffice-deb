@@ -689,7 +689,7 @@ endif
 # Debian Bookworm
 ifeq "$(DEB_DISTRIBUTION)" "bookworm-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out mdds orcus,$(SYSTEM_STUFF))
+  SYSTEM_STUFF := $(filter-out mdds orcus libcmis,$(SYSTEM_STUFF))
   BOOKWORM_BACKPORT=y
 endif
 
