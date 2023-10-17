@@ -11,7 +11,7 @@ libreoffice (4:24.2~alpha0~git20231017-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 
-libreoffice (4:7.6.2-2) UNRELEASED; urgency=medium
+libreoffice (4:7.6.2-2) experimental; urgency=medium
 
   * debian/rules:
     - allow liborcus 0.20, it's supposed to be API/ABI-compatible with 0.19
