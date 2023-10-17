@@ -365,7 +365,7 @@ SYSTEM_STUFF += postgresql
 DICT_DIR=/usr/share/hunspell
 HYPH_DIR=/usr/share/hyphen
 THES_DIR=/usr/share/mythes
-ENABLE_LIBCMIS=n
+ENABLE_LIBCMIS=y
 ifeq "$(ENABLE_LIBCMIS)" "y"
 SYSTEM_STUFF += libcmis
 endif
@@ -1375,7 +1375,7 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   endif
   ifeq "$(ENABLE_LIBCMIS)" "y"
     ifneq (,$(filter libcmis, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libcmis-dev (>= 0.5.2~), libcmis-dev (<< 0.6~)
+	BUILD_DEPS += , libcmis-dev (>= 0.6.0~), libcmis-dev (<< 0.7~)
     endif
   else
 	CONFIGURE_FLAGS += --disable-libcmis
