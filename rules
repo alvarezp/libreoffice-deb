@@ -149,7 +149,10 @@ ifeq ($(filter nojava,$(DEB_BUILD_PROFILES)),)
     JDK=default
     include /usr/share/java/java_defaults.mk
     ifneq "$(JDK)" "default"
-      JAVA_MAINVER=7
+      JAVA_MAINVER=17
+    endif
+    ifneq (,$(findstring $(DEB_HOST_ARCH),$(java_unsupported_architectures)))
+	ENABLE_JAVA=n
     endif
   endif
 else
