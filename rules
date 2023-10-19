@@ -2095,8 +2095,6 @@ endif
 
 ifeq "$(ENABLE_APPARMOR_PROFILES)" "y"
 	perl -pi -e 's/ttf-mscorefonts-installer/ttf-mscorefonts-installer, apparmor/' debian/control
-	perl -pi -e 's/openoffice-unbundled/openoffice-unbundled, apparmor/' debian/control
-
 endif
 
 .DELETE_ON_ERROR: debian/control
