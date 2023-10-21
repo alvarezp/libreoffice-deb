@@ -1,9 +1,9 @@
-libreoffice (4:7.6.3~rc1~git20231012-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.3~rc1~git20231021-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
   * debian/rules:
-    - bump libcmis build-dep to >= 0.6.0
+    - re-enable cmis; bump libcmis build-dep to >= 0.6.0
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 Oct 2023 20:11:21 +0200
 
