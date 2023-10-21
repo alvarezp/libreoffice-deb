@@ -54,7 +54,7 @@ Depends: @builddeps@, libreoffice-core, libreoffice-impress, python3-uno
 Restrictions: allow-stderr
 
 Tests: uicheck-cui
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Depends: @builddeps@, libreoffice-core, libreoffice-impress, libreoffice-writer, python3-uno, libreoffice-script-provider-python, libreoffice-script-provider-js, libreoffice-script-provider-bsh
 Restrictions: allow-stderr
 
@@ -67,12 +67,12 @@ Depends: @builddeps@, libreoffice-core, libreoffice-writer, python3-uno
 Restrictions: allow-stderr
 
 Tests: uicheck-sc
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Depends: @builddeps@, libreoffice-core, libreoffice-calc, libreoffice-draw, libreoffice-impress, python3-uno, libreoffice-l10n-he, libreoffice-l10n-zh-tw, libreoffice-java-common, libreoffice-writer
 Restrictions: allow-stderr
 
 Tests: uicheck-sw
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-draw, libreoffice-calc, libreoffice-impress, libreoffice-base, python3-uno, libreoffice-l10n-he, libreoffice-l10n-zh-tw, libreoffice-librelogo, libreoffice-java-common
 Restrictions: allow-stderr, needs-internet
 

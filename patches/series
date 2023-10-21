@@ -44,7 +44,6 @@ apparmor-gnupg-tofu.diff
 arm-fp-mode.diff
 moreIconsDialog-accesses-internet.diff
 do-not-abort-on-NON_APPLICATION_FONT_USE.diff
-we-dont-have-the-needed-fonts.diff
+#we-dont-have-the-needed-fonts.diff
 adapt-for-new-carlito.diff
 fix-armhf-linker.diff
-enable-testDubiousArrayFormulasFODS-also-on-non-x86-64.diff

@@ -1444,7 +1444,6 @@ ifeq "$(ENABLE_QT5)" "y"
 	BUILD_DEPS += , libqt5x11extras5-dev $(QT5_MINVER)
 	BUILD_DEPS += , libglib2.0-dev
 	BUILD_DEPS += , libxcb1-dev
-	BUILD_DEPS += , libxcb-icccm4-dev
 endif
 ifeq "$(ENABLE_QT6)" "y"
 	CONFIGURE_FLAGS += --enable-qt6
