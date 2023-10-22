@@ -144,15 +144,18 @@ endif
 endif
 BUILD_ONLY_EN_US=n
 ifeq ($(filter nojava,$(DEB_BUILD_PROFILES)),)
-  ENABLE_JAVA=y
+  include /usr/share/java/java_defaults.mk
+  ifneq "$(BOOKWORM_BACKPORT)" "y"
+    ifneq ($(DEB_HOST_ARCH),$(filter-out $(DEB_HOST_ARCH),$(java_unsupported_architectures)))
+      ENABLE_JAVA=y
+    endif
+   else
+      ENABLE_JAVA=y
+   endif
   ifeq "$(ENABLE_JAVA)" "y"
     JDK=default
-    include /usr/share/java/java_defaults.mk
     ifneq "$(JDK)" "default"
       JAVA_MAINVER=17
-    endif
-    ifneq (,$(findstring $(DEB_HOST_ARCH),$(java_unsupported_architectures)))
-	ENABLE_JAVA=n
     endif
   endif
 else
@@ -1164,10 +1167,14 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"
+  ifeq ($(BOOKWORM_BACKPORT),y)
+	BUILD_DEPS += , java-common <!nojava>
+  else
+	BUILD_DEPS += , java-common (>= 0.75) <!nojava>
+  endif
   BUILD_DEPS += , maven-repo-helper
   ifeq "$(JDK)" "default"
 	JAVA_HOME=/usr/lib/jvm/default-java
-	BUILD_DEPS += , java-common <!nojava>
 	DEFAULT_JDK := $(call java_dependency, default-jdk)
 	# build-depend on 1.9 (upstream needs it anyway for module-info support)
 	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.9)/') <!nojava>
