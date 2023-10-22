@@ -534,9 +534,9 @@ OOO_JUNIT_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 OOO_CHECK_FATAL_ARCHS := amd64 arm64
 
-# riscv64 is a new architecture. be more strict here. Especially since it doesn't seem that
-# the bridges' code actually works and all uittests using python fail.. We don't want to have
-# a broken build in there (as it might become a release arch) which we then need to work around again...
+# riscv64 is a new architecture. be more strict here. (The testtools pass and (most) of the uitests too
+# in the meanwhile). FIXME: Ignore and put into the smoketest-only archs. (Based on experience it then
+# never will get out of this anymore given the remaining issues don't get any attention even right now)
 OOO_CHECK_ARCHS += riscv64
 OOO_JUNIT_ARCHS += riscv64
 OOO_CHECK_FATAL_ARCHS += riscv64
@@ -2099,8 +2099,6 @@ endif
 
 ifeq "$(ENABLE_APPARMOR_PROFILES)" "y"
 	perl -pi -e 's/ttf-mscorefonts-installer/ttf-mscorefonts-installer, apparmor/' debian/control
-	perl -pi -e 's/openoffice-unbundled/openoffice-unbundled, apparmor/' debian/control
-
 endif
 
 .DELETE_ON_ERROR: debian/control
