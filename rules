@@ -1216,7 +1216,7 @@ export JAVA_HOME
 	BUILD_DEPS += , javahelper $(JAVAHELPER_MIN_VERSION) <!nojava>
 else
 	CONFIGURE_FLAGS += --without-java
-	DEBHELPER_OPTIONS += -Nlibreoffice-officebean -Nlibofficebean-java -Nlibreoffice-java-common -Nlibreoffice-script-provider-bsh -Nlibreoffice-script-provider-js -Nlibreoffice-subsequentcheckbase -Nlibofficebean-java -Nlibunoloader-java -Nliblibreoffice-java -Nlibreoffice-sdbc-hsqldb
+	DEBHELPER_OPTIONS += -Nlibofficebean-java -Nlibreoffice-java-common -Nlibreoffice-script-provider-bsh -Nlibreoffice-script-provider-js -Nlibreoffice-subsequentcheckbase -Nlibofficebean-java -Nlibunoloader-java -Nliblibreoffice-java -Nlibreoffice-sdbc-hsqldb
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"
@@ -3176,9 +3176,8 @@ ifeq "$(ENABLE_JAVA)" "y"
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"
-	# move the officebean so into libreoffice-officebean
-	# the jar will be installed (into libofficebean-java)
-	# using mh_ in install-indep
+	# move the officebean so into libofficebean-java (into the arch-dep
+	# JNI paths). the jar will be installed using mh_ in install-indep
 	rm -rf debian/libofficebean-java
 	mkdir -p -m755 debian/libofficebean-java/usr/lib/jni
 	mkdir -p -m755 debian/libofficebean-java/$(OODIR)/program
