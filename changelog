@@ -1,4 +1,4 @@
-libreoffice (4:7.5.8~rc1-2) UNRELEASED; urgency=medium
+libreoffice (4:7.5.8~rc1-2) unstable; urgency=medium
 
   * debian/patches/kahansum-test-SSE2.diff: backport from upstream
     libreoffice-7-5-8 branch to fix test failure on !amd64
