@@ -1,3 +1,9 @@
+libreoffice (4:7.6.2-4) experimental; urgency=medium
+
+  * debian/control: regen with proper Bugs:, oops
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 23 Oct 2023 18:05:15 +0200
+
 libreoffice (4:7.6.2-3) experimental; urgency=medium
 
   * debian/patches/kahansum-test-SSE2.diff: backport from upstream
