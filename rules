@@ -2339,7 +2339,7 @@ else
 	# - "bridgetest"
 	# - the public libraries (sal, cppu(helper), comphelper)
 	# - "smoketest" as a smoketest
-	# - pyuno (as we shiup python3-uno..)
+	# - pyuno (as we ship python3-uno..)
 	# - unoidl for the SDK
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE) && \
