@@ -1557,7 +1557,7 @@ ifeq "$(ENABLE_JAVA)" "y"
     endif
 	CONFIGURE_FLAGS += --enable-scripting-beanshell
   else
-	CONFIGURE_FLAGS += --disble-scripting-beanshell
+	CONFIGURE_FLAGS += --disable-scripting-beanshell
  	DEBHELPER_OPTIONS += -Nlibreoffice-script-provider-bsh
   endif
   ifeq "$(ENABLE_SCRIPT_PROVIDER_JS)" "y"
