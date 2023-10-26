@@ -1,16 +1,3 @@
-diff --git a/sd/qa/unit/import-tests2.cxx b/sd/qa/unit/import-tests2.cxx
-index 55ab505fc603..8a59626cb606 100644
---- a/sd/qa/unit/import-tests2.cxx
-+++ b/sd/qa/unit/import-tests2.cxx
-@@ -1759,7 +1759,7 @@ CPPUNIT_TEST_FIXTURE(SdImportTest2, testTdf144092TableHeight)
-     // - Expected: 7208
-     // - Actual  : 4595
-     // i.e. the table height wasn't corrected by expanding less than minimum sized rows.
--    CPPUNIT_ASSERT_EQUAL(sal_Int32(7208), xTableShape->getSize().Height);
-+    CPPUNIT_ASSERT_EQUAL(sal_Int32(7957), xTableShape->getSize().Height);
- }
- 
- CPPUNIT_TEST_FIXTURE(SdImportTest2, testTdf89928BlackWhiteThreshold)
 diff --git a/sw/qa/extras/layout/layout3.cxx b/sw/qa/extras/layout/layout3.cxx
 index 784a295fa2e8..12ce916f63e5 100644
 --- a/sw/qa/extras/layout/layout3.cxx
