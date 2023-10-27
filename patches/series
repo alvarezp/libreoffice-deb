@@ -49,4 +49,3 @@ adapt-for-new-carlito.diff
 bash-completion-updates.diff
 fix-riscv64-bridges.diff
 fix-armhf-linker.diff
-kahansum-test-SSE2.diff
