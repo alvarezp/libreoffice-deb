@@ -48,4 +48,3 @@ we-dont-have-the-needed-fonts.diff
 adapt-for-new-carlito.diff
 bash-completion-updates.diff
 fix-riscv64-bridges.diff
-fix-armhf-linker.diff
