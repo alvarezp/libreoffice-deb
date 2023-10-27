@@ -11,22 +11,28 @@ libreoffice (4:24.2~alpha0~git20231027-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 
-libreoffice (4:7.6.3~rc1~git20231012-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.3~rc1~git20231023-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
   * debian/rules:
-    - bump libcmis build-dep to >= 0.6.0
+    - re-enable cmis; bump libcmis build-dep to >= 0.6.0
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 Oct 2023 20:11:21 +0200
+
+libreoffice (4:7.6.2-3) experimental; urgency=medium
+
+  * debian/patches/kahansum-test-SSE2.diff: backport from upstream
+    libreoffice-7-6 branch to fix test failure on !amd64
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 18 Oct 2023 20:45:52 +0200
 
 libreoffice (4:7.6.2-2) experimental; urgency=medium
 
   * debian/rules:
     - allow liborcus 0.20, it's supposed to be API/ABI-compatible with 0.19
-    - re-enable cmis; bump libcmis build-dep to >= 0.6.0
 
- -- Rene Engelhard <rene@debian.org>  Thu, 12 Oct 2023 20:11:21 +0200
+ -- Rene Engelhard <rene@debian.org>  Tue, 03 Oct 2023 14:13:35 +0200
 
 libreoffice (4:7.6.2-1) experimental; urgency=medium
 

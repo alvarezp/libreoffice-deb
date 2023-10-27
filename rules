@@ -146,12 +146,18 @@ endif
 endif
 BUILD_ONLY_EN_US=n
 ifeq ($(filter nojava,$(DEB_BUILD_PROFILES)),)
-  ENABLE_JAVA=y
+  include /usr/share/java/java_defaults.mk
+  ifneq "$(BOOKWORM_BACKPORT)" "y"
+    ifneq ($(DEB_HOST_ARCH),$(filter-out $(DEB_HOST_ARCH),$(java_unsupported_architectures)))
+      ENABLE_JAVA=y
+    endif
+   else
+      ENABLE_JAVA=y
+   endif
   ifeq "$(ENABLE_JAVA)" "y"
     JDK=default
-    include /usr/share/java/java_defaults.mk
     ifneq "$(JDK)" "default"
-      JAVA_MAINVER=7
+      JAVA_MAINVER=17
     endif
   endif
 else
@@ -549,9 +555,9 @@ OOO_JUNIT_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 OOO_CHECK_FATAL_ARCHS := amd64 arm64
 
-# riscv64 is a new architecture. be more strict here. Especially since it doesn't seem that
-# the bridges' code actually works and all uittests using python fail.. We don't want to have
-# a broken build in there (as it might become a release arch) which we then need to work around again...
+# riscv64 is a new architecture. be more strict here. (The testtools pass and (most) of the uitests too
+# in the meanwhile). FIXME: Ignore and put into the smoketest-only archs. (Based on experience it then
+# never will get out of this anymore given the remaining issues don't get any attention even right now)
 OOO_CHECK_ARCHS += riscv64
 OOO_JUNIT_ARCHS += riscv64
 OOO_CHECK_FATAL_ARCHS += riscv64
@@ -707,7 +713,7 @@ endif
 # Debian Bookworm
 ifeq "$(DEB_DISTRIBUTION)" "bookworm-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out mdds orcus,$(SYSTEM_STUFF))
+  SYSTEM_STUFF := $(filter-out mdds orcus libcmis,$(SYSTEM_STUFF))
   BOOKWORM_BACKPORT=y
 endif
 
@@ -1181,10 +1187,14 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"
+  ifeq ($(BOOKWORM_BACKPORT),y)
+	BUILD_DEPS += , java-common <!nojava>
+  else
+	BUILD_DEPS += , java-common (>= 0.75) <!nojava>
+  endif
   BUILD_DEPS += , maven-repo-helper
   ifeq "$(JDK)" "default"
 	JAVA_HOME=/usr/lib/jvm/default-java
-	BUILD_DEPS += , java-common <!nojava>
 	DEFAULT_JDK := $(call java_dependency, default-jdk)
 	# build-depend on 1.9 (upstream needs it anyway for module-info support)
 	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/') <!nojava>
@@ -1233,7 +1243,7 @@ export JAVA_HOME
 	BUILD_DEPS += , javahelper $(JAVAHELPER_MIN_VERSION) <!nojava>
 else
 	CONFIGURE_FLAGS += --without-java
-	DEBHELPER_OPTIONS += -Nlibreoffice-officebean -Nlibofficebean-java -Nlibreoffice-java-common -Nlibreoffice-script-provider-bsh -Nlibreoffice-script-provider-js -Nlibreoffice-subsequentcheckbase -Nlibofficebean-java -Nlibunoloader-java -Nliblibreoffice-java -Nlibreoffice-sdbc-hsqldb
+	DEBHELPER_OPTIONS += -Nlibofficebean-java -Nlibreoffice-java-common -Nlibreoffice-script-provider-bsh -Nlibreoffice-script-provider-js -Nlibreoffice-subsequentcheckbase -Nlibofficebean-java -Nlibunoloader-java -Nliblibreoffice-java -Nlibreoffice-sdbc-hsqldb
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"
@@ -2128,8 +2138,6 @@ endif
 
 ifeq "$(ENABLE_APPARMOR_PROFILES)" "y"
 	perl -pi -e 's/ttf-mscorefonts-installer/ttf-mscorefonts-installer, apparmor/' debian/control
-	perl -pi -e 's/openoffice-unbundled/openoffice-unbundled, apparmor/' debian/control
-
 endif
 
 .DELETE_ON_ERROR: debian/control
@@ -3207,9 +3215,8 @@ ifeq "$(ENABLE_JAVA)" "y"
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"
-	# move the officebean so into libreoffice-officebean
-	# the jar will be installed (into libofficebean-java)
-	# using mh_ in install-indep
+	# move the officebean so into libofficebean-java (into the arch-dep
+	# JNI paths). the jar will be installed using mh_ in install-indep
 	rm -rf debian/libofficebean-java
 	mkdir -p -m755 debian/libofficebean-java/usr/lib/jni
 	mkdir -p -m755 debian/libofficebean-java/$(OODIR)/program
@@ -4045,11 +4052,6 @@ ifeq (,$(filter orcus, $(SYSTEM_STUFF)))
 endif
 ifeq (,$(filter liblangtag, $(SYSTEM_STUFF)))
 	cat debian/shlibs.override.liblangtag >> debian/shlibs.local
-endif
-	# the other way as the above, depend on a newer libcmis to that the
-	# advertised google 2-factor-auth fixes are present
-ifneq (,$(filter libcmis, $(SYSTEM_STUFF)))
-	cat debian/shlibs.override.libcmis >> debian/shlibs.local
 endif
 ifeq "$(ENABLE_FIREBIRD)" "y"
 ifneq (,$(filter firebird, $(SYSTEM_STUFF)))
