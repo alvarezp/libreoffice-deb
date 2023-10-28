@@ -1,6 +1,6 @@
-libreoffice (4:7.5.8~rc2-1) UNRELEASED; urgency=medium
+libreoffice (4:7.5.8-1) unstable; urgency=medium
 
-  * New upstream release candidate 
+  * New upstream release
 
  -- Rene Engelhard <rene@debian.org>  Sat, 28 Oct 2023 09:22:38 +0200
 
