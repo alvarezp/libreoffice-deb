@@ -1075,6 +1075,12 @@ endif
     else
 	BUILD_DEPS_ARCH += , fonts-crosextra-carlito (<< 20230309) [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
     endif
+	# porrst.cxx:85:Assertion
+	#Test name: (anonymous namespace)::testFloattableAnchorHeight::TestBody
+	#equality assertion failed
+	#- Expected: 1
+	#- Actual  : 2
+	BUILD_DEPS_ARCH += , fonts-crosextra-caladea [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# https://lists.freedesktop.org/archives/libreoffice/2017-May/077764.html
 	BUILD_DEPS_ARCH += , fonts-dejavu [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# used in vcl/qa/cppunit/text.cxx:void VclTextTest::testImplLayoutArgs_PrepareFallback_precalculatedglyphs()
