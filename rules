@@ -27,9 +27,10 @@ ifeq "$(shell echo $(OOVER) | cut -d. -f2)" "2"
 # 24.2 + .6 -> 24.8 -> OK
 NEXT_OOVER=$(shell echo "$(OOVER) + .6" | bc)
 else
-# 24.8 + .6 = 25.4 -> wrong, so substract 6 to get back to
-# February, which is supposed to be the schedule
-NEXT_OOVER=$(shell echo "$(OOVER) - .6" | bc)
+# 24.8 + .6 = 25.4 -> wrong (doesn't take into account that the year
+# has 12 months)so subtract 2 (so effectively + .4) to get back to February (25.2),
+# which is supposed to be the schedule.
+NEXT_OOVER=$(shell echo "$(OOVER) + .4" | bc)
 endif
 
 ARCH_INDEP_PACKAGES := $(shell dh_listpackages -i)
