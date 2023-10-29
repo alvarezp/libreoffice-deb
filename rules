@@ -3712,9 +3712,6 @@ endif
 	# fix the shebangs to make lintian happy
 	sed -i "s,/usr/bin/env perl,/usr/bin/perl,g" \
 		$(PKGDIR)-common/usr/share/$(OODIRNAME)/bin/lo-xlate-lang
-	for i in $(PKGDIR)-common/$(OODIR)/share/config/webcast/*.pl; do \
-		sed -i "s,/usr/bin/env perl,/usr/bin/perl,g" $$i; \
-	done
 
 	for i in $(ARCH_INDEP_PACKAGES); do \
 		if [ -e debian/$$i.bug-script.in ]; then \
