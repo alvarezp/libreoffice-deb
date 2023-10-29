@@ -3542,9 +3542,6 @@ endif
 endif
 
 	# fix permissions
-	for i in editpic poll savepic show webcast; do \
-		chmod 755 $(PKGDIR)-common/$(OODIR)/share/config/webcast/$$i.pl; \
-	done
 	chmod 644 $(PKGDIR)-common/$(OODIR)/CREDITS.fodt
 	# Do we really need this (ALV2 mandating it) or can this go?
 	chmod 644 $(PKGDIR)-common/$(OODIR)/NOTICE
