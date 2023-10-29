@@ -2524,7 +2524,7 @@ ifeq "$(ENABLE_QT6)" "y"
 	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt6lo.so\
 		debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program
 endif
-ifeq "$(shell echo $(ENABLE_KF5)$(ENABLE_KF6) | grep -q y && true)" "true"
+ifeq "$(shell echo $(ENABLE_KF5)$(ENABLE_KF6) | grep -q y && echo true)" "true"
 	mv debian/tmp/pkg/libreoffice-kde \
 		debian/tmp/pkg/libreoffice-kf$(KF_VERSION)
 ifeq "$(BUILD_PLASMA)" "y"
