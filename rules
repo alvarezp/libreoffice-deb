@@ -44,7 +44,7 @@ include /usr/share/dpkg/architecture.mk
 include /usr/share/dpkg/vendor.mk
 SHELL:=/bin/bash
 
-SYSTEM_GCC_VERSION = $(shell gcc --version | sed -n '/^gcc/s/.*\(..\..\)\../\1/p' | cut -d" " -f1)
+SYSTEM_GCC_VERSION = $(shell gcc --version | sed -n '/^gcc/s/.*\(..\..\)\../\1/p' | cut -d" " -f1 | cut -d. -f1)
 SYSTEM_CLANG_VERSION = $(shell clang -v 2>&1 | head -n1 | awk '{ print $$4 }' | cut -d. -f1)
 
 PKGDIR:=debian/libreoffice
@@ -800,6 +800,18 @@ endif
 ifeq "$(DEB_HOST_ARCH)" "s390x"
   ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	DEB_BUILD_OPTIONS += noopt
+  endif
+  ifeq (,$(shell gcc -v 2>&1 | grep disable-s390-excess-float-precision))
+	$(error gcc isn't built with disable-s390-excess-float-precision, bridgetest will fail.)
+  endif
+endif
+# see above
+ifeq "$(SYSTEM_GCC_VERSION)" "13"
+	BUILD_DEPS += , gcc-13 (>= 13.2.0-6) [s390x], g++-13 (>= 13.2.0-6) [s390x]
+endif
+ifneq "$(BOOKWORM_BACKPORT)" "y"
+  ifeq "$(SYSTEM_GCC_VERSION)" "12"
+	BUILD_DEPS += , gcc-12 (>= 12.3.0-11) [s390x], g++-12 (>= 12.3.0-11) [s390x]
   endif
 endif
 # bridgetest fails when built with gcc 13, works with 12

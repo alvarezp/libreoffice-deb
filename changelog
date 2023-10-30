@@ -7,6 +7,19 @@ libreoffice (4:7.6.3~rc1~git20231027-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Thu, 12 Oct 2023 20:11:21 +0200
 
+libreoffice (4:7.6.2-4) experimental; urgency=medium
+
+  * debian/patches/patches/orcus-make-reference-resolver-available.diff: add
+    from upstream master; fix tests with orcus 0.19
+
+  * debian/rules:
+    - bump gcc build-deps to gcc defaulting to --disable-s390-excess-float-precision
+      on s390x - the bridge test fails otherwise (with-Java still fails,
+      though...)
+  * debian/control: regen with proper Bugs:, oops
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 30 Oct 2023 18:57:35 +0000
+
 libreoffice (4:7.6.2-3) experimental; urgency=medium
 
   * debian/patches/kahansum-test-SSE2.diff: backport from upstream

@@ -19,7 +19,9 @@ Build-Depends: autoconf,
                flex,
                fontforge-nox | fontforge,
                g++-12 [i386],
+               g++-13 (>= 13.2.0-6) [s390x],
                gcc-12 [i386],
+               gcc-13 (>= 13.2.0-6) [s390x],
                gobject-introspection,
                gperf,
                java-common (>= 0.75) <!nojava>,
@@ -238,7 +240,7 @@ Build-Conflicts: amd-libopencl1,
 Standards-Version: 4.0.1
 Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-7.6
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
-Bugs: mailto:debian-openoffice@lists.debian.org
+Bugs: 
 Homepage: http://www.libreoffice.org
 
 Package: libreoffice
