@@ -1,4 +1,4 @@
-libreoffice (4:7.6.2-4) UNRELEASED; urgency=medium
+libreoffice (4:7.6.2-4) experimental; urgency=medium
 
   * debian/patches/patches/orcus-make-reference-resolver-available.diff: add
     from upstream master; fix tests with orcus 0.19
@@ -9,7 +9,7 @@ libreoffice (4:7.6.2-4) UNRELEASED; urgency=medium
       though...)
   * debian/control: regen with proper Bugs:, oops
 
- -- Rene Engelhard <rene@debian.org>  Mon, 23 Oct 2023 18:05:15 +0200
+ -- Rene Engelhard <rene@debian.org>  Mon, 30 Oct 2023 18:57:35 +0000
 
 libreoffice (4:7.6.2-3) experimental; urgency=medium
 
