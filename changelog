@@ -1,8 +1,12 @@
-libreoffice (4:7.6.2-4) experimental; urgency=medium
+libreoffice (4:7.6.2-4) UNRELEASED; urgency=medium
 
   * debian/patches/patches/orcus-make-reference-resolver-available.diff: add
     from upstream master; fix tests with orcus 0.19
 
+  * debian/rules:
+    - bump gcc build-deps to gcc defaulting to --disable-s390-excess-float-precision
+      on s390x - the bridge test fails otherwise (with-Java still fails,
+      though...)
   * debian/control: regen with proper Bugs:, oops
 
  -- Rene Engelhard <rene@debian.org>  Mon, 23 Oct 2023 18:05:15 +0200
