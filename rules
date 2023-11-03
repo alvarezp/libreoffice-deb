@@ -333,10 +333,6 @@ BUILD_GTK3=y
   ifeq "$(BUILD_GTK3)" "y"
     ENABLE_INTROSPECTION=y
   endif
-  # run the atspi tests
-  ifeq "$(BUILD_GTK3)" "y"
-    ENABLE_ATSPI_TESTS=y
-  endif
 endif
 BUILD_GTK4=y
 ENABLE_EVO2=y
@@ -622,6 +618,10 @@ ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 endif
 ifeq "$(RUN_MAKE_CHECK)" "y"
   BUILD_TESTS=y
+  # run the atspi tests
+  ifeq "$(BUILD_GTK3)" "y"
+    ENABLE_ATSPI_TESTS=y
+  endif
 else
   BUILD_TESTS=n
 endif
