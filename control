@@ -1213,6 +1213,7 @@ Package: libreoffice-uiconfig-common
 Section: misc
 Architecture: all
 Replaces: libreoffice-common (<< 4:7.6.0~beta1)
+Breaks: libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice ("common" set)
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1230,6 +1231,9 @@ Architecture: all
 Replaces: libreoffice-base (<< 4:7.6.0~beta1),
           libreoffice-base-nogui (<< 4:7.6.0~beta1),
           libreoffice-common (<< 4:7.6.0~beta1)
+Breaks: libreoffice-base (<< 4:7.6.0~beta1),
+        libreoffice-base-nogui (<< 4:7.6.0~beta1),
+        libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Base
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1247,6 +1251,9 @@ Architecture: all
 Replaces: libreoffice-calc (<< 4:7.6.0~beta1),
           libreoffice-calc-nogui (<< 4:7.6.0~beta1),
           libreoffice-common (<< 4:7.6.0~beta1)
+Breaks: libreoffice-calc (<< 4:7.6.0~beta1),
+        libreoffice-calc-nogui (<< 4:7.6.0~beta1),
+        libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Calc
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1264,6 +1271,9 @@ Architecture: all
 Replaces: libreoffice-common (<< 4:7.6.0~beta1),
           libreoffice-draw (<< 4:7.6.0~beta1),
           libreoffice-draw-nogui (<< 4:7.6.0~beta1)
+Breaks: libreoffice-common (<< 4:7.6.0~beta1),
+        libreoffice-draw (<< 4:7.6.0~beta1),
+        libreoffice-draw-nogui (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Draw
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1283,6 +1293,11 @@ Replaces: libreoffice-common (<< 4:7.6.0~beta1),
           libreoffice-draw-nogui (<< 4:7.6.0~rc1),
           libreoffice-impress (<< 4:7.6.0~rc1),
           libreoffice-impress-nogui (<< 4:7.6.0~rc1)
+Breaks: libreoffice-common (<< 4:7.6.0~beta1),
+        libreoffice-draw (<< 4:7.6.0~rc1),
+        libreoffice-draw-nogui (<< 4:7.6.0~rc1),
+        libreoffice-impress (<< 4:7.6.0~rc1),
+        libreoffice-impress-nogui (<< 4:7.6.0~rc1)
 Description: UI data ("config") for LibreOffice Impress
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1300,6 +1315,9 @@ Architecture: all
 Replaces: libreoffice-common (<< 4:7.6.0~beta1),
           libreoffice-math (<< 4:7.6.0~beta1),
           libreoffice-math-nogui (<< 4:7.6.0~beta1)
+Breaks: libreoffice-common (<< 4:7.6.0~beta1),
+        libreoffice-math (<< 4:7.6.0~beta1),
+        libreoffice-math-nogui (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Math
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1317,6 +1335,9 @@ Architecture: all
 Replaces: libreoffice-common (<< 4:7.6.0~beta1),
           libreoffice-writer (<< 4:7.6.0~beta1),
           libreoffice-writer-nogui (<< 4:7.6.0~beta1)
+Breaks: libreoffice-common (<< 4:7.6.0~beta1),
+        libreoffice-writer (<< 4:7.6.0~beta1),
+        libreoffice-writer-nogui (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Writer
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -5011,6 +5032,8 @@ Section: misc
 Architecture: all
 Replaces: libreoffice-common (<< 4:7.6.0~beta1),
           libreoffice-report-builder (<< 4:7.6.0~beta1)
+Breaks: libreoffice-common (<< 4:7.6.0~beta1),
+        libreoffice-report-builder (<< 4:7.6.0~beta1)
 Description: UI data ("config") for the LibreOffice Report Builder
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.

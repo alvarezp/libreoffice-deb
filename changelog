@@ -1,9 +1,11 @@
-libreoffice (4:7.6.3~rc1-2) UNRELEASED; urgency=medium
+libreoffice (4:7.6.3~rc1-2) experimental; urgency=medium
 
   * debian/rules:
     - readd fonts-crosextra-caladea build-dep; Cambria usage is back
+  * debian/control.in:
+    - duplicate Replaces: as Breaks: in -uiconfig-* (closes: #1055267)
 
- -- Rene Engelhard <rene@debian.org>  Fri, 03 Nov 2023 17:49:58 +0100
+ -- Rene Engelhard <rene@debian.org>  Fri, 03 Nov 2023 17:59:51 +0100
 
 libreoffice (4:7.6.3~rc1-1) experimental; urgency=medium
 
