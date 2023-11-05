@@ -888,6 +888,7 @@ Architecture: all
 Homepage: http://www.access2base.com/access2base.html
 Depends: libreoffice-common (>= 1:6.4.0~beta1-2~), libreoffice-base, python3-uno, ${python3:Depends}, ${misc:Depends}
 Replaces: libreoffice-base
+Build-Profiles: <!nopython>
 Description: interface between Python and the LibreOffice Access2Base library
  Access2Base is a LibreOffice/OpenOffice Basic library of macros for
  (business or personal) application developers and advanced users.
@@ -906,6 +907,7 @@ Section: python
 Architecture: all
 Depends: libreoffice-common (>= 1:7.1.0~), python3-uno, ${python3:Depends}, ${misc:Depends}
 Replaces: libreoffice-common (<< 4:7.6.0~)
+Build-Profiles: <!nopython>
 Description: interface between Python and the LibreOffice ScriptForge library
  ScriptForge libraries build up an extensible collection of macro scripting
  resources for LibreOffice to be invoked from Basic macros or Python scripts.
