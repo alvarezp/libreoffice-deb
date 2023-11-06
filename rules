@@ -237,6 +237,7 @@ endif
 endif
 SYSTEM_STUFF += xmlsec
 USE_SYSTEMD=n
+SYSTEM_STUFF += zxcvbn
 
 ifeq ($(filter noinsttest,$(DEB_BUILD_PROFILES)),)
  # this changes the packages built/contents of packages (-subsequentcheckbase)
@@ -1415,6 +1416,10 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   endif
 endif
 	CONFIGURE_FLAGS += --with-external-thes-dir=$(THES_DIR)
+	
+ifneq (,$(filter zxing, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , libzxcvbn-dev
+endif
 
 ifeq "$(INSTALL_APPARMOR_PROFILES)" "y"
   BUILD_DEPS_INDEP += , dh-apparmor

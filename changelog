@@ -1,4 +1,4 @@
-libreoffice (4:24.2~alpha0~git20231103-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2~alpha0~git20231106-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
     - Border line style control is now a11y accessible (closes: #870612)

@@ -1,0 +1,118 @@
+diff --git a/RepositoryExternal.mk b/RepositoryExternal.mk
+index 0a0be689fd07..f4d2217cc0d9 100644
+--- a/RepositoryExternal.mk
++++ b/RepositoryExternal.mk
+@@ -4287,6 +4287,17 @@ endef
+ 
+ endif # SYSTEM_BOX2D
+ 
++ifneq ($(SYSTEM_ZXCVBN),FALSE)
++define gb_LinkTarget__use_zxcvbn-c
++$(call gb_LinkTarget_set_include,$(1),\
++	-DSYSTEM_ZXCVBN \
++	$$(INCLUDE) \
++)
++$(call gb_LinkTarget_add_libs,$(1),-lzxcvbn)
++endef
++
++else
++
+ define gb_LinkTarget__use_zxcvbn-c
+ $(call gb_LinkTarget_use_unpacked,$(1),zxcvbn-c)
+ $(call gb_LinkTarget_set_include,$(1),\
+@@ -4297,6 +4308,8 @@ $(call gb_LinkTarget_use_static_libraries,$(1),\
+ 	zxcvbn-c \
+ )
+ endef
++endif
++
+ 
+ ifneq ($(SYSTEM_ZXING),)
+ 
+diff --git a/config_host.mk.in b/config_host.mk.in
+index c8990ddab3ae..f71fe453051e 100644
+--- a/config_host.mk.in
++++ b/config_host.mk.in
+@@ -686,6 +686,7 @@ SYSTEM_PAGEMAKER=@SYSTEM_PAGEMAKER@
+ SYSTEM_POPPLER=@SYSTEM_POPPLER@
+ SYSTEM_POSTGRESQL=@SYSTEM_POSTGRESQL@
+ SYSTEM_PYTHON=@SYSTEM_PYTHON@
++SYSTEM_ZXCVBN=@SYSTEM_ZXCVBN@
+ SYSTEM_ZXING=@SYSTEM_ZXING@
+ SYSTEM_QXP=@SYSTEM_QXP@
+ SYSTEM_REDLAND=@SYSTEM_REDLAND@
+diff --git a/configure.ac b/configure.ac
+index 7b821c6343d5..418bb7d81b68 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2499,6 +2499,11 @@ AC_ARG_WITH(system-zxing,
+         [Use libzxing already on system.]),,
+     [with_system_zxing="$with_system_libs"])
+ 
++AC_ARG_WITH(system-zxcvbn,
++    AS_HELP_STRING([--with-system-zxcvbn],
++        [Use libzxcvbn already on system.]),,
++    [with_system_zxcvbn="$with_system_libs"])
++
+ AC_ARG_WITH(system-box2d,
+     AS_HELP_STRING([--with-system-box2d],
+         [Use box2d already on system.]),,
+@@ -5858,6 +5863,7 @@ if test "$cross_compiling" = "yes"; then
+         PYTHON
+         SCRIPTING
+         ZLIB
++	ZXCVBN
+ "
+     # converts BUILD_TYPE and PERMITTED_BUILD_TARGETS into non-whitespace,
+     # newlined lists, to use grep as a filter
+@@ -11198,6 +11204,24 @@ AC_SUBST(SYSTEM_HUNSPELL)
+ AC_SUBST(HUNSPELL_CFLAGS)
+ AC_SUBST(HUNSPELL_LIBS)
+ 
++dnl ===================================================================
++dnl Check for system zxcvbn
++dnl ===================================================================
++AC_MSG_CHECKING([which zxcvbn to use])
++if test "$with_system_zxcvbn" = "yes"; then
++    AC_MSG_RESULT([external])
++    SYSTEM_ZXCVBN=TRUE
++    AC_CHECK_HEADER(zxcvbn.h, [],
++       [ AC_MSG_ERROR(zxcvbn headers not foundd.)], [])
++    AC_CHECK_LIB(zxcvbn, ZxcvbnMatch, [],
++        [ AC_MSG_ERROR(zxcvbn library not found.)], [])
++else
++   AC_MSG_RESULT([internal])
++   BUILD_TYPE="$BUILD_TYPE ZXCVBN"
++   SYSTEM_ZXCVBN=FALSE
++fi
++AC_SUBST(SYSTEM_ZXCVBN)
++
+ dnl ===================================================================
+ dnl Check for system zxing
+ dnl ===================================================================
+diff --git a/external/Module_external.mk b/external/Module_external.mk
+index 2b2cd99ff399..11588c51dcf0 100644
+--- a/external/Module_external.mk
++++ b/external/Module_external.mk
+@@ -90,7 +90,7 @@ $(eval $(call gb_Module_add_moduledirs,external,\
+ 	$(call gb_Helper_optional,POSTGRESQL,postgresql) \
+ 	$(call gb_Helper_optional,PYTHON,python3) \
+ 	$(call gb_Helper_optional,QXP,libqxp) \
+-	zxcvbn-c \
++	$(call gb_Helper_optional,ZXCVBN,zxcvbn-c) \
+ 	$(call gb_Helper_optional,ZXING,zxing) \
+ 	$(call gb_Helper_optional,REDLAND,redland) \
+ 	$(call gb_Helper_optional,REVENGE,librevenge) \
+diff --git a/solenv/gbuild/extensions/pre_BuildTools.mk b/solenv/gbuild/extensions/pre_BuildTools.mk
+index 891d478262b5..f5a4ddd4f3d0 100644
+--- a/solenv/gbuild/extensions/pre_BuildTools.mk
++++ b/solenv/gbuild/extensions/pre_BuildTools.mk
+@@ -48,7 +48,7 @@ gb_BUILD_TOOLS = \
+     $(foreach executable,$(gb_BUILD_TOOLS_executables),$(call gb_Executable_get_runtime_dependencies,$(executable))) \
+     $(foreach executable,$(gb_BUILD_TOOLS_executables_extern),$(call gb_ExternalExecutable_get_dependencies,$(executable))) \
+ 	$(INSTROOT)/$(LIBO_URE_ETC_FOLDER)/$(call gb_Helper_get_rcfile,uno) \
+-	$(call gb_ExternalProject_get_target_for_build,zxcvbn-c) \
++	$(if $(filter FALSE,$(SYSTEM_ZXCVBN)),$(call gb_ExternalProject_get_target_for_build,zxcvbn-c)) \
+ 
+ endif
+ 
