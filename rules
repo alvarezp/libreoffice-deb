@@ -1417,7 +1417,7 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
 endif
 	CONFIGURE_FLAGS += --with-external-thes-dir=$(THES_DIR)
 	
-ifneq (,$(filter zxing, $(SYSTEM_STUFF)))
+ifneq (,$(filter zxcvbn, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libzxcvbn-dev
 endif
 
