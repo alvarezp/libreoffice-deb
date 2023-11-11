@@ -1246,7 +1246,7 @@ endif
 
 ifeq "$(ENABLE_JAVA)" "y"
 	ifeq "$(shell $(JAVA_HOME)/bin/java -version 2>&1 | grep -q Zero && echo true)" "true"
-		#RUN_MAKE_CHECK:=n
+		RUN_MAKE_CHECK:=n
 		ENABLE_JUNIT4=n
 	endif
 endif
