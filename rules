@@ -2291,9 +2291,11 @@ endif
 	./autogen.sh $(CONFIGURE_FLAGS) $(CONFIGURE_FLAGS_INDEP)
 
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) ARCH_FLAGS=$(ARCH_FLAGS) TMP=`mktemp -q -d` $(MAKE) build
-ifeq "$(BUILD_TEST_PACKAGES)" "y"
-  ifeq "$(ENABLE_JUNIT4)" "y"
+ifeq "$(ENABLE_JAVA)" "y"
+  ifeq "$(BUILD_TEST_PACKAGES)" "y"
+    ifeq "$(ENABLE_JUNIT4)" "y"
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) ARCH_FLAGS=$(ARCH_FLAGS) TMP=`mktemp -q -d` $(MAKE) Jar_{OOoRunner,test,ConnectivityTools}
+    endif
   endif
 endif
 
