@@ -6,6 +6,10 @@ libreoffice (4:7.6.3~rc2~git20231116-1) UNRELEASED; urgency=medium
   * debian/rules:
     - don't try to install dbreport config modules into
      -uiconfig-report-builder if the report builder is disabled
+    - switch OOO_BASE_ARCHS/OOO_REPORTBUILDER_ARCHS variables
+      (build base on all architectures instead of Java architectures
+      and report-builder-* only on archs where Java is enabled, not on
+      "all base archs"); there's -sdbc-{mysql,postgresql,firebird} anyway
     - bump libcmis build-dep to >= 0.6.1 
     - build against libcurl4-openssl-dev instead of gnutls
 
