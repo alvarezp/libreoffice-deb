@@ -3,7 +3,7 @@ index abcb3a3e2593..35d45ad23413 100644
 --- a/odk/build-examples_common.mk
 +++ b/odk/build-examples_common.mk
 @@ -49,12 +49,7 @@ else
- 		&& printf 'yes\n' | LC_ALL=C make -j1 \
+ 		&& printf 'yes\n' | LANGUAGE= LC_ALL=C make -j1 \
  			CC="$(CXX) $(gb_CXX03FLAGS)" LINK="$(CXX)" LIB="$(CXX)" \
  		    $(if $(MACOSX_SHELL_HACK), SHELL="$$$$ODK_BUILD_SHELL", ))) \
 -	$(if $(MACOSX_SHELL_HACK),&& rm -f "$$$$ODK_BUILD_SHELL")) \
