@@ -2,7 +2,7 @@ Package: libreoffice-subsequentcheckbase
 Section: libs
 Architecture: all
 Depends: liblibreoffice-java, ${java:Depends}, ${misc:Depends}
-Build-Profiles: <!noinsttest>
+Build-Profiles: <!noinsttest !nojava>
 Description: LibreOffice java test libraries
  Java libraries LibreOffice subsequentchecks integration test suite
 

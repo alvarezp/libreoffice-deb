@@ -783,6 +783,7 @@ Depends: libreoffice-common,
          ${java:Depends},
          ${java-runtime-depends},
          ${misc:Depends}
+Build-Profiles: <!nojava>
 Description: BeanShell script support provider for LibreOffice scripting framework
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -804,6 +805,7 @@ Depends: libreoffice-common,
          ${java:Depends},
          ${java-runtime-depends},
          ${misc:Depends}
+Build-Profiles: <!nojava>
 Description: JavaScript script support provider for LibreOffice scripting framework
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -820,6 +822,7 @@ Depends: libreoffice-core-nogui | libreoffice-core, ${java-common-depends}, ${ja
 Architecture: %OOO_JAVA_ARCHS%
 Section: database
 Enhances: libreoffice-base-drivers
+Build-Profiles: <!nojava>
 Description: HSQLDB SDBC driver for LibreOffice
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -925,6 +928,7 @@ Recommends: libreoffice-core-nogui | libreoffice-core
 Architecture: %OOO_JAVA_ARCHS%
 Replaces: libreoffice-officebean (<< 1:6.4.0~rc2-1)
 Breaks: libreoffice-officebean (<< 1:6.4.0~rc2-1)
+Build-Profiles: <!nojava>
 Description: generic Java Bean wrapper for LibreOffice components
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.

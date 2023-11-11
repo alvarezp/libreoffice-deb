@@ -133,6 +133,7 @@ Depends: ${misc:Depends}, ${shlibs:Depends}, ${java:Depends}, uno-libs-private (
 Recommends: liblibreoffice-java, ${java-runtime-depends}
 Replaces: ure (<< 1:7.1.0~)
 Breaks: ure (<< 1:7.1.0~)
+Build-Profiles: <!nojava>
 Description: LibreOffice UNO runtime environment -- Java support
  The Uno Runtime Environment (URE) is the well-known UNO component model
  of LibreOffice, packaged up as an individual product.
@@ -151,6 +152,7 @@ Section: java
 Depends: ${java:Depends}, ${misc:Depends}
 Replaces: ure (<< 6.4.0~rc1-6)
 Breaks: ure (<< 6.4.0~rc1-6)
+Build-Profiles: <!nojava>
 Description: LibreOffice UNO runtime environment -- (Java) UNO loader
  The Uno Runtime Environment (URE) is the well-known UNO component model
  of LibreOffice, packaged up as an individual product.
@@ -164,6 +166,7 @@ Depends: ure-java, libunoloader-java, ${java:Depends}, ${misc:Depends}
 Provides: libjuh-java, libridl-java, libjurt-java, libunoil-java
 Replaces: libjuh-java (<< 1:7.1.0~), libridl-java (<< 1:7.1.0~), libjurt-java (<< 1:7.1.0~), libunoil-java (<< 1:7.1.0~)
 Breaks: libjuh-java (<< 1:7.1.0~), libridl-java (<< 1:7.1.0~), libjurt-java (<< 1:7.1.0~), libunoil-java (<< 1:7.1.0~)
+Build-Profiles: <!nojava>
 Description: LibreOffice UNO runtime environment -- Java library
  The Uno Runtime Environment (URE) is the well-known UNO component model
  of LibreOffice, packaged up as an individual product.

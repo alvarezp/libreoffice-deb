@@ -1045,6 +1045,7 @@ Depends: liblibreoffice-java,
          ${java-runtime-depends},
          ${java:Depends},
          ${misc:Depends}
+Build-Profiles: <!nojava>
 Description: BeanShell script support provider for LibreOffice scripting framework
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1066,6 +1067,7 @@ Depends: liblibreoffice-java,
          ${java-runtime-depends},
          ${java:Depends},
          ${misc:Depends}
+Build-Profiles: <!nojava>
 Description: JavaScript script support provider for LibreOffice scripting framework
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1087,6 +1089,7 @@ Depends: libreoffice-core-nogui | libreoffice-core,
 Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Section: database
 Enhances: libreoffice-base-drivers
+Build-Profiles: <!nojava>
 Description: HSQLDB SDBC driver for LibreOffice
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -1204,6 +1207,7 @@ Recommends: libreoffice-core-nogui | libreoffice-core
 Architecture: alpha amd64 arm64 armel armhf i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 ppc64el riscv64 s390x sparc64 mips
 Replaces: libreoffice-officebean (<< 1:6.4.0~rc2-1)
 Breaks: libreoffice-officebean (<< 1:6.4.0~rc2-1)
+Build-Profiles: <!nojava>
 Description: generic Java Bean wrapper for LibreOffice components
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -4915,6 +4919,7 @@ Depends: libunoloader-java,
 Recommends: liblibreoffice-java, ${java-runtime-depends}
 Replaces: ure (<< 1:7.1.0~)
 Breaks: ure (<< 1:7.1.0~)
+Build-Profiles: <!nojava>
 Description: LibreOffice UNO runtime environment -- Java support
  The Uno Runtime Environment (URE) is the well-known UNO component model
  of LibreOffice, packaged up as an individual product.
@@ -4933,6 +4938,7 @@ Section: java
 Depends: ${java:Depends}, ${misc:Depends}
 Replaces: ure (<< 6.4.0~rc1-6)
 Breaks: ure (<< 6.4.0~rc1-6)
+Build-Profiles: <!nojava>
 Description: LibreOffice UNO runtime environment -- (Java) UNO loader
  The Uno Runtime Environment (URE) is the well-known UNO component model
  of LibreOffice, packaged up as an individual product.
@@ -4952,6 +4958,7 @@ Breaks: libjuh-java (<< 1:7.1.0~),
         libjurt-java (<< 1:7.1.0~),
         libridl-java (<< 1:7.1.0~),
         libunoil-java (<< 1:7.1.0~)
+Build-Profiles: <!nojava>
 Description: LibreOffice UNO runtime environment -- Java library
  The Uno Runtime Environment (URE) is the well-known UNO component model
  of LibreOffice, packaged up as an individual product.
@@ -5335,7 +5342,7 @@ Package: libreoffice-subsequentcheckbase
 Section: libs
 Architecture: all
 Depends: liblibreoffice-java, ${java:Depends}, ${misc:Depends}
-Build-Profiles: <!noinsttest>
+Build-Profiles: <!noinsttest !nojava>
 Description: LibreOffice java test libraries
  Java libraries LibreOffice subsequentchecks integration test suite
 
