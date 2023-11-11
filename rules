@@ -2934,8 +2934,12 @@ endif
 	mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/writerperfect \
 		$(PKGDIR)-uiconfig-writer/$(OODIR)/share/config/soffice.cfg
 	mkdir -p $(PKGDIR)-uiconfig-report-builder/$(OODIR)/share/config/soffice.cfg/modules
+ifeq "$(ENABLE_REPORTBUILDER)" "y"
 	mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/modules/dbreport \
 		$(PKGDIR)-uiconfig-report-builder/$(OODIR)/share/config/soffice.cfg/modules
+else
+	rm -rf $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg/modules/dbreport
+endif
 	mkdir -p $(PKGDIR)-uiconfig-common/$(OODIR)/share/config/
 	mv $(PKGDIR)-common/$(OODIR)/share/config/soffice.cfg \
 		$(PKGDIR)-uiconfig-common/$(OODIR)/share/config
