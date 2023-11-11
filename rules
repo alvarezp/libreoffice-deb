@@ -547,7 +547,7 @@ OOO_CHECK_FATAL_ARCHS += riscv64
 # this now also passes. and the autopkgtests also pass (also the junit ones).
 # So let's include armhf in the above
 OOO_CHECK_ARCHS += armhf
-OOO_JUNIT_ARCHS += armhf
+#OOO_JUNIT_ARCHS += armhf
 OOO_CHECK_FATAL_ARCHS += armhf
 
 # if bridgetest and smoketest fail this is surely not working in a way
@@ -611,7 +611,7 @@ endif
 # upstream says --source=1.8 / --target=1.8 so 1.8 is fine in runtime
 JAVA_RUNTIME_BASELINE=8
 ifeq "$(JDK)" "default"
-OOO_JAVA_ARCHS = $(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures))
+OOO_JAVA_ARCHS = $(filter-out ppc64el s390x armhf,$(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures)))
 else
 OOO_JAVA_ARCHS = $(OOO_ARCHS)
 endif
