@@ -15,6 +15,7 @@ libreoffice (4:7.6.3~rc2~git20231116-1) UNRELEASED; urgency=medium
         "all base archs"); there's -sdbc-{mysql,postgresql,firebird} anyway
       + don't try to build Jar_{OOoRunner,test,ConnectivityTools} if Java is
         disabled as an extra safety net (instead of checking for junit only)
+    - remove riscv64 from OOO_CHECK_ARCHS to run only the "smoketest tests"
     - bump libcmis build-dep to >= 0.6.1 
     - build against libcurl4-openssl-dev instead of gnutls
 
