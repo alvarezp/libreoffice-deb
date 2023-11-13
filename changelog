@@ -1,3 +1,10 @@
+libreoffice (4:7.6.3~rc2~git20231116-1) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - bump libcmis build-dep to >= 0.6.1 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 16 Nov 2023 17:47:17 +0100
+
 libreoffice (4:7.6.3~rc1-2) experimental; urgency=medium
 
   * debian/rules:
