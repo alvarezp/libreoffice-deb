@@ -1364,7 +1364,7 @@ ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   endif
   ifeq "$(ENABLE_LIBCMIS)" "y"
     ifneq (,$(filter libcmis, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libcmis-dev (>= 0.5.2~), libcmis-dev (<< 0.6~)
+	BUILD_DEPS += , libcmis-dev (>= 0.6.1~), libcmis-dev (<< 0.7~)
     endif
   else
 	CONFIGURE_FLAGS += --disable-libcmis
