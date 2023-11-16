@@ -262,7 +262,7 @@ ifeq "$(ENABLE_GUI)" "y"
 USE_GSTREAMER=y
 endif
 ENABLE_CURL=y
-CURL_SECTYPE=gnutls
+CURL_SECTYPE=openssl
 ENABLE_WEBDAV=y
 ifeq "$(ENABLE_WEBDAV)" "y"
   ENABLE_CURL=y

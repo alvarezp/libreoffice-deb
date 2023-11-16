@@ -4,6 +4,7 @@ libreoffice (4:7.5.9~rc1-1) UNRELEASED; urgency=medium
 
   * debian/rules:
     - re-enable cmis; bump libcmis build-dep to >= 0.6.1 
+    - build against libcurl4-openssl-dev instead of gnutls
 
  -- Rene Engelhard <rene@debian.org>  Tue, 21 Nov 2023 17:41:55 +0100
 
