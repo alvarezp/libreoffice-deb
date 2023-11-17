@@ -8,7 +8,7 @@ Forwarded: not-needed
 @@ -33,6 +33,7 @@ Keywords=Equation;OpenDocument Formula;F
  InitialPreference=5
  StartupWMClass=libreoffice-math
- X-KDE-Protocols=file,http,ftp,webdav,webdavs
+ X-KDE-Protocols=file,http,webdav,webdavs
 +NotShowIn=GNOME;
  
  Actions=NewDocument;
