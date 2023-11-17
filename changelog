@@ -1,4 +1,6 @@
-libreoffice (4:7.6.3~rc2~git20231116-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.3~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
 
   * debian/control*in:
     - add missing Build-Profiles: <!nopython>
@@ -19,7 +21,7 @@ libreoffice (4:7.6.3~rc2~git20231116-1) UNRELEASED; urgency=medium
     - bump libcmis build-dep to >= 0.6.1 
     - build against libcurl4-openssl-dev instead of gnutls
 
- -- Rene Engelhard <rene@debian.org>  Thu, 16 Nov 2023 17:47:17 +0100
+ -- Rene Engelhard <rene@debian.org>  Fri, 17 Nov 2023 07:05:17 +0100
 
 libreoffice (4:7.6.3~rc1-2) experimental; urgency=medium
 
