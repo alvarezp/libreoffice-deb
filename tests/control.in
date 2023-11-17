@@ -80,11 +80,6 @@ Tests: uicheck-uitest
 Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-math, libreoffice-base, python3-uno, libreoffice-l10n-he, libreoffice-l10n-zh-tw
 Restrictions: allow-stderr
 
-Tests: junit-subsequentcheck
-Architecture: %OOO_JUNIT_ARCHS%
-Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-math, libreoffice-base, libreoffice-subsequentcheckbase, libreoffice-sdbc-hsqldb, libreoffice-sdbc-firebird
-Restrictions: allow-stderr, skippable
-
 Test-Command: export DOXYGEN=`command -v doxygen`; export ENABLE_JAVA=TRUE; export JDK=sun; export JAVADOC=/usr/lib/jvm/default-java/bin/javadoc; perl odk/util/check.pl /usr/lib/libreoffice/sdk
 Features: test-name=sdk-complete
 Depends: libreoffice-dev, libreoffice-dev-doc

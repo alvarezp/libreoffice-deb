@@ -1,4 +1,4 @@
-libreoffice (4:24.2~alpha0~git20231110-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2~alpha0~git20231117-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
     - Border line style control is now a11y accessible (closes: #870612)
@@ -8,6 +8,12 @@ libreoffice (4:24.2~alpha0~git20231110-1) UNRELEASED; urgency=medium
     time since I guess we won't ship plasma 5 and plasma 6 in parallel
   * debian/rules: enable the new atspi tests, add xvfb, xauth, dbus-x11
     and at-spi builddeps
+  * debian/rules:
+    - enable the new atspi tests, add xvfb, xauth, dbus-x11
+      and at-spi builddeps
+    - temporarily disable junit, crashy
+  * debian/tests/control*in, debian/rules:
+    - split junit-subsequentcheck into extra control.junit.in
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 

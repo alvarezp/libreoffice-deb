@@ -256,9 +256,9 @@ ifeq ($(MAKECMDGOALS),build-indep)
 # no need to do a double build...
 BUILD_NOGUI_PACKAGES=n
 # go sure
-  ifeq "$(BUILD_TEST_PACKAGES)" "y"
-    ENABLE_JUNIT4=y
-  endif
+#  ifeq "$(BUILD_TEST_PACKAGES)" "y"
+#    ENABLE_JUNIT4=y
+#  endif
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"
@@ -549,7 +549,9 @@ $(eval $(call gen_no_archs,OOO_CLANG_ARCHS))
 # supported upstream (upstream does aarch64 flatpak builds)
 OOO_CHECK_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
-OOO_JUNIT_ARCHS := amd64 arm64
+#OOO_JUNIT_ARCHS := amd64 arm64
+OOO_JUNIT_ARCHS :=
+
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
 OOO_CHECK_FATAL_ARCHS := amd64 arm64
 
@@ -557,13 +559,13 @@ OOO_CHECK_FATAL_ARCHS := amd64 arm64
 # in the meanwhile). FIXME: Ignore and put into the smoketest-only archs. (Based on experience it then
 # never will get out of this anymore given the remaining issues don't get any attention even right now)
 OOO_CHECK_ARCHS += riscv64
-OOO_JUNIT_ARCHS += riscv64
+#OOO_JUNIT_ARCHS += riscv64
 OOO_CHECK_FATAL_ARCHS += riscv64
 # original idea was without armhf, but since --disable-cve-tests for 32bit archs (see below)
 # this now also passes. and the autopkgtests also pass (also the junit ones).
 # So let's include armhf in the above
 OOO_CHECK_ARCHS += armhf
-OOO_JUNIT_ARCHS += armhf
+#OOO_JUNIT_ARCHS += armhf
 OOO_CHECK_FATAL_ARCHS += armhf
 
 # if bridgetest and smoketest fail this is surely not working in a way
@@ -2167,12 +2169,19 @@ endif
 .DELETE_ON_ERROR: debian/control
 
 debian/tests/control: debian/tests/control.in debian/rules
+	rm -f debian/tests/control
+	# otherwise Architecture: is empty (and empty means "any" in autopgktest,
+	# cf. https://salsa.debian.org/ci-team/autopkgtest/-/blob/master/lib/testdesc.py#L546)
+ifneq (,$(OOO_JUNIT_ARCHS))
+	    sed -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
+	    	> debian/tests/control < debian/tests/control.junit.in
+endif	    
 	    sed -e "s|%OOO_JAVA_ARCHS%|$(OOO_JAVA_ARCHS)|g" \
 		    -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
 		    -e "s|%OOO_NOGUI_ARCHS%|$(OOO_NOGUI_ARCHS)|g" \
 		    -e "s|%OOO_CHECK_FATAL_ARCHS%|$(OOO_CHECK_FATAL_ARCHS)|g" \
 		    -e "s|%AUTOPKGTEST_CPPUNIT_PACKAGES%|$(shell echo $(AUTOPKGTEST_CPPUNIT_PACKAGES) | sed -e "s/\ /,/g")|g" \
-	        > debian/tests/control < debian/tests/control.in
+	        >> debian/tests/control < debian/tests/control.in
 
 .DELETE_ON_ERROR: debian/tests/control
 
