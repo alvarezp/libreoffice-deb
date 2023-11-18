@@ -17,6 +17,7 @@ Description: office productivity suite -- GTK+ 3 integration
 Package: gir1.2-lokdocview-0.1
 Architecture: %OOO_ARCHS%
 Section: introspection
+Build-Profiles: <!nogir>
 Depends: ${gir:Depends}, ${misc:Depends}, liblibreofficekitgtk (= ${binary:Version})
 Description: GTK3 widget wrapping LibreOffice functionality - introspection
  LOKDocView is the GTK3 widget that wraps the libreoffice functionality and
