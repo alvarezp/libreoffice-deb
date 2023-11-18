@@ -1864,9 +1864,6 @@ clean-debdir:
 
 	rm -rf $(CURDIR)/debian/locales
 
-ifeq "$(ENABLE_JAVA)" "y"
-	mh_clean
-endif
 	dh_clean
 
 clean:
