@@ -1186,7 +1186,7 @@ ifeq "$(ENABLE_JAVA)" "y"
   else
 	BUILD_DEPS += , java-common (>= 0.75) <!nojava>
   endif
-  BUILD_DEPS += , maven-repo-helper
+  BUILD_DEPS += , maven-repo-helper$(OOO_NO_JAVA_ARCHS) <!nojava>
   ifeq "$(JDK)" "default"
 	JAVA_HOME=/usr/lib/jvm/default-java
 	DEFAULT_JDK := $(call java_dependency, default-jdk)
