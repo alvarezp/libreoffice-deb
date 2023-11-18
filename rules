@@ -1235,7 +1235,7 @@ export JAVA_HOME
 	BUILD_DEPS += , javahelper $(JAVAHELPER_MIN_VERSION) <!nojava>
 else
 	CONFIGURE_FLAGS += --without-java
-	DEBHELPER_OPTIONS += -Nlibofficebean-java -Nlibreoffice-java-common -Nlibreoffice-script-provider-bsh -Nlibreoffice-script-provider-js -Nlibreoffice-subsequentcheckbase -Nlibofficebean-java -Nlibunoloader-java -Nliblibreoffice-java -Nlibreoffice-sdbc-hsqldb
+	DEBHELPER_OPTIONS += -Nlibofficebean-java -Nlibreoffice-java-common -Nlibreoffice-script-provider-bsh -Nlibreoffice-script-provider-js -Nlibreoffice-subsequentcheckbase -Nlibunoloader-java -Nliblibreoffice-java -Nlibreoffice-sdbc-hsqldb -Nure-java
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"

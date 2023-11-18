@@ -4909,7 +4909,7 @@ Description: LibreOffice UNO runtime environment
 
 Package: ure-java
 Section: java
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
 Depends: libunoloader-java,
          uno-libs-private (= ${binary:Version}),
          ure (= ${binary:Version}),
