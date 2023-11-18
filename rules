@@ -2373,7 +2373,6 @@ else
 	# and it only builds unotest but not test so build that manually...
 	# sal only builds cppunittester on make check due to cppunit-optional.diff
 	# smoketest.allcheck actually does NOT run it... Do it manually later..
-	# allcheck actually does NOT run it... Do it manually later..
 	cd $(SOURCE_TREE) && \
 		( \
 			make unotest.allbuild && \
