@@ -3204,7 +3204,7 @@ endif
 
 ifeq "$(ENABLE_JAVA)" "y"
 	# move the officebean so into libofficebean-java (into the arch-dep
-	# JNI paths). the jar will be installed using mh_ in install-indep
+	# JNI paths). the jar will be installed using mh_ ...
 	rm -rf debian/libofficebean-java
 	mkdir -p -m755 debian/libofficebean-java/usr/lib/jni
 	mkdir -p -m755 debian/libofficebean-java/$(OODIR)/program
@@ -3214,6 +3214,7 @@ ifeq "$(ENABLE_JAVA)" "y"
 		ln -s /usr/lib/jni/libofficebean.so libofficebean.so
 	sed -e s/@version@/$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d~ -f1)/ \
 		< $(SOURCE_TREE)/bean/pom.officebean.xml > debian/pom.officebean.xml
+	# ... here.
 	mh_installpoms -plibofficebean-java
 	mh_installjar -plibofficebean-java -l debian/pom.officebean.xml instdir/program/classes/officebean.jar
 	# create symlink where LO expects it
