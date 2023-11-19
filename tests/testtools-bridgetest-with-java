@@ -35,7 +35,6 @@ echo "====== Enabling core dumps ======"
 ulimit -c unlimited || true
 
 if [ ! -f config_host.mk ] || grep -q ENABLE_JAVA=$ config_host.mk; then
-	if [ -f Makefile ]; then make clean; fi
 	# this normally shouldn't be needed but otherwise it wants a automatic
 	# re-autogen.
 	echo
