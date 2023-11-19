@@ -1,3 +1,9 @@
+libreoffice (4:7.6.3~rc2-3) UNRELEASED; urgency=medium
+
+  * debian/tests/testtools-bridgetest-with-java: run make clean
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 19 Nov 2023 19:07:39 +0100
+
 libreoffice (4:7.6.3~rc2-2) experimental; urgency=medium
 
   * debian/control.ure.in:
