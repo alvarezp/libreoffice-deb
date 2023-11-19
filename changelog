@@ -17,6 +17,22 @@ libreoffice (4:24.2~alpha0~git20231117-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Sat, 13 May 2023 18:31:33 +0200
 
+libreoffice (4:7.6.3~rc2-2) experimental; urgency=medium
+
+  * debian/control.ure.in:
+    - make ure-java actutally Architecture: %OOO_JAVA_ARCHS% 
+  * debian/rules:
+    - support nogir build profile
+  * debian/control.gtk3.in: add Build-Profiles: <!nogir> 
+  * debian/tests/control*in: update for no-Java builds
+    - split testtools-bridgetest into with-java/without-java variants
+    - add new %OOO_JAVA_AND_NOGUI_ARCHS%
+    - make test-extensions-*, odk-build-examples-java
+      Architecture: %OOO_JAVA_AND_NOGUI_ARCHS%
+    - make sdk-complete %OOO_JAVA_ARCHS%
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 19 Nov 2023 13:15:15 +0000
+
 libreoffice (4:7.6.3~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate

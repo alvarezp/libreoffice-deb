@@ -332,7 +332,9 @@ ifeq "$(ENABLE_GUI)" "y"
 BUILD_GTK3=y
   # introspection needs GTK3
   ifeq "$(BUILD_GTK3)" "y"
-    ENABLE_INTROSPECTION=y
+    ifeq ($(filter nogir,$(DEB_BUILD_PROFILES)),)
+      ENABLE_INTROSPECTION=y
+    endif
   endif
 endif
 BUILD_GTK4=y
@@ -1080,7 +1082,7 @@ endif
 	BUILD_DEPS_ARCH += , locales$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , gdb$(OOO_NO_CHECK_ARCHS) <!nocheck>
     ifeq "$(USE_SYSTEMD)" "y"
-	BUILD_DEPS_ARCH += , systemd$(OOO_NO_CHECK_ARCHS) <!nocheck>, systemd-coredump$(OOO_NO_CHECK_ARCHS) <!nocheck>, jq$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , systemd$(OOO_NO_CHECK_ARCHS) <!nocheck>, systemd-coredump$(OOO_NO_CHECK_ARCHS) (>= 248) <!nocheck>, jq$(OOO_NO_CHECK_ARCHS) <!nocheck>
     endif
 	BUILD_DEPS_ARCH += , fontconfig [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 ifeq ($(BOOKWORM_BACKPORT),y)
@@ -1208,7 +1210,7 @@ ifeq "$(ENABLE_JAVA)" "y"
   else
 	BUILD_DEPS += , java-common (>= 0.75) <!nojava>
   endif
-  BUILD_DEPS += , maven-repo-helper
+  BUILD_DEPS += , maven-repo-helper$(OOO_NO_JAVA_ARCHS) <!nojava>
   ifeq "$(JDK)" "default"
 	JAVA_HOME=/usr/lib/jvm/default-java
 	DEFAULT_JDK := $(call java_dependency, default-jdk)
@@ -1259,7 +1261,7 @@ export JAVA_HOME
 	BUILD_DEPS += , javahelper $(JAVAHELPER_MIN_VERSION) <!nojava>
 else
 	CONFIGURE_FLAGS += --without-java
-	DEBHELPER_OPTIONS += -Nlibofficebean-java -Nlibreoffice-java-common -Nlibreoffice-script-provider-bsh -Nlibreoffice-script-provider-js -Nlibreoffice-subsequentcheckbase -Nlibofficebean-java -Nlibunoloader-java -Nliblibreoffice-java -Nlibreoffice-sdbc-hsqldb
+	DEBHELPER_OPTIONS += -Nlibofficebean-java -Nlibreoffice-java-common -Nlibreoffice-script-provider-bsh -Nlibreoffice-script-provider-js -Nlibreoffice-subsequentcheckbase -Nlibunoloader-java -Nliblibreoffice-java -Nlibreoffice-sdbc-hsqldb -Nure-java
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"
@@ -1531,7 +1533,7 @@ ifeq "$(BUILD_GTK3)" "y"
   endif
 	GNOME_GTK_RECOMMENDS += libreoffice-gtk3
   ifeq "$(ENABLE_INTROSPECTION)" "y"
-	BUILD_DEPS += , gobject-introspection, libgirepository1.0-dev 
+	BUILD_DEPS += , gobject-introspection <!nogir>, libgirepository1.0-dev <!nogir>
 	CONFIGURE_FLAGS += --enable-introspection
   else
 	DEBHELPER_OPTIONS+= -Ngir1.2-lokdocview-0.1
@@ -1901,9 +1903,6 @@ clean-debdir:
 
 	rm -rf $(CURDIR)/debian/locales
 
-ifeq "$(ENABLE_JAVA)" "y"
-	mh_clean
-endif
 	dh_clean
 
 clean:
@@ -2173,6 +2172,7 @@ endif
 	    sed -e "s|%OOO_JAVA_ARCHS%|$(OOO_JAVA_ARCHS)|g" \
 		    -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
 		    -e "s|%OOO_NOGUI_ARCHS%|$(OOO_NOGUI_ARCHS)|g" \
+		    -e "s|%OOO_JAVA_AND_NOGUI_ARCHS%|$(filter $(OOO_JAVA_ARCHS),$(OOO_NOGUI_ARCHS))|g" \
 		    -e "s|%OOO_CHECK_FATAL_ARCHS%|$(OOO_CHECK_FATAL_ARCHS)|g" \
 		    -e "s|%AUTOPKGTEST_CPPUNIT_PACKAGES%|$(shell echo $(AUTOPKGTEST_CPPUNIT_PACKAGES) | sed -e "s/\ /,/g")|g" \
 	        >> debian/tests/control < debian/tests/control.in
@@ -2420,7 +2420,6 @@ else
 	# and it only builds unotest but not test so build that manually...
 	# sal only builds cppunittester on make check due to cppunit-optional.diff
 	# smoketest.allcheck actually does NOT run it... Do it manually later..
-	# allcheck actually does NOT run it... Do it manually later..
 	cd $(SOURCE_TREE) && \
 		( \
 			make unotest.allbuild && \
@@ -3249,7 +3248,7 @@ endif
 
 ifeq "$(ENABLE_JAVA)" "y"
 	# move the officebean so into libofficebean-java (into the arch-dep
-	# JNI paths). the jar will be installed using mh_ in install-indep
+	# JNI paths). the jar will be installed using mh_ ...
 	rm -rf debian/libofficebean-java
 	mkdir -p -m755 debian/libofficebean-java/usr/lib/jni
 	mkdir -p -m755 debian/libofficebean-java/$(OODIR)/program
@@ -3259,6 +3258,7 @@ ifeq "$(ENABLE_JAVA)" "y"
 		ln -s /usr/lib/jni/libofficebean.so libofficebean.so
 	sed -e s/@version@/$(shell echo $(DEB_VERSION_UPSTREAM) | cut -d~ -f1)/ \
 		< $(SOURCE_TREE)/bean/pom.officebean.xml > debian/pom.officebean.xml
+	# ... here.
 	mh_installpoms -plibofficebean-java
 	mh_installjar -plibofficebean-java -l debian/pom.officebean.xml instdir/program/classes/officebean.jar
 	# create symlink where LO expects it
