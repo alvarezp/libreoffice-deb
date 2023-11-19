@@ -1506,10 +1506,6 @@ ifeq "$(BUILD_GTK3)" "y"
 	GNOME_GTK_RECOMMENDS += libreoffice-gtk3
   ifeq "$(ENABLE_INTROSPECTION)" "y"
 	BUILD_DEPS += , gobject-introspection <!nogir>, libgirepository1.0-dev <!nogir>
-	# dh_girepository: warning: Missing Build-Depends: gir1.2-gdk-3.0-dev (ideally with <!nogir>)
-	# dh_girepository: warning: Missing Build-Depends: gir1.2-gdkpixbuf-2.0-dev (ideally with <!nogir>)
-	BUILD_DEPS += , gir1.2-gdk-3.0-dev <!nogir>, gir1.2-gdkpixbuf-2.0-dev <!nogir>
-	# no gtk here since dh_girepository: warning: libgtk-3-dev should have Provides: gir1.2-gtk-3.0-dev (= ${binary:Version})
 	CONFIGURE_FLAGS += --enable-introspection
   else
 	DEBHELPER_OPTIONS+= -Ngir1.2-lokdocview-0.1
