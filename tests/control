@@ -1,4 +1,9 @@
-Tests: testtools-bridgetest
+Tests: testtools-bridgetest-without-java
+Depends: @builddeps@, ure
+Restrictions: allow-stderr, rw-build-tree, superficial
+
+Tests: testtools-bridgetest-with-java
+Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
 Depends: @builddeps@, ure-java, liblibreoffice-java, default-jdk
 Restrictions: allow-stderr, rw-build-tree, superficial
 
@@ -24,12 +29,12 @@ Restrictions: superficial
 # the installed LO. works standalone, though, so it's patched out of the
 # smoketest. Do it here separately.
 Tests: test-extension
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 i386 ppc64
 Depends: libreoffice-core-nogui, libreoffice-common, libreoffice-java-common, libreoffice-smoketest-data, default-jdk
 Restrictions: allow-stderr, superficial, skippable
 
 Tests: test-extension-shared
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 i386 ppc64
 Depends: libreoffice-core-nogui, libreoffice-common, libreoffice-java-common, libreoffice-smoketest-data, default-jdk
 Restrictions: allow-stderr, needs-root, superficial
 
@@ -87,6 +92,7 @@ Restrictions: allow-stderr, skippable
 
 Test-Command: export DOXYGEN=`command -v doxygen`; export ENABLE_JAVA=TRUE; export JDK=sun; export JAVADOC=/usr/lib/jvm/default-java/bin/javadoc; perl odk/util/check.pl /usr/lib/libreoffice/sdk
 Features: test-name=sdk-complete
+Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
 Depends: libreoffice-dev, libreoffice-dev-doc
 Restrictions: superficial
 
@@ -96,7 +102,7 @@ Depends: @builddeps@, libreoffice-core-nogui, libreoffice-dev, libreoffice-dev-d
 Restrictions: allow-stderr, skippable
 
 Tests: odk-build-examples-java
-Architecture: amd64 arm64 armhf i386 ppc64 ppc64el s390x
+Architecture: amd64 arm64 i386 ppc64
 Depends: @builddeps@, libreoffice-core-nogui, libreoffice-dev, libreoffice-dev-doc, libreoffice-java-common, libofficebean-java
 Restrictions: allow-stderr, skippable
 

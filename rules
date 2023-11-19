@@ -2129,6 +2129,7 @@ debian/tests/control: debian/tests/control.in debian/rules
 	    sed -e "s|%OOO_JAVA_ARCHS%|$(OOO_JAVA_ARCHS)|g" \
 		    -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
 		    -e "s|%OOO_NOGUI_ARCHS%|$(OOO_NOGUI_ARCHS)|g" \
+		    -e "s|%OOO_JAVA_AND_NOGUI_ARCHS%|$(filter $(OOO_JAVA_ARCHS),$(OOO_NOGUI_ARCHS))|g" \
 		    -e "s|%OOO_CHECK_FATAL_ARCHS%|$(OOO_CHECK_FATAL_ARCHS)|g" \
 		    -e "s|%AUTOPKGTEST_CPPUNIT_PACKAGES%|$(shell echo $(AUTOPKGTEST_CPPUNIT_PACKAGES) | sed -e "s/\ /,/g")|g" \
 	        > debian/tests/control < debian/tests/control.in
