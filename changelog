@@ -1,3 +1,9 @@
+libreoffice (4:7.5.9~rc1-1) UNRELEASED; urgency=medium
+
+  * New upstream release candidate 
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 21 Nov 2023 17:41:55 +0100
+
 libreoffice (4:7.5.8-1) unstable; urgency=medium
 
   * New upstream release
