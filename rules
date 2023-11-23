@@ -262,7 +262,13 @@ ifeq "$(ENABLE_GUI)" "y"
 USE_GSTREAMER=y
 endif
 ENABLE_CURL=y
+# otherwise librdf0-dev (which we also need)  is uninstallable... 
+ifeq ($(BOOKWORM_BACKPORT),y)
+ CURL_SECTYPE=gnutls
+else
+# ... from trixie onwards it seems it has an alternative which allows openssl
 CURL_SECTYPE=openssl
+endif
 ENABLE_WEBDAV=y
 ifeq "$(ENABLE_WEBDAV)" "y"
   ENABLE_CURL=y

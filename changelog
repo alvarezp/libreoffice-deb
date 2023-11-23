@@ -1,3 +1,11 @@
+libreoffice (4:7.5.9~rc1-2) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - revert back to using gnutls on bookworm-backports, librdf0-dev doesn't
+      allow the ssl alternative yet...
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 23 Nov 2023 19:21:18 +0100
+
 libreoffice (4:7.5.9~rc1-1) unstable; urgency=medium
 
   * New upstream release candidate 
