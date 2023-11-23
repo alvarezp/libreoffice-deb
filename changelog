@@ -6,26 +6,18 @@ libreoffice (4:24.2.0~alpha1-1) UNRELEASED; urgency=medium
   * debian/rules, debian/control.kf6.in: add initial support for kf6 backend
     added upstream (not enable yet obviously). Only build one of kf5/kf6 at a
     time since I guess we won't ship plasma 5 and plasma 6 in parallel
-  * debian/rules: enable the new atspi tests, add xvfb, xauth, dbus-x11
-    and at-spi builddeps
   * debian/rules:
     - enable the new atspi tests, add xvfb, xauth, dbus-x11
       and at-spi builddeps
     - temporarily disable junit, crashy
-  * debian/tests/control*in, debian/rules:
-    - split junit-subsequentcheck into extra control.junit.in
-
- -- Rene Engelhard <rene@debian.org>  Thu, 23 Nov 2023 18:13:01 +0100
-
-libreoffice (4:7.6.3~rc2-3) UNRELEASED; urgency=medium
-
-  * debian/tests/testtools-bridgetest-with-java: re-gen config_host.mk if
-    ENABLE_JAVA=n (testtools-bridgetest-without-java run before)
-  * debian/rules:
     - revert back to using gnutls on bookworm-backports, librdf0-dev doesn't
       allow the ssl alternative yet...
+  * debian/tests/control*in, debian/rules:
+    - split junit-subsequentcheck into extra control.junit.in
+  * debian/tests/testtools-bridgetest-with-java: re-gen config_host.mk if
+    ENABLE_JAVA=n (testtools-bridgetest-without-java run before)
 
- -- Rene Engelhard <rene@debian.org>  Sun, 19 Nov 2023 19:07:39 +0100
+ -- Rene Engelhard <rene@debian.org>  Thu, 23 Nov 2023 20:30:53 +0100
 
 libreoffice (4:7.6.3~rc2-2) experimental; urgency=medium
 
