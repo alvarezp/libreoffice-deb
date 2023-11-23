@@ -285,7 +285,13 @@ ifeq "$(ENABLE_GUI)" "y"
 USE_GSTREAMER=y
 endif
 ENABLE_CURL=y
+# otherwise librdf0-dev (which we also need)  is uninstallable... 
+ifeq ($(BOOKWORM_BACKPORT),y)
+ CURL_SECTYPE=gnutls
+else
+# ... from trixie onwards it seems it has an alternative which allows openssl
 CURL_SECTYPE=openssl
+endif
 ENABLE_WEBDAV=y
 ifeq "$(ENABLE_WEBDAV)" "y"
   ENABLE_CURL=y
@@ -1609,7 +1615,7 @@ ifeq "$(ENABLE_JAVA)" "y"
     endif
 	CONFIGURE_FLAGS += --enable-scripting-beanshell
   else
-	CONFIGURE_FLAGS += --disble-scripting-beanshell
+	CONFIGURE_FLAGS += --disable-scripting-beanshell
  	DEBHELPER_OPTIONS += -Nlibreoffice-script-provider-bsh
   endif
   ifeq "$(ENABLE_SCRIPT_PROVIDER_JS)" "y"
@@ -2411,7 +2417,7 @@ else
 	# - "bridgetest"
 	# - the public libraries (sal, cppu(helper), comphelper)
 	# - "smoketest" as a smoketest
-	# - pyuno (as we shiup python3-uno..)
+	# - pyuno (as we ship python3-uno..)
 	# - unoidl for the SDK
 	$(IGNORE_MAKE_FAILURES)\
 	cd $(SOURCE_TREE) && \

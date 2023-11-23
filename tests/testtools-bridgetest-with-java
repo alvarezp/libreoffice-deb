@@ -34,7 +34,7 @@ echo "====== Enabling core dumps ======"
 # yes, we want core dumps and stack traces
 ulimit -c unlimited || true
 
-if [ ! -f config_host.mk ]; then
+if [ ! -f config_host.mk ] || grep -q ENABLE_JAVA=$ config_host.mk; then
 	# this normally shouldn't be needed but otherwise it wants a automatic
 	# re-autogen.
 	echo
