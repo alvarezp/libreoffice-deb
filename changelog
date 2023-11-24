@@ -1,6 +1,8 @@
-libreoffice (4:7.6.3-1) UNRELEASED; urgency=medium
+libreoffice (4:7.6.3-1) unstable; urgency=medium
 
   * LibreOffice 7.6.3 final release (identical to rc2)
+
+  * upload to unstable
 
   * debian/tests/testtools-bridgetest-with-java: re-gen config_host.mk if
     ENABLE_JAVA=n (testtools-bridgetest-without-java run before)
@@ -8,7 +10,7 @@ libreoffice (4:7.6.3-1) UNRELEASED; urgency=medium
     - revert back to using gnutls on bookworm-backports, librdf0-dev doesn't
       allow the ssl alternative yet...
 
- -- Rene Engelhard <rene@debian.org>  Sun, 19 Nov 2023 19:07:39 +0100
+ -- Rene Engelhard <rene@debian.org>  Thu, 23 Nov 2023 20:29:38 +0100
 
 libreoffice (4:7.6.3~rc2-2) experimental; urgency=medium
 
