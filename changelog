@@ -9,8 +9,12 @@ libreoffice (4:7.6.3-1) unstable; urgency=medium
   * debian/rules:
     - revert back to using gnutls on bookworm-backports, librdf0-dev doesn't
       allow the ssl alternative yet...
+    - add -fexcess-precision=fast to DEB_CFLAGS_MAINT_APPEND
+      and (although supposedly no effect) DEB_CXXFLAGS_MAINT_APPEND since
+      it seems it fixes the bridgetest problem on s390x/nojava;
+      remove strict gcc-12/-13 build-dep on s390x again
 
- -- Rene Engelhard <rene@debian.org>  Thu, 23 Nov 2023 20:29:38 +0100
+ -- Rene Engelhard <rene@debian.org>  Mon, 27 Nov 2023 17:35:03 +0100
 
 libreoffice (4:7.6.3~rc2-2) experimental; urgency=medium
 

@@ -796,18 +796,6 @@ ifeq "$(DEB_HOST_ARCH)" "s390x"
   ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	DEB_BUILD_OPTIONS += noopt
   endif
-  ifeq (,$(shell gcc -v 2>&1 | grep disable-s390-excess-float-precision))
-       $(error gcc isn't built with disable-s390-excess-float-precision, bridgetest will fail.)
-  endif
-endif
-# see above
-ifeq "$(SYSTEM_GCC_VERSION)" "13"
-	BUILD_DEPS += , gcc-13 (>= 13.2.0-6) [s390x], g++-13 (>= 13.2.0-6) [s390x]
-endif
-ifneq "$(BOOKWORM_BACKPORT)" "y"
-  ifeq "$(SYSTEM_GCC_VERSION)" "12"
-	BUILD_DEPS += , gcc-12 (>= 12.3.0-11) [s390x], g++-12 (>= 12.3.0-11) [s390x]
-  endif
 endif
 # bridgetest fails when built with gcc 13, works with 12
 ifneq "$(BOOKWORM_BACKPORT)" "y"
@@ -1008,6 +996,16 @@ endif
 ifneq (,$(filter ppc64el s390x,$(DEB_HOST_ARCH)))
 	DEB_CFLAGS_MAINT_APPEND = -ffp-contract=off
 	DEB_CXXFLAGS_MAINT_APPEND = -ffp-contract=off
+endif
+
+ifneq (,$(filter s390x,$(DEB_HOST_ARCH)))
+  ifeq (,$(shell gcc -v 2>&1 | grep disable-s390-excess-float-precision))
+	DEB_CFLAGS_MAINT_APPEND = -fexcess-precision=fast
+	# the gcc manpage says
+	# "-fexcess-precision=standard is not implemented for languages other than C"
+	# but it works with this and fails without, so probably has some effect after all
+	DEB_CXXFLAGS_MAINT_APPEND = -fexcess-precision=fast
+  endif
 endif
 
 ifeq "$(ENABLE_SYMBOLS)" "y"
