@@ -797,7 +797,7 @@ ifeq "$(DEB_HOST_ARCH)" "s390x"
 	DEB_BUILD_OPTIONS += noopt
   endif
   ifeq (,$(shell gcc -v 2>&1 | grep disable-s390-excess-float-precision))
-	$(error gcc isn't built with disable-s390-excess-float-precision, bridgetest will fail.)
+       $(error gcc isn't built with disable-s390-excess-float-precision, bridgetest will fail.)
   endif
 endif
 # see above
