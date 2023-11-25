@@ -1,4 +1,4 @@
-libreoffice (4:24.2.0~alpha1-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.0~alpha1-1) experimental; urgency=medium
 
   * New upstream alpha release
     - Border line style control is now a11y accessible (closes: #870612)
