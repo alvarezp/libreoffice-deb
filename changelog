@@ -1,8 +1,11 @@
-libreoffice (4:24.2.0~beta1~git20231202-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.0~beta1~git20231206-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
   * debian/tests/patches/odk-build-examples-standalone.diff: make apply again
+  * debian/python3-uno.ucf: remove
+  * debian/python3-uno.preinst.in: add. ucfr --purge and
+    rm -f /etc/libreoffice/registry/pyuno.xcd - gone upstream
 
  -- Rene Engelhard <rene@debian.org>  Tue, 28 Nov 2023 21:07:51 +0100
 
