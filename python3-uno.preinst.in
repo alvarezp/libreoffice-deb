@@ -12,6 +12,7 @@ if [ "$1" = "upgrade" ] && dpkg --compare-versions "$2" lt "4:24.2~beta1"; then
 	else
 		rm -f /etc/libreoffice/registry/pyuno.xcd
 	fi
+	ucf --purge /etc/libreoffice/registry/pyuno.xcd
 	ucfr --purge python3-uno /etc/libreoffice/registry/pyuno.xcd
 fi
 
