@@ -21,7 +21,7 @@ include /usr/share/dpkg/pkg-info.mk
 CURDIR ?= $(realpath $(dir $(firstword $(MAKEFILE_LIST)))/..)
 BASE_VERSION:=$(shell echo $(DEB_VERSION) | cut -d: -f1):$(DEB_VERSION_UPSTREAM)
 BINARY_VERSION=$(DEB_VERSION)
-OOVER:=24.2
+OOVER:=24.8
 HELP_L10N_VIRTUAL_VERSION:=$(OOVER)
 ifeq "$(shell echo $(OOVER) | cut -d. -f2)" "2"
 # 24.2 + .6 -> 24.8 -> OK
