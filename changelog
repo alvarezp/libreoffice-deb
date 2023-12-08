@@ -4,8 +4,8 @@ libreoffice (4:24.2.0~beta1-1) experimental; urgency=medium
 
   * debian/tests/patches/odk-build-examples-standalone.diff: make apply again
   * debian/python3-uno.ucf: remove
-  * debian/python3-uno.preinst.in: add. ucfr --purge and
-    rm -f /etc/libreoffice/registry/pyuno.xcd - gone upstream
+  * debian/python3-uno.preinst.in: remove /etc/libreoffice/registry/pyuno.xcd -
+    gone upstream (and was a noop before anyway)
 
  -- Rene Engelhard <rene@debian.org>  Fri, 08 Dec 2023 17:07:09 +0100
 
