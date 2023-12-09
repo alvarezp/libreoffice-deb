@@ -28,3 +28,38 @@ index a4d4540ab228..46d262f6f0b8 100644
  
  CPPUNIT_TEST_FIXTURE(SwCoreTextTest, testScriptinfosurrogatePairs)
  {
+From c3c51bd9bcd607fc1f689652d2e4824871c98add Mon Sep 17 00:00:00 2001
+From: Rene Engelhard <rene@rene-engelhard.de>
+Date: Sat, 9 Dec 2023 09:30:22 +0100
+Subject: [PATCH] add missing #if MORE_FONTS
+
+since it nededs Source Han Sans
+
+Change-Id: I35bd30048b298e8cbdaf6de22ae2022d51415aa9
+---
+ vcl/qa/cppunit/complextext.cxx | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/vcl/qa/cppunit/complextext.cxx b/vcl/qa/cppunit/complextext.cxx
+index 37f4fbc0766c..8a847def8763 100644
+--- a/vcl/qa/cppunit/complextext.cxx
++++ b/vcl/qa/cppunit/complextext.cxx
+@@ -529,6 +529,7 @@ CPPUNIT_TEST_FIXTURE(VclComplexTextTest, testMixedCJKLatinScript_glyph_advanceme
+ 
+ CPPUNIT_TEST_FIXTURE(VclComplexTextTest, testTdf107718)
+ {
++#if HAVE_MORE_FONTS
+ #if !defined _WIN32 // TODO: Fails on jenkins but passes locally
+     vcl::Font aFont(u"Source Han Sans"_ustr, u"Regular"_ustr, Size(0, 72));
+ 
+@@ -574,6 +575,7 @@ CPPUNIT_TEST_FIXTURE(VclComplexTextTest, testTdf107718)
+         CPPUNIT_ASSERT_EQUAL(3, nStart);
+     }
+ #endif
++#endif
+ }
+ 
+ CPPUNIT_TEST_FIXTURE(VclComplexTextTest, testTdf107612)
+-- 
+2.39.2
+
