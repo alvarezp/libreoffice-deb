@@ -13,6 +13,7 @@ libreoffice (4:24.2.0~alpha1-1) experimental; urgency=medium
 
   * New upstream alpha release
     - Border line style control is now a11y accessible (closes: #870612)
+    - fixes CVE-2023-6186: "Link targets allow arbitrary script execution"
 
   * debian/rules, debian/control.kf6.in: add initial support for kf6 backend
     added upstream (not enable yet obviously). Only build one of kf5/kf6 at a
@@ -70,6 +71,8 @@ libreoffice (4:7.6.3~rc2-2) experimental; urgency=medium
 libreoffice (4:7.6.3~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate
+    - fixes CVE-2023-6185: "Improper input validation enabling arbitrary Gstreamer
+      pipeline injection"
 
   * debian/control*in:
     - add missing Build-Profiles: <!nopython>
