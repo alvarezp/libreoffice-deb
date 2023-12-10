@@ -9,6 +9,7 @@ libreoffice (4:7.6.4-1) UNRELEASED; urgency=medium
 libreoffice (4:7.6.4~rc1-1) unstable; urgency=medium
 
   * New upstream release candidate 
+    - fixes CVE-2023-6186: "Link targets allow arbitrary script execution"
 
  -- Rene Engelhard <rene@debian.org>  Thu, 30 Nov 2023 19:47:03 +0100
 
@@ -56,6 +57,8 @@ libreoffice (4:7.6.3~rc2-2) experimental; urgency=medium
 libreoffice (4:7.6.3~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate
+    - fixes CVE-2023-6185: "Improper input validation enabling arbitrary Gstreamer
+      pipeline injection"
 
   * debian/control*in:
     - add missing Build-Profiles: <!nopython>
