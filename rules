@@ -256,9 +256,9 @@ ifeq ($(MAKECMDGOALS),build-indep)
 # no need to do a double build...
 BUILD_NOGUI_PACKAGES=n
 # go sure
-#  ifeq "$(BUILD_TEST_PACKAGES)" "y"
-#    ENABLE_JUNIT4=y
-#  endif
+  ifeq "$(BUILD_TEST_PACKAGES)" "y"
+    ENABLE_JUNIT4=y
+  endif
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"
@@ -550,7 +550,7 @@ $(eval $(call gen_no_archs,OOO_CLANG_ARCHS))
 # supported upstream (upstream does aarch64 flatpak builds)
 OOO_CHECK_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
-#OOO_JUNIT_ARCHS := amd64 arm64
+OOO_JUNIT_ARCHS := amd64 arm64
 OOO_JUNIT_ARCHS :=
 
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
