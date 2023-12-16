@@ -910,7 +910,7 @@ ifeq "$(ENABLE_PDFIMPORT)" "y"
 	BUILD_DEPS += , libopenjp2-7-dev [$(OOO_PDFIUM_ARCHS)]
     endif
     ifneq (,$(filter abseil, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libabsl-dev (>= 20230125.3~) [$(OOO_PDFIUM_ARCHS)]
+	BUILD_DEPS += , libabsl-dev [$(OOO_PDFIUM_ARCHS)]
     endif
   endif
 endif
