@@ -4920,8 +4920,8 @@ Depends: libunoloader-java,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: liblibreoffice-java, ${java-runtime-depends}
-Replaces: ure (<< 1:7.1.0~)
-Breaks: ure (<< 1:7.1.0~)
+Replaces: ure (<< 4:24.2.0~rc1~)
+Breaks: ure (<< 4:24.2.0~rc1~)
 Build-Profiles: <!nojava>
 Description: LibreOffice UNO runtime environment -- Java support
  The Uno Runtime Environment (URE) is the well-known UNO component model

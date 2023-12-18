@@ -3133,10 +3133,11 @@ $(STAMP_DIR)/install-arch: $(STAMP_DIR)/build-arch $(STAMP_DIR)/install-common
 ifeq "$(ENABLE_JAVA)" "y"
 	mkdir -p debian/ure-java/usr/share/java
 	mkdir -p debian/ure-java/$(OODIR)/program/classes
-	mv debian/ure/$(OODIR)/program/classes/java_uno.jar \
-		debian/ure-java/usr/share/java
-	cd debian/ure-java/$(OODIR)/program/classes && \
-		ln -sf /usr/share/java/java_uno.jar java_uno.jar
+	for i in java_uno.jar java_websocket.jar; do \
+		mv debian/ure/$(OODIR)/program/classes/$$i \
+			debian/ure-java/usr/share/java; \
+		ln -sf /usr/share/java/$$i debian/ure-java/$(OODIR)/program/classes/$$i; \
+	done
 	# remove libraries split out to extra packages
 	# will be installed using mh_* or jh_* in install-indep
 	for i in juh jurt ridl unoloader libreoffice; do \

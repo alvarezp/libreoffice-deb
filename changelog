@@ -1,9 +1,11 @@
-libreoffice (4:24.2.0~rc1~git20231216-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.0~rc1~git20231218-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
   * debian/rules:
     - re-enable junit
+  * debian/rules, debian/control.ure.in:
+    - move java_websocket.jar from ure to ure-java
 
  -- Rene Engelhard <rene@debian.org>  Sat, 09 Dec 2023 20:24:32 +0100
 
