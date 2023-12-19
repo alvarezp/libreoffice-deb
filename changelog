@@ -2,6 +2,9 @@ libreoffice (4:7.6.4-1) UNRELEASED; urgency=medium
 
   * LibreOffice 7.6.4 final release (identical to rc1) 
 
+  * debian/patches/fix-build-with-libxml-2.12.diff: as name says, from
+    24.2 branch. Only the build, not the tests (yet)!
+
   * debian/control.in: fix Vcs-Git:
 
  -- Rene Engelhard <rene@debian.org>  Thu, 07 Dec 2023 13:05:27 +0100
