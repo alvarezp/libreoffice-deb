@@ -1,13 +1,13 @@
-libreoffice (4:24.2.0~rc1~git20231219-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.0~rc1-1) experimental; urgency=medium
 
-  * New upstream snapshot 
+  * New upstream release candidate
 
   * debian/rules:
     - re-enable junit
   * debian/rules, debian/control.ure.in:
     - move java_websocket.jar from ure to ure-java
 
- -- Rene Engelhard <rene@debian.org>  Sat, 09 Dec 2023 20:24:32 +0100
+ -- Rene Engelhard <rene@debian.org>  Thu, 21 Dec 2023 18:06:42 +0100
 
 libreoffice (4:24.2.0~beta1-1) experimental; urgency=medium
 
