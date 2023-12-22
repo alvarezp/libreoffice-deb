@@ -256,9 +256,9 @@ ifeq ($(MAKECMDGOALS),build-indep)
 # no need to do a double build...
 BUILD_NOGUI_PACKAGES=n
 # go sure
-#  ifeq "$(BUILD_TEST_PACKAGES)" "y"
-#    ENABLE_JUNIT4=y
-#  endif
+  ifeq "$(BUILD_TEST_PACKAGES)" "y"
+    ENABLE_JUNIT4=y
+  endif
 endif
 
 ifeq "$(ENABLE_JAVA)" "y"
@@ -461,6 +461,7 @@ SYSTEM_STUFF += box2d
 SYSTEM_STUFF += libwebp
 SYSTEM_STUFF += libtiff
 SYSTEM_STUFF += frozen
+SYSTEM_STUFF += argon2
 
 # Default flags to pass to configure
 CONFIGURE_FLAGS+= \
@@ -550,7 +551,7 @@ $(eval $(call gen_no_archs,OOO_CLANG_ARCHS))
 # supported upstream (upstream does aarch64 flatpak builds)
 OOO_CHECK_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
-#OOO_JUNIT_ARCHS := amd64 arm64
+OOO_JUNIT_ARCHS := amd64 arm64
 OOO_JUNIT_ARCHS :=
 
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
@@ -712,7 +713,7 @@ endif
 # Debian Bookworm
 ifeq "$(DEB_DISTRIBUTION)" "bookworm-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out mdds orcus libcmis,$(SYSTEM_STUFF))
+  SYSTEM_STUFF := $(filter-out frozen mdds orcus libcmis,$(SYSTEM_STUFF))
   BOOKWORM_BACKPORT=y
 endif
 
@@ -1697,6 +1698,10 @@ endif
 
 ifneq (,$(filter frozen, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libfrozen-dev 
+endif
+
+ifneq (,$(filter argon2, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , libargon2-dev 
 endif
 
 ifneq (,$(filter redland, $(SYSTEM_STUFF)))
@@ -3133,10 +3138,11 @@ $(STAMP_DIR)/install-arch: $(STAMP_DIR)/build-arch $(STAMP_DIR)/install-common
 ifeq "$(ENABLE_JAVA)" "y"
 	mkdir -p debian/ure-java/usr/share/java
 	mkdir -p debian/ure-java/$(OODIR)/program/classes
-	mv debian/ure/$(OODIR)/program/classes/java_uno.jar \
-		debian/ure-java/usr/share/java
-	cd debian/ure-java/$(OODIR)/program/classes && \
-		ln -sf /usr/share/java/java_uno.jar java_uno.jar
+	for i in java_uno.jar java_websocket.jar; do \
+		mv debian/ure/$(OODIR)/program/classes/$$i \
+			debian/ure-java/usr/share/java; \
+		ln -sf /usr/share/java/$$i debian/ure-java/$(OODIR)/program/classes/$$i; \
+	done
 	# remove libraries split out to extra packages
 	# will be installed using mh_* or jh_* in install-indep
 	for i in juh jurt ridl unoloader libreoffice; do \

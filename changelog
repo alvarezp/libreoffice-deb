@@ -4,6 +4,17 @@ libreoffice (4:24.8.0~alpha0~git20231208-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Tue, 28 Nov 2023 21:07:51 +0100
 
+libreoffice (4:24.2.0~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/rules:
+    - re-enable junit
+  * debian/rules, debian/control.ure.in:
+    - move java_websocket.jar from ure to ure-java
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 21 Dec 2023 18:06:42 +0100
+
 libreoffice (4:24.2.0~beta1-1) experimental; urgency=medium
 
   * New upstream beta release
@@ -13,12 +24,13 @@ libreoffice (4:24.2.0~beta1-1) experimental; urgency=medium
   * debian/python3-uno.preinst.in: remove /etc/libreoffice/registry/pyuno.xcd -
     gone upstream (and was a noop before anyway)
 
- -- Rene Engelhard <rene@debian.org>  Fri, 08 Dec 2023 17:07:09 +0100
+ -- Rene Engelhard <rene@debian.org>  Sat, 09 Dec 2023 09:34:51 +0100
 
 libreoffice (4:24.2.0~alpha1-1) experimental; urgency=medium
 
   * New upstream alpha release
     - Border line style control is now a11y accessible (closes: #870612)
+    - fixes CVE-2023-6186: "Link targets allow arbitrary script execution"
 
   * debian/rules, debian/control.kf6.in: add initial support for kf6 backend
     added upstream (not enable yet obviously). Only build one of kf5/kf6 at a
@@ -76,6 +88,8 @@ libreoffice (4:7.6.3~rc2-2) experimental; urgency=medium
 libreoffice (4:7.6.3~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate
+    - fixes CVE-2023-6185: "Improper input validation enabling arbitrary Gstreamer
+      pipeline injection"
 
   * debian/control*in:
     - add missing Build-Profiles: <!nopython>
