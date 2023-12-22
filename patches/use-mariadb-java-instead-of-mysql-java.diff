@@ -48,12 +48,12 @@ index 95094265e..c0ad7802e 100644
  }
  }
  
-@@ -170,7 +170,7 @@ Sequence<PropertyValue> lcl_convertProperties(T_DRIVERTYPE _eType,
+@@ -165,7 +165,7 @@ Sequence<PropertyValue> lcl_convertProperties(T_DRIVERTYPE _eType,
+     {
          if (!jdc)
          {
-             aProps.push_back(PropertyValue("JavaDriverClass", 0,
--                                           Any(OUString("com.mysql.jdbc.Driver")),
-+                                           Any(OUString("org.mariadb.jdbc.Driver")),
-                                            PropertyState_DIRECT_VALUE));
+-            aProps.emplace_back("JavaDriverClass", 0, Any(OUString("com.mysql.jdbc.Driver")),
++            aProps.emplace_back("JavaDriverClass", 0, Any(OUString("org.mariadb.jdbc.Driver")),
+                                 PropertyState_DIRECT_VALUE);
          }
      }
