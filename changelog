@@ -7,6 +7,11 @@ libreoffice (4:7.6.4-1) UNRELEASED; urgency=medium
 
   * debian/control.in: fix Vcs-Git:
 
+  * debian/rules:
+    - don't remove libforuilo.so in -core-nogui. (closes: #1059158)
+      It's subsumed in libmerged on 64bit archs anyway which we definitely
+      need to keep anyway (similar as libuuilo.so).
+
  -- Rene Engelhard <rene@debian.org>  Thu, 07 Dec 2023 13:05:27 +0100
 
 libreoffice (4:7.6.4~rc1-1) unstable; urgency=medium
