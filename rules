@@ -3402,7 +3402,7 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	done
 	# remove lib*uilo.so in -nogui
 	find debian/libreoffice-*-nogui/$(OODIR)/program -name "lib*uilo.so" -a ! -name "libuuilo.so" \
-		-exec rm {} \;
+		-a ! -name "libforuilo.so" -exec rm {} \;
 	rm -f debian/libreoffice-base-nogui/$(OODIR)/program/libdbulo.so
 	# no need to have the Extension Manager GUI
 	rm -f debian/libreoffice-core-nogui/$(OODIR)/program/libdeploymentgui.so

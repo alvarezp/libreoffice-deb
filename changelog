@@ -1,3 +1,12 @@
+libreoffice (4:24.2.0~rc1-2) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - don't remove libforuilo.so in -core-nogui. (closes: #1059158)
+      It's subsumed in libmerged on 64bit archs anyway which we definitely
+      need to keep anyway (similar as libuuilo.so).
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 24 Dec 2023 14:23:16 +0100
+
 libreoffice (4:24.2.0~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
