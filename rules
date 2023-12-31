@@ -552,9 +552,8 @@ $(eval $(call gen_no_archs,OOO_CLANG_ARCHS))
 OOO_CHECK_ARCHS := amd64 arm64
 $(eval $(call gen_no_archs,OOO_CHECK_ARCHS))
 OOO_JUNIT_ARCHS := amd64 arm64
-OOO_JUNIT_ARCHS :=
-
 $(eval $(call gen_no_archs,OOO_JUNIT_ARCHS))
+
 OOO_CHECK_FATAL_ARCHS := amd64 arm64
 
 # original idea was without armhf, but since --disable-cve-tests for 32bit archs (see below)

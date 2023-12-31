@@ -4,6 +4,7 @@ libreoffice (4:24.2.0~rc1-2) UNRELEASED; urgency=medium
     - don't remove libforuilo.so in -core-nogui. (closes: #1059158)
       It's subsumed in libmerged on 64bit archs anyway which we definitely
       need to keep anyway (similar as libuuilo.so).
+    - actually re-enable junit
   * debian/tests/control.junit.in: add missing newline 
 
  -- Rene Engelhard <rene@debian.org>  Sun, 24 Dec 2023 14:23:16 +0100
