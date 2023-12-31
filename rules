@@ -4008,6 +4008,9 @@ ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 			debian/.debhelper/libreoffice-writer/dbgsym-root/usr/share/libreoffice/gdb/libreoffice; \
 	done
 
+	# cleanup
+	find debian/.debhelper -name "__pycache__" -exec rm -rf {} \;
+
 	# populate -nogui-dbgsym from the gui counterparts
 ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	mkdir -p debian/.debhelper/libreoffice-core-nogui/dbgsym-root/usr/share/gdb/auto-load/
