@@ -1,8 +1,3 @@
-Tests: junit-subsequentcheck
-Architecture: amd64 arm64
-Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-math, libreoffice-base, libreoffice-subsequentcheckbase, libreoffice-sdbc-hsqldb, libreoffice-sdbc-firebird
-Restrictions: allow-stderr, skippable
-
 Tests: testtools-bridgetest-without-java
 Depends: @builddeps@, ure
 Restrictions: allow-stderr, rw-build-tree, superficial
@@ -136,3 +131,8 @@ Restrictions: allow-stderr, superficial
 #Architecture: amd64 arm64 armhf
 #Depends: @builddeps@, pwgen, libreoffice-sdbc-mysql, libreoffice-core, default-mysql-server, default-mysql-client
 #Restrictions: build-needed, allow-stderr, needs-root, isolation-container, breaks-testbed, superficial
+
+Tests: junit-subsequentcheck
+Architecture: amd64 arm64
+Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-math, libreoffice-base, libreoffice-subsequentcheckbase, libreoffice-sdbc-hsqldb, libreoffice-sdbc-firebird
+Restrictions: allow-stderr, skippable

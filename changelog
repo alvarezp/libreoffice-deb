@@ -1,3 +1,11 @@
+libreoffice (4:24.2.0~rc1-3) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - add junit-subsequentcheck after all the other tests, not before
+  * debian/tests/control*in: adapt newlines accordingly 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 01 Jan 2024 13:13:00 +0100
+
 libreoffice (4:24.2.0~rc1-2) experimental; urgency=medium
 
   * debian/rules:

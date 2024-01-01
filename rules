@@ -2170,20 +2170,19 @@ endif
 .DELETE_ON_ERROR: debian/control
 
 debian/tests/control: debian/tests/control.in debian/rules
-	rm -f debian/tests/control
+	sed -e "s|%OOO_JAVA_ARCHS%|$(OOO_JAVA_ARCHS)|g" \
+	    -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
+	    -e "s|%OOO_NOGUI_ARCHS%|$(OOO_NOGUI_ARCHS)|g" \
+	    -e "s|%OOO_JAVA_AND_NOGUI_ARCHS%|$(filter $(OOO_JAVA_ARCHS),$(OOO_NOGUI_ARCHS))|g" \
+	    -e "s|%OOO_CHECK_FATAL_ARCHS%|$(OOO_CHECK_FATAL_ARCHS)|g" \
+	    -e "s|%AUTOPKGTEST_CPPUNIT_PACKAGES%|$(shell echo $(AUTOPKGTEST_CPPUNIT_PACKAGES) | sed -e "s/\ /,/g")|g" \
+	    > debian/tests/control < debian/tests/control.in
 	# otherwise Architecture: is empty (and empty means "any" in autopgktest,
 	# cf. https://salsa.debian.org/ci-team/autopkgtest/-/blob/master/lib/testdesc.py#L546)
 ifneq (,$(OOO_JUNIT_ARCHS))
-	    sed -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
-	    	> debian/tests/control < debian/tests/control.junit.in
+	sed -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
+		>> debian/tests/control < debian/tests/control.junit.in
 endif	    
-	    sed -e "s|%OOO_JAVA_ARCHS%|$(OOO_JAVA_ARCHS)|g" \
-		    -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
-		    -e "s|%OOO_NOGUI_ARCHS%|$(OOO_NOGUI_ARCHS)|g" \
-		    -e "s|%OOO_JAVA_AND_NOGUI_ARCHS%|$(filter $(OOO_JAVA_ARCHS),$(OOO_NOGUI_ARCHS))|g" \
-		    -e "s|%OOO_CHECK_FATAL_ARCHS%|$(OOO_CHECK_FATAL_ARCHS)|g" \
-		    -e "s|%AUTOPKGTEST_CPPUNIT_PACKAGES%|$(shell echo $(AUTOPKGTEST_CPPUNIT_PACKAGES) | sed -e "s/\ /,/g")|g" \
-	        >> debian/tests/control < debian/tests/control.in
 
 .DELETE_ON_ERROR: debian/tests/control
 
