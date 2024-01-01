@@ -1,5 +1,7 @@
 libreoffice (4:24.2.0~rc1-3) UNRELEASED; urgency=medium
 
+  * debian/patches/update-LIBO_THIS_YEAR.diff: as said, we are at 2024 :)
+
   * debian/rules:
     - add junit-subsequentcheck after all the other tests, not before
   * debian/tests/control*in: adapt newlines accordingly 
