@@ -1,4 +1,4 @@
-libreoffice (4:24.2.0~rc1-2) UNRELEASED; urgency=medium
+libreoffice (4:24.2.0~rc1-2) experimental; urgency=medium
 
   * debian/rules:
     - don't remove libforuilo.so in -core-nogui. (closes: #1059158)
@@ -7,7 +7,7 @@ libreoffice (4:24.2.0~rc1-2) UNRELEASED; urgency=medium
     - actually re-enable junit
   * debian/tests/control.junit.in: add missing newline 
 
- -- Rene Engelhard <rene@debian.org>  Sun, 24 Dec 2023 14:23:16 +0100
+ -- Rene Engelhard <rene@debian.org>  Mon, 01 Jan 2024 11:30:04 +0100
 
 libreoffice (4:24.2.0~rc1-1) experimental; urgency=medium
 
