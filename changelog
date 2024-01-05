@@ -1,6 +1,5 @@
-libreoffice (4:24.2.0~rc1-3) UNRELEASED; urgency=medium
+libreoffice (4:24.2.0~rc2~git20240105-1) UNRELEASED; urgency=medium
 
-  * debian/patches/update-LIBO_THIS_YEAR.diff: as said, we are at 2024 :)
   * debian/patches/libxml-2.12.diff: fix tests with libxml 2.12, from
     master
 
