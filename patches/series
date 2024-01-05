@@ -48,3 +48,4 @@ we-dont-have-the-needed-fonts.diff
 adapt-for-new-carlito.diff
 fix-system-abseil-build.diff
 update-LIBO_THIS_YEAR.diff
+libxml-2.12.diff
