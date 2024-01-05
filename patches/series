@@ -48,4 +48,4 @@ we-dont-have-the-needed-fonts.diff
 adapt-for-new-carlito.diff
 bash-completion-updates.diff
 fix-riscv64-bridges.diff
-fix-build-with-libxml-2.12.diff
+libxml-2.12.diff
