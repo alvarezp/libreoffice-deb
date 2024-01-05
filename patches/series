@@ -47,4 +47,3 @@ do-not-abort-on-NON_APPLICATION_FONT_USE.diff
 we-dont-have-the-needed-fonts.diff
 adapt-for-new-carlito.diff
 fix-system-abseil-build.diff
-libxml-2.12.diff
