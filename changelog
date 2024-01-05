@@ -1,8 +1,29 @@
-libreoffice (4:24.8.0~alpha0~git20231230-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~alpha0~git20240105-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
  -- Rene Engelhard <rene@debian.org>  Tue, 28 Nov 2023 21:07:51 +0100
+
+libreoffice (4:24.2.0~rc2~git20240105-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot
+
+  * debian/rules:
+    - add junit-subsequentcheck after all the other tests, not before
+  * debian/tests/control*in: adapt newlines accordingly 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 01 Jan 2024 13:13:00 +0100
+
+libreoffice (4:24.2.0~rc1-2) experimental; urgency=medium
+
+  * debian/rules:
+    - don't remove libforuilo.so in -core-nogui. (closes: #1059158)
+      It's subsumed in libmerged on 64bit archs anyway which we definitely
+      need to keep anyway (similar as libuuilo.so).
+    - actually re-enable junit
+  * debian/tests/control.junit.in: add missing newline 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 01 Jan 2024 11:30:04 +0100
 
 libreoffice (4:24.2.0~rc1-1) experimental; urgency=medium
 

@@ -131,3 +131,4 @@ Restrictions: allow-stderr, superficial
 #Architecture: %OOO_CHECK_FATAL_ARCHS%
 #Depends: @builddeps@, pwgen, libreoffice-sdbc-mysql, libreoffice-core, default-mysql-server, default-mysql-client
 #Restrictions: build-needed, allow-stderr, needs-root, isolation-container, breaks-testbed, superficial
+
