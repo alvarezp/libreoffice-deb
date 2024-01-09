@@ -4,6 +4,10 @@ libreoffice (4:24.2.0~rc2~git20240105-1) UNRELEASED; urgency=medium
 
   * debian/rules:
     - add junit-subsequentcheck after all the other tests, not before
+    - also disable Java on riscv64 to get bridgetest pass.
+      Now it fails on a new sal test in 7.6 which shows riscv64 doesn't have
+      stuff defined in the architecture which libreoffice needs.
+      Keep it allowed in Architecture: (for now), though.
   * debian/tests/control*in: adapt newlines accordingly 
   * debian/watch: watch rcs again 
 

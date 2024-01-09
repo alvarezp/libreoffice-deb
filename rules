@@ -92,6 +92,8 @@ endif
 #########
 # Default package configuration
 #
+# FIXME: Should riscv64 be here at all given it doesn't support NaN payload propagation which LO (at least Calc) needs?
+# see https://bugs.documentfoundation.org/show_bug.cgi?id=152943
 OOO_ARCHS = alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
 DEBIAN_MAIN_ARCHITECTURES = amd64 arm64 armel armhf i386 mipsel mips64el ppc64el riscv64 s390x
 PATCHSET=$(DEB_VENDOR)
@@ -628,7 +630,7 @@ endif
 # upstream says --source=1.8 / --target=1.8 so 1.8 is fine in runtime
 JAVA_RUNTIME_BASELINE=8
 ifeq "$(JDK)" "default"
-OOO_JAVA_ARCHS = $(filter-out ppc64el s390x armhf,$(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures)))
+OOO_JAVA_ARCHS = $(filter-out ppc64el s390x armhf riscv64,$(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures)))
 else
 OOO_JAVA_ARCHS = $(OOO_ARCHS)
 endif

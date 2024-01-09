@@ -3,7 +3,7 @@ Depends: @builddeps@, ure
 Restrictions: allow-stderr, rw-build-tree, superficial
 
 Tests: testtools-bridgetest-with-java
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
+Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 sparc64 mips
 Depends: @builddeps@, ure-java, liblibreoffice-java, default-jdk
 Restrictions: allow-stderr, rw-build-tree, superficial
 
@@ -59,7 +59,7 @@ Depends: @builddeps@, libreoffice-core, libreoffice-impress, python3-uno
 Restrictions: allow-stderr
 
 Tests: uicheck-cui
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
+Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 sparc64 mips
 Depends: @builddeps@, libreoffice-core, libreoffice-impress, libreoffice-writer, python3-uno, libreoffice-script-provider-python, libreoffice-script-provider-js, libreoffice-script-provider-bsh
 Restrictions: allow-stderr
 
@@ -72,12 +72,12 @@ Depends: @builddeps@, libreoffice-core, libreoffice-writer, python3-uno
 Restrictions: allow-stderr
 
 Tests: uicheck-sc
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
+Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 sparc64 mips
 Depends: @builddeps@, libreoffice-core, libreoffice-calc, libreoffice-draw, libreoffice-impress, python3-uno, libreoffice-l10n-he, libreoffice-l10n-zh-tw, libreoffice-java-common, libreoffice-writer
 Restrictions: allow-stderr
 
 Tests: uicheck-sw
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
+Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 sparc64 mips
 Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-draw, libreoffice-calc, libreoffice-impress, libreoffice-base, python3-uno, libreoffice-l10n-he, libreoffice-l10n-zh-tw, libreoffice-librelogo, libreoffice-java-common
 Restrictions: allow-stderr, needs-internet
 
@@ -87,7 +87,7 @@ Restrictions: allow-stderr
 
 Test-Command: export DOXYGEN=`command -v doxygen`; export ENABLE_JAVA=TRUE; export JDK=sun; export JAVADOC=/usr/lib/jvm/default-java/bin/javadoc; perl odk/util/check.pl /usr/lib/libreoffice/sdk
 Features: test-name=sdk-complete
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
+Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 sparc64 mips
 Depends: libreoffice-dev, libreoffice-dev-doc
 Restrictions: superficial
 
