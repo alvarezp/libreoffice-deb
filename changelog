@@ -1,6 +1,6 @@
-libreoffice (4:24.2.0~rc2~git20240105-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.0~rc2-1) experimental; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules:
     - add junit-subsequentcheck after all the other tests, not before
@@ -11,7 +11,7 @@ libreoffice (4:24.2.0~rc2~git20240105-1) UNRELEASED; urgency=medium
   * debian/tests/control*in: adapt newlines accordingly 
   * debian/watch: watch rcs again 
 
- -- Rene Engelhard <rene@debian.org>  Mon, 01 Jan 2024 13:13:00 +0100
+ -- Rene Engelhard <rene@debian.org>  Thu, 11 Jan 2024 18:29:04 +0000
 
 libreoffice (4:24.2.0~rc1-2) experimental; urgency=medium
 
