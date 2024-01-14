@@ -4,6 +4,12 @@ libreoffice (4:24.8.0~alpha0~git20240111-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Tue, 28 Nov 2023 21:07:51 +0100
 
+libreoffice (4:24.2.0~rc2-2) unstable; urgency=medium
+
+  * upload to unstable 
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 13 Jan 2024 20:26:16 +0100
+
 libreoffice (4:24.2.0~rc2-1) experimental; urgency=medium
 
   * New upstream release candidate

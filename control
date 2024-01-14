@@ -244,7 +244,7 @@ Build-Conflicts: amd-libopencl1,
                  nvidia-libopencl1,
                  systemd-coredump <!nocheck>
 Standards-Version: 4.0.1
-Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-24.2
+Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-24.8
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
 Bugs: 
 Homepage: http://www.libreoffice.org
