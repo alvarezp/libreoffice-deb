@@ -939,6 +939,7 @@ Description: generic Java Bean wrapper for LibreOffice components
 Package: libreoffice-uiconfig-common
 Section: misc
 Architecture: all
+Depends: ${misc:Depends}
 Replaces: libreoffice-common (<< 4:7.6.0~beta1)
 Breaks: libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice ("common" set)
@@ -955,6 +956,7 @@ Description: UI data ("config") for LibreOffice ("common" set)
 Package: libreoffice-uiconfig-base
 Section: misc
 Architecture: all
+Depends: ${misc:Depends}
 Replaces: libreoffice-base (<< 4:7.6.0~beta1), libreoffice-base-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Breaks: libreoffice-base (<< 4:7.6.0~beta1), libreoffice-base-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Base
@@ -971,6 +973,7 @@ Description: UI data ("config") for LibreOffice Base
 Package: libreoffice-uiconfig-calc
 Section: misc
 Architecture: all
+Depends: ${misc:Depends}
 Replaces: libreoffice-calc (<< 4:7.6.0~beta1), libreoffice-calc-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Breaks: libreoffice-calc (<< 4:7.6.0~beta1), libreoffice-calc-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Calc
@@ -987,6 +990,7 @@ Description: UI data ("config") for LibreOffice Calc
 Package: libreoffice-uiconfig-draw
 Section: misc
 Architecture: all
+Depends: ${misc:Depends}
 Replaces: libreoffice-draw (<< 4:7.6.0~beta1), libreoffice-draw-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Breaks: libreoffice-draw (<< 4:7.6.0~beta1), libreoffice-draw-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Draw
@@ -1003,6 +1007,7 @@ Description: UI data ("config") for LibreOffice Draw
 Package: libreoffice-uiconfig-impress
 Section: misc
 Architecture: all
+Depends: ${misc:Depends}
 Replaces: libreoffice-impress (<< 4:7.6.0~rc1), libreoffice-impress-nogui (<< 4:7.6.0~rc1), libreoffice-draw (<< 4:7.6.0~rc1), libreoffice-draw-nogui (<< 4:7.6.0~rc1), libreoffice-common (<< 4:7.6.0~beta1)
 Breaks: libreoffice-impress (<< 4:7.6.0~rc1), libreoffice-impress-nogui (<< 4:7.6.0~rc1), libreoffice-draw (<< 4:7.6.0~rc1), libreoffice-draw-nogui (<< 4:7.6.0~rc1), libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Impress
@@ -1019,6 +1024,7 @@ Description: UI data ("config") for LibreOffice Impress
 Package: libreoffice-uiconfig-math
 Section: misc
 Architecture: all
+Depends: ${misc:Depends}
 Replaces: libreoffice-math (<< 4:7.6.0~beta1), libreoffice-math-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Breaks: libreoffice-math (<< 4:7.6.0~beta1), libreoffice-math-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Math
@@ -1035,6 +1041,7 @@ Description: UI data ("config") for LibreOffice Math
 Package: libreoffice-uiconfig-writer
 Section: misc
 Architecture: all
+Depends: ${misc:Depends}
 Replaces: libreoffice-writer (<< 4:7.6.0~beta1), libreoffice-writer-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Breaks: libreoffice-writer (<< 4:7.6.0~beta1), libreoffice-writer-nogui (<< 4:7.6.0~beta1), libreoffice-common (<< 4:7.6.0~beta1)
 Description: UI data ("config") for LibreOffice Writer
