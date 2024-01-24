@@ -1,9 +1,14 @@
 libreoffice (4:24.2.0~rc2-3) UNRELEASED; urgency=medium
 
+  * debian/patches/fix-riscv64-bridge.diff: as name says; more riscv64 bridge
+    fixes from https://gerrit.libreoffice.org/c/core/+/160970
+
   * debian/control.lokit.in: add ${gir:Depends} and ${gir:Provides} to
     libreofficekit-dev 
+  * debian/rules:
+    - re-enable Java on riscv64 
 
- -- Rene Engelhard <rene@debian.org>  Sat, 20 Jan 2024 16:57:36 +0100
+ -- Rene Engelhard <rene@debian.org>  Wed, 24 Jan 2024 19:37:00 +0100
 
 libreoffice (4:24.2.0~rc2-2) unstable; urgency=medium
 
