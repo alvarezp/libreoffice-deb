@@ -839,6 +839,8 @@ ifeq "$(DEB_HOST_ARCH)" "riscv64"
   ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	DEB_BUILD_OPTIONS += noopt
   endif
+  # see https://lists.debian.org/debian-riscv/2024/01/msg00018.html
+  CONFIGURE_FLAGS += --disable-split-debug
 endif
   # skia build picks up clang if present (for performance reasons,
   # at least on Windows...). See the thread starting at

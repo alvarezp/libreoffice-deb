@@ -9,6 +9,7 @@ libreoffice (4:24.2.0~rc3-1) UNRELEASED; urgency=medium
     libreofficekit-dev 
   * debian/rules:
     - re-enable Java on riscv64 
+    - build with --disable-split-debug on riscv64
 
  -- Rene Engelhard <rene@debian.org>  Fri, 26 Jan 2024 16:28:52 +0100
 
