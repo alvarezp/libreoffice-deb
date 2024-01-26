@@ -1,4 +1,6 @@
-libreoffice (4:24.2.0~rc2-3) UNRELEASED; urgency=medium
+libreoffice (4:24.2.0~rc3-1) UNRELEASED; urgency=medium
+
+  * New upstream release candidate
 
   * debian/patches/fix-riscv64-bridge.diff: as name says; more riscv64 bridge
     fixes from https://gerrit.libreoffice.org/c/core/+/160970
@@ -8,7 +10,7 @@ libreoffice (4:24.2.0~rc2-3) UNRELEASED; urgency=medium
   * debian/rules:
     - re-enable Java on riscv64 
 
- -- Rene Engelhard <rene@debian.org>  Wed, 24 Jan 2024 19:37:00 +0100
+ -- Rene Engelhard <rene@debian.org>  Fri, 26 Jan 2024 16:28:52 +0100
 
 libreoffice (4:24.2.0~rc2-2) unstable; urgency=medium
 
