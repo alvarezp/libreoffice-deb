@@ -1,8 +1,23 @@
-libreoffice (4:24.8.0~alpha0~git20240111-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~alpha0~git20240126-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
  -- Rene Engelhard <rene@debian.org>  Tue, 28 Nov 2023 21:07:51 +0100
+
+libreoffice (4:24.2.0~rc3-1) UNRELEASED; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/patches/fix-riscv64-bridge.diff: as name says; more riscv64 bridge
+    fixes from https://gerrit.libreoffice.org/c/core/+/160970
+
+  * debian/control.lokit.in: add ${gir:Depends} and ${gir:Provides} to
+    libreofficekit-dev 
+  * debian/rules:
+    - re-enable Java on riscv64 
+    - build with --disable-split-debug on riscv64
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 26 Jan 2024 16:28:52 +0100
 
 libreoffice (4:24.2.0~rc2-2) unstable; urgency=medium
 

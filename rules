@@ -570,7 +570,7 @@ OOO_CHECK_FATAL_ARCHS += armhf
 OOO_SMOKETEST_FATAL_ARCHS := $(OOO_ARCHS)
 
 # archs where the archive/ci runs autopkgtests
-OOO_AUTOPKGTEST_ARCHS := $(filter-out riscv64,$(OOO_CHECK_ARCHS) i386 ppc64el s390x)
+OOO_AUTOPKGTEST_ARCHS := $(OOO_CHECK_ARCHS) i386 ppc64el s390x
 
 ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
 PACKAGE_GEN=n
@@ -630,7 +630,7 @@ endif
 # upstream says --source=1.8 / --target=1.8 so 1.8 is fine in runtime
 JAVA_RUNTIME_BASELINE=8
 ifeq "$(JDK)" "default"
-OOO_JAVA_ARCHS = $(filter-out ppc64el s390x armhf riscv64,$(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures)))
+OOO_JAVA_ARCHS = $(filter-out ppc64el s390x armhf,$(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures)))
 else
 OOO_JAVA_ARCHS = $(OOO_ARCHS)
 endif
@@ -839,6 +839,8 @@ ifeq "$(DEB_HOST_ARCH)" "riscv64"
   ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	DEB_BUILD_OPTIONS += noopt
   endif
+  # see https://lists.debian.org/debian-riscv/2024/01/msg00018.html
+  CONFIGURE_FLAGS += --disable-split-debug
 endif
   # skia build picks up clang if present (for performance reasons,
   # at least on Windows...). See the thread starting at

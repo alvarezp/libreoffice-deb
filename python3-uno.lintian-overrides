@@ -1,2 +1,6 @@
 # "aged out" due to debhelpers changelog trimming (see #1021502)
 python3-uno: debian-news-entry-has-unknown-version 1:3.5.2-2 [usr/share/doc/python3-uno/NEWS.Debian.gz:1]
+# the old package does have a dependency on ucf. the ucf snippets are only ran on upgrades
+# which means that the ucf installed back then is still there. No need for the new package to depend
+# on ucf just for this
+python3-uno: maintainer-script-needs-depends-on-ucf ucf (does not satisfy ucf) [preinst:15]
