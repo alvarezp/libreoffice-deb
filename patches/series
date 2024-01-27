@@ -48,3 +48,4 @@ we-dont-have-the-needed-fonts.diff
 adapt-for-new-carlito.diff
 fix-system-abseil-build.diff
 fix-riscv64-bridge.diff
+lo-xlate-lang-hy.diff
