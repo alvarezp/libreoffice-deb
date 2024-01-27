@@ -308,8 +308,6 @@ ifeq "$(USE_SOURCE_TARBALLS)" "y"
 ENABLE_EXPORT_VALIDATION_TESTS=n
 endif
 #JUNIT_MIN_VER=
-USE_LIBSUITESPARSE=y
-#SUITESPARSE_MIN_VERSION=
 PARALLEL_BUILD=y
 ENABLE_LDAP=y
 SYSTEM_STUFF += openldap
@@ -1638,11 +1636,7 @@ ifneq (,$(filter lpsolve, $(SYSTEM_STUFF)))
   else
 	BUILD_DEPS += , liblpsolve55-dev $(LPSOLVE_MIN_VERSION)
   endif
-  ifeq "$(USE_LIBSUITESPARSE)" "y"
 	BUILD_DEPS += , libsuitesparse-dev $(SUITESPARSE_MIN_VERSION)
-  else
-	BUILD_DEPS += , libufsparse-dev
-  endif
 endif
 
 ifeq "$(USE_DBUS)" "y"
