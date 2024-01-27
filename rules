@@ -736,6 +736,9 @@ ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
     ifeq "$(DEB_HOST_ARCH)" "mips64el"
 	ENABLE_LTO=n
     endif
+    # we apparently also need --disable-split-debug (see below) since according to configure.ac both are
+    # "Inherently incompatible, since no debug info is created while compiling, GCC complains."
+    # so make it explicit
     ifeq "$(DEB_HOST_ARCH)" "riscv64"
 	ENABLE_LTO=n
     endif
