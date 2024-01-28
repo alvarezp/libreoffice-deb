@@ -4,6 +4,17 @@ libreoffice (4:24.8.0~alpha0~git20240126-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Tue, 28 Nov 2023 21:07:51 +0100
 
+libreoffice (4:24.2.1~rc1~git20241127-1) UNRELEASED; urgency=medium
+
+  * debian/patches/lo-xlate-lang-hy.diff: make hy/Armenian known
+
+  * New upstream snapshot
+
+  * debian/rules:
+    - enable hy (Armenian) langpack
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 26 Jan 2024 16:28:52 +0100
+
 libreoffice (4:24.2.0~rc3-1) UNRELEASED; urgency=medium
 
   * New upstream release candidate

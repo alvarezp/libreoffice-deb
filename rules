@@ -93,7 +93,7 @@ endif
 # Default package configuration
 #
 # FIXME: Should riscv64 be here at all given it doesn't support NaN payload propagation which LO (at least Calc) needs?
-# see https://bugs.documentfoundation.org/show_bug.cgi?id=152943
+# see https://bugs.documentfoundation.org/show_bug.cgi?id=152943 and https://lists.debian.org/debian-riscv/2024/01/msg00018.html
 OOO_ARCHS = alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
 DEBIAN_MAIN_ARCHITECTURES = amd64 arm64 armel armhf i386 mipsel mips64el ppc64el riscv64 s390x
 PATCHSET=$(DEB_VENDOR)
@@ -308,8 +308,6 @@ ifeq "$(USE_SOURCE_TARBALLS)" "y"
 ENABLE_EXPORT_VALIDATION_TESTS=n
 endif
 #JUNIT_MIN_VER=
-USE_LIBSUITESPARSE=y
-#SUITESPARSE_MIN_VERSION=
 PARALLEL_BUILD=y
 ENABLE_LDAP=y
 SYSTEM_STUFF += openldap
@@ -736,6 +734,9 @@ ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
     ifeq "$(DEB_HOST_ARCH)" "mips64el"
 	ENABLE_LTO=n
     endif
+    # we apparently also need --disable-split-debug (see below) since according to configure.ac both are
+    # "Inherently incompatible, since no debug info is created while compiling, GCC complains."
+    # so make it explicit
     ifeq "$(DEB_HOST_ARCH)" "riscv64"
 	ENABLE_LTO=n
     endif
@@ -1175,7 +1176,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	# have gid_Module_Root.$iso
 	#ISOS=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
 	ISOS:=en-US af am ar as ast be bg bn bn-IN br bs ca ca-valencia cs cy da de dz el \
-	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu id is it ja \
+	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu hy id is it ja \
 	  ka kk km kmr-Latn kn ko lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
 	  ta te tg th tn tr ts ug uk uz ve vi xh zh-CN zh-TW zu
@@ -1188,7 +1189,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
     endif
 	#LANGPACKISOS:=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
 	LANGPACKISOS:=en-US af am ar as ast be bg bn bn-IN br bs ca ca-valencia cs cy da de dz el \
-	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu id is it ja \
+	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu hy id is it ja \
 	  ka kk km kmr-Latn kn ko lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
 	  ta te tg th tn tr ts ug uk uz ve vi xh zh-CN zh-TW zu
@@ -1635,11 +1636,7 @@ ifneq (,$(filter lpsolve, $(SYSTEM_STUFF)))
   else
 	BUILD_DEPS += , liblpsolve55-dev $(LPSOLVE_MIN_VERSION)
   endif
-  ifeq "$(USE_LIBSUITESPARSE)" "y"
 	BUILD_DEPS += , libsuitesparse-dev $(SUITESPARSE_MIN_VERSION)
-  else
-	BUILD_DEPS += , libufsparse-dev
-  endif
 endif
 
 ifeq "$(USE_DBUS)" "y"
