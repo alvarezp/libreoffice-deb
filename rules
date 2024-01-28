@@ -835,8 +835,8 @@ ifeq "$(DEB_HOST_ARCH)" "i386"
       CXX=$(CC_PREFIX)g++-12
   endif
 endif
-# see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1039906#26
 ifeq "$(DEB_HOST_ARCH)" "riscv64"
+  # see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1039906#26
   ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	DEB_BUILD_OPTIONS += noopt
   endif
