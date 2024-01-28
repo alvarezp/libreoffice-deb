@@ -267,6 +267,7 @@ ifeq "$(ENABLE_JAVA)" "y"
   SYSTEM_STUFF += beanshell
   SYSTEM_STUFF += hsqldb
 endif
+ENABLE_LPSOLVE=y
 SYSTEM_STUFF += lpsolve
 USE_SHARED_LPSOLVE=y
 #LPSOLVE_MIN_VERSION=
@@ -1629,14 +1630,18 @@ ifeq "$(ENABLE_JAVA)" "y"
   endif
 endif
 
-ifneq (,$(filter lpsolve, $(SYSTEM_STUFF)))
-  ifeq "$(USE_SHARED_LPSOLVE)" "y"
+ifeq ($(ENABLE_LPSOLVE),y)
+  ifneq (,$(filter lpsolve, $(SYSTEM_STUFF)))
+    ifeq "$(USE_SHARED_LPSOLVE)" "y"
 	BUILD_DEPS += , liblpsolve55-dev $(LPSOLVE_MIN_VERSION), lp-solve $(LPSOLVE_MIN_VERSION)
 	LPSOLVE_DEP = lp-solve $(LPSOLVE_MIN_VERSION)
-  else
+    else
 	BUILD_DEPS += , liblpsolve55-dev $(LPSOLVE_MIN_VERSION)
-  endif
+    endif
 	BUILD_DEPS += , libsuitesparse-dev $(SUITESPARSE_MIN_VERSION)
+  endif
+else
+	CONFIGURE_FLAGS += --disable-lpsolve
 endif
 
 ifeq "$(USE_DBUS)" "y"
