@@ -1,6 +1,4 @@
-libreoffice (4:24.2.1~rc1~git20241127-1) UNRELEASED; urgency=medium
-
-  * debian/patches/lo-xlate-lang-hy.diff: make hy/Armenian known
+libreoffice (4:24.2.1~rc1~git20241129-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
