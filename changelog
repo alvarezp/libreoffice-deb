@@ -10,6 +10,7 @@ libreoffice (4:24.2.0-1) unstable; urgency=medium
   * debian/rules:
     - re-enable Java on riscv64 
     - build with --disable-split-debug on riscv64
+    - stop running debian/rules control in the clean target; forbidden
 
  -- Rene Engelhard <rene@debian.org>  Sat, 27 Jan 2024 13:25:02 +0000
 

@@ -1952,7 +1952,8 @@ endif
 	# Files created in debian directory
 	$(MAKE) -f debian/rules clean-debdir
 
-	$(MAKE) -f debian/rules control
+	# we must not regenerate  this automatically per policy....
+	#$(MAKE) -f debian/rules control
 
 
 # Generate control files, because we have so many different languages
