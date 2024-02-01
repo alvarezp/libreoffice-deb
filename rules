@@ -3179,18 +3179,18 @@ ifeq "$(ENABLE_JAVA)" "y"
 endif
 	# and the public libs to their respective packages
 	for i in sal cppu; do \
-		mkdir -p debian/libuno-$${i}3/$(OODIR)/program; \
-		mkdir -p debian/libuno-$${i}3/usr/lib/$(DEB_HOST_MULTIARCH); \
+		mkdir -p debian/libuno-$${i}3t64/$(OODIR)/program; \
+		mkdir -p debian/libuno-$${i}3t64/usr/lib/$(DEB_HOST_MULTIARCH); \
 		mv debian/ure/$(OODIR)/program/libuno_$${i}.so.3 \
-			debian/libuno-$${i}3/$(OODIR)/program; \
-		ln -sf /$(OODIR)/program/`basename libuno_$$i.so.3` debian/libuno-$${i}3/usr/lib/$(DEB_HOST_MULTIARCH)/`basename libuno_$$i.so.3`; \
+			debian/libuno-$${i}3t64/$(OODIR)/program; \
+		ln -sf /$(OODIR)/program/`basename libuno_$$i.so.3` debian/libuno-$${i}3t64/usr/lib/$(DEB_HOST_MULTIARCH)/`basename libuno_$$i.so.3`; \
 	done
 	for i in salhelpergcc3 cppuhelpergcc3 purpenvhelpergcc3; do \
-		mkdir -p debian/libuno-$${i}-3/$(OODIR)/program; \
-		mkdir -p debian/libuno-$${i}-3/usr/lib/$(DEB_HOST_MULTIARCH); \
+		mkdir -p debian/libuno-$${i}-3t64/$(OODIR)/program; \
+		mkdir -p debian/libuno-$${i}-3t64/usr/lib/$(DEB_HOST_MULTIARCH); \
 		mv debian/ure/$(OODIR)/program/libuno_$${i}.so.3 \
-			debian/libuno-$${i}-3/$(OODIR)/program; \
-		ln -sf /$(OODIR)/program/`basename libuno_$$i.so.3` debian/libuno-$${i}-3/usr/lib/$(DEB_HOST_MULTIARCH)/`basename libuno_$$i.so.3`; \
+			debian/libuno-$${i}-3t64/$(OODIR)/program; \
+		ln -sf /$(OODIR)/program/`basename libuno_$$i.so.3` debian/libuno-$${i}-3t64/usr/lib/$(DEB_HOST_MULTIARCH)/`basename libuno_$$i.so.3`; \
 	done
 	# we also need libxmlreaderlo.so, libreglo.so and libunoidllo.so (libuno_cppuhelpergcc3.so.3
         # needs it) and libstorelo.so (libreglo.so needs it)
@@ -3985,7 +3985,7 @@ endif
 	dh_bugfiles -a -A
 	dh_link -a
 ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
-	for i in libuno-cppu3 libuno-sal3 libreoffice-core libreoffice-writer; do \
+	for i in libuno-cppu3t64 libuno-sal3t64 libreoffice-core libreoffice-writer; do \
 		rm -rf debian/.debhelper/$$i/dbgsym-root; \
 	done
   ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
@@ -4011,12 +4011,12 @@ ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 
 	# move sal and cppu gdb helpers into their respective packages
 	for i in sal cppu; do \
-		mkdir -p debian/.debhelper/libuno-$${i}3/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program; \
-		mkdir -p debian/.debhelper/libuno-$${i}3/dbgsym-root/usr/share/libreoffice/gdb/libreoffice; \
+		mkdir -p debian/.debhelper/libuno-$${i}3t64/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program; \
+		mkdir -p debian/.debhelper/libuno-$${i}3t64/dbgsym-root/usr/share/libreoffice/gdb/libreoffice; \
 		mv debian/.debhelper/libreoffice-core/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program/libuno_$$i.so.3-gdb.py \
-			debian/.debhelper/libuno-$${i}3/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program; \
+			debian/.debhelper/libuno-$${i}3t64/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program; \
 		mv debian/.debhelper/libreoffice-core/dbgsym-root/usr/share/libreoffice/gdb/libreoffice/$$i.py \
-			debian/.debhelper/libuno-$${i}3/dbgsym-root/usr/share/libreoffice/gdb/libreoffice; \
+			debian/.debhelper/libuno-$${i}3t64/dbgsym-root/usr/share/libreoffice/gdb/libreoffice; \
 	done
 
 	# move sw and writerfilter gdb helpers to writer-dbgsym
@@ -4067,7 +4067,7 @@ ifeq "$(ENABLE_INTROSPECTION)" "y"
 endif
 	dh_strip_nondeterminism -a
 	for i in sal3 cppu3 salhelpergcc3-3 cppuhelpergcc3-3 purpenvhelpergcc3-3; do \
-		dh_makeshlibs -plibuno-$$i -V"libuno-$$i (>= 4:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -c2 -V -v$(BINARY_VERSION); \
+		dh_makeshlibs -plibuno-$${i}t64 -V"libuno-$${i}t64 (>= 4:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -c2 -V -v$(BINARY_VERSION); \
 	done
 	dh_makeshlibs -n -pure -V"ure (>= 4:$(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~)" -- -d -V -v$(BINARY_VERSION)
 	dh_installdeb -a
@@ -4122,17 +4122,17 @@ endif
 endif
 
 		dh_shlibdeps -a -Nlibreoffice-core-nogui -Nure \
-			-Lure -Llibuno-sal3 -Llibpuno-cppu3 -Llibuno-salhelpergcc3-3 -Llibcppuhelpergcc3-3 -Llibuno-purpenvhelpergcc3-3 \
-			-l$(CURDIR)/debian/libuno-sal3/$(OODIR)/program:$(CURDIR)/debian/libuno-cppu3/$(OODIR)/program:$(CURDIR)/debian/libuno-salhelpergcc3-3/$(OODIR)/program:$(CURDIR)/debian/libuno-cppuhelpergcc3-3/$(OODIR)/program:$(CURDIR)/debian/libuno-purpenvhelpergcc3-3/$(OODIR)/program:$(CURDIR)/debian/ure/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-core/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-base-core/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-base/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-writer/$(OODIR)/program \
+			-Lure -Llibuno-sal3t64 -Llibpuno-cppu3t64 -Llibuno-salhelpergcc3-3t64 -Llibcppuhelpergcc3-3t64 -Llibuno-purpenvhelpergcc3-3t64 \
+			-l$(CURDIR)/debian/libuno-sal3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-cppu3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-salhelpergcc3-3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-cppuhelpergcc3-3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-purpenvhelpergcc3-3t64/$(OODIR)/program:$(CURDIR)/debian/ure/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-core/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-base-core/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-base/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-writer/$(OODIR)/program \
 			$(SHLIBS_OVERRIDE)
 		dh_shlibdeps -pure \
-			-Llibuno-sal3 -Llibpuno-cppu3 -Llibuno-salhelpergcc3-3 -Llibcppuhelpergcc3-3 -Llibuno-purpenvhelpergcc3-3 \
-			-l$(CURDIR)/debian/libuno-sal3/$(OODIR)/program:$(CURDIR)/debian/libuno-cppu3/$(OODIR)/program:$(CURDIR)/debian/libuno-salhelpergcc3-3/$(OODIR)/program:$(CURDIR)/debian/libuno-cppuhelpergcc3-3/$(OODIR)/program:$(CURDIR)/debian/libuno-purpenvhelpergcc3-3/$(OODIR)/program:$(CURDIR)/debian/ure/$(OODIR)/program \
+			-Llibuno-sal3t64 -Llibpuno-cppu3t64 -Llibuno-salhelpergcc3-3t64 -Llibcppuhelpergcc3-3t64 -Llibuno-purpenvhelpergcc3-3t64 \
+			-l$(CURDIR)/debian/libuno-sal3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-cppu3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-salhelpergcc3-3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-cppuhelpergcc3-3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-purpenvhelpergcc3-3t64/$(OODIR)/program:$(CURDIR)/debian/ure/$(OODIR)/program \
 			-- -xure
 ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 		dh_shlibdeps -plibreoffice-core-nogui \
-			-Lure -Llibuno-sal3 -Llibpuno-cppu3 -Llibuno-salhelpergcc3-3 -Llibcppuhelpergcc3-3 -Llibuno-purpenvhelpergcc3-3 \
-			-l$(CURDIR)/debian/libuno-sal3/$(OODIR)/program:$(CURDIR)/debian/libuno-cppu3/$(OODIR)/program:$(CURDIR)/debian/libuno-salhelpergcc3-3/$(OODIR)/program:$(CURDIR)/debian/libuno-cppuhelpergcc3-3/$(OODIR)/program:$(CURDIR)/debian/libuno-purpenvhelpergcc3-3/$(OODIR)/program:$(CURDIR)/debian/ure/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-core-nogui/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-base-core/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-base/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-writer/$(OODIR)/program \
+			-Lure -Llibuno-sal3t64 -Llibpuno-cppu3t64 -Llibuno-salhelpergcc3-3t64 -Llibcppuhelpergcc3-3t64 -Llibuno-purpenvhelpergcc3-3t64 \
+			-l$(CURDIR)/debian/libuno-sal3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-cppu3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-salhelpergcc3-3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-cppuhelpergcc3-3t64/$(OODIR)/program:$(CURDIR)/debian/libuno-purpenvhelpergcc3-3t64/$(OODIR)/program:$(CURDIR)/debian/ure/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-core-nogui/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-base-core/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-base/$(OODIR)/program:$(CURDIR)/$(PKGDIR)-writer/$(OODIR)/program \
 			$(SHLIBS_OVERRIDE)
 endif
   ifneq (,$(filter coinmp, $(SYSTEM_STUFF)))
@@ -4141,10 +4141,6 @@ endif
 	perl -pi -e "s/coinor-libcoinmp1v5/coinor-libcoinmp1v5 $(COINMP_MINVER)/" \
 		debian/libreoffice-calc.substvars
   endif
-  	# FIXME. Otherwise the unoEditGlossary openDialog test crashes and hangs. go sure to make sure it doesn't
-	# happen on runtime. No idea whether alpha1 would suffice but it doesn't really matter in practice anyway :)
-	perl -pi -e "s/, libuno-sal3 \(>= 1:7.3.0~beta1\),/, libuno-sal3 \(>= 1:7.4.0~beta1\),/" \
-			debian/libreoffice-core.substvars
 ifeq "$(ENABLE_JAVA)" "y"
 	for p in $(ARCH_DEP_PACKAGES); do \
 		jh_depends -p$$p -Xure -Xbase-files; \
@@ -4183,7 +4179,7 @@ endif
 		-V'liberation-fonts-recommends=$(LIBERATION_FONTS_RECOMMENDS)' \
 		-v$(BINARY_VERSION)
 ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
-	for i in libuno-sal3 libuno-cppu3 libuno-salhelpergcc3-3 libuno-cppuhelpergcc3-3 libuno-purpenvhelpergcc3-3 \
+	for i in libuno-sal3t64 libuno-cppu3t64 libuno-salhelpergcc3-3t64 libuno-cppuhelpergcc3-3t64 libuno-purpenvhelpergcc3-3t64 \
 		libreoffice-core libreoffice-writer; do \
 		perl -pi -e 's/^(Depends:.*)/\1\nRecommends: gdb, python3-six/' \
 		debian/.debhelper/$$i/dbgsym-root/DEBIAN/control; \
