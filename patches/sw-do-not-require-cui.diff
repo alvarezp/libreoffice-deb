@@ -1,0 +1,28 @@
+From 8d26ca7f9ac37b5ada0a2c463b37181bcc8301a8 Mon Sep 17 00:00:00 2001
+From: Noel Grandin <noel.grandin@collabora.co.uk>
+Date: Tue, 30 Jan 2024 14:13:41 +0200
+Subject: tdf#158695 convert-to bogusly needs libcui (--disable-gui build)
+
+Change-Id: I8e13902c4ee9b4b17e921b68b0626f7728cb0c18
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/162749
+Tested-by: Jenkins
+Reviewed-by: Noel Grandin <noel.grandin@collabora.co.uk>
+---
+ sw/Library_sw.mk | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/sw/Library_sw.mk b/sw/Library_sw.mk
+index bd5d831f7f2f..707f5506d6a6 100644
+--- a/sw/Library_sw.mk
++++ b/sw/Library_sw.mk
+@@ -56,7 +56,6 @@ $(eval $(call gb_Library_use_libraries,sw,\
+     comphelper \
+     cppu \
+     cppuhelper \
+-    cui \
+     $(call gb_Helper_optional,DBCONNECTIVITY, \
+         dbtools) \
+     docmodel \
+-- 
+cgit v1.2.3
+

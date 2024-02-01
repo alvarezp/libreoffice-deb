@@ -1,5 +1,8 @@
 libreoffice (4:24.2.0-2) UNRELEASED; urgency=medium
 
+  * debian/patches/sw-do-not-require-cui.diff: do not require cui in sw, from
+    upstream (closes: #1058653)
+
   * debian/rules:
     - don't create debian/control and debian/test/control but an intermediate
       control.new
