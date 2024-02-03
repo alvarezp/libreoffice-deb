@@ -1953,7 +1953,7 @@ endif
 	# Files created in debian directory
 	$(MAKE) -f debian/rules clean-debdir
 
-	$(MAKE) -f debian/rules control
+	#$(MAKE) -f debian/rules control
 
 
 # Generate control files, because we have so many different languages
