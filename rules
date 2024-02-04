@@ -103,7 +103,6 @@ BUILD_DEPS=\
     bc,\
     bison,\
     bzip2,\
-    diffutils, \
     flex, \
     fontforge-nox | fontforge, \
     gperf,\
