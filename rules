@@ -1133,6 +1133,11 @@ endif
 
 	BUILD_DEPS_ARCH += , hunspell-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , hyphen-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	# for test_tdf159102_smart_justify_with_automatic_hyphenation.
+	# The test itself claims we must not depend on the installed hyphenation patterns
+	# but installing this (which is suggested by writer as missing even after
+	# opening the .fodt) fixes it
+	BUILD_DEPS_ARCH += , hyphen-es$(OOO_NO_CHECK_ARCHS) <!nocheck>
   endif
   # we don't run any cppunit check in all builds
   ifneq "$(AUTOPKGTEST_BUILD)" "y"
