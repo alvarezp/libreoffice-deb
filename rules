@@ -103,7 +103,6 @@ BUILD_DEPS=\
     bc,\
     bison,\
     bzip2,\
-    diffutils, \
     flex, \
     fontforge-nox | fontforge, \
     gperf,\
@@ -716,6 +715,12 @@ ifeq "$(DEB_DISTRIBUTION)" "bookworm-backports"
   SYSTEM_STUFF := $(filter-out frozen mdds orcus libcmis,$(SYSTEM_STUFF))
   BOOKWORM_BACKPORT=y
   ENABLE_KF6=n
+endif
+
+ifeq "$(BOOKWORM_BACKPORT)" "y"
+  ifneq (,$(shell grep t64 debian/control))
+$(error Revert t64 rename 6f794ba67d113395d7662c2ebf5f67b37eddff09 for bookworm-backports!)
+  endif
 endif
 
 CONFIGURE_FLAGS += $(foreach i, $(SYSTEM_STUFF),--with-system-$(i))
