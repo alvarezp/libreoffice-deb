@@ -1,9 +1,12 @@
-libreoffice (4:24.2.1~rc1~git20240201-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.1~rc1~git20240204-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
   * debian/rules:
     - enable hy (Armenian) langpack
+    - (blindly) fix to actually make parallel build/packaging of kf5/(upcoming) kf6
+      work
+  * debian/rules, debian/control.plasma.in: conditionalize -kfX Recommends
 
  -- Rene Engelhard <rene@debian.org>  Fri, 26 Jan 2024 16:28:52 +0100
 

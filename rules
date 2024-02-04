@@ -206,8 +206,7 @@ SYSTEM_STUFF += cairo
 ifeq "$(ENABLE_GUI)" "y"
 BUILD_PLASMA=y
 # let's assume we won't ship two plasmas parallel..
-KF_VERSION=5
-PLASMA_VERSION=$(KF_VERSION)
+PLASMA_VERSION=5
 ENABLE_QT5=n
 #QT5_MINVER=
 endif
@@ -716,6 +715,7 @@ ifeq "$(DEB_DISTRIBUTION)" "bookworm-backports"
   BUGS=mailto:debian-backports@lists.debian.org
   SYSTEM_STUFF := $(filter-out frozen mdds orcus libcmis,$(SYSTEM_STUFF))
   BOOKWORM_BACKPORT=y
+  ENABLE_KF6=n
 endif
 
 CONFIGURE_FLAGS += $(foreach i, $(SYSTEM_STUFF),--with-system-$(i))
@@ -2102,7 +2102,8 @@ ifeq "$(ENABLE_QT6)" "y"
 	cat debian/control.qt6.in >> debian/control.new
 endif
 ifeq "$(BUILD_PLASMA)" "y"
-	cat debian/control.plasma.in >> debian/control.new
+	sed -e "s|@PLASMA_VERSION@|$(PLASMA_VERSION)|g" \
+	        >> debian/control.new < debian/control.plasma.in
 endif
 	cat debian/control.postgresql.in >> debian/control.new
 ifeq "$(ENABLE_EVO2)" "y"
@@ -2587,14 +2588,24 @@ ifeq "$(ENABLE_QT6)" "y"
 		debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program
 endif
 ifeq "$(shell echo $(ENABLE_KF5)$(ENABLE_KF6) | grep -q y && echo true)" "true"
-	mv debian/tmp/pkg/libreoffice-kde \
-		debian/tmp/pkg/libreoffice-kf$(KF_VERSION)
 ifeq "$(BUILD_PLASMA)" "y"
 	mkdir -p debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program
-	mv debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program/libkf$(KF_VERSION)be1lo.so \
+	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf$(PLASMA_VERSION)be1lo.so \
 		debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program
+	# remove other ones maybe built by --enable-kfX
+	rm -f debian/tmp/pkg/libreoffice-kf5/$(OODIR)/libkf*be1lo.so 
 else
-	rm -f debian/tmp/pkg/libreoffice-kf5/$(OODIR)/libkf$(KF_VERSION)be1lo.so
+	rm -f debian/tmp/pkg/libreoffice-kf5/$(OODIR)/libkf*be1lo.so
+endif
+ifeq "$(ENABLE_KF5)" "y"
+	mkdir -p debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program
+	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf5lo.so \
+		debian/tmp/pkg/libreoffice-kf5
+endif
+ifeq "$(ENABLE_KF6)" "y"
+	mkdir -p debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program
+	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf6lo.so \
+		debian/tmp/pkg/libreoffice-kf6
 endif
 endif
 

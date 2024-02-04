@@ -3,7 +3,7 @@ Architecture: %OOO_ARCHS%
 Depends: libreoffice-core (= ${binary:Version}),
         ${misc:Depends},
         ${shlibs:Depends}
-Recommends: libreoffice-kf5
+Recommends: libreoffice-kf@PLASMA_VERSION@
 Replaces: libreoffice-kde5 (<< 1:6.4.0~)
 Description: office productivity suite -- some Plasma integration
  LibreOffice is a full-featured office productivity suite that provides
