@@ -1,5 +1,5 @@
-libuno_cppu.so.3 libuno-cppu3 #MINVER#
-| libuno-cppu3 #MINVER#, libstdc++6 (>= 4.1.1)
+libuno_cppu.so.3 libuno-cppu3t64 #MINVER#
+| libuno-cppu3t64 #MINVER#, libstdc++6 (>= 4.1.1)
  (symver)UDK_3_0_0 1.4.0
  (symver)UDK_3.1 1.4.0
  (symver)UDK_3.2 1.4.0

@@ -1,23 +1,56 @@
-libreoffice (4:24.8.0~alpha0~git20240126-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~alpha0~git20240204-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
  -- Rene Engelhard <rene@debian.org>  Tue, 28 Nov 2023 21:07:51 +0100
 
-libreoffice (4:24.2.1~rc1~git20241127-1) UNRELEASED; urgency=medium
-
-  * debian/patches/lo-xlate-lang-hy.diff: make hy/Armenian known
+libreoffice (4:24.2.1~rc1~git20240204-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
   * debian/rules:
     - enable hy (Armenian) langpack
+    - (blindly) fix to actually make parallel build/packaging of kf5/(upcoming) kf6
+      work
+  * debian/rules, debian/control.plasma.in: conditionalize -kfX Recommends
 
  -- Rene Engelhard <rene@debian.org>  Fri, 26 Jan 2024 16:28:52 +0100
 
-libreoffice (4:24.2.0~rc3-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.0-4) UNRELEASED; urgency=medium
 
-  * New upstream release candidate
+  * debian/rules:
+    - error out on bookworm-backports if we detect t64 packages. Mention
+      needed revert 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 04 Feb 2024 14:17:21 +0100
+
+libreoffice (4:24.2.0-3) experimental; urgency=medium
+
+  * debian/rules:
+    - stop running debian/rules control in the clean target again; otherwise
+      we FTBFS due to control differences now on architectures where some stuff
+      is disabled (and be it test-only build-deps) 
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 03 Feb 2024 08:41:32 +0100
+
+libreoffice (4:24.2.0-2) experimental; urgency=medium
+
+  * debian/patches/sw-do-not-require-cui.diff: do not require cui in sw, from
+    upstream (closes: #1058653)
+
+  * debian/rules:
+    - don't create debian/control and debian/test/control but an intermediate
+      control.new
+    - run debian/rules control in the clean target again but don't directly
+      overwrite debian/control - diff -u against control.new and warn instead 
+  * debian/libuno*, debian/control.ure.in, debian/rules:
+    Rename libraries for 64-bit time_t transition.
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 30 Jan 2024 21:04:30 +0000
+
+libreoffice (4:24.2.0-1) unstable; urgency=medium
+
+  * LibreOffice 24.2.0 final release
 
   * debian/patches/fix-riscv64-bridge.diff: as name says; more riscv64 bridge
     fixes from https://gerrit.libreoffice.org/c/core/+/160970
@@ -27,8 +60,9 @@ libreoffice (4:24.2.0~rc3-1) UNRELEASED; urgency=medium
   * debian/rules:
     - re-enable Java on riscv64 
     - build with --disable-split-debug on riscv64
+    - stop running debian/rules control in the clean target; forbidden
 
- -- Rene Engelhard <rene@debian.org>  Fri, 26 Jan 2024 16:28:52 +0100
+ -- Rene Engelhard <rene@debian.org>  Sat, 27 Jan 2024 13:25:02 +0000
 
 libreoffice (4:24.2.0~rc2-2) unstable; urgency=medium
 
