@@ -5076,6 +5076,7 @@ Replaces: libreoffice-common (<< 4:7.6.0~beta1),
           libreoffice-report-builder (<< 4:7.6.0~beta1)
 Breaks: libreoffice-common (<< 4:7.6.0~beta1),
         libreoffice-report-builder (<< 4:7.6.0~beta1)
+Depends: ${misc:Depends}
 Description: UI data ("config") for the LibreOffice Report Builder
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
