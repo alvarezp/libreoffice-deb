@@ -627,8 +627,9 @@ endif
 # Java...
 # upstream says --source=1.8 / --target=1.8 so 1.8 is fine in runtime
 JAVA_RUNTIME_BASELINE=8
+JAVA_BRIDGE_BROKEN_ARCHS:=ppc64el s390x armhf
 ifeq "$(JDK)" "default"
-OOO_JAVA_ARCHS = $(filter-out ppc64el s390x armhf,$(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures)))
+OOO_JAVA_ARCHS = $(filter-out $(JAVA_BRIDGE_BROKEN_ARCHS),$(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures)))
 else
 OOO_JAVA_ARCHS = $(OOO_ARCHS)
 endif
@@ -1236,7 +1237,8 @@ ifeq "$(ENABLE_JAVA)" "y"
 	JAVA_HOME=/usr/lib/jvm/default-java
 	DEFAULT_JDK := $(call java_dependency, default-jdk)
 	# build-depend on 1.9 (upstream needs it anyway for module-info support)
-	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/') <!nojava>
+	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/' | sed -e 's/\]/ $(foreach i,$(JAVA_BRIDGE_BROKEN_ARCHS),!$(i))\]/') <!nojava>
+CONFIGURE_FLAGS += $(foreach i, $(SYSTEM_STUFF),--with-system-$(i))
   endif
   ifeq "$(JDK)" "openjdk"
 	BUILD_DEPS += , openjdk-$(JAVA_MAINVER)-jdk <!nojava>
