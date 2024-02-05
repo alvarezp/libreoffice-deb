@@ -8,6 +8,8 @@ libreoffice (4:24.2.1~rc1~git20240204-1) UNRELEASED; urgency=medium
       work
     - micro-optimization: don't build-depend on default-jdk for architectures
       where Java is disabled
+    - try building with -O2 on riscv64; the test bug is supposed to be fixed
+      and since the latest gcc-13/binutils -O2 also links
   * debian/rules, debian/control.plasma.in: conditionalize -kfX Recommends
 
  -- Rene Engelhard <rene@debian.org>  Fri, 26 Jan 2024 16:28:52 +0100

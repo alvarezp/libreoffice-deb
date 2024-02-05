@@ -844,10 +844,6 @@ ifeq "$(DEB_HOST_ARCH)" "i386"
   endif
 endif
 ifeq "$(DEB_HOST_ARCH)" "riscv64"
-  # see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1039906#26
-  ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	DEB_BUILD_OPTIONS += noopt
-  endif
   # see https://lists.debian.org/debian-riscv/2024/01/msg00018.html
   CONFIGURE_FLAGS += --disable-split-debug
 endif
