@@ -2605,12 +2605,12 @@ endif
 ifeq "$(ENABLE_KF5)" "y"
 	mkdir -p debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program
 	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf5lo.so \
-		debian/tmp/pkg/libreoffice-kf5
+		debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program
 endif
 ifeq "$(ENABLE_KF6)" "y"
 	mkdir -p debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program
 	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf6lo.so \
-		debian/tmp/pkg/libreoffice-kf6
+		debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program
 endif
 endif
 
