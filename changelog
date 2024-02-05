@@ -3,6 +3,8 @@ libreoffice (4:24.2.0-4) UNRELEASED; urgency=medium
   * debian/rules:
     - error out on bookworm-backports if we detect t64 packages. Mention
       needed revert 
+    - micro-optimization: don't build-depend on default-jdk for architectures
+      where Java is disabled
 
  -- Rene Engelhard <rene@debian.org>  Sun, 04 Feb 2024 14:17:21 +0100
 
