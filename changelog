@@ -1,6 +1,6 @@
-libreoffice (4:24.2.1~rc1~git20240204-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.1~rc1-1) experimental; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules:
     - enable hy (Armenian) langpack
@@ -12,7 +12,7 @@ libreoffice (4:24.2.1~rc1~git20240204-1) UNRELEASED; urgency=medium
       and since the latest gcc-13/binutils -O2 also links
   * debian/rules, debian/control.plasma.in: conditionalize -kfX Recommends
 
- -- Rene Engelhard <rene@debian.org>  Fri, 26 Jan 2024 16:28:52 +0100
+ -- Rene Engelhard <rene@debian.org>  Fri, 09 Feb 2024 17:01:49 +0100
 
 libreoffice (4:24.2.0-4) UNRELEASED; urgency=medium
 
