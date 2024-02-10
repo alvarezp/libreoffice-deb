@@ -13,7 +13,6 @@ libreoffice (4:24.2.1~rc1-1) experimental; urgency=medium
     - try building with -O2 on riscv64; the test bug is supposed to be fixed
       and since the latest gcc-13/binutils -O2 also links
   * debian/rules, debian/control.plasma.in: conditionalize -kfX Recommends
-  * debian/rules:
 
  -- Rene Engelhard <rene@debian.org>  Fri, 09 Feb 2024 17:01:49 +0100
 
