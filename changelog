@@ -4,25 +4,24 @@ libreoffice (4:24.8.0~alpha0~git20240204-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Tue, 28 Nov 2023 21:07:51 +0100
 
-libreoffice (4:24.2.1~rc1~git20240204-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.1~rc1-1) experimental; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules:
     - enable hy (Armenian) langpack
-    - (blindly) fix to actually make parallel build/packaging of kf5/(upcoming) kf6
-      work
-  * debian/rules, debian/control.plasma.in: conditionalize -kfX Recommends
-
- -- Rene Engelhard <rene@debian.org>  Fri, 26 Jan 2024 16:28:52 +0100
-
-libreoffice (4:24.2.0-4) UNRELEASED; urgency=medium
-
-  * debian/rules:
     - error out on bookworm-backports if we detect t64 packages. Mention
       needed revert 
+    - fix to actually make parallel build/packaging of kf5/(upcoming) kf6
+      work
+    - micro-optimization: don't build-depend on default-jdk for architectures
+      where Java is disabled
+    - try building with -O2 on riscv64; the test bug is supposed to be fixed
+      and since the latest gcc-13/binutils -O2 also links
+  * debian/rules, debian/control.plasma.in: conditionalize -kfX Recommends
+  * debian/rules:
 
- -- Rene Engelhard <rene@debian.org>  Sun, 04 Feb 2024 14:17:21 +0100
+ -- Rene Engelhard <rene@debian.org>  Fri, 09 Feb 2024 17:01:49 +0100
 
 libreoffice (4:24.2.0-3) experimental; urgency=medium
 

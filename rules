@@ -83,7 +83,7 @@ lo_sources_ver=$(shell grep AC_INIT $(SOURCE_TREE)/configure.ac | grep documentf
 # NOT in proper libreoffice-3-6 branch
 # use ./g checkout -b tag-libreoffice-3.6.2.1 libreoffice-3.6.2.1
 GIT_TAG=libreoffice-$(lo_sources_ver)
-GIT_BRANCH=libreoffice-24-2-0
+GIT_BRANCH=libreoffice-24-2-1
 endif
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 lo_sources_ver=$(shell cat $(CURDIR)/sources.ver | cut -d= -f2)
@@ -627,8 +627,9 @@ endif
 # Java...
 # upstream says --source=1.8 / --target=1.8 so 1.8 is fine in runtime
 JAVA_RUNTIME_BASELINE=8
+JAVA_BRIDGE_BROKEN_ARCHS:=ppc64el s390x armhf
 ifeq "$(JDK)" "default"
-OOO_JAVA_ARCHS = $(filter-out ppc64el s390x armhf,$(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures)))
+OOO_JAVA_ARCHS = $(filter-out $(JAVA_BRIDGE_BROKEN_ARCHS),$(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures)))
 else
 OOO_JAVA_ARCHS = $(OOO_ARCHS)
 endif
@@ -843,10 +844,6 @@ ifeq "$(DEB_HOST_ARCH)" "i386"
   endif
 endif
 ifeq "$(DEB_HOST_ARCH)" "riscv64"
-  # see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1039906#26
-  ifneq (noopt,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	DEB_BUILD_OPTIONS += noopt
-  endif
   # see https://lists.debian.org/debian-riscv/2024/01/msg00018.html
   CONFIGURE_FLAGS += --disable-split-debug
 endif
@@ -1236,7 +1233,8 @@ ifeq "$(ENABLE_JAVA)" "y"
 	JAVA_HOME=/usr/lib/jvm/default-java
 	DEFAULT_JDK := $(call java_dependency, default-jdk)
 	# build-depend on 1.9 (upstream needs it anyway for module-info support)
-	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/') <!nojava>
+	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/' | sed -e 's/\]/ $(foreach i,$(JAVA_BRIDGE_BROKEN_ARCHS),!$(i))\]/') <!nojava>
+CONFIGURE_FLAGS += $(foreach i, $(SYSTEM_STUFF),--with-system-$(i))
   endif
   ifeq "$(JDK)" "openjdk"
 	BUILD_DEPS += , openjdk-$(JAVA_MAINVER)-jdk <!nojava>
@@ -2605,12 +2603,12 @@ endif
 ifeq "$(ENABLE_KF5)" "y"
 	mkdir -p debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program
 	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf5lo.so \
-		debian/tmp/pkg/libreoffice-kf5
+		debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program
 endif
 ifeq "$(ENABLE_KF6)" "y"
 	mkdir -p debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program
 	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf6lo.so \
-		debian/tmp/pkg/libreoffice-kf6
+		debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program
 endif
 endif
 
