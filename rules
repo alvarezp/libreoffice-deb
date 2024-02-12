@@ -1231,7 +1231,7 @@ ifeq "$(ENABLE_JAVA)" "y"
 	JAVA_HOME=/usr/lib/jvm/default-java
 	DEFAULT_JDK := $(call java_dependency, default-jdk)
 	# build-depend on 1.9 (upstream needs it anyway for module-info support)
-	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/' | sed -e 's/\]/ $(foreach i,$(JAVA_BRIDGE_BROKEN_ARCHS),!$(i))\]/') <!nojava>
+	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/' | sed -e 's/\]/$(foreach i,$(JAVA_BRIDGE_BROKEN_ARCHS), !$(i))\]/') <!nojava>
   endif
   ifeq "$(JDK)" "openjdk"
 	BUILD_DEPS += , openjdk-$(JAVA_MAINVER)-jdk <!nojava>
