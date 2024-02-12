@@ -1233,7 +1233,7 @@ ifeq "$(ENABLE_JAVA)" "y"
 	JAVA_HOME=/usr/lib/jvm/default-java
 	DEFAULT_JDK := $(call java_dependency, default-jdk)
 	# build-depend on 1.9 (upstream needs it anyway for module-info support)
-	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/' | sed -e 's/\]/ $(foreach i,$(JAVA_BRIDGE_BROKEN_ARCHS),!$(i))\]/') <!nojava>
+	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/' | sed -e 's/\]/$(foreach i,$(JAVA_BRIDGE_BROKEN_ARCHS), !$(i))\]/') <!nojava>
   endif
   ifeq "$(JDK)" "openjdk"
 	BUILD_DEPS += , openjdk-$(JAVA_MAINVER)-jdk <!nojava>
@@ -2401,6 +2401,7 @@ endif
 	touch $@
 
 check:
+ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 ifneq (,$(filter $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
 	patch -p1 < $(CURDIR)/debian/tests/patches/disable-db-tests.diff
 endif
@@ -2541,6 +2542,7 @@ ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 	fi
     endif
   endif
+endif
 endif
 
 install: $(STAMP_DIR)/install-common $(STAMP_DIR)/install-arch $(STAMP_DIR)/install-indep
