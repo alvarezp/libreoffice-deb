@@ -237,7 +237,6 @@ DWZ_ARGS:=-L 100000000
 endif
 endif
 SYSTEM_STUFF += xmlsec
-USE_SYSTEMD=n
 SYSTEM_STUFF += zxcvbn
 
 ifeq ($(filter noinsttest,$(DEB_BUILD_PROFILES)),)
@@ -476,7 +475,8 @@ CONFIGURE_FLAGS+= \
 		--disable-fetch-external \
 		--without-fonts --enable-build-opensymbol \
 		--without-myspell-dicts \
-		--with-branding=$(CURDIR)/debian/branding
+		--with-branding=$(CURDIR)/debian/branding \
+		--without-coredumpctl
 
 ifeq "$(ENABLE_GUI)" "y"
 BUILD_DEPS += ,\
@@ -1094,9 +1094,6 @@ endif
   ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , locales$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , gdb$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    ifeq "$(USE_SYSTEMD)" "y"
-	BUILD_DEPS_ARCH += , systemd$(OOO_NO_CHECK_ARCHS) <!nocheck>, systemd-coredump$(OOO_NO_CHECK_ARCHS) (>= 248) <!nocheck>, jq$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    endif
 	BUILD_DEPS_ARCH += , fontconfig [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 ifeq ($(BOOKWORM_BACKPORT),y)
 	BUILD_DEPS_ARCH += , fonts-liberation2 [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
@@ -2159,9 +2156,6 @@ ifneq "$(ALLOW_CLANG)" "y"
 	perl -pi -e "s/(Build-Conflicts: .*)/\1,clang,/" debian/control.new
 else
 	perl -pi -e "s/(Build-Conflicts: .*)/\1,clang [$(filter-out $(OOO_CLANG_ARCHS),$(OOO_ARCHS))],/" debian/control.new
-endif
-ifeq "$(USE_SYSTEMD)" "n"
-	perl -pi -e "s/(Build-Conflicts: .*)/\1,systemd-coredump <!nocheck>,/" debian/control.new
 endif
 
 	$(PYTHON) debian/scripts/joinctrl.py < debian/control.new > debian/control.tmp
