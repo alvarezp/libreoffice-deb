@@ -1145,7 +1145,7 @@ endif
       # without the deterministic order patch the xmlsecurity_signing test fails. See
       # https://cgit.freedesktop.org/libreoffice/core/commit/external/cppunit/order.patch.0?id=2f2246d22e2a8ccbc1dc3e6f5243734a61edf270
       ifeq "$(ENABLE_LTO)" "y"
-        BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.15.1-4) [$(filter $(OOO_CHECK_ARCHS),$(OOO_64BIT_ARCHS))] <!nocheck>
+        BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.15.1-4) [$(filter $(OOO_CHECK_ARCHS),$(OOO_ARCHS))] <!nocheck>
       endif
     endif
     ifeq ($(MAKECMDGOALS),build-indep)
