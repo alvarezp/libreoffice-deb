@@ -8,7 +8,10 @@ libreoffice (4:24.2.3~rc1~git20240330-1) UNRELEASED; urgency=medium
       with Rules-Requires-Root: no "build{-*}" is not calld anymore itself
       (and install-common needs to depend on $(STAMP_DIR)/build-{arch,indep})
     - check for binary-indep instead of build-indep for arch-indep builds
+    - remove extra individual Suggests on -{hyphenation,spellcheck}-xy
   * debian/control.in: set Rules-Requires-Root: no
+  * debian/control.lang.in: add Suggests on -{hyphenation,spellcheck}-xy
+    unconditionally for all languages
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
