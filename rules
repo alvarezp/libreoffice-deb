@@ -2165,6 +2165,9 @@ endif
 	# match myspell-fi and libreoffice-soikko/-voikko
 	perl -pi -e 's/myspell-dictionary-fi/myspell-dictionary-fi | libreoffice-spellcheck-fi/' debian/control.new
 	perl -pi -e 's/hyphen-fi/hyphen-fi | libreoffice-hyphenation-fi/' debian/control.new
+	# similar for -l10n-tr and zemberek
+	perl -pi -e 's/myspell-dictionary-tr/myspell-dictionary-tr | libreoffice-spellcheck-tr/' debian/control.new
+	perl -pi -e 's/hyphen-tr/hyphen-tr | libreoffice-hyphenation-tr/' debian/control.new
 
 ifeq "$(USE_DBUS)" "y"
   ifeq "$(ENABLE_BLUETOOTH)" "y"

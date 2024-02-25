@@ -3895,8 +3895,8 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version})
 Provides: libreoffice-l10n (= ${help-l10n-virtual-version})
-Suggests: hunspell-dictionary-tr | myspell-dictionary-tr,
-          hyphen-tr,
+Suggests: hunspell-dictionary-tr | myspell-dictionary-tr | libreoffice-spellcheck-tr,
+          hyphen-tr | libreoffice-hyphenation-tr,
           libreoffice-grammarcheck-tr,
           libreoffice-help-tr,
           mythes-tr
