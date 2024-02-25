@@ -2168,6 +2168,9 @@ endif
 	# similar for -l10n-tr and zemberek
 	perl -pi -e 's/myspell-dictionary-tr/myspell-dictionary-tr | libreoffice-spellcheck-tr/' debian/control.new
 	perl -pi -e 's/hyphen-tr/hyphen-tr | libreoffice-hyphenation-tr/' debian/control.new
+	# and for -l10n-fr and grammalecte
+	perl -pi -e 's/myspell-dictionary-fr/myspell-dictionary-fr | libreoffice-spellcheck-fr/' debian/control.new
+	perl -pi -e 's/hyphen-fr/hyphen-fr | libreoffice-hyphenation-fr/' debian/control.new
 
 ifeq "$(USE_DBUS)" "y"
   ifeq "$(ENABLE_BLUETOOTH)" "y"

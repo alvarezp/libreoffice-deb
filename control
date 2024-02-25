@@ -2159,8 +2159,8 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version})
 Provides: libreoffice-l10n (= ${help-l10n-virtual-version})
-Suggests: hunspell-dictionary-fr | myspell-dictionary-fr,
-          hyphen-fr,
+Suggests: hunspell-dictionary-fr | myspell-dictionary-fr | libreoffice-spellcheck-fr,
+          hyphen-fr | libreoffice-hyphenation-fr,
           libreoffice-grammarcheck-fr,
           libreoffice-help-fr,
           mythes-fr
