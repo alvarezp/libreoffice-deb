@@ -237,7 +237,6 @@ DWZ_ARGS:=-L 100000000
 endif
 endif
 SYSTEM_STUFF += xmlsec
-USE_SYSTEMD=n
 SYSTEM_STUFF += zxcvbn
 
 ifeq ($(filter noinsttest,$(DEB_BUILD_PROFILES)),)
@@ -476,7 +475,8 @@ CONFIGURE_FLAGS+= \
 		--disable-fetch-external \
 		--without-fonts --enable-build-opensymbol \
 		--without-myspell-dicts \
-		--with-branding=$(CURDIR)/debian/branding
+		--with-branding=$(CURDIR)/debian/branding \
+		--without-coredumpctl
 
 ifeq "$(ENABLE_GUI)" "y"
 BUILD_DEPS += ,\
@@ -1094,9 +1094,6 @@ endif
   ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , locales$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , gdb$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    ifeq "$(USE_SYSTEMD)" "y"
-	BUILD_DEPS_ARCH += , systemd$(OOO_NO_CHECK_ARCHS) <!nocheck>, systemd-coredump$(OOO_NO_CHECK_ARCHS) (>= 248) <!nocheck>, jq$(OOO_NO_CHECK_ARCHS) <!nocheck>
-    endif
 	BUILD_DEPS_ARCH += , fontconfig [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 ifeq ($(BOOKWORM_BACKPORT),y)
 	BUILD_DEPS_ARCH += , fonts-liberation2 [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
@@ -1136,7 +1133,7 @@ endif
 	BUILD_DEPS_ARCH += , hunspell-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , hyphen-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	# for test_tdf159102_smart_justify_with_automatic_hyphenation.
-	# The test itself claims we must not depend on the installed hyphenation patterns
+	# The test itself claims the test must not depend on the installed hyphenation patterns
 	# but installing this (which is suggested by writer as missing even after
 	# opening the .fodt) fixes it
 	BUILD_DEPS_ARCH += , hyphen-es$(OOO_NO_CHECK_ARCHS) <!nocheck>
@@ -1148,7 +1145,7 @@ endif
       # without the deterministic order patch the xmlsecurity_signing test fails. See
       # https://cgit.freedesktop.org/libreoffice/core/commit/external/cppunit/order.patch.0?id=2f2246d22e2a8ccbc1dc3e6f5243734a61edf270
       ifeq "$(ENABLE_LTO)" "y"
-        BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.15.1-4) [$(filter $(OOO_CHECK_ARCHS),$(OOO_64BIT_ARCHS))] <!nocheck>
+        BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.15.1-4) [$(filter $(OOO_CHECK_ARCHS),$(OOO_ARCHS))] <!nocheck>
       endif
     endif
     ifeq ($(MAKECMDGOALS),build-indep)
@@ -1233,8 +1230,7 @@ ifeq "$(ENABLE_JAVA)" "y"
 	JAVA_HOME=/usr/lib/jvm/default-java
 	DEFAULT_JDK := $(call java_dependency, default-jdk)
 	# build-depend on 1.9 (upstream needs it anyway for module-info support)
-	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/' | sed -e 's/\]/ $(foreach i,$(JAVA_BRIDGE_BROKEN_ARCHS),!$(i))\]/') <!nojava>
-CONFIGURE_FLAGS += $(foreach i, $(SYSTEM_STUFF),--with-system-$(i))
+	BUILD_DEPS += , $(shell echo $(DEFAULT_JDK) | sed -e 's/default-jdk/default-jdk (>= 2:1.17)/' | sed -e 's/\]/$(foreach i,$(JAVA_BRIDGE_BROKEN_ARCHS), !$(i))\]/') <!nojava>
   endif
   ifeq "$(JDK)" "openjdk"
 	BUILD_DEPS += , openjdk-$(JAVA_MAINVER)-jdk <!nojava>
@@ -2161,9 +2157,6 @@ ifneq "$(ALLOW_CLANG)" "y"
 else
 	perl -pi -e "s/(Build-Conflicts: .*)/\1,clang [$(filter-out $(OOO_CLANG_ARCHS),$(OOO_ARCHS))],/" debian/control.new
 endif
-ifeq "$(USE_SYSTEMD)" "n"
-	perl -pi -e "s/(Build-Conflicts: .*)/\1,systemd-coredump <!nocheck>,/" debian/control.new
-endif
 
 	$(PYTHON) debian/scripts/joinctrl.py < debian/control.new > debian/control.tmp
 	mv debian/control.tmp debian/control.new
@@ -2172,6 +2165,12 @@ endif
 	# match myspell-fi and libreoffice-soikko/-voikko
 	perl -pi -e 's/myspell-dictionary-fi/myspell-dictionary-fi | libreoffice-spellcheck-fi/' debian/control.new
 	perl -pi -e 's/hyphen-fi/hyphen-fi | libreoffice-hyphenation-fi/' debian/control.new
+	# similar for -l10n-tr and zemberek
+	perl -pi -e 's/myspell-dictionary-tr/myspell-dictionary-tr | libreoffice-spellcheck-tr/' debian/control.new
+	perl -pi -e 's/hyphen-tr/hyphen-tr | libreoffice-hyphenation-tr/' debian/control.new
+	# and for -l10n-fr and grammalecte
+	perl -pi -e 's/myspell-dictionary-fr/myspell-dictionary-fr | libreoffice-spellcheck-fr/' debian/control.new
+	perl -pi -e 's/hyphen-fr/hyphen-fr | libreoffice-hyphenation-fr/' debian/control.new
 
 ifeq "$(USE_DBUS)" "y"
   ifeq "$(ENABLE_BLUETOOTH)" "y"
@@ -2402,6 +2401,7 @@ endif
 	touch $@
 
 check:
+ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 ifneq (,$(filter $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
 	patch -p1 < $(CURDIR)/debian/tests/patches/disable-db-tests.diff
 endif
@@ -2542,6 +2542,7 @@ ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 	fi
     endif
   endif
+endif
 endif
 
 install: $(STAMP_DIR)/install-common $(STAMP_DIR)/install-arch $(STAMP_DIR)/install-indep

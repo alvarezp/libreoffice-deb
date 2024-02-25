@@ -4,6 +4,20 @@ libreoffice (4:24.8.0~alpha0~git20240223-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Sun, 11 Feb 2024 11:45:13 +0000
 
+libreoffice (4:24.2.1~rc2-2) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - also suggest libreoffice-{hyphenation,spellcheck}-tr in -l10n-tr
+      and libreoffice-{hyphenation,spellcheck}-fr in -l10n-fr (as for fi)
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 25 Feb 2024 20:13:40 +0000
+
+libreoffice (4:24.2.1~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 25 Feb 2024 16:22:37 +0100
+
 libreoffice (4:24.2.1~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
@@ -19,7 +33,6 @@ libreoffice (4:24.2.1~rc1-1) experimental; urgency=medium
     - try building with -O2 on riscv64; the test bug is supposed to be fixed
       and since the latest gcc-13/binutils -O2 also links
   * debian/rules, debian/control.plasma.in: conditionalize -kfX Recommends
-  * debian/rules:
 
  -- Rene Engelhard <rene@debian.org>  Fri, 09 Feb 2024 17:01:49 +0100
 

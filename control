@@ -218,7 +218,7 @@ Build-Depends-Arch: at-spi2-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd6
                     hyphen-es [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     imagemagick [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     libatspi2.0-dev [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
-                    libcppunit-dev (>= 1.15.1-4) [amd64 arm64] <!nocheck>,
+                    libcppunit-dev (>= 1.15.1-4) [amd64 arm64 armhf] <!nocheck>,
                     libcppunit-dev <!nocheck>,
                     libnumbertext-data (>= 1.0.11) <!nocheck>,
                     locales [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
@@ -247,8 +247,7 @@ Build-Conflicts: amd-libopencl1,
                  fonts-opensymbol <!nocheck>,
                  nvidia-glx-dev,
                  nvidia-glx-legacy-dev,
-                 nvidia-libopencl1,
-                 systemd-coredump <!nocheck>
+                 nvidia-libopencl1
 Standards-Version: 4.0.1
 Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-24.8
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
@@ -2160,8 +2159,8 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version})
 Provides: libreoffice-l10n (= ${help-l10n-virtual-version})
-Suggests: hunspell-dictionary-fr | myspell-dictionary-fr,
-          hyphen-fr,
+Suggests: hunspell-dictionary-fr | myspell-dictionary-fr | libreoffice-spellcheck-fr,
+          hyphen-fr | libreoffice-hyphenation-fr,
           libreoffice-grammarcheck-fr,
           libreoffice-help-fr,
           mythes-fr
@@ -3896,8 +3895,8 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version})
 Provides: libreoffice-l10n (= ${help-l10n-virtual-version})
-Suggests: hunspell-dictionary-tr | myspell-dictionary-tr,
-          hyphen-tr,
+Suggests: hunspell-dictionary-tr | myspell-dictionary-tr | libreoffice-spellcheck-tr,
+          hyphen-tr | libreoffice-hyphenation-tr,
           libreoffice-grammarcheck-tr,
           libreoffice-help-tr,
           mythes-tr
