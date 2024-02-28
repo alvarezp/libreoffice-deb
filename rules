@@ -538,6 +538,8 @@ RTL_ARCH := $(shell grep RTL_ARCH debian/vars.$(DEB_HOST_ARCH) | cut -d"=" -f2)
 
 OOO_64BIT_ARCHS = $(filter alpha amd64 arm64 ia64 kfreebsd-amd64 loong64 mips64 mips64el ppc64 ppc64el riscv64 s390x sparc64, $(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_64BIT_ARCHS))
+OOO_32BIT_ARCHS = $(filter-out $(OOO_64BIT_ARCHS),$(OOO_ARCHS))
+$(eval $(call gen_no_archs,OOO_32BIT_ARCHS))
 OOO_BE_ARCHS = $(filter hppa m68k mips mips64 powerpc powerpcspe ppc64 s390 s390x sparc sparc64,$(OOO_ARCHS))
 $(eval $(call gen_no_archs,OOO_BE_ARCHS))
 OOO_LE_ARCHS = $(filter-out $(OOO_BE_ARCHS),$(OOO_ARCHS))
@@ -722,6 +724,8 @@ ifeq "$(BOOKWORM_BACKPORT)" "y"
   ifneq (,$(shell grep t64 debian/control))
 $(error Revert t64 rename 6f794ba67d113395d7662c2ebf5f67b37eddff09 for bookworm-backports!)
   endif
+else
+  BUILD_DEPS += , dpkg-dev (>= 1.22.5) [$(filter-out i386,$(OOO_32BIT_ARCHS))]
 endif
 
 CONFIGURE_FLAGS += $(foreach i, $(SYSTEM_STUFF),--with-system-$(i))
@@ -968,6 +972,9 @@ else
 endif
 ifneq (,$(filter xmlsec, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libxmlsec1-dev (>= 1.2.35)
+  ifneq ($(BOOKWORM_BACKPORT),y)
+	BUILD_DEPS += , libxmlsec1-dev (>= 1.2.39-4) [$(filter $(OOO_CHECK_FATAL_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+  endif
 endif
 ifneq (,$(filter expat, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libexpat1-dev
