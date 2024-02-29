@@ -973,7 +973,7 @@ endif
 ifneq (,$(filter xmlsec, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libxmlsec1-dev (>= 1.2.35)
   ifneq ($(BOOKWORM_BACKPORT),y)
-	BUILD_DEPS += , libxmlsec1-dev (>= 1.2.39-4) [$(filter $(OOO_CHECK_FATAL_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+	BUILD_DEPS += , libxmlsec1-dev (>= 1.2.39-5) [$(filter $(OOO_CHECK_FATAL_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
   endif
 endif
 ifneq (,$(filter expat, $(SYSTEM_STUFF)))
