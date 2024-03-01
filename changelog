@@ -12,7 +12,7 @@ libreoffice (4:24.2.1-1) unstable; urgency=medium
       upstream makefile does -Os anyways
     - add some more safety nets for t64:
       - Build-Depend on dpkg-dev (>= 1.22.5) on affected archs
-      - Build-Depend on libxmlsec1-dev (>= 1.2.39-4) on affected archs
+      - Build-Depend on libxmlsec1-dev (>= 1.2.39-5) on affected archs
 
  -- Rene Engelhard <rene@debian.org>  Wed, 28 Feb 2024 18:06:52 +0100
 
