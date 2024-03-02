@@ -28,7 +28,7 @@ index 06398bfa99a7..06835ae884c4 100644
 +            fi
          fi
      else
-         AC_MSG_ERROR([Java not found. You need at least JDK 17])
+         AC_MSG_ERROR([Java not found. You need at least JDK 8])
 @@ -7841,6 +7849,7 @@ else
          JAVAIFLAGS=$JAVAIFLAGS_FOR_BUILD
      fi
