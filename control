@@ -62,7 +62,6 @@ Build-Depends: autoconf,
                libdragonbox-dev,
                libe-book-dev (<< 0.2~),
                libe-book-dev (>= 0.1),
-               libebook1.2-dev,
                libeot-dev,
                libepoxy-dev,
                libepubgen-dev (<< 0.2~),
@@ -5390,23 +5389,6 @@ Description: PostgreSQL SDBC driver for LibreOffice
  The PostgreSQL SDBC Driver allows one to use the PostgreSQL database from
  LibreOffice without any wrapper layer such as ODBC or JDBC.
 Homepage: http://wiki.documentfoundation.org/PostgreSQL-SDBC
-
-Package: libreoffice-evolution
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
-Section: gnome
-Depends: libreoffice-base,
-         libreoffice-common (>= 1:7.0.0~alpha~),
-         libreoffice-core (= ${binary:Version}),
-         ${libebook-dep},
-         ${misc:Depends},
-         ${shlibs:Depends}
-Recommends: evolution
-Description: office productivity suite -- Evolution addressbook support
- LibreOffice is a full-featured office productivity suite that provides
- a near drop-in replacement for Microsoft(R) Office.
- .
- This package allows LibreOffice to access Evolution address books.
- You need to install evolution separately.
 
 Package: libreoffice-subsequentcheckbase
 Section: libs
