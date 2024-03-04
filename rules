@@ -1585,7 +1585,7 @@ endif
 
 ifeq "$(ENABLE_EVO2)" "n"
 	CONFIGURE_FLAGS += --disable-evolution2
-	DEBHELPER_OPTIONS += -Nlibreoffice-evolution
+	#DEBHELPER_OPTIONS += -Nlibreoffice-evolution
 else
 	CONFIGURE_FLAGS += --enable-evolution2
 	BUILD_DEPS += , libebook1.2-dev
