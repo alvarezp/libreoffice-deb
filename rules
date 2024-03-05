@@ -1287,7 +1287,7 @@ export JAVA_HOME
 	CONFIGURE_FLAGS_INDEP += --enable-ext-nlpsolver
   endif
 	OOO_OFFICEBEAN_DEP = libofficebean-java
-	BUILD_DEPS += , javahelper $(JAVAHELPER_MIN_VERSION) <!nojava>
+	BUILD_DEPS += , javahelper $(JAVAHELPER_MIN_VERSION)$(OOO_NO_JAVA_ARCHS) <!nojava>
 else
 	CONFIGURE_FLAGS += --without-java
 	DEBHELPER_OPTIONS += -Nlibofficebean-java -Nlibreoffice-java-common -Nlibreoffice-script-provider-bsh -Nlibreoffice-script-provider-js -Nlibreoffice-subsequentcheckbase -Nlibunoloader-java -Nliblibreoffice-java -Nlibreoffice-sdbc-hsqldb -Nure-java
