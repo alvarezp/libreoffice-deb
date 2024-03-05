@@ -2948,6 +2948,8 @@ ifeq "$(ENABLE_EVO2)" "y"
 	mkdir -p $(PKGDIR)-evolution/$(OODIR)/share/registry
 	mv $(PKGDIR)-common/$(OODIR)/presets/database/evolocal.odb \
 		$(PKGDIR)-evolution/$(OODIR)/presets/database
+else
+	rm -f $(PKGDIR)-common/$(OODIR)/presets/database/evolocal.odb
 endif
 
 ifeq "$(PACKAGE_BASE)" "y"
