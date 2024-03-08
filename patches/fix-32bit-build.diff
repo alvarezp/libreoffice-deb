@@ -1,0 +1,54 @@
+From 0f5dfaebd61b9cabbe9762865563c2296ebb0112 Mon Sep 17 00:00:00 2001
+From: Stephan Bergmann <stephan.bergmann@allotropia.de>
+Date: Fri, 8 Mar 2024 08:38:44 +0100
+Subject: [PATCH] Blind fix for Linux 32-bit builds
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+...which, according to
+<https://lists.freedesktop.org/archives/libreoffice/2024-March/091666.html> "32
+bit build failure (smb, narrowing)", started to fail with
+
+> /<<PKGBUILDDIR>>/sal/osl/unx/file.cxx: In function ‘void osl_file_adjustLockFlags(const rtl::OString&, int*, sal_uInt32*)’:
+> /<<PKGBUILDDIR>>/sal/osl/unx/file.cxx:71:26: error: narrowing conversion of ‘4283649346’ from ‘unsigned int’ to ‘int’ [-Wnarrowing]
+>     71 | #define CIFS_SUPER_MAGIC 0xFF534D42
+>        |                          ^~~~~~~~~~
+> /<<PKGBUILDDIR>>/sal/osl/unx/file.cxx:795:14: note: in expansion of macro ‘CIFS_SUPER_MAGIC’
+>    795 |         case CIFS_SUPER_MAGIC:
+>        |              ^~~~~~~~~~~~~~~~
+
+etc.  My Fedora 39 "Linux man-pages 6.05" statfs(2) man page explains about the
+struct statfs f_type field of __fsword_t type:  "The __fsword_t type used for
+various fields in the statfs structure definition is a glibc internal type, not
+intended for public use.  This leaves the programmer in a bit of a conundrum
+when trying to copy or compare these fields to local variables in a program.
+Using unsigned int for such variables suffices on most systems."  But the
+underlying __FSWORD_T_TYPE looks like it is actually defined as a signed type in
+/usr/include/bits/typesizes.h.
+
+Change-Id: Ida3ae84031c4e48b0d6e69d76b66b4e4facfa1ae
+---
+ sal/osl/unx/file.cxx | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/sal/osl/unx/file.cxx b/sal/osl/unx/file.cxx
+index 03d685a997e9..5c4069cae2de 100644
+--- a/sal/osl/unx/file.cxx
++++ b/sal/osl/unx/file.cxx
+@@ -67,9 +67,9 @@
+ #ifdef LINUX
+ #include <sys/vfs.h>
+ // As documented by the kernel
+-#define SMB_SUPER_MAGIC  0x517B
+-#define CIFS_SUPER_MAGIC 0xFF534D42
+-#define SMB2_SUPER_MAGIC 0xFE534D42
++#define SMB_SUPER_MAGIC  static_cast<__fsword_t>(0x517B)
++#define CIFS_SUPER_MAGIC static_cast<__fsword_t>(0xFF534D42)
++#define SMB2_SUPER_MAGIC static_cast<__fsword_t>(0xFE534D42)
+ #endif
+ 
+ namespace {
+-- 
+2.39.2
+
