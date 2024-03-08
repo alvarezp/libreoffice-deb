@@ -46,3 +46,4 @@ moreIconsDialog-accesses-internet.diff
 do-not-abort-on-NON_APPLICATION_FONT_USE.diff
 we-dont-have-the-needed-fonts.diff
 adapt-for-new-carlito.diff
+pdfium-ports.diff
