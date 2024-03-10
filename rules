@@ -1092,7 +1092,7 @@ endif
 	BUILD_DEPS += , $(PYTHON)
 ifeq "$(ENABLE_PYTHON)" "y"
 	BUILD_DEPS += , $(PYTHON)-dev <!nopython>
-	BUILD_DEPS += , $(PYTHON)-distutils <!nopython>
+	BUILD_DEPS += , $(PYTHON)-setuptools <!nopython>
 	BUILD_DEPS += , dh-python <!nopython>
   ifeq "$(RUN_MAKE_CHECK)" "y"
     ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
