@@ -1,5 +1,8 @@
 libreoffice (4:24.2.2~rc1-3) UNRELEASED; urgency=medium
 
+  * debian/patches/autoconf-2.72.diff: fix build with autoconf 2.72
+    on 32bit archs (from master)
+
   * debian/rules: build-depend on python3-setuptools instead of
     python3-distutils (closes: #1065893) 
 

@@ -50,3 +50,4 @@ fix-system-abseil-build.diff
 fix-riscv64-bridge.diff
 pdfium-ports.diff
 fix-32bit-build.diff
+autoconf-2.72.diff
