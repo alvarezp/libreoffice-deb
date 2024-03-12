@@ -1086,13 +1086,13 @@ ifeq "$(ENABLE_PYTHON)" "y"
 PYMAJOR:=$(shell $(PYTHON) -c "import sys; print (sys.version_info[0])")
 PYMINOR:=$(shell $(PYTHON) -c "import sys; print (sys.version_info[1])")
 PYMINORPLUS1:=$(shell $(PYTHON) -c "import sys; print (sys.version_info[1]+1)")
-PYTHON_SITE:=debian/python3-uno/$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
+PYTHON_SITE:=$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
 endif
 
 	BUILD_DEPS += , $(PYTHON)
 ifeq "$(ENABLE_PYTHON)" "y"
 	BUILD_DEPS += , $(PYTHON)-dev <!nopython>
-	BUILD_DEPS += , $(PYTHON)-distutils <!nopython>
+	BUILD_DEPS += , $(PYTHON)-setuptools <!nopython>
 	BUILD_DEPS += , dh-python <!nopython>
   ifeq "$(RUN_MAKE_CHECK)" "y"
     ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
@@ -2942,9 +2942,9 @@ else
 endif
 
 ifeq "$(PACKAGE_BASE)" "y"
-	mkdir -p debian/python3-access2base/$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
+	mkdir -p debian/python3-access2base/$(PYTHON_SITE) }
 	mv $(PKGDIR)-common/$(OODIR)/program/access2base.py \
-		debian/python3-access2base/$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
+		debian/python3-access2base/$(PYTHON_SITE)
 else
 	rm -rf $(PKGDIR)-common/$(OODIR)/share/basic/Access2Base
 	t=`mktemp -q`; grep -v Access2Base $(PKGDIR)-common/$(OODIR)/share/basic/dialog.xlc > \
@@ -2955,9 +2955,9 @@ else
 endif
 
 	# ScriptForge
-	mkdir -p debian/python3-scriptforge/$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
+	mkdir -p debian/python3-scriptforge/$(PYTHON_SITE) \
 	mv $(PKGDIR)-common/$(OODIR)/program/scriptforge.py \
-		debian/python3-scriptforge/$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
+		debian/python3-scriptforge/$(PYTHON_SITE)
 
 ifeq "$(PACKAGE_SDK)" "y"
 	# move gengal stuff into -dev-gui
@@ -3343,16 +3343,16 @@ endif
 
 ifeq "$(ENABLE_PYTHON)" "y"
 	# PyUNO packaging
-	install -d $(PYTHON_SITE)
+	install -d debian/python3-uno/$(PYTHON_SITE)
 	# prepend stuff so that it works when the module is not in LOs
 	# directories but in $(PYTHON_SITE). Can't be a patch (anymore)
 	# as otherwise the python-based unittests fail miserably.
-	echo "import sys, os" > $(PYTHON_SITE)/uno.py
-	echo "sys.path.append('/$(OODIR)/program')" >> $(PYTHON_SITE)/uno.py
-	echo "os.putenv('URE_BOOTSTRAP', 'vnd.sun.star.pathname:/$(OODIR)/program/fundamentalrc')" >> $(PYTHON_SITE)/uno.py
-	cat debian/python3-uno/$(OODIR)/program/uno.py >> $(PYTHON_SITE)/uno.py
+	echo "import sys, os" > debian/python3-uno/$(PYTHON_SITE)/uno.py
+	echo "sys.path.append('/$(OODIR)/program')" >> debian/python3-uno/$(PYTHON_SITE)/uno.py
+	echo "os.putenv('URE_BOOTSTRAP', 'vnd.sun.star.pathname:/$(OODIR)/program/fundamentalrc')" >> debian/python3-uno/$(PYTHON_SITE)/uno.py
+	cat debian/python3-uno/$(OODIR)/program/uno.py >> debian/python3-uno/$(PYTHON_SITE)/uno.py
 	rm -f debian/python3-uno/$(OODIR)/program/uno.py
-	mv debian/python3-uno/$(OODIR)/program/unohelper.py $(PYTHON_SITE)
+	mv debian/python3-uno/$(OODIR)/program/unohelper.py debian/python3-uno/$(PYTHON_SITE)
 	touch debian/python3-uno/$(OODIR)/program/pythonloader.unorc
 	chmod u+w debian/python3-uno/$(OODIR)/program/pythonloader.unorc
 	( echo 'PYTHONHOME=file:///usr/lib/python$(PYMAJOR).$(PYMINOR)' ;\
