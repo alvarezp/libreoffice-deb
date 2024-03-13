@@ -6,7 +6,7 @@ libreoffice (4:24.2.2~rc1-3) UNRELEASED; urgency=medium
   * debian/rules: build-depend on python3-setuptools instead of
     python3-distutils (closes: #1065893) 
 
- -- Rene Engelhard <rene@debian.org>  Sun, 10 Mar 2024 19:57:14 +0100
+ -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
 libreoffice (4:24.2.2~rc1-2) experimental; urgency=medium
 
