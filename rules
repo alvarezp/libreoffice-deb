@@ -2953,7 +2953,7 @@ else
 endif
 
 ifeq "$(PACKAGE_BASE)" "y"
-	mkdir -p debian/python3-access2base/$(PYTHON_SITE) }
+	mkdir -p debian/python3-access2base/$(PYTHON_SITE)
 	mv $(PKGDIR)-common/$(OODIR)/program/access2base.py \
 		debian/python3-access2base/$(PYTHON_SITE)
 else
@@ -2966,7 +2966,7 @@ else
 endif
 
 	# ScriptForge
-	mkdir -p debian/python3-scriptforge/$(PYTHON_SITE) \
+	mkdir -p debian/python3-scriptforge/$(PYTHON_SITE)
 	mv $(PKGDIR)-common/$(OODIR)/program/scriptforge.py \
 		debian/python3-scriptforge/$(PYTHON_SITE)
 
