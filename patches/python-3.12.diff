@@ -1,0 +1,120 @@
+From 7a561440acd01949e9b7b4efef9062ce05ce5d64 Mon Sep 17 00:00:00 2001
+From: Justin Luth <jluth@mail.com>
+Date: Wed, 13 Mar 2024 08:38:40 -0400
+Subject: allow build with python 3.12.0: initialize new tp_watched
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This fixes the build failure after I updated Ubuntu 24.04 (alpha),
+which upgraded python 3.11.7 to python 3.12.0, causing the error:
+
+libreoffice/pyuno/source/module/pyuno_callable.cxx:249:1:
+error: missing initializer for member ‘_typeobject::tp_watched’
+[-Werror=missing-field-initializers]
+...
+
+I gleaned this information from a July 2023 commit for
+https://github.com/xbmc/xbmc/issues/23503
+
+tp_watched was added in upstream commit python/cpython@82ccbf6
+https://github.com/python/cpython/commit/82ccbf69a842db25d8117f1c41b47aa5b4ed96ab
+
+This change first appeared in Python v3.12.0a1
+
+Change-Id: If82ff1eb47d66d2669d90d6e00e0feff3c55b5ca
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/164775
+Tested-by: Jenkins
+Reviewed-by: Justin Luth <jluth@mail.com>
+Reviewed-by: Stephan Bergmann <stephan.bergmann@allotropia.de>
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/164785
+---
+ pyuno/source/module/pyuno.cxx          | 3 +++
+ pyuno/source/module/pyuno_callable.cxx | 3 +++
+ pyuno/source/module/pyuno_iterator.cxx | 6 ++++++
+ pyuno/source/module/pyuno_runtime.cxx  | 3 +++
+ pyuno/source/module/pyuno_struct.cxx   | 3 +++
+ 5 files changed, 18 insertions(+)
+
+diff --git a/pyuno/source/module/pyuno.cxx b/pyuno/source/module/pyuno.cxx
+index bd4904d5f729..a589c72ba3bf 100644
+--- a/pyuno/source/module/pyuno.cxx
++++ b/pyuno/source/module/pyuno.cxx
+@@ -1667,6 +1667,9 @@ static PyTypeObject PyUNOType =
+ #pragma clang diagnostic pop
+ #endif
+ #endif
++#if PY_VERSION_HEX >= 0x030C00A1
++    , 0 // tp_watched
++#endif
+ #endif
+ #endif
+ };
+diff --git a/pyuno/source/module/pyuno_callable.cxx b/pyuno/source/module/pyuno_callable.cxx
+index f22de316b7de..8f19fc8eb654 100644
+--- a/pyuno/source/module/pyuno_callable.cxx
++++ b/pyuno/source/module/pyuno_callable.cxx
+@@ -244,6 +244,9 @@ static PyTypeObject PyUNO_callable_Type =
+ #pragma clang diagnostic pop
+ #endif
+ #endif
++#if PY_VERSION_HEX >= 0x030C00A1
++    , 0 // tp_watched
++#endif
+ #endif
+ #endif
+ };
+diff --git a/pyuno/source/module/pyuno_iterator.cxx b/pyuno/source/module/pyuno_iterator.cxx
+index 134f318a1017..2fc70a32fcff 100644
+--- a/pyuno/source/module/pyuno_iterator.cxx
++++ b/pyuno/source/module/pyuno_iterator.cxx
+@@ -177,6 +177,9 @@ static PyTypeObject PyUNO_iterator_Type =
+ #pragma clang diagnostic pop
+ #endif
+ #endif
++#if PY_VERSION_HEX >= 0x030C00A1
++    , 0 // tp_watched
++#endif
+ #endif
+ #endif
+ };
+@@ -323,6 +326,9 @@ static PyTypeObject PyUNO_list_iterator_Type =
+ #pragma clang diagnostic pop
+ #endif
+ #endif
++#if PY_VERSION_HEX >= 0x030C00A1
++    , 0 // tp_watched
++#endif
+ #endif
+ #endif
+ };
+diff --git a/pyuno/source/module/pyuno_runtime.cxx b/pyuno/source/module/pyuno_runtime.cxx
+index cb95e5a46dc1..91e971fdd582 100644
+--- a/pyuno/source/module/pyuno_runtime.cxx
++++ b/pyuno/source/module/pyuno_runtime.cxx
+@@ -139,6 +139,9 @@ static PyTypeObject RuntimeImpl_Type =
+ #pragma clang diagnostic pop
+ #endif
+ #endif
++#if PY_VERSION_HEX >= 0x030C00A1
++    , 0 // tp_watched
++#endif
+ #endif
+ #endif
+ };
+diff --git a/pyuno/source/module/pyuno_struct.cxx b/pyuno/source/module/pyuno_struct.cxx
+index c8fd7e987905..364f2776011a 100644
+--- a/pyuno/source/module/pyuno_struct.cxx
++++ b/pyuno/source/module/pyuno_struct.cxx
+@@ -354,6 +354,9 @@ static PyTypeObject PyUNOStructType =
+ #pragma clang diagnostic pop
+ #endif
+ #endif
++#if PY_VERSION_HEX >= 0x030C00A1
++    , 0 // tp_watched
++#endif
+ #endif
+ #endif
+ };
+-- 
+cgit v1.2.3

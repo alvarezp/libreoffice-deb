@@ -51,3 +51,4 @@ fix-riscv64-bridge.diff
 pdfium-ports.diff
 fix-32bit-build.diff
 autoconf-2.72.diff
+python-3.12.diff
