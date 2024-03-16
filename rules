@@ -2958,6 +2958,8 @@ endif
 	mkdir -p debian/python3-scriptforge/$(PYTHON_SITE)
 	mv $(PKGDIR)-common/$(OODIR)/program/scriptforge.py \
 		debian/python3-scriptforge/$(PYTHON_SITE)
+	mv $(PKGDIR)-common/$(OODIR)/program/scriptforge.pyi \
+		debian/python3-scriptforge/$(PYTHON_SITE)
 
 ifeq "$(PACKAGE_SDK)" "y"
 	# move gengal stuff into -dev-gui
