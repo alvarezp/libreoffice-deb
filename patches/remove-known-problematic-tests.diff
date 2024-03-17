@@ -1,0 +1,82 @@
+From 7547d290df422629235674a54181274363359f51 Mon Sep 17 00:00:00 2001
+From: Stephan Bergmann <stephan.bergmann@allotropia.de>
+Date: Tue, 12 Mar 2024 15:14:52 +0100
+Subject: Remove known-problematic tests
+
+For unclear reasons:
+
+[...]
+
+2  With (1) out of the way, UITest_writer_tests7 kept failing with
+
+> ======================================================================
+> ERROR: test_tdf150443 (tdf150443.tdf150443)
+> ----------------------------------------------------------------------
+> Traceback (most recent call last):
+>   File "/home/libo/src/core/uitest/uitest/test.py", line 134, in execute_dialog_through_command
+>     yield xDialog
+>   File "/home/libo/src/core/uitest/uitest/test.py", line 149, in execute_modeless_dialog_through_command
+>     yield xDialog
+>   File "/home/libo/src/core/sw/qa/uitest/writer_tests7/tdf150443.py", line 33, in test_tdf150443
+>     changesList = xTrackDlg.getChild("writerchanges")
+> uno.com.sun.star.uno.RuntimeException: Could not find child with id: writerchanges children were                   writer_edit PageBreak PageBreak    ScrollBars vertical horizontal   ScrollBars vertical horizontal      TabBar  TabBar TabBarContents  menubutton measure button button button button button button button button   FixedImageControl image   Deck titlebar grip addonimage label toolbar scrolledwindow     contents Panel titlebar addonimage expander   toolbar contents SidebarStylesPanel grid1 fontstyletoolbox  applystyle     style Panel titlebar addonimage expander   toolbar contents SidebarTextPanel grid1 font  fontnamecombobox     fontheight  fontsizecombobox     fonteffects ToolbarPopover container box3 defaultattr resetattr fontadjust box1 colorbar_writer ToolbarPopover container colorbar_others ToolbarPopover container colorbar_background ToolbarPopover container spacingbar ToolbarPopover container box2 position Panel titlebar addonimage expander   toolbar contents ParaPropertyPanel grid1 box1 horizontalalignment writedirection verticalalignment numberbullet ToolbarPopover container ToolbarPopover container ToolbarPopover container backgroundcolor ToolbarPopover container separator1 box3 spacinglabel paraspacing aboveparaspacingbox aboveparaspacingimg  aboveparaspacing  belowparaspacingbox belowparaspacingimg  belowparaspacing  linespacing ToolbarPopover container indentfieldbox indentlabel indent beforetextindentbox beforetextindentimg  beforetextindent  aftertextindentbox aftertextindentimg  aftertextindent  firstlineindentbox firstlineindentimg  firstlineindent  Panel titlebar addonimage expander   toolbar contents TableEditPanel grid1 insert_label delete_label insert delete select_label split_merge_label select split_merge  row_height_label column_width_label  rowheight   columnwidth  rowsizing columnsizing align_label  alignmentLB   leftspace_label rightspace_label  leftspace   rightspace   misc_label misc ToolbarPopover container ToolbarPopover container          applystyle  ApplyStyleBox  applystyle     fontnamecombobox  FontNameBox  fontnamecombobox       FontSizeBox  fontsizecombobox           EditControl  entry       at /home/libo/src/core/vcl/source/uitest/uiobject.cxx:470
+
+[...]
+
+Change-Id: Iec8afd0ce5d2903ffdab1f07c0c88cd4d9650a80
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/164714
+Tested-by: Stephan Bergmann <stephan.bergmann@allotropia.de>
+Reviewed-by: Stephan Bergmann <stephan.bergmann@allotropia.de>
+
+diff --git a/sw/qa/uitest/writer_tests8/tdf150443.py b/sw/qa/uitest/writer_tests8/tdf150443.py
+deleted file mode 100644
+index fb39bd8a0375..000000000000
+--- a/sw/qa/uitest/writer_tests8/tdf150443.py
++++ /dev/null
+@@ -1,46 +0,0 @@
+-# -*- tab-width: 4; indent-tabs-mode: nil; py-indent-offset: 4 -*-
+-#
+-# This file is part of the LibreOffice project.
+-#
+-# This Source Code Form is subject to the terms of the Mozilla Public
+-# License, v. 2.0. If a copy of the MPL was not distributed with this
+-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+-#
+-
+-from uitest.framework import UITestCase
+-from uitest.uihelper.common import get_state_as_dict, get_url_for_data_file
+-from libreoffice.uno.propertyvalue import mkPropertyValues
+-
+-class tdf150443(UITestCase):
+-
+-    def test_tdf150443(self):
+-        with self.ui_test.load_file(get_url_for_data_file("tdf150443.docx")):
+-            xWriterDoc = self.xUITest.getTopFocusWindow()
+-            xWriterEdit = xWriterDoc.getChild("writer_edit")
+-            xToolkit = self.xContext.ServiceManager.createInstance('com.sun.star.awt.Toolkit')
+-
+-            # search term "Jump here!"
+-            with self.ui_test.execute_modeless_dialog_through_command(".uno:SearchDialog", close_button="close") as xDialog:
+-                searchterm = xDialog.getChild("searchterm")
+-                searchterm.executeAction("TYPE", mkPropertyValues({"TEXT":"Jump here!"}))
+-                xsearch = xDialog.getChild("search")
+-                xsearch.executeAction("CLICK", tuple())  #first search
+-                xToolkit.processEventsToIdle()
+-                self.assertEqual(get_state_as_dict(xWriterEdit)["CurrentPage"], "4")
+-
+-            # reject the tracked table row in Manage Changes dialog window
+-            with self.ui_test.execute_modeless_dialog_through_command(".uno:AcceptTrackedChanges", close_button="close") as xTrackDlg:
+-                changesList = xTrackDlg.getChild("writerchanges")
+-
+-                items = len(changesList.getChildren())
+-
+-                # select tree parent of the actual tracked row deletion in tree list
+-                changesList.executeAction("TYPE", mkPropertyValues({"KEYCODE": "LEFT"}))
+-                xToolkit.processEventsToIdle()
+-
+-                # Without the fix in place, it would have crashed here
+-                xAccBtn = xTrackDlg.getChild("reject")
+-                xAccBtn.executeAction("CLICK", tuple())
+-                self.assertEqual(items - 1, len(changesList.getChildren()))
+-
+-# vim: set shiftwidth=4 softtabstop=4 expandtab:
