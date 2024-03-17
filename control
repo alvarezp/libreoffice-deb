@@ -21,7 +21,7 @@ Build-Depends: autoconf,
                default-jdk (>= 2:1.9) [!hppa !hurd-i386 !kfreebsd-amd64 !kfreebsd-i386 !hurd-i386 !powerpcspe !s390 !sparc !ppc64el !s390x !armhf] <!nojava>,
                dh-python <!nopython>,
                dpkg-dev (>= 1.22.5) [armel armhf hppa kfreebsd-i386 m68k mips mipsel powerpc powerpcspe sparc],
-               firebird-dev,
+               firebird-dev [!m68k],
                flex,
                fontforge-nox | fontforge,
                g++ (>= 4:12),
@@ -201,7 +201,7 @@ Build-Depends: autoconf,
                zlib1g-dev
 Build-Depends-Arch: at-spi2-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     dbus-x11 [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
-                    firebird3.0-server-core <!nocheck>,
+                    firebird3.0-server-core [!m68k] <!nocheck>,
                     fontconfig [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
                     fonts-crosextra-caladea [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
                     fonts-crosextra-carlito (>= 20230309) [amd64 arm64 armhf i386 ppc64el s390x] <!nocheck>,
@@ -5454,7 +5454,7 @@ Depends: libreoffice-core-nogui | libreoffice-core,
          ${firebird-engine-depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
 Section: database
 Enhances: libreoffice-base-drivers
 Description: Firebird SDBC driver for LibreOffice
