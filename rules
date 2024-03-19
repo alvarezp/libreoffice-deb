@@ -2298,9 +2298,7 @@ config_host.mk:
 	FIREBIRD_CFLAGS=$(FIREBIRD_CFLAGS) FIREBIRD_LIBS=$(FIREBIRD_LIBS) \
 	./autogen.sh $(CONFIGURE_FLAGS)
 
-build:
-	$(CURDIR)/debian/rules build-arch
-	$(CURDIR)/debian/rules build-indep
+build: $(STAMP_DIR)/prepare $(STAMP_DIR)/build-arch $(STAMP_DIR)/build-indep
 	touch $(STAMP_DIR)/$@
 
 build-arch: $(STAMP_DIR)/prepare $(STAMP_DIR)/build-arch
