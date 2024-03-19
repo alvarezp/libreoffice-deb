@@ -2655,9 +2655,6 @@ ifeq "$(ENABLE_HTML_HELP)" "y"
 	mv debian/tmp/pkg/libreoffice-common/$(OODIR)/help \
 		debian/tmp/pkg/libreoffice-help-common/$(OODIR)
 endif
-	mkdir -p debian/tmp/pkg/libreoffice-help-common/$(OODIR)/share/config
-	mv debian/tmp/pkg/libreoffice-common/$(OODIR)/share/config/images_helpimg.zip \
-		debian/tmp/pkg/libreoffice-help-common/$(OODIR)/share/config
 endif
 
 	# prepare install/dir files for dh
@@ -3769,12 +3766,12 @@ endif
 		ln -s /$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config/$$z \
 			$(PKGDIR)-style-$$p/$(OODIR)/share/config/$$z; \
 	done
-	mkdir -p $(PKGDIR)-common/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config; \
+	mkdir -p $(PKGDIR)-help-common/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config; \
 	mv $(PKGDIR)-common/$(OODIR)/share/config/images_helpimg.zip \
-		$(PKGDIR)-common/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config/; \
-	mkdir -p $(PKGDIR)-common/$(OODIR)/share/config; \
+		$(PKGDIR)-help-common/$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config/; \
+	mkdir -p $(PKGDIR)-help-common/$(OODIR)/share/config; \
 	ln -s /$(shell echo $(OODIR) | sed -e s/lib/share/)/share/config/images_helpimg.zip \
-		$(PKGDIR)-common/$(OODIR)/share/config/images_helpimg.zip; \
+		$(PKGDIR)-help-common/$(OODIR)/share/config/images_helpimg.zip; \
 
 ifeq "$(DEB_VENDOR)" "Debian"
 	# install Debian presentation template
