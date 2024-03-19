@@ -2433,11 +2433,11 @@ ifeq "$(BUILD_TESTS)" "y"
 endif
 
 ifneq "$(AUTOPKGTEST_BUILD)" "y"
-ifeq "$(RUN_MAKE_CHECK)" "y"
 	# generate the needed en_US.UTF-8 locale
 	mkdir -p $(CURDIR)/debian/locales
 	USE_CPUS=$(NUM_CPUS) debian/scripts/locale-gen
 
+ifeq "$(RUN_MAKE_CHECK)" "y"
         # and now run them
 	$(IGNORE_MAKE_FAILURES)t=`mktemp -q -d`; \
 	cd $(SOURCE_TREE) && \
@@ -2488,6 +2488,7 @@ else
 		export TMPDIR=$$t; \
 		export HOME=$$t; \
 		export PARALLELISM=1; \
+		export LANG=en_US.UTF-8; \
 		$(TEST_TIMEOUT) make check
 	# more public library checks
 	$(IGNORE_MAKE_FAILURES)\
