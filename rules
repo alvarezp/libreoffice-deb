@@ -1106,7 +1106,7 @@ endif
 	BUILD_DEPS += , debhelper-compat (= 12)
 
   ifeq "$(RUN_MAKE_CHECK)" "y"
-	BUILD_DEPS_ARCH += , locales <!nocheck>
+	BUILD_DEPS_ARCH += , locales <!nocheck> | locales-all <!nocheck>
 	BUILD_DEPS_ARCH += , gdb$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , fontconfig [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 ifeq ($(BOOKWORM_BACKPORT),y)
@@ -2433,9 +2433,11 @@ ifeq "$(BUILD_TESTS)" "y"
 endif
 
 ifneq "$(AUTOPKGTEST_BUILD)" "y"
-	# generate the needed en_US.UTF-8 locale
-	mkdir -p $(CURDIR)/debian/locales
-	USE_CPUS=$(NUM_CPUS) debian/scripts/locale-gen
+	# generate the needed en_US.UTF-8 locale if needed
+	if ! locale -a | grep -q ^en_US\.utf8; then \
+		mkdir -p $(CURDIR)/debian/locales; \
+		USE_CPUS=$(NUM_CPUS) debian/scripts/locale-gen; \
+	fi
 
 ifeq "$(RUN_MAKE_CHECK)" "y"
         # and now run them
