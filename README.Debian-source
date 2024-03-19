@@ -80,3 +80,24 @@ $ git submodule init
 
 For tarballs/, see above
 
+Build profiles
+==============
+
+Except the "common" build profiles
+ - nodoc
+ - nocheck
+ - nopython
+ - nojava
+ - nogir
+this source package also has 
+ - an own one which controls whether opens___.ttf of fonts-opensymbol is rebuilt
+   (which needs fontforge-nox | fontforge) (pkg.libreoffice.opensymbolbuild, default on arch
+   inde builds) or not.
+   If this is disabled you must provide opens___.ttf itself since the upstream build will fail
+   wiithout it being present. The canonical way (which is what upstream does per default actually)
+   is to put https://dev-www.libreoffice.org/extern/f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf
+   into tarballs/. It will be picked up from there.
+ - Then we get a fonts-opensymbol Build-Depends-Arch to make arch-dep builds use the
+   rebuilt font. In case this makes problem this can be built still by
+   debuild (-b) -Ppkg.libreoffice.opensymbolbuild
+
