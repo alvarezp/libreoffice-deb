@@ -4,9 +4,13 @@ libreoffice (4:24.2.2~rc1-3) UNRELEASED; urgency=medium
     on 32bit archs (from libreoffice-24-2 branch)
   * debian/patches/python-3.12.diff: add from libreoffice-24-2 branch;
     only a warning here but probably senseful to have anyway
- 
-  * debian/rules: build-depend on python3-setuptools instead of
-    python3-distutils (closes: #1065893) 
+
+  * debian/rules:
+    - build-depend on python3-setuptools instead of
+      python3-distutils (closes: #1065893) 
+    - move images_helpimg.zip to libreoffice-help-common
+  * debian/control.in: add replaces to libreoffice-common on
+    libreoffice-help-common for the images_helpimg.zip move
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 

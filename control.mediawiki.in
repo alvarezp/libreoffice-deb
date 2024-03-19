@@ -8,7 +8,7 @@ Depends: libreoffice-core,
          ${java-runtime-depends},
          ${misc:Depends}
 Enhances: libreoffice-writer
-Suggests: mediawiki
+Suggests: mediawiki, libreoffice-help-common
 Description: LibreOffice extension for working with MediaWiki articles
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.

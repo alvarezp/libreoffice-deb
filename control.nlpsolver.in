@@ -1,6 +1,7 @@
 Package: libreoffice-nlpsolver
 Architecture: all
 Depends: ${misc:Depends}, libreoffice-calc, libreoffice-core, liblibreoffice-java, ${java-common-depends}, ${java-runtime-depends}
+Suggests: libreoffice-help-common
 Section: math
 Description: "Solver for Nonlinear Programming" extension for LibreOffice
  By default LibreOffice Calc ships with a solver engine for linear

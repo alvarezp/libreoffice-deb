@@ -645,7 +645,7 @@ Package: libreoffice-help-common
 Architecture: all
 Depends: libreoffice-common, ${help-common-depends}, ${misc:Depends}
 Breaks: libreoffice-common (<< 1:6.1.0~alpha1-1)
-Replaces: libreoffice-common (<< 1:6.1.0~alpha1-1)
+Replaces: libreoffice-common (<< 4:24.2.2~rc2)
 Description: office productivity suite -- common files for LibreOffice help
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -5040,7 +5040,7 @@ Depends: liblibreoffice-java,
          ${java:Depends},
          ${misc:Depends}
 Enhances: libreoffice-writer
-Suggests: mediawiki
+Suggests: libreoffice-help-common, mediawiki
 Description: LibreOffice extension for working with MediaWiki articles
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -5128,6 +5128,7 @@ Depends: liblibreoffice-java,
          ${java-common-depends},
          ${java-runtime-depends},
          ${misc:Depends}
+Suggests: libreoffice-help-common
 Section: math
 Description: "Solver for Nonlinear Programming" extension for LibreOffice
  By default LibreOffice Calc ships with a solver engine for linear
