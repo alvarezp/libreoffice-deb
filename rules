@@ -1962,8 +1962,6 @@ endif
 
 	rm -f download.list
 
-	rm -f extras/source/truetype/symbol/opens___.ttf
-
 	# obsolete lock file not cleaned up....
 	rm -f dbaccess/qa/extras/testdocuments/fdo84315.odb.lck
 
