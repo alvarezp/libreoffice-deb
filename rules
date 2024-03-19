@@ -2488,6 +2488,7 @@ else
 		export TMPDIR=$$t; \
 		export HOME=$$t; \
 		export PARALLELISM=1; \
+		export LOCPATH=$(CURDIR)/debian/locales; \
 		export LANG=en_US.UTF-8; \
 		$(TEST_TIMEOUT) make check
 	# more public library checks
