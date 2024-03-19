@@ -4185,9 +4185,6 @@ ifeq "$(ENABLE_JAVA)" "y"
 	perl -pi -e 's/^(java:Depends.*$$)/\1, ure/' \
 		debian/libofficebean-java.substvars
 endif
-# This switch to dh_shlibdeps reduces the 'libXXX not found' warnings but
-# causes ldd crashes sometimes when used with fakeroot:
-#          -l $(PKGDIR)-core/$(OPENOFFICEDIR)/program
 	dh_gencontrol -a $(DEBHELPER_OPTIONS) \
 		-- \
 		-V'base-version=$(BASE_VERSION)' \
