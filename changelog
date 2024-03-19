@@ -21,6 +21,10 @@ libreoffice (4:24.2.2~rc1-3) UNRELEASED; urgency=medium
   * debian/rules:
     - build-depend on python3-setuptools instead of
       python3-distutils (closes: #1065893) 
+    - move fontforge to B-D-I and rebuild opens___.ttf as before. Make
+      arch-dep builds use fonts-opensymbol and it's copy.
+      Implement build profiles to change behaviour here should there
+      ever be need for it.
     - don't make build: call build-arch and build-indep manually but
       depend on it (and $(STAMP_DIR)/prepare)
     - move images_helpimg.zip to libreoffice-help-common
