@@ -104,7 +104,6 @@ BUILD_DEPS=\
     bison,\
     bzip2,\
     flex, \
-    fontforge-nox | fontforge, \
     gperf,\
     libfreetype-dev,\
     libfontconfig-dev,\
@@ -473,10 +472,33 @@ CONFIGURE_FLAGS+= \
 		--host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) \
 		--disable-online-update \
 		--disable-fetch-external \
-		--without-fonts --enable-build-opensymbol \
+		--without-fonts \
 		--without-myspell-dicts \
 		--with-branding=$(CURDIR)/debian/branding \
 		--without-coredumpctl
+
+# don't rebuild the font anywhere, we just really need it in indep builds.
+# please put https://dev-www.libreoffice.org/extern/f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf
+# into $(SOURCE_TREE)/tarballs if you don't rebuild the font.
+BUILD_DEPS_INDEP += , fontforge-nox | fontforge <!pkg.libreoffice.noopensymbolbuild>
+ifeq ($(filter pkg.libreoffice.noopensymbolbuild,$(DEB_BUILD_PROFILES)),)
+ENABLE_OPENSYMBOL_BUILD=y
+endif
+
+# we get a fonts-opensymbol build-dep -b builds (_ARCH also affects -b), too anyway but it's still lesser
+# dependencies than fontforge-nox | fontforge...
+# But this can get a problem for bootstrapping if we ever needed a newer fonts-opensymbol for
+# tests to pass...
+# Allow building it nevertheless if wanted
+BUILD_DEPS_ARCH += , fonts-opensymbol <!pkg.libreoffice.opensymbolbuild>
+ifneq ($(MAKECMDGOALS),build-arch)
+ifneq ($(filter pkg.libreoffice.opensymbolbuild,$(DEB_BUILD_PROFILES)),)
+ENABLE_OPENSYMBOL_BUILD=y
+endif
+ifeq "$(ENABLE_OPENSYMBOL_BUILD)" "y"
+CONFIGURE_FLAGS_INDEP += --enable-build-opensymbol 
+endif
+endif
 
 ifeq "$(ENABLE_GUI)" "y"
 BUILD_DEPS += ,\
@@ -1971,6 +1993,13 @@ endif
 		rm -f prism.js && \
 		rm -f prism.css
 
+	# remove only if we linked it over. otherwise we remove the one
+	# intentionally added there if so
+	cd $(SOURCE_TREE)/tarballs && \
+		if [ -L f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf ]; then \
+			rm f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf; \
+		fi
+
 	# Files created in debian directory
 	$(MAKE) -f debian/rules clean-debdir
 
@@ -2159,10 +2188,6 @@ endif
 ifeq "$(MYSQL_FLAVOUR)" "mysql"
 	perl -pi -e "s/(Build-Conflicts: .*)/\1,libmariadbclient-dev,/" debian/control.new
 endif
-ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
-	# be sure to use our rebuilt font
-	perl -pi -e "s/(Build-Conflicts: .*)/\1,fonts-opensymbol <!nocheck>,/" debian/control.new
-endif
 
 ifneq "$(ALLOW_CLANG)" "y"
 	perl -pi -e "s/(Build-Conflicts: .*)/\1,clang,/" debian/control.new
@@ -2286,6 +2311,14 @@ endif
 	cd $(SOURCE_TREE)/helpcontent2/help3xsl && \
 		ln -sf /usr/share/nodejs/prismjs/prism.js && \
 		ln -sf /usr/share/nodejs/prismjs/themes/prism-coy.css prism.css
+
+ifeq ($(filter pkg.libreoffice.opensymbolbuild,$(DEB_BUILD_PROFILES)),)
+	# link to already-rebuilt opens___.ttf (fonts-opensymbol) form the arch indep build.
+	# Thankfully the sha256sum is only checked in Makefile.fetch (which we don't do)
+	cd $(SOURCE_TREE)/tarballs && \
+		ln -sf /usr/share/fonts/truetype/libreoffice/opens___.ttf \
+			f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf
+endif
 
 	touch $@
 
