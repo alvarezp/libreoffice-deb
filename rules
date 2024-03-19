@@ -2459,7 +2459,7 @@ else
 	# don't run make check but *do* run selected tests here which are deemed too important
 	# to fail
 	# - "bridgetest"
-	# - the public libraries (sal, cppu(helper), comphelper)
+	# - the public libraries (sal(helper), cppu(helper))
 	# - "smoketest" as a smoketest
 	# - pyuno (as we ship python3-uno..)
 	# - unoidl for the SDK
@@ -2478,7 +2478,7 @@ else
 			make smoketest.allcheck \
 		)
 	# build some more tests
-	for i in cppu cppuhelper comphelper unoidl; do \
+	for i in salhelper cppu cppuhelper unoidl; do \
 		gb_SUPPRESS_TESTS=true make $$i.allcheck; \
 	done
 	# run the sal tests. We built them anyways and it does make sense to test
@@ -2495,7 +2495,7 @@ else
 		$(TEST_TIMEOUT) make check
 	# more public library checks
 	$(IGNORE_MAKE_FAILURES)\
-	for i in cppu cppuhelper comphelper; do \
+	for i in salhelper cppu cppuhelper; do \
 		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make $$i.allcheck; \
 	done
