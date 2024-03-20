@@ -1,13 +1,19 @@
-libreoffice (4:24.8.0~alpha0~git20240316-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~alpha0~git20240319-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
   * debian/patches/remove-known-problematic-tests.diff: remove known
     problematic test
 
-  * debian/rules: remove extra individual suggests on
-    libreoffice-{hyphenation,spellcheck}-xy
-  * debian/control.lang.in: add them unconditionally for all languages
+  * debian/rules:
+    - remove extra individual suggests on
+      libreoffice-{hyphenation,spellcheck}-xy
+    - more target fixes to make Rules-Requires-Root: no work, make
+      binary-{arch,indep} depend on prepare and build-{arch,indep} since
+      with Rules-Requires-Root: no "build{-*}" is not calld anymore itself
+      (and install-common needs to depend on $(STAMP_DIR)/build-{arch,indep})
+  * debian/control.lang.in: add libreoffice-{hyphenation,spellcheck}-xy
+    unconditionally for all languages
 
  -- Rene Engelhard <rene@debian.org>  Sun, 11 Feb 2024 11:45:13 +0000
 
