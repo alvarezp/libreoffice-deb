@@ -14,6 +14,7 @@ Build-Conflicts: nvidia-glx-dev,
                  fontconfig-config (= 2.14.1-2) <!nocheck>,
                  fontconfig-config (= 2.14.1-3) <!nocheck>
 Standards-Version: 4.0.1
+Rules-Requires-Root: no
 Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-24.8
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
 Bugs: @BUGS@

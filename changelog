@@ -14,6 +14,7 @@ libreoffice (4:24.8.0~alpha0~git20240319-1) UNRELEASED; urgency=medium
       (and install-common needs to depend on $(STAMP_DIR)/build-{arch,indep})
   * debian/control.lang.in: add libreoffice-{hyphenation,spellcheck}-xy
     unconditionally for all languages
+  * debian/control.in: set Rules-Requires-Root: no
 
  -- Rene Engelhard <rene@debian.org>  Sun, 11 Feb 2024 11:45:13 +0000
 
