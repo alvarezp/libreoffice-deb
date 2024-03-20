@@ -2632,7 +2632,7 @@ endif
 install: $(STAMP_DIR)/install-common $(STAMP_DIR)/install-arch $(STAMP_DIR)/install-indep
 
 install-common: $(STAMP_DIR)/install-common
-$(STAMP_DIR)/install-common:
+$(STAMP_DIR)/install-common: $(STAMP_DIR)/build-arch $(STAMP_DIR)/build-indep
 	dh_testdir
 	dh_testroot
 
@@ -4085,7 +4085,7 @@ endif
 	touch $@
 
 binary-arch: $(STAMP_DIR)/binary-arch
-$(STAMP_DIR)/binary-arch: $(STAMP_DIR)/install-arch debian/control $(STAMP_DIR)/maintscripts
+$(STAMP_DIR)/binary-arch: $(STAMP_DIR)/prepare $(STAMP_DIR)/build-arch $(STAMP_DIR)/install-arch debian/control $(STAMP_DIR)/maintscripts
 	dh_testdir
 	dh_testroot
 
@@ -4348,8 +4348,8 @@ endif
 
 	touch $@
 
-binary-indep: $(GSI_EXPORT_STAMP) $(STAMP_DIR)/binary-indep
-$(STAMP_DIR)/binary-indep: $(STAMP_DIR)/install-indep debian/control $(STAMP_DIR)/maintscripts $(STAMP_DIR)/langpacks
+binary-indep: $(STAMP_DIR)/binary-indep
+$(STAMP_DIR)/binary-indep: $(STAMP_DIR)/prepare $(STAMP_DIR)/build-indep $(STAMP_DIR)/install-indep debian/control $(STAMP_DIR)/maintscripts $(STAMP_DIR)/langpacks
 ifneq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_JAVA_ARCHS)))
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "For uploads with binary-all packages, please use arches where Java is enabled"

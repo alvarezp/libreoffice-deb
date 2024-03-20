@@ -2,6 +2,12 @@ libreoffice (4:24.2.3~rc1~git20240330-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
+  * debian/rules:
+    - more target fixes to make Rules-Requires-Root: no work, make
+      binary-{arch,indep} depend on prepare and build-{arch,indep} since
+      with Rules-Requires-Root: no "build{-*}" is not calld anymore itself
+      (and install-common needs to depend on $(STAMP_DIR)/build-{arch,indep})
+
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
 libreoffice (4:24.2.2-3) UNRELEASED; urgency=medium
