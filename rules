@@ -201,6 +201,7 @@ ENABLE_ZXING=y
 SYSTEM_STUFF += zxing
 BUILD_CAIROCANVAS=y
 SYSTEM_STUFF += cairo
+ENABLE_GPGMEPP=y
 ifeq "$(ENABLE_GUI)" "y"
 BUILD_PLASMA=y
 # let's assume we won't ship two plasmas parallel..
@@ -460,6 +461,29 @@ SYSTEM_STUFF += libwebp
 SYSTEM_STUFF += libtiff
 SYSTEM_STUFF += frozen
 SYSTEM_STUFF += argon2
+
+# override stuff for build-indep to save build dependencies
+ifeq ($(MAKECMDGOALS),build-indep)
+ENABLE_EVOAB=n
+BUILD_GTK3=n
+ENABLE_INTROSPECTION=n
+ENABLE_GIO=n
+BUILD_GTK4=n
+ENABLE_QT5=n
+ENABLE_QT6=n
+# libgpgmepp-dev depends on Qt, too, see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863149
+ENABLE_GPGMEPP=n
+ENABLE_KF5=n
+ENABLE_KF6=n
+BUILD_PLASMA=n
+ENABLE_MARIADB=n
+ENABLE_FIREBIRD=n
+ENABLE_SDBC_POSTGRESQL=n
+ENABLE_SKIA=n
+ENABLE_COINMP=n
+ENABLE_LPSOLVE=n
+USE_GSTREAMER=n
+endif
 
 # Default flags to pass to configure
 CONFIGURE_FLAGS+= \
@@ -793,9 +817,9 @@ ifneq "$(shell echo $(USE_CLANG)$(ALLOW_CLANG) | grep y)" ""
     else
       ifeq "$(ALLOW_CLANG)" "y"
         ifeq "$(CLANG_VERSION)" "default"
-	  BUILD_DEPS += , llvm$(OOO_NO_CLANG_ARCHS)
+	  BUILD_DEPS_ARCH += , llvm$(OOO_NO_CLANG_ARCHS)
         else
-	  BUILD_DEPS += , llvm-$(CLANG_VERSION)-linker-tools$(OOO_NO_CLANG_ARCHS)
+	  BUILD_DEPS_ARCH += , llvm-$(CLANG_VERSION)-linker-tools$(OOO_NO_CLANG_ARCHS)
         endif
       endif
     endif
@@ -894,11 +918,11 @@ endif
       ifeq "$(CLANG_VERSION)" "default"
 	export LO_CLANG_CC=clang
 	export LO_CLANG_CXX=clang++
-	BUILD_DEPS += , clang$(OOO_NO_CLANG_ARCHS)
+	BUILD_DEPS_ARCH += , clang$(OOO_NO_CLANG_ARCHS)
       else
 	export LO_CLANG_CC=clang-$(CLANG_VERSION)
 	export LO_CLANG_CXX=clang++-$(CLANG_VERSION)
-	BUILD_DEPS += , clang-$(CLANG_VERSION) [$(OOO_LE_ARCHS)]
+	BUILD_DEPS_ARCH += , clang-$(CLANG_VERSION) [$(OOO_LE_ARCHS)]
       endif
     endif
   endif
@@ -1042,7 +1066,7 @@ ifneq ($(ENABLE_COINMP),y)
 	CONFIGURE_FLAGS += --disable-coinmp
 else
   ifneq (,$(filter coinmp, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , coinor-libcoinmp-dev $(COINMP_MINVER), coinor-libcoinutils-dev $(COINUTILS_MINVER)
+	BUILD_DEPS_ARCH += , coinor-libcoinmp-dev $(COINMP_MINVER), coinor-libcoinutils-dev $(COINUTILS_MINVER)
   endif
 endif
 
@@ -1511,39 +1535,39 @@ endif
 
 ifeq "$(ENABLE_KF5)" "y"
 	CONFIGURE_FLAGS += --enable-kf5
-	BUILD_DEPS += , libkf5coreaddons-dev, libkf5i18n-dev, libkf5config-dev, libkf5windowsystem-dev, libkf5kio-dev
+	BUILD_DEPS_ARCH += , libkf5coreaddons-dev, libkf5i18n-dev, libkf5config-dev, libkf5windowsystem-dev, libkf5kio-dev
 endif
 ifeq "$(ENABLE_KF6)" "y"
 	CONFIGURE_FLAGS += --enable-kf6
-	BUILD_DEPS += , libkf6coreaddons-dev, libkf6i18n-dev, libkf6config-dev, libkf6windowsystem-dev, libkf6kio-dev
+	BUILD_DEPS_ARCH += , libkf6coreaddons-dev, libkf6i18n-dev, libkf6config-dev, libkf6windowsystem-dev, libkf6kio-dev
 endif
 	PLASMA_ICONSET_DEP=libreoffice-style-breeze
 ifeq "$(ENABLE_QT5)" "y"
 	CONFIGURE_FLAGS += --enable-qt5
-	BUILD_DEPS += , qtbase5-dev $(QT5_MINVER), qt5-qmake $(QT5_MINVER), qtbase5-dev-tools $(QT5_MINVER)
-	BUILD_DEPS += , libqt5x11extras5-dev $(QT5_MINVER)
-	BUILD_DEPS += , libglib2.0-dev
-	BUILD_DEPS += , libxcb1-dev
+	BUILD_DEPS_ARCH += , qtbase5-dev $(QT5_MINVER), qt5-qmake $(QT5_MINVER), qtbase5-dev-tools $(QT5_MINVER)
+	BUILD_DEPS_ARCH += , libqt5x11extras5-dev $(QT5_MINVER)
+	BUILD_DEPS_ARCH += , libglib2.0-dev
+	BUILD_DEPS_ARCH += , libxcb1-dev
 endif
 ifeq "$(ENABLE_QT6)" "y"
 	CONFIGURE_FLAGS += --enable-qt6
-	BUILD_DEPS += , qt6-base-dev $(QT6_MINVER), qmake6 $(QT6_MINVER), qt6-base-dev-tools $(QT6_MINVER)
-	BUILD_DEPS += , libxcb1-dev
+	BUILD_DEPS_ARCH += , qt6-base-dev $(QT6_MINVER), qmake6 $(QT6_MINVER), qt6-base-dev-tools $(QT6_MINVER)
+	BUILD_DEPS_ARCH += , libxcb1-dev
 endif
 
 ifeq "$(ENABLE_MARIADB)" "y"
   ifeq "$(MYSQL_FLAVOUR)" "default"
-	BUILD_DEPS += , default-libmysqlclient-dev
+	BUILD_DEPS_ARCH += , default-libmysqlclient-dev
   else
     ifeq "$(MYSQL_FLAVOUR)" "mysql"
         ifneq (,$(filter mariadb, $(SYSTEM_STUFF)))
-        BUILD_DEPS += , libmysqlclient-dev
+        BUILD_DEPS_ARCH += , libmysqlclient-dev
         endif
       MARIADBCONFIG=/usr/bin/mysql_config
     endif
     ifeq "$(MYSQL_FLAVOUR)" "mariadb"
       ifneq (,$(filter mariadb, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libmariadb-dev
+	BUILD_DEPS_ARCH += , libmariadb-dev
       endif
     MARIADBCONFIG=/usr/bin/mariadb_config
     endif
@@ -1556,13 +1580,13 @@ endif
 ifeq "$(ENABLE_FIREBIRD)" "y"
 	BASE_FIREBIRD_RECOMMENDS = libreoffice-sdbc-firebird [$(OOO_FIREBIRD_ARCHS)]
   ifneq (,$(filter libatomic-ops, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libatomic-ops-dev$(OOO_NO_FIREBIRD_ARCHS)
+	BUILD_DEPS_ARCH += , libatomic-ops-dev$(OOO_NO_FIREBIRD_ARCHS)
   endif
   ifneq (,$(filter libtommath, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libtommath-dev$(OOO_NO_FIREBIRD_ARCHS)
+	BUILD_DEPS_ARCH += , libtommath-dev$(OOO_NO_FIREBIRD_ARCHS)
   endif
   ifneq (,$(filter firebird, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , firebird-dev$(OOO_NO_FIREBIRD_ARCHS)
+	BUILD_DEPS_ARCH += , firebird-dev$(OOO_NO_FIREBIRD_ARCHS)
 	# we need libEngine12.so
   ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , firebird3.0-server-core $(OOO_NO_FIREBIRD_ARCHS) <!nocheck>
@@ -1575,7 +1599,7 @@ else
 endif
 
 ifeq "$(BUILD_GTK3)" "y"
-	BUILD_DEPS += , libgtk-3-dev, libglib2.0-dev
+	BUILD_DEPS_ARCH += , libgtk-3-dev, libglib2.0-dev
   ifneq (cairo,$(findstring cairo,$(SYSTEM_STUFF)))
   $(error GTK3 build fails without system-cairo!!)
   endif
@@ -1584,7 +1608,7 @@ ifeq "$(BUILD_GTK3)" "y"
   endif
 	GNOME_GTK_RECOMMENDS += libreoffice-gtk3
   ifeq "$(ENABLE_INTROSPECTION)" "y"
-	BUILD_DEPS += , gobject-introspection <!nogir>, libgirepository1.0-dev <!nogir>
+	BUILD_DEPS_ARCH += , gobject-introspection <!nogir>, libgirepository1.0-dev <!nogir>
 	CONFIGURE_FLAGS += --enable-introspection
   else
 	DEBHELPER_OPTIONS+= -Ngir1.2-lokdocview-0.1
@@ -1601,7 +1625,7 @@ ifeq "$(BUILD_GTK3)" "y"
 endif
 
 ifeq "$(BUILD_GTK4)" "y"
-	BUILD_DEPS += , libgtk-4-dev, libglib2.0-dev, libcairo2-dev, libatk1.0-dev
+	BUILD_DEPS_ARCH += , libgtk-4-dev, libglib2.0-dev, libcairo2-dev, libatk1.0-dev
 	CONFIGURE_FLAGS += --enable-gtk4
 endif
 
@@ -1610,13 +1634,14 @@ ifeq "$(ENABLE_EVO2)" "n"
 	#DEBHELPER_OPTIONS += -Nlibreoffice-evolution
 else
 	CONFIGURE_FLAGS += --enable-evolution2
-	BUILD_DEPS += , libebook1.2-dev
+	BUILD_DEPS_ARCH += , libebook1.2-dev
 	LIBEBOOK_DEP = $(shell debian/scripts/get_libebook_dep.sh)
 endif
 
 ifeq "$(ENABLE_SDBC_POSTGRESQL)" "y"
   ifneq (,$(filter postgresql, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libpq-dev
+	BUILD_DEPS += , libkrb5-dev
+	BUILD_DEPS_ARCH += , libpq-dev
   else
 	BUILD_DEPS += , libkrb5-dev
   endif
@@ -1674,7 +1699,7 @@ endif
 ifeq ($(ENABLE_LPSOLVE),y)
   ifneq (,$(filter lpsolve, $(SYSTEM_STUFF)))
     ifeq "$(USE_SHARED_LPSOLVE)" "y"
-	BUILD_DEPS += , liblpsolve55-dev $(LPSOLVE_MIN_VERSION), lp-solve $(LPSOLVE_MIN_VERSION)
+	BUILD_DEPS_ARCH += , liblpsolve55-dev $(LPSOLVE_MIN_VERSION), lp-solve $(LPSOLVE_MIN_VERSION)
 	LPSOLVE_DEP = lp-solve $(LPSOLVE_MIN_VERSION)
     else
 	BUILD_DEPS += , liblpsolve55-dev $(LPSOLVE_MIN_VERSION)
@@ -1707,9 +1732,9 @@ ifeq "$(ENABLE_AVAHI)" "y"
 endif
 
 ifeq "$(USE_GSTREAMER)" "y"
-	BUILD_DEPS += , libgstreamer1.0-dev
+	BUILD_DEPS_ARCH += , libgstreamer1.0-dev
 	CONFIGURE_FLAGS += --enable-gstreamer-1-0
-	BUILD_DEPS += , libgstreamer-plugins-base1.0-dev
+	BUILD_DEPS_ARCH += , libgstreamer-plugins-base1.0-dev
 	GSTREAMER_PLUGINS_SUGGESTS += , gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-plugins-ugly, gstreamer1.0-plugins-bad, gstreamer1.0-libav
 else
 	CONFIGURE_FLAGS += --disable-gstreamer-1-0
@@ -1765,18 +1790,20 @@ ifneq (,$(filter glm, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libglm-dev
 endif
 
+ifeq "$(ENABLE_GPGMEPP)" "y"
 ifneq (,$(filter gpgmepp, $(SYSTEM_STUFF)))
-	BUILD_DEPS+= , libgpgmepp-dev, libgpgme-dev, libgpg-error-dev
+	BUILD_DEPS_ARCH+= , libgpgmepp-dev, libgpgme-dev, libgpg-error-dev
 endif
 ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , gpg$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , gpgconf$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , gpg-agent$(OOO_NO_CHECK_ARCHS) <!nocheck>
 endif
+endif
 
 ifeq "$(ENABLE_GIO)" "y"
   ifneq "$(BUILD_GTK3)" "y"
-	BUILD_DEPS += , libglib2.0-dev
+	BUILD_DEPS_ARCH += , libglib2.0-dev
   endif
 else
 	CONFIGURE_FLAGS += --disable-gio
@@ -2622,37 +2649,47 @@ endif
 	# FIXME
 	cd $(CURDIR)/debian/tmp/pkg && rm -rf \*
 
-ifeq "$(ENABLE_QT5)" "y"
 	# we need to do it here. If -kf5 isn't built
 	# there's no -kf5.install generated, so dh_missing complains later
-	mkdir -p debian/tmp/pkg/libreoffice-qt5/$(OODIR)/program
-	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt5lo.so\
-		debian/tmp/pkg/libreoffice-qt5/$(OODIR)/program
+ifeq "$(ENABLE_QT5)" "y"
+	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt5lo.so ]; then \
+		mkdir -p debian/tmp/pkg/libreoffice-qt5/$(OODIR)/program; \
+		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt5lo.so\
+			debian/tmp/pkg/libreoffice-qt5/$(OODIR)/program; \
+	fi
 endif
 ifeq "$(ENABLE_QT6)" "y"
-	mkdir -p debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program
-	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt6lo.so\
-		debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program
+	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt6lo.so ]; then \
+		mkdir -p debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program; \
+		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt6lo.so\
+			debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program; \
+	fi
 endif
 ifeq "$(shell echo $(ENABLE_KF5)$(ENABLE_KF6) | grep -q y && echo true)" "true"
 ifeq "$(BUILD_PLASMA)" "y"
-	mkdir -p debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program
-	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf$(PLASMA_VERSION)be1lo.so \
-		debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program
+	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf$(PLASMA_VERSION)be1lo.so ]; then \
+		mkdir -p debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program; \
+		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf$(PLASMA_VERSION)be1lo.so \
+			debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program; \
+	fi
 	# remove other ones maybe built by --enable-kfX
-	rm -f debian/tmp/pkg/libreoffice-kf5/$(OODIR)/libkf*be1lo.so 
+	rm -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/libkf*be1lo.so 
 else
-	rm -f debian/tmp/pkg/libreoffice-kf5/$(OODIR)/libkf*be1lo.so
+	rm -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/libkf*be1lo.so
 endif
 ifeq "$(ENABLE_KF5)" "y"
-	mkdir -p debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program
-	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf5lo.so \
-		debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program
+	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf5lo.so ]; then \
+		mkdir -p debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program; \
+		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf5lo.so \
+			debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program; \
+	fi
 endif
 ifeq "$(ENABLE_KF6)" "y"
-	mkdir -p debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program
-	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf6lo.so \
-		debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program
+	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf6lo.so ]; then \
+		mkdir -p debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program; \
+		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf6lo.so \
+			debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program; \
+	fi
 endif
 endif
 
