@@ -15,7 +15,7 @@ libreoffice (4:24.2.2~rc1-3) UNRELEASED; urgency=medium
     - don't make build: call build-arch and build-indep manually but
       depend on it (and $(STAMP_DIR)/prepare)
     - move images_helpimg.zip to libreoffice-help-common
-    - agressively disable unneeded stuff for build-indep builds we don't
+    - aggressively disable unneeded stuff for build-indep builds we don't
       need for generating the indep stuff. Move their build deps to
       Build-Depends-Arch:. Update install-common to work again
     - move install of the lokit and gir stuff from install-common to
