@@ -2797,14 +2797,6 @@ ifeq "$(BUILD_PLASMA)" "y"
 	echo "../usr/share/metainfo/org.libreoffice.kde.metainfo.xml /usr/share/metainfo/" >> $(PKGDIR)-plasma.install
 endif
 
-ifeq "$(PACKAGE_LOKIT)" "y"
-	echo "../../../include/LibreOfficeKit usr/include" > debian/libreofficekit-dev.install
-endif
-ifeq "$(ENABLE_INTROSPECTION)" "y"
-	echo "../../../workdir/CustomTarget/sysui/share/libreoffice/LOKDocView-0.1.gir /usr/share/gir-1.0/" >> debian/libreofficekit-dev.install
-	echo "../../../workdir/CustomTarget/sysui/share/libreoffice/LOKDocView-0.1.typelib /usr/lib/$(DEB_HOST_MULTIARCH)/girepository-1.0" >> debian/gir1.2-lokdocview-0.1.install
-endif
-
 ifneq "$(ENABLE_GUI)" "y"
 	rm -rf debian/tmp/pkg/libreofficekit-data
 endif
@@ -3329,6 +3321,18 @@ ifeq "$(ENABLE_GUI)" "y"
 	mv $(PKGDIR)-gnome/$(OODIR)/program/*gtk4* $(PKGDIR)-gtk4/$(OODIR)/program
 	mv $(PKGDIR)-core/$(OODIR)/program/libavmediagtk.so $(PKGDIR)-gtk4/$(OODIR)/program
   endif
+endif
+
+ifeq "$(ENABLE_INTROSPECTION)" "y"
+	echo "workdir/CustomTarget/sysui/share/libreoffice/LOKDocView-0.1.typelib /usr/lib/$(DEB_HOST_MULTIARCH)/girepository-1.0" >> debian/gir1.2-lokdocview-0.1.install
+	dh_install -pgir1.2-lokdocview-0.1
+endif
+ifeq "$(PACKAGE_LOKIT)" "y"
+	echo "include/LibreOfficeKit usr/include" > debian/libreofficekit-dev.install
+ifeq "$(ENABLE_INTROSPECTION)" "y"
+	echo "workdir/CustomTarget/sysui/share/libreoffice/LOKDocView-0.1.gir /usr/share/gir-1.0/" >> debian/libreofficekit-dev.install
+endif
+	dh_install -plibreofficekit-dev
 endif
 
 ifeq "$(PACKAGE_BASE)" "y"
