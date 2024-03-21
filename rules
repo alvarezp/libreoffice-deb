@@ -3980,6 +3980,15 @@ ifeq "$(INSTALL_APPARMOR_PROFILES)" "y"
   endif
 endif
 
+	# not installed if skia is disabled. Arch-indep builds disable skia for build-dep and
+	# speed reasons and it is supposed to end up in an arch-indep package (libreoffice-common)
+	# So install this manually if skia is disabled
+ifneq "$(ENABLE_SKIA)" "y"
+	mkdir -p $(PKGDIR)-common/$(OODIR)/share/skia
+	install -m644 $(SOURCE_TREE)/vcl/skia/skia_denylist_vulkan.xml \
+		$(PKGDIR)-common/$(OODIR)/share/skia/skia_denylist_vulkan.xml
+endif
+
 	# fix fundamentalrc to not cause
 	# /usr/lib/libreoffice/program/../program/xpdfimport calls
 	# we know the path and the apparmor profiles disallow this...
