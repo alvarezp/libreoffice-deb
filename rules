@@ -484,6 +484,7 @@ ENABLE_COINMP=n
 ENABLE_LPSOLVE=n
 USE_GSTREAMER=n
 ENABLE_LDAP=n
+ENABLE_PDFIUM=n
 endif
 
 # Default flags to pass to configure
@@ -974,10 +975,10 @@ ifeq "$(ENABLE_PDFIMPORT)" "y"
 	SYSTEM_STUFF += abseil
 	SYSTEM_STUFF += openjpeg
     ifneq (,$(filter openjpeg, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libopenjp2-7-dev [$(OOO_PDFIUM_ARCHS)]
+	BUILD_DEPS_ARCH += , libopenjp2-7-dev [$(OOO_PDFIUM_ARCHS)]
     endif
     ifneq (,$(filter abseil, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libabsl-dev [$(OOO_PDFIUM_ARCHS)]
+	BUILD_DEPS_ARCH += , libabsl-dev [$(OOO_PDFIUM_ARCHS)]
     endif
   endif
 endif
