@@ -12,6 +12,7 @@ libreoffice (4:24.8.0~alpha0~git20240321-1) UNRELEASED; urgency=medium
       binary-{arch,indep} depend on prepare and build-{arch,indep} since
       with Rules-Requires-Root: no "build{-*}" is not calld anymore itself
       (and install-common needs to depend on $(STAMP_DIR)/build-{arch,indep})
+    - check for binary-indep instead of build-indep for arch-indep builds
   * debian/control.lang.in: add libreoffice-{hyphenation,spellcheck}-xy
     unconditionally for all languages
   * debian/control.in: set Rules-Requires-Root: no
