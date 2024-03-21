@@ -248,11 +248,11 @@ ifeq ($(filter noinsttest,$(DEB_BUILD_PROFILES)),)
   endif
 endif
 
-ifneq ($(MAKECMDGOALS),build-indep)
+ifneq ($(MAKECMDGOALS),binary-indep)
 ENABLE_SYMBOLS=y
 SMALL_SYMBOLS=y
 endif
-ifeq ($(MAKECMDGOALS),build-indep)
+ifeq ($(MAKECMDGOALS),binary-indep)
 # no need to do a double build...
 BUILD_NOGUI_PACKAGES=n
 # go sure
@@ -463,7 +463,7 @@ SYSTEM_STUFF += frozen
 SYSTEM_STUFF += argon2
 
 # override stuff for build-indep to save build dependencies
-ifeq ($(MAKECMDGOALS),build-indep)
+ifeq ($(MAKECMDGOALS),binary-indep)
 ENABLE_EVOAB=n
 BUILD_GTK3=n
 ENABLE_INTROSPECTION=n
@@ -1212,7 +1212,7 @@ endif
         BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.15.1-4) [$(filter $(OOO_CHECK_ARCHS),$(OOO_ARCHS))] <!nocheck>
       endif
     endif
-    ifeq ($(MAKECMDGOALS),build-indep)
+    ifeq ($(MAKECMDGOALS),binary-indep)
 	CONFIGURE_FLAGS_INDEP += --without-cppunit
     endif
   endif
