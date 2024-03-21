@@ -483,6 +483,7 @@ ENABLE_SKIA=n
 ENABLE_COINMP=n
 ENABLE_LPSOLVE=n
 USE_GSTREAMER=n
+ENABLE_LDAP=n
 endif
 
 # Default flags to pass to configure
@@ -1513,7 +1514,7 @@ ifneq (,$(filter lcms2, $(SYSTEM_STUFF)))
 endif
 
 ifneq (,$(filter openldap, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libldap-dev
+	BUILD_DEPS_ARCH += , libldap-dev
 endif
 
 ifneq (,$(filter liblangtag, $(SYSTEM_STUFF)))
