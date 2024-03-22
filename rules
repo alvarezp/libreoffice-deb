@@ -485,6 +485,8 @@ ENABLE_LPSOLVE=n
 USE_GSTREAMER=n
 ENABLE_LDAP=n
 ENABLE_PDFIUM=n
+ENABLE_DBUS=n
+ENABLE_AVAHI=n
 endif
 
 # Default flags to pass to configure
@@ -1713,7 +1715,7 @@ else
 endif
 
 ifeq "$(USE_DBUS)" "y"
-	BUILD_DEPS += , libdbus-1-dev
+	BUILD_DEPS_ARCH += , libdbus-1-dev
 	CONFIGURE_FLAGS += --enable-dbus
   ifeq "$(ENABLE_BLUETOOTH)" "y"
 	BUILD_DEPS += , libglib2.0-dev
@@ -1729,7 +1731,7 @@ ifeq "$(USE_DBUS)" "y"
 endif
 
 ifeq "$(ENABLE_AVAHI)" "y"
-	BUILD_DEPS += , libavahi-client-dev
+	BUILD_DEPS_ARCH += , libavahi-client-dev
 	CONFIGURE_FLAGS += --enable-avahi
 endif
 
