@@ -1,9 +1,9 @@
-libreoffice (4:24.2.2~rc2~git20240321-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.2~rc2-1) experimental; urgency=medium
 
   * debian/patches/python-3.12.diff: add from libreoffice-24-2 branch;
     only a warning here but probably senseful to have anyway
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules:
     - build-depend on python3-setuptools instead of
@@ -29,7 +29,7 @@ libreoffice (4:24.2.2~rc2~git20240321-1) UNRELEASED; urgency=medium
   * debian/control.in: add replaces to libreoffice-common on
     libreoffice-help-common for the images_helpimg.zip move
 
- -- Rene Engelhard <rene@debian.org>  Sat, 16 Mar 2024 16:50:52 +0100
+ -- Rene Engelhard <rene@debian.org>  Fri, 22 Mar 2024 20:37:15 +0100
 
 libreoffice (4:24.2.2~rc1-2) experimental; urgency=medium
 
