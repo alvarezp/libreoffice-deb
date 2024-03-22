@@ -8,16 +8,21 @@ libreoffice (4:24.2.2~rc2~git20240321-1) UNRELEASED; urgency=medium
   * debian/rules:
     - build-depend on python3-setuptools instead of
       python3-distutils (closes: #1065893) 
-    - move fontforge to B-D-I and rebuild opens___.ttf as before. Make
-      arch-dep builds use fonts-opensymbol and it's copy.
-      Implement build profiles to change behaviour here should there
-      ever be need for it.
+    - move images_helpimg.zip to libreoffice-help-common
     - don't make build: call build-arch and build-indep manually but
       depend on it (and $(STAMP_DIR)/prepare)
-    - move images_helpimg.zip to libreoffice-help-common
-    - aggressively disable unneeded stuff for build-indep builds we don't
-      need for generating the indep stuff. Move their build deps to
-      Build-Depends-Arch:. Update install-common to work again
+    - reduce some build-deps to make transitions easier with all the
+      build-deps we have:
+      + move fontforge to B-D-I and rebuild opens___.ttf as before. Make
+        arch-dep builds use fonts-opensymbol and it's copy as it's already
+        thre.
+        Implement build profiles to change behaviour here should there
+        ever be need for it (e.g. if one needed a new version of
+        opensymbol for the tests and it's not available (yet)).
+      + aggressively disable unneeded stuff for build-indep builds we don't
+        need for generating the indep stuff. Move their build deps to
+        Build-Depends-Arch:. Work around install failures for the KDE stuff in
+        install-common
     - move install of the lokit and gir stuff from install-common to
       install-arch, both libreofficekit-dev and gir1.2-lokdocview-0.1
       are arch-dep anyway
