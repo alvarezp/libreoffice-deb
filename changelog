@@ -1,3 +1,11 @@
+libreoffice (4:24.2.2~rc2-2) experimental; urgency=medium
+
+  * debian/rules:
+    - explicitely --disable-* GTK3/dbus/gpgmepp if not to be enabled 
+    - fix DBUS disabling for build-indep
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 27 Mar 2024 17:23:35 +0000
+
 libreoffice (4:24.2.2~rc2-1) experimental; urgency=medium
 
   * debian/patches/python-3.12.diff: add from libreoffice-24-2 branch;

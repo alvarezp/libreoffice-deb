@@ -485,7 +485,7 @@ ENABLE_LPSOLVE=n
 USE_GSTREAMER=n
 ENABLE_LDAP=n
 ENABLE_PDFIUM=n
-ENABLE_DBUS=n
+USE_DBUS=n
 ENABLE_AVAHI=n
 endif
 
@@ -1626,6 +1626,8 @@ ifeq "$(BUILD_GTK3)" "y"
 	# explicitely disable it if not wanted as t is auto-enabled if the above is there
 	CONFIGURE_FLAGS += --disable-atspi-tests
   endif
+else
+	CONFIGURE_FLAGS += --disable-gtk3
 endif
 
 ifeq "$(BUILD_GTK4)" "y"
@@ -1716,7 +1718,6 @@ endif
 
 ifeq "$(USE_DBUS)" "y"
 	BUILD_DEPS_ARCH += , libdbus-1-dev
-	CONFIGURE_FLAGS += --enable-dbus
   ifeq "$(ENABLE_BLUETOOTH)" "y"
 	BUILD_DEPS += , libglib2.0-dev
     ifneq (,$(filter bluez, $(SYSTEM_STUFF)))
@@ -1728,6 +1729,8 @@ ifeq "$(USE_DBUS)" "y"
   ifeq "$(ENABLE_PACKAGEKIT)" "y"
 	CONFIGURE_FLAGS += --enable-packagekit
   endif
+else
+	CONFIGURE_FLAGS += --disable-dbus
 endif
 
 ifeq "$(ENABLE_AVAHI)" "y"
@@ -1803,6 +1806,8 @@ ifeq "$(RUN_MAKE_CHECK)" "y"
 	BUILD_DEPS_ARCH += , gpgconf$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , gpg-agent$(OOO_NO_CHECK_ARCHS) <!nocheck>
 endif
+else
+	CONFIGURE_FLAGS += --disable-gpgmepp
 endif
 
 ifeq "$(ENABLE_GIO)" "y"
