@@ -19,33 +19,46 @@ libreoffice (4:24.8.0~alpha0~git20240321-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Sun, 11 Feb 2024 11:45:13 +0000
 
-libreoffice (4:24.2.2~rc2~git20240321-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.2~rc2-2) experimental; urgency=medium
+
+  * debian/rules:
+    - explicitely --disable-* GTK3/dbus/gpgmepp if not to be enabled 
+    - fix DBUS disabling for build-indep
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 27 Mar 2024 17:23:35 +0000
+
+libreoffice (4:24.2.2~rc2-1) experimental; urgency=medium
 
   * debian/patches/python-3.12.diff: add from libreoffice-24-2 branch;
     only a warning here but probably senseful to have anyway
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules:
     - build-depend on python3-setuptools instead of
       python3-distutils (closes: #1065893) 
-    - move fontforge to B-D-I and rebuild opens___.ttf as before. Make
-      arch-dep builds use fonts-opensymbol and it's copy.
-      Implement build profiles to change behaviour here should there
-      ever be need for it.
+    - move images_helpimg.zip to libreoffice-help-common
     - don't make build: call build-arch and build-indep manually but
       depend on it (and $(STAMP_DIR)/prepare)
-    - move images_helpimg.zip to libreoffice-help-common
-    - aggressively disable unneeded stuff for build-indep builds we don't
-      need for generating the indep stuff. Move their build deps to
-      Build-Depends-Arch:. Update install-common to work again
+    - reduce some build-deps to make transitions easier with all the
+      build-deps we have:
+      + move fontforge to B-D-I and rebuild opens___.ttf as before. Make
+        arch-dep builds use fonts-opensymbol and it's copy as it's already
+        thre.
+        Implement build profiles to change behaviour here should there
+        ever be need for it (e.g. if one needed a new version of
+        opensymbol for the tests and it's not available (yet)).
+      + aggressively disable unneeded stuff for build-indep builds we don't
+        need for generating the indep stuff. Move their build deps to
+        Build-Depends-Arch:. Work around install failures for the KDE stuff in
+        install-common
     - move install of the lokit and gir stuff from install-common to
       install-arch, both libreofficekit-dev and gir1.2-lokdocview-0.1
       are arch-dep anyway
   * debian/control.in: add replaces to libreoffice-common on
     libreoffice-help-common for the images_helpimg.zip move
 
- -- Rene Engelhard <rene@debian.org>  Sat, 16 Mar 2024 16:50:52 +0100
+ -- Rene Engelhard <rene@debian.org>  Fri, 22 Mar 2024 20:37:15 +0100
 
 libreoffice (4:24.2.2~rc1-2) experimental; urgency=medium
 
