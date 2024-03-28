@@ -4,6 +4,14 @@ libreoffice (4:24.2.3~rc1~git20240313-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
+libreoffice (4:24.2.2-1) unstable; urgency=medium
+
+  * LibreOffice 24.2.2 release (identical to rc2)
+
+  * upload to unstable
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 28 Mar 2024 08:28:58 +0000
+
 libreoffice (4:24.2.2~rc2-2) experimental; urgency=medium
 
   * debian/rules:
