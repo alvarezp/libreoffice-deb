@@ -2189,7 +2189,9 @@ endif
 ifeq "$(PACKAGE_LIBRELOGO)" "y"
 	cat debian/control.librelogo.in >> debian/control.new
 endif
+ifeq "$(ENABLE_FIREBIRD)" "y"
 	cat debian/control.firebird.in >> debian/control.new
+endif
 
 	perl -pi -e "s,%OOO_ARCHS%,$(OOO_ARCHS),g" debian/control.new
 	perl -pi -e "s,%OOO_NOGUI_ARCHS%,$(OOO_NOGUI_ARCHS),g" debian/control.new
@@ -2942,6 +2944,12 @@ ifeq "$(ENABLE_JAVA)" "y"
   endif
 endif
 
+ifeq "$(ENABLE_FIREBIRD)" "y"
+	mkdir -p $(PKGDIR)-sdbc-firebird/$(OODIR)/share/registry
+	mv $(PKGDIR)-common/$(OODIR)/share/registry/firebird_sdbc.xcd \
+		$(PKGDIR)-sdbc-firebird/$(OODIR)/share/registry
+endif
+
 ifeq "$(PACKAGE_SDK)" "y"
 	# move arch-indep stuff into a libreoffice-dev-common
 	mkdir -p $(PKGDIR)-dev-common/usr/include
@@ -3517,9 +3525,15 @@ ifeq "$(ENABLE_FIREBIRD)" "y"
 	done
   endif
 endif
+ifeq "$(ENABLE_MARIADB)" "y"
 	mkdir -p $(PKGDIR)-sdbc-mysql/$(OODIR)/program
 	mv $(PKGDIR)-base/$(OODIR)/program/libmysqlclo.so \
 		$(PKGDIR)-sdbc-mysql/$(OODIR)/program
+	# FIXME. Do in scp2
+	mkdir -p $(PKGDIR)-sdbc-mysql/$(OODIR)/share/registry
+	install -m644 instdir/share/registry/mysqlc.xcd \
+		$(PKGDIR)-sdbc-mysql/$(OODIR)/share/registry
+endif
 
 	mkdir -p $(PKGDIR)-base-drivers/$(OODIR)/program
 	for i in `find $(PKGDIR)-base/$(OODIR)/program/ -name "*.so" \

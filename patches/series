@@ -50,3 +50,4 @@ fix-system-abseil-build.diff
 fix-riscv64-bridge.diff
 pdfium-ports.diff
 python-3.12.diff
+split-sdbc-firebird-mariadb.diff
