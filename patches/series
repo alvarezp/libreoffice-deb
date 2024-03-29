@@ -16,7 +16,6 @@ make-package-modules-not-suck.diff
 mediwiki-oor-replace.diff
 debian-hardened-buildflags-CPPFLAGS.diff
 debian-hardened-buildflags-no-LO-fstack-protector-strong.diff
-remove-known-problematic-tests.diff
 disable-flaky-tests.diff
 #dont-touch-urd.diff
 fix-internal-hsqldb-build.diff

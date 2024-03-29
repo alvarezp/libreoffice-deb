@@ -1,9 +1,6 @@
-libreoffice (4:24.8.0~alpha0~git20240321-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~alpha0~git20240328-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
-
-  * debian/patches/remove-known-problematic-tests.diff: remove known
-    problematic test
 
   * debian/rules:
     - remove extra individual suggests on
