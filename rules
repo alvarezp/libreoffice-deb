@@ -462,7 +462,7 @@ SYSTEM_STUFF += libtiff
 SYSTEM_STUFF += frozen
 SYSTEM_STUFF += argon2
 
-# override stuff for build-indep to save build dependencies
+# override stuff for indep builds to save build dependencies
 ifeq ($(MAKECMDGOALS),binary-indep)
 ENABLE_EVOAB=n
 BUILD_GTK3=n
@@ -750,7 +750,7 @@ DEBHELPER_OPTIONS += -Nlibreoffice-core-nogui -Nlibreoffice-calc-nogui -Nlibreof
 endif
 
 ifeq "$(AUTOPKGTEST_BUILD)" "y"
-# as above (for build-indep), no need to do two builds here...
+# as above (for binary-indep), no need to do two builds here...
 # needs to be here since there is arch-specific rules before
 BUILD_NOGUI_PACKAGES=n
 # go sure
