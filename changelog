@@ -1,8 +1,24 @@
-libreoffice (4:24.2.3~rc1~git20240313-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.3~rc1~git20240330-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
+
+libreoffice (4:24.2.2-2) unstable; urgency=medium
+
+  * debian/patches/split-sdbc-firebird-mariadb.diff: create extra
+    {mysqlc,firebird_sdbc}.xcd as for evoab. Otherwise configuration
+    parts of it ends up (or not in indep builds) in libreoffice-commons
+    main.xcd
+  * debian/rules: 
+    - install new {mysqlc,firebird_sdbc}.xcd into the respective
+      packages
+    - build-depend on liborcus-dev (>> 0.19.2-3+b1) as for libxmlsec1-dev
+  * debian/libreoffice-sdbc-{mysql,firebird}.ucf: add 
+  * debian/control.in: add Breaks: -sdbc-{mysql,firebird} (<< 4:24.2.2-2)
+    to libreoffice-common
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 30 Mar 2024 09:30:30 +0000
 
 libreoffice (4:24.2.2-1) unstable; urgency=medium
 
@@ -37,7 +53,7 @@ libreoffice (4:24.2.2~rc2-1) experimental; urgency=medium
       build-deps we have:
       + move fontforge to B-D-I and rebuild opens___.ttf as before. Make
         arch-dep builds use fonts-opensymbol and it's copy as it's already
-        thre.
+        there.
         Implement build profiles to change behaviour here should there
         ever be need for it (e.g. if one needed a new version of
         opensymbol for the tests and it's not available (yet)).
