@@ -47,7 +47,7 @@ libreoffice (4:24.2.2~rc2-1) experimental; urgency=medium
       build-deps we have:
       + move fontforge to B-D-I and rebuild opens___.ttf as before. Make
         arch-dep builds use fonts-opensymbol and it's copy as it's already
-        thre.
+        there.
         Implement build profiles to change behaviour here should there
         ever be need for it (e.g. if one needed a new version of
         opensymbol for the tests and it's not available (yet)).
