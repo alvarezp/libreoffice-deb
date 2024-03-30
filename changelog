@@ -16,10 +16,17 @@ libreoffice (4:24.8.0~alpha0~git20240328-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Sun, 11 Feb 2024 11:45:13 +0000
 
+libreoffice (4:24.2.2-3) UNRELEASED; urgency=medium
+
+  * debian/rules: make -commons -mysql and -firebird Breaks: << 4:24.2.2-2~
+    to fix it in backports
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 30 Mar 2024 15:36:09 +0100
+
 libreoffice (4:24.2.2-2) unstable; urgency=medium
 
   * debian/patches/split-sdbc-firebird-mariadb.diff: create extra
-    {mysqlc,firebird_sdbc}.xcd add as for evoab. Otherwise configuration
+    {mysqlc,firebird_sdbc}.xcd as for evoab. Otherwise configuration
     parts of it ends up (or not in indep builds) in libreoffice-commons
     main.xcd
   * debian/rules: 
