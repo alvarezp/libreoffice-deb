@@ -4,6 +4,13 @@ libreoffice (4:24.2.3~rc1~git20240330-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
+libreoffice (4:24.2.2-3) UNRELEASED; urgency=medium
+
+  * debian/rules: make -commons -mysql and -firebird Breaks: << 4:24.2.2-2~
+    to fix it in backports
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 30 Mar 2024 15:36:09 +0100
+
 libreoffice (4:24.2.2-2) unstable; urgency=medium
 
   * debian/patches/split-sdbc-firebird-mariadb.diff: create extra
