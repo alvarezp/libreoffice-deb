@@ -1406,6 +1406,9 @@ endif
 
 ifneq (,$(filter orcus, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , liborcus-dev (>= 0.19.1), liborcus-dev (<< 0.20~)
+  ifneq ($(BOOKWORM_BACKPORT),y)
+	BUILD_DEPS += , liborcus-dev (>> 0.19.2-3+b1) [$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+  endif
 endif
 
 ifeq "$(ENABLE_XMLHELP)" "y"

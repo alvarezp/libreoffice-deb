@@ -4,8 +4,10 @@ libreoffice (4:24.2.2-2) UNRELEASED; urgency=medium
     {mysqlc,firebird_sdbc}.xcd add as for evoab. Otherwise configuration
     parts of it ends up (or not in indep builds) in libreoffice-commons
     main.xcd
-  * debian/rules: install new {mysqlc,firebird_sdbc}.xcd into the respective
-    packages
+  * debian/rules: 
+    - install new {mysqlc,firebird_sdbc}.xcd into the respective
+      packages
+    - build-depend on liborcus-dev (>> 0.19.2-3+b1) as for libxmlsec1-dev
   * debian/libreoffice-sdbc-{mysql,firebird}.ucf: add 
   * debian/control.in: add Breaks: -sdbc-{mysql,firebird} (<< 4:24.2.2-2)
     to libreoffice-common
