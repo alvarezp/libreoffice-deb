@@ -1,7 +1,7 @@
 libreoffice (4:24.2.2-2) unstable; urgency=medium
 
   * debian/patches/split-sdbc-firebird-mariadb.diff: create extra
-    {mysqlc,firebird_sdbc}.xcd add as for evoab. Otherwise configuration
+    {mysqlc,firebird_sdbc}.xcd as for evoab. Otherwise configuration
     parts of it ends up (or not in indep builds) in libreoffice-commons
     main.xcd
   * debian/rules: 
