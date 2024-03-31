@@ -2621,7 +2621,16 @@ endif
 install: $(STAMP_DIR)/install-common $(STAMP_DIR)/install-arch $(STAMP_DIR)/install-indep
 
 install-common: $(STAMP_DIR)/install-common
+ifeq ($(MAKECMDGOALS),binary)
 $(STAMP_DIR)/install-common: $(STAMP_DIR)/build-arch $(STAMP_DIR)/build-indep
+else
+ifeq ($(MAKECMDGOALS),binary-indep)
+$(STAMP_DIR)/install-common: $(STAMP_DIR)/build-indep
+endif
+ifeq ($(MAKECMDGOALS),binary-arch)
+$(STAMP_DIR)/install-common: $(STAMP_DIR)/build-arch
+endif
+endif
 	dh_testdir
 	dh_testroot
 
