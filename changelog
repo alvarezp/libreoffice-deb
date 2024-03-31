@@ -2,9 +2,13 @@ libreoffice (4:24.8.0~alpha0~git20240330-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
+ -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
+
+libreoffice (4:24.2.3~rc1~git20240331-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot
+
   * debian/rules:
-    - remove extra individual suggests on
-      libreoffice-{hyphenation,spellcheck}-xy
     - more target fixes to make Rules-Requires-Root: no work, make
       binary-{arch,indep} depend on prepare and build-{arch,indep} since
       with Rules-Requires-Root: no "build{-*}" is not calld anymore itself
@@ -12,18 +16,24 @@ libreoffice (4:24.8.0~alpha0~git20240330-1) UNRELEASED; urgency=medium
       $(STAMP_DIR)/build-{arch,indep}; only depend on build-arch/build-indep
       on binary-arch/binary-indep builds)
     - check for binary-indep instead of build-indep for arch-indep builds
-  * debian/control.lang.in: add libreoffice-{hyphenation,spellcheck}-xy
-    unconditionally for all languages
+    - remove extra individual Suggests on -{hyphenation,spellcheck}-xy
+    - remove firebird/KDE workerounds in install-common again; works without
+      with binary-indep/Rules-Requires-Root: no now
   * debian/control.in: set Rules-Requires-Root: no
+  * debian/control.lang.in: add Suggests on -{hyphenation,spellcheck}-xy
+    unconditionally for all languages
 
- -- Rene Engelhard <rene@debian.org>  Sun, 11 Feb 2024 11:45:13 +0000
+ -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
-libreoffice (4:24.2.2-3) UNRELEASED; urgency=medium
+libreoffice (4:24.2.2-3) unstable; urgency=medium
 
   * debian/rules: make -commons -mysql and -firebird Breaks: << 4:24.2.2-2~
     to fix it in backports
+  * debian/rules: guard firebird_sdbc.xcu install in install-common;
+    only try if it exists (as the qt/kde stuff) and add comment to the
+    build-indep check why
 
- -- Rene Engelhard <rene@debian.org>  Sat, 30 Mar 2024 15:36:09 +0100
+ -- Rene Engelhard <rene@debian.org>  Sun, 31 Mar 2024 12:25:17 +0200
 
 libreoffice (4:24.2.2-2) unstable; urgency=medium
 
