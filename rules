@@ -463,6 +463,11 @@ SYSTEM_STUFF += frozen
 SYSTEM_STUFF += argon2
 
 # override stuff for build-indep to save build dependencies
+# This is a hack. dpkg calls build-indep for -A so this is in effect.
+# but for the binary target it calls binary-indep which calls install etc
+# apparently without these. so those guards do not work if stuff is moved
+# in install-common. e.g. qt/kf5, firebird_sdbc.xcd. Those need to be guarded
+# with an if [ -f or similar
 ifeq ($(MAKECMDGOALS),build-indep)
 ENABLE_EVOAB=n
 BUILD_GTK3=n
