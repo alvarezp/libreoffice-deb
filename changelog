@@ -1,4 +1,4 @@
-libreoffice (4:24.2.2-3) UNRELEASED; urgency=medium
+libreoffice (4:24.2.2-3) unstable; urgency=medium
 
   * debian/rules: make -commons -mysql and -firebird Breaks: << 4:24.2.2-2~
     to fix it in backports
