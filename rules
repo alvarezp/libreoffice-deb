@@ -2953,9 +2953,11 @@ ifeq "$(ENABLE_JAVA)" "y"
 endif
 
 ifeq "$(ENABLE_FIREBIRD)" "y"
-	mkdir -p $(PKGDIR)-sdbc-firebird/$(OODIR)/share/registry
-	mv $(PKGDIR)-common/$(OODIR)/share/registry/firebird_sdbc.xcd \
-		$(PKGDIR)-sdbc-firebird/$(OODIR)/share/registry
+	if [ -f $(PKGDIR)-common/$(OODIR)/share/registry/firebird_sdbc.xcd ]; then \
+		mkdir -p $(PKGDIR)-sdbc-firebird/$(OODIR)/share/registry; \
+		mv $(PKGDIR)-common/$(OODIR)/share/registry/firebird_sdbc.xcd \
+			$(PKGDIR)-sdbc-firebird/$(OODIR)/share/registry; \
+	fi
 endif
 
 ifeq "$(PACKAGE_SDK)" "y"
