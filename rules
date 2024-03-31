@@ -2625,7 +2625,16 @@ endif
 install: $(STAMP_DIR)/install-common $(STAMP_DIR)/install-arch $(STAMP_DIR)/install-indep
 
 install-common: $(STAMP_DIR)/install-common
+ifeq ($(MAKECMDGOALS),binary)
 $(STAMP_DIR)/install-common: $(STAMP_DIR)/build-arch $(STAMP_DIR)/build-indep
+else
+ifeq ($(MAKECMDGOALS),binary-indep)
+$(STAMP_DIR)/install-common: $(STAMP_DIR)/build-indep
+endif
+ifeq ($(MAKECMDGOALS),binary-arch)
+$(STAMP_DIR)/install-common: $(STAMP_DIR)/build-arch
+endif
+endif
 	dh_testdir
 	dh_testroot
 
@@ -2659,44 +2668,34 @@ endif
 	# we need to do it here. If -kf5 isn't built
 	# there's no -kf5.install generated, so dh_missing complains later
 ifeq "$(ENABLE_QT5)" "y"
-	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt5lo.so ]; then \
-		mkdir -p debian/tmp/pkg/libreoffice-qt5/$(OODIR)/program; \
-		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt5lo.so\
-			debian/tmp/pkg/libreoffice-qt5/$(OODIR)/program; \
-	fi
+	mkdir -p debian/tmp/pkg/libreoffice-qt5/$(OODIR)/program
+	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt5lo.so\
+		debian/tmp/pkg/libreoffice-qt5/$(OODIR)/program
 endif
 ifeq "$(ENABLE_QT6)" "y"
-	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt6lo.so ]; then \
-		mkdir -p debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program; \
-		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt6lo.so\
-			debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program; \
-	fi
+	mkdir -p debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program
+	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_qt6lo.so\
+		debian/tmp/pkg/libreoffice-qt6/$(OODIR)/program
 endif
 ifeq "$(shell echo $(ENABLE_KF5)$(ENABLE_KF6) | grep -q y && echo true)" "true"
 ifeq "$(BUILD_PLASMA)" "y"
-	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf$(PLASMA_VERSION)be1lo.so ]; then \
-		mkdir -p debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program; \
-		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf$(PLASMA_VERSION)be1lo.so \
-			debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program; \
-	fi
+	mkdir -p debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program
+	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf$(PLASMA_VERSION)be1lo.so \
+		debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program
 	# remove other ones maybe built by --enable-kfX
 	rm -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/libkf*be1lo.so 
 else
 	rm -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/libkf*be1lo.so
 endif
 ifeq "$(ENABLE_KF5)" "y"
-	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf5lo.so ]; then \
-		mkdir -p debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program; \
-		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf5lo.so \
-			debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program; \
-	fi
+	mkdir -p debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program
+	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf5lo.so \
+		debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program
 endif
 ifeq "$(ENABLE_KF6)" "y"
-	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf6lo.so ]; then \
-		mkdir -p debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program; \
-		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf6lo.so \
-			debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program; \
-	fi
+	mkdir -p debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program
+	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libvclplug_kf6lo.so \
+		debian/tmp/pkg/libreoffice-kf6/$(OODIR)/program
 endif
 endif
 
