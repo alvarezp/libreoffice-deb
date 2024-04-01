@@ -6,7 +6,7 @@ libreoffice (4:24.2.3~rc1~git20240331-1) UNRELEASED; urgency=medium
     - more target fixes to make Rules-Requires-Root: no work, make
       binary-{arch,indep} depend on prepare and build-{arch,indep} since
       with Rules-Requires-Root: no "build{-*}" is not calld anymore itself
-    - fix install-common dependendies (needs to depend on
+    - fix install-common dependencies (needs to depend on
       $(STAMP_DIR)/build-{arch,indep}; only depend on build-arch/build-indep
       on binary-arch/binary-indep builds)
     - check for binary-indep instead of build-indep for arch-indep builds
