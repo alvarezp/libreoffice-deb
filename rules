@@ -263,6 +263,7 @@ endif
 
 ifeq "$(ENABLE_JAVA)" "y"
   SYSTEM_STUFF += beanshell
+  SYSTEM_STUFF += rhino
   SYSTEM_STUFF += hsqldb
 endif
 ENABLE_LPSOLVE=y
@@ -1698,6 +1699,9 @@ ifeq "$(ENABLE_JAVA)" "y"
  	DEBHELPER_OPTIONS += -Nlibreoffice-script-provider-bsh
   endif
   ifeq "$(ENABLE_SCRIPT_PROVIDER_JS)" "y"
+    ifneq (,$(filter rhino, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , librhino-java <!nojava>
+    endif
 	CONFIGURE_FLAGS += --enable-scripting-javascript
   else
 	CONFIGURE_FLAGS += --disable-scripting-javascript
@@ -4422,9 +4426,11 @@ ifeq "$(ENABLE_JAVA)" "y"
 			-Xlibreoffice-report-builder -Xbase-files; \
         done
 endif
+    ifeq (,$(filter rhino, $(SYSTEM_STUFF)))
 	# jh_depends adds a librhino-java Depends where we still use internal rhino
 	perl -pi -e "s/librhino-java//" \
 		debian/libreoffice-script-provider-js.substvars
+    endif
 ifeq "$(BUILD_TEST_PACKAGES)" "y"
 	perl -pi -e 's/junit4/junit4 $(JUNIT_MIN_VER)/' \
 		debian/libreoffice-subsequentcheckbase.substvars
