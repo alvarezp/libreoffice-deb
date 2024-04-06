@@ -1028,7 +1028,9 @@ endif
 ifneq (,$(filter xmlsec, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libxmlsec1-dev (>= 1.2.35)
   ifneq ($(BOOKWORM_BACKPORT),y)
-	BUILD_DEPS += , libxmlsec1-dev (>= 1.2.39-5) [$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+    ifneq (,$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS))))
+	BUILD_DEPS_ARCH += , libxmlsec1-dev (>= 1.2.39-5) [$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+    endif
   endif
 endif
 ifneq (,$(filter expat, $(SYSTEM_STUFF)))
@@ -1412,7 +1414,9 @@ endif
 ifneq (,$(filter orcus, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , liborcus-dev (>= 0.19.1), liborcus-dev (<< 0.20~)
   ifneq ($(BOOKWORM_BACKPORT),y)
-	BUILD_DEPS += , liborcus-dev (>> 0.19.2-3+b1) [$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+    ifneq (,$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS))))
+	BUILD_DEPS_ARCH += , liborcus-dev (>> 0.19.2-3+b1) [$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+    endif
   endif
 endif
 
