@@ -221,7 +221,8 @@ ifeq "$(BUILD_PLASMA)" "y"
        ENABLE_QT5=y
        KF5_QT5_DEPENDS := libreoffice-qt5 (= $${binary:Version})
      endif
-  else
+   endif
+   ifeq "$(PLASMA_VERSION)" "6"
 	ENABLE_KF6=y
 	# KF6 depends on Qt6
      ifeq "$(ENABLE_KF6)" "y"
