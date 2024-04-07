@@ -212,11 +212,11 @@ Build-Depends-Arch: at-spi2-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd6
                     libkf5i18n-dev,
                     libkf5kio-dev,
                     libkf5windowsystem-dev,
-                    libkf6config-dev,
-                    libkf6coreaddons-dev,
-                    libkf6i18n-dev,
-                    libkf6kio-dev,
-                    libkf6windowsystem-dev,
+                    libkf6config-dev [amd64],
+                    libkf6coreaddons-dev [amd64],
+                    libkf6i18n-dev [amd64],
+                    libkf6kio-dev [amd64],
+                    libkf6windowsystem-dev [amd64],
                     libldap-dev,
                     liblpsolve55-dev,
                     libmariadb-dev,
@@ -5343,7 +5343,7 @@ Description: office productivity suite -- KDE Frameworks 5 integration
  Picker when running under Plasma.
 
 Package: libreoffice-kf6
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
+Architecture: amd64
 Depends: libreoffice-core (= ${binary:Version}),
          ${kf6-qt6-depends},
          ${misc:Depends},

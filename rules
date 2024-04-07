@@ -209,7 +209,9 @@ PLASMA_VERSION=5
 ENABLE_QT5=n
 #QT5_MINVER=
 ENABLE_QT6=y
+ifeq "$(DEB_HOST_ARCH)" "amd64"
 ENABLE_KF6=y
+endif
 endif
 ifeq "$(BUILD_PLASMA)" "y"
    ifeq "$(PLASMA_VERSION)" "5"
@@ -1548,7 +1550,7 @@ ifeq "$(ENABLE_KF5)" "y"
 endif
 ifeq "$(ENABLE_KF6)" "y"
 	CONFIGURE_FLAGS += --enable-kf6
-	BUILD_DEPS_ARCH += , libkf6coreaddons-dev, libkf6i18n-dev, libkf6config-dev, libkf6windowsystem-dev, libkf6kio-dev
+	BUILD_DEPS_ARCH += , libkf6coreaddons-dev [amd64], libkf6i18n-dev [amd64], libkf6config-dev [amd64], libkf6windowsystem-dev [amd64], libkf6kio-dev [amd64]
 endif
 	PLASMA_ICONSET_DEP=libreoffice-style-breeze
 ifeq "$(ENABLE_QT5)" "y"

@@ -5,6 +5,7 @@ libreoffice (4:24.8.0~alpha0~git20240406-1) UNRELEASED; urgency=medium
   * debian/rules:
     - use system-rhino
     - enable libreoffice-kf6
+      (only on amd64 for now since it FTBFS ~anywhere right now)
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
