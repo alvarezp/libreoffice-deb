@@ -208,6 +208,8 @@ BUILD_PLASMA=y
 PLASMA_VERSION=5
 ENABLE_QT5=n
 #QT5_MINVER=
+ENABLE_QT6=y
+ENABLE_KF6=y
 endif
 ifeq "$(BUILD_PLASMA)" "y"
    ifeq "$(PLASMA_VERSION)" "5"
@@ -226,7 +228,6 @@ ifeq "$(BUILD_PLASMA)" "y"
      endif
   endif
 endif
-ENABLE_QT6=y
 # https://www.debian.org/doc/debian-policy/ says this is not defined and must
 # be ignored, but dh_strip mentions (and honours) it, so...
 ifneq (noautodbgsym,$(findstring noautodbgsym,$(DEB_BUILD_OPTIONS)))

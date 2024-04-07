@@ -1,9 +1,10 @@
-libreoffice (4:24.8.0~alpha0~git20240403-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~alpha0~git20240406-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
   * debian/rules:
     - use system-rhino
+    - enable libreoffice-kf6
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
