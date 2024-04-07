@@ -206,13 +206,18 @@ ifeq "$(ENABLE_GUI)" "y"
 BUILD_PLASMA=y
 # let's assume we won't ship two plasmas parallel..
 PLASMA_VERSION=5
-ENABLE_QT5=n
+# but both kf5/kf6 are supposed to be in parallel according to the Qt/KDE
+# maintainers
+ENABLE_QT5=y
 #QT5_MINVER=
+ENABLE_KF5=y
 ENABLE_QT6=y
 ifeq "$(DEB_HOST_ARCH)" "amd64"
 ENABLE_KF6=y
 endif
 endif
+# go sure. if we want plasma, we want kfX, too and if we want that
+# one we want qtX, too.
 ifeq "$(BUILD_PLASMA)" "y"
    ifeq "$(PLASMA_VERSION)" "5"
      ENABLE_KF5=y
