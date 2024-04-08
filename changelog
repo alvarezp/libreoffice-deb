@@ -1,3 +1,11 @@
+libreoffice (4:24.2.2-4) UNRELEASED; urgency=medium
+
+  * debian/rules: fix the ability to make make check failures not
+    fatal, don't let the value be overridden by the "smoketest-only"
+    fatal architectures 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 08 Apr 2024 05:05:06 +0200
+
 libreoffice (4:24.2.2-3) unstable; urgency=medium
 
   * debian/rules: make -commons -mysql and -firebird Breaks: << 4:24.2.2-2~
