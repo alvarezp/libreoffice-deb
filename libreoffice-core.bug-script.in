@@ -17,4 +17,4 @@ fi
 # installed VCLplugs
 echo "" >&3
 echo "Installed VCLplugs:" >&3
-dpkg -l libreoffice-gtk3 libreoffice-qt5 libreoffice-kf5 libreoffice-qt6 >&3
+dpkg -l libreoffice-gtk3 libreoffice-gtk4 libreoffice-qt5 libreoffice-kf5 libreoffice-qt6 libreoffice-kf6 >&3

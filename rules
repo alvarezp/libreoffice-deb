@@ -671,13 +671,16 @@ ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
   endif
   IGNORE_MAKE_FAILURES=-
   TEST_TIMEOUT := timeout --foreground --preserve-status -v -k 250m 200m
-  ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_CHECK_FATAL_ARCHS)))
+  ifeq "$(RUN_MAKE_CHECK)" "y"
+    ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_CHECK_FATAL_ARCHS)))
        IGNORE_MAKE_FAILURES:=
        TEST_TIMEOUT:=
-  endif
-  ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_SMOKETEST_FATAL_ARCHS)))
+    endif
+  else
+    ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_SMOKETEST_FATAL_ARCHS)))
        IGNORE_MAKE_FAILURES:=
        TEST_TIMEOUT:=
+    endif
   endif
 endif
 ifeq "$(RUN_MAKE_CHECK)" "y"
@@ -1033,7 +1036,9 @@ endif
 ifneq (,$(filter xmlsec, $(SYSTEM_STUFF)))
        BUILD_DEPS += , libxmlsec1-dev (>= 1.2.35)
   ifneq ($(BOOKWORM_BACKPORT),y)
-	BUILD_DEPS += , libxmlsec1-dev (>= 1.2.39-5) [$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+    ifneq (,$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS))))
+	BUILD_DEPS_ARCH += , libxmlsec1-dev (>= 1.2.39-5) [$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+    endif
   endif
 endif
 ifneq (,$(filter expat, $(SYSTEM_STUFF)))
@@ -1417,7 +1422,9 @@ endif
 ifneq (,$(filter orcus, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , liborcus-dev (>= 0.19.1), liborcus-dev (<< 0.20~)
   ifneq ($(BOOKWORM_BACKPORT),y)
-	BUILD_DEPS += , liborcus-dev (>> 0.19.2-3+b1) [$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+    ifneq (,$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS))))
+	BUILD_DEPS_ARCH += , liborcus-dev (>> 0.19.2-3+b1) [$(filter $(OOO_CHECK_ARCHS),$(filter-out i386,$(OOO_32BIT_ARCHS)))] <!nocheck>
+    endif
   endif
 endif
 
