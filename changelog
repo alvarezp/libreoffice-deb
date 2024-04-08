@@ -13,11 +13,14 @@ libreoffice (4:24.2.3~rc1~git20240331-1) UNRELEASED; urgency=medium
     - remove extra individual Suggests on -{hyphenation,spellcheck}-xy
     - remove firebird/KDE workerounds in install-common again; works without
       with binary-indep/Rules-Requires-Root: no now
+    - fix the ability to make make check failures not
+      fatal, don't let the value be overridden by the "smoketest-only"
+      fatal architectures 
   * debian/control.in: set Rules-Requires-Root: no
   * debian/control.lang.in: add Suggests on -{hyphenation,spellcheck}-xy
     unconditionally for all languages
 
- -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
+ -- Rene Engelhard <rene@debian.org>  Mon, 08 Apr 2024 05:05:06 +0200
 
 libreoffice (4:24.2.2-3) unstable; urgency=medium
 

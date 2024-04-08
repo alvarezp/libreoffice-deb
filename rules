@@ -661,13 +661,16 @@ ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
   endif
   IGNORE_MAKE_FAILURES=-
   TEST_TIMEOUT := timeout --foreground --preserve-status -v -k 250m 200m
-  ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_CHECK_FATAL_ARCHS)))
+  ifeq "$(RUN_MAKE_CHECK)" "y"
+    ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_CHECK_FATAL_ARCHS)))
        IGNORE_MAKE_FAILURES:=
        TEST_TIMEOUT:=
-  endif
-  ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_SMOKETEST_FATAL_ARCHS)))
+    endif
+  else
+    ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),$(OOO_SMOKETEST_FATAL_ARCHS)))
        IGNORE_MAKE_FAILURES:=
        TEST_TIMEOUT:=
+    endif
   endif
 endif
 ifeq "$(RUN_MAKE_CHECK)" "y"
