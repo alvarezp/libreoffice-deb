@@ -1,6 +1,6 @@
-libreoffice (4:24.2.3~rc1~git20240331-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.3~rc1-1) experimental; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules:
     - more target fixes to make Rules-Requires-Root: no work, make
@@ -20,7 +20,7 @@ libreoffice (4:24.2.3~rc1~git20240331-1) UNRELEASED; urgency=medium
   * debian/control.lang.in: add Suggests on -{hyphenation,spellcheck}-xy
     unconditionally for all languages
 
- -- Rene Engelhard <rene@debian.org>  Mon, 08 Apr 2024 05:05:06 +0200
+ -- Rene Engelhard <rene@debian.org>  Thu, 11 Apr 2024 19:59:04 +0200
 
 libreoffice (4:24.2.2-3) unstable; urgency=medium
 
