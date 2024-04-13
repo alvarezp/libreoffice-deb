@@ -1,4 +1,4 @@
-libreoffice (4:24.8.0~alpha0~git20240406-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~alpha0~git20240413-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
@@ -6,6 +6,8 @@ libreoffice (4:24.8.0~alpha0~git20240406-1) UNRELEASED; urgency=medium
     - use system-rhino
     - enable libreoffice-kf6
       (only on amd64 for now since it FTBFS ~anywhere right now)
+    - move rhino and bsh build-deps to Build-Depends-Indep: and build it
+      only in build-indep
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
