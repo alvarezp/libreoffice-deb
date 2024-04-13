@@ -3,16 +3,18 @@ libreoffice (4:24.2.3~rc1-1) experimental; urgency=medium
   * New upstream release candidate
 
   * debian/rules:
-    - more target fixes to make Rules-Requires-Root: no work, make
-      binary-{arch,indep} depend on prepare and build-{arch,indep} since
-      with Rules-Requires-Root: no "build{-*}" is not calld anymore itself
-    - fix install-common dependencies (needs to depend on
-      $(STAMP_DIR)/build-{arch,indep}; only depend on build-arch/build-indep
-      on binary-arch/binary-indep builds)
-    - check for binary-indep instead of build-indep for arch-indep builds
-    - remove extra individual Suggests on -{hyphenation,spellcheck}-xy
+    - more target fixes to make Rules-Requires-Root: no work
+      + make binary-{arch,indep} depend on prepare and build-{arch,indep} since
+        with Rules-Requires-Root: no "build{-*}" is not calld anymore itself
+      + fix install-common dependencies (needs to depend on
+        $(STAMP_DIR)/build-{arch,indep}; only depend on build-arch/build-indep
+        on binary-arch/binary-indep builds)
+    - check for binary-indep instead of build-indep for arch-indep builds as
+      Rules-Requires-Root: no builds now (onoy) call binary-indep without
+      build-indep before
     - remove firebird/KDE workerounds in install-common again; works without
       with binary-indep/Rules-Requires-Root: no now
+    - remove extra individual Suggests on -{hyphenation,spellcheck}-xy
     - fix the ability to ignore make check errors;
       don't let the value be overridden by the list of archs where
       "smoketest-only" is fatal
