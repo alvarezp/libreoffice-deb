@@ -20,7 +20,7 @@ libreoffice (4:24.2.3~rc1-1) experimental; urgency=medium
         $(STAMP_DIR)/build-{arch,indep}; only depend on build-arch/build-indep
         on binary-arch/binary-indep builds)
     - check for binary-indep instead of build-indep for arch-indep builds as
-      Rules-Requires-Root: no builds now (onoy) call binary-indep without
+      Rules-Requires-Root: no builds now (only) call binary-indep without
       build-indep before
     - remove firebird/KDE workerounds in install-common again; works without
       with binary-indep/Rules-Requires-Root: no now
