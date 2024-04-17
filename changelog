@@ -6,34 +6,44 @@ libreoffice (4:24.8.0~alpha0~git20240413-1) UNRELEASED; urgency=medium
     - use system-rhino
     - enable libreoffice-kf6
       (only on amd64 for now since it FTBFS ~anywhere right now)
-    - move rhino and bsh build-deps to Build-Depends-Indep: and build it
-      only in build-indep
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
-libreoffice (4:24.2.3~rc1~git20240331-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.3~rc1-2) unstable; urgency=medium
 
-  * New upstream snapshot
+  * upload to unstable
 
   * debian/rules:
-    - more target fixes to make Rules-Requires-Root: no work, make
-      binary-{arch,indep} depend on prepare and build-{arch,indep} since
-      with Rules-Requires-Root: no "build{-*}" is not calld anymore itself
-    - fix install-common dependencies (needs to depend on
-      $(STAMP_DIR)/build-{arch,indep}; only depend on build-arch/build-indep
-      on binary-arch/binary-indep builds)
-    - check for binary-indep instead of build-indep for arch-indep builds
-    - remove extra individual Suggests on -{hyphenation,spellcheck}-xy
+    - move bsh build-dep to Build-Depends-Indep: and build rhino
+      and bsh scripting only in build-indep
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 17 Apr 2024 17:40:08 +0200
+
+libreoffice (4:24.2.3~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/rules:
+    - more target fixes to make Rules-Requires-Root: no work
+      + make binary-{arch,indep} depend on prepare and build-{arch,indep} since
+        with Rules-Requires-Root: no "build{-*}" is not calld anymore itself
+      + fix install-common dependencies (needs to depend on
+        $(STAMP_DIR)/build-{arch,indep}; only depend on build-arch/build-indep
+        on binary-arch/binary-indep builds)
+    - check for binary-indep instead of build-indep for arch-indep builds as
+      Rules-Requires-Root: no builds now (only) call binary-indep without
+      build-indep before
     - remove firebird/KDE workerounds in install-common again; works without
       with binary-indep/Rules-Requires-Root: no now
-    - fix the ability to make make check failures not
-      fatal, don't let the value be overridden by the "smoketest-only"
-      fatal architectures 
+    - remove extra individual Suggests on -{hyphenation,spellcheck}-xy
+    - fix the ability to ignore make check errors;
+      don't let the value be overridden by the list of archs where
+      "smoketest-only" is fatal
   * debian/control.in: set Rules-Requires-Root: no
   * debian/control.lang.in: add Suggests on -{hyphenation,spellcheck}-xy
     unconditionally for all languages
 
- -- Rene Engelhard <rene@debian.org>  Mon, 08 Apr 2024 05:05:06 +0200
+ -- Rene Engelhard <rene@debian.org>  Thu, 11 Apr 2024 19:59:04 +0200
 
 libreoffice (4:24.2.2-3) unstable; urgency=medium
 
