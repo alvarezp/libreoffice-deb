@@ -3,7 +3,7 @@ libreoffice (4:24.2.3~rc1-3) unstable; urgency=medium
   * debian/rules:
     - revert bsh build change from -2 for now
 
- -- Rene Engelhard <rene@debian.org>  Wed, 17 Apr 2024 17:40:08 +0200
+ -- Rene Engelhard <rene@debian.org>  Wed, 17 Apr 2024 21:07:49 +0200
 
 libreoffice (4:24.2.3~rc1-2) unstable; urgency=medium
 
