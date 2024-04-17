@@ -1697,15 +1697,15 @@ ifeq "$(ENABLE_JAVA)" "y"
   endif
   ifeq "$(ENABLE_SCRIPT_PROVIDER_BSH)" "y"
     ifneq (,$(filter beanshell, $(SYSTEM_STUFF)))
-	BUILD_DEPS_INDEP += , libbsh-java <!nojava>
+	BUILD_DEPS += , libbsh-java <!nojava>
     endif
-	CONFIGURE_FLAGS_INDEP += --enable-scripting-beanshell
+	CONFIGURE_FLAGS += --enable-scripting-beanshell
   else
 	CONFIGURE_FLAGS += --disable-scripting-beanshell
  	DEBHELPER_OPTIONS += -Nlibreoffice-script-provider-bsh
   endif
   ifeq "$(ENABLE_SCRIPT_PROVIDER_JS)" "y"
-	CONFIGURE_FLAGS_INDEP += --enable-scripting-javascript
+	CONFIGURE_FLAGS += --enable-scripting-javascript
   else
 	CONFIGURE_FLAGS += --disable-scripting-javascript
 	DEBHELPER_OPTIONS += -Nlibreoffice-script-provider-js
@@ -2385,7 +2385,6 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--without-junit --without-cppunit \
 		--disable-ext-wiki-publisher \
-		--disable-scripting-beanshell --disable-scripting-javascript \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)" \
 		--disable-gui --disable-introspection --disable-qt5 --disable-kf5
@@ -2410,7 +2409,6 @@ endif
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--without-junit --without-cppunit \
 		--disable-ext-wiki-publisher \
-		--disable-scripting-beanshell --disable-scripting-javascript \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
 
