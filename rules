@@ -311,7 +311,6 @@ else
 PACKAGE_SDK_DOCS=y
 endif
 PACKAGE_LOKIT=y
-ENABLE_CHART_TESTS=n
 # will not work, uses schema/ stripped in the tarballs
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 ENABLE_EXPORT_VALIDATION_TESTS=n
@@ -1235,9 +1234,6 @@ endif
 	BUILD_DEPS += , junit4 $(JUNIT_MIN_VER) [$(OOO_JUNIT_ARCHS)] <!nocheck !nojava>
   else
 	CONFIGURE_FLAGS += --without-junit
-  endif
-  ifeq "$(ENABLE_CHART_TESTS)" "y"
-	CONFIGURE_FLAGS += --enable-chart-tests
   endif
   ifeq "$(ENABLE_EXPORT_VALIDATION_TESTS)" "y"
 	BUILD_DEPS += , libofficeotron-java$(OOO_NO_CHECK_ARCHS) <!nocheck !nojava>, libodfvalidator-java$(OOO_NO_CHECK_ARCHS) <!nocheck !nojava>
