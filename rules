@@ -2516,6 +2516,7 @@ endif
 	./autogen.sh $(CONFIGURE_FLAGS) $(CONFIGURE_FLAGS_TESTS) \
 		--disable-ext-wiki-publisher \
 		--without-doxygen --without-javadoc \
+		--disable-scripting-beanshell --disable-scripting-javascript \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
 
 ifeq "$(BUILD_TESTS)" "y"
