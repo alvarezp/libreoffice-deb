@@ -4,6 +4,9 @@ libreoffice (4:24.8.0~alpha0~git20240420-1) UNRELEASED; urgency=medium
 
   * debian/rules:
     - use system-rhino
+    - move bsh (and the new rhino) build-dep to Build-Depends-Indep: and
+      build rhino and bsh scripting only in build-indep (and disable bsh/rhino
+      for the "make check" configure call, too)
     - enable libreoffice-kf6
       (only on amd64 for now since it FTBFS ~anywhere right now)
 
