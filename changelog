@@ -4,6 +4,13 @@ libreoffice (4:24.2.3~rc2-1) experimental; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Mon, 29 Apr 2024 20:53:47 +0200
 
+libreoffice (4:24.2.3~rc1-3) unstable; urgency=medium
+
+  * debian/rules:
+    - revert bsh build change from -2 for now
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 17 Apr 2024 21:07:49 +0200
+
 libreoffice (4:24.2.3~rc1-2) unstable; urgency=medium
 
   * upload to unstable
@@ -26,7 +33,7 @@ libreoffice (4:24.2.3~rc1-1) experimental; urgency=medium
         $(STAMP_DIR)/build-{arch,indep}; only depend on build-arch/build-indep
         on binary-arch/binary-indep builds)
     - check for binary-indep instead of build-indep for arch-indep builds as
-      Rules-Requires-Root: no builds now (onoy) call binary-indep without
+      Rules-Requires-Root: no builds now (only) call binary-indep without
       build-indep before
     - remove firebird/KDE workerounds in install-common again; works without
       with binary-indep/Rules-Requires-Root: no now

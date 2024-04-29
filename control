@@ -39,6 +39,7 @@ Build-Depends: autoconf,
                libboost-iostreams-dev,
                libboost-locale-dev,
                libbox2d-dev,
+               libbsh-java <!nojava>,
                libcairo2-dev,
                libcdr-dev (<< 0.2~),
                libcdr-dev (>= 0.1),
@@ -241,7 +242,6 @@ Build-Depends-Indep: ant [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !p
                      gettext,
                      graphviz <!nodoc>,
                      junit4 <!nojava>,
-                     libbsh-java <!nojava>,
                      node-normalize.css,
                      node-prismjs,
                      rdfind,
@@ -256,7 +256,7 @@ Build-Conflicts: amd-libopencl1,
                  nvidia-libopencl1
 Standards-Version: 4.0.1
 Rules-Requires-Root: no
-Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-24.2
+Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
 Bugs: 
 Homepage: http://www.libreoffice.org
