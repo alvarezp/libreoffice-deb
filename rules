@@ -4181,7 +4181,7 @@ ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 	# move sw and writerfilter gdb helpers to writer-dbgsym
 	mkdir -p debian/.debhelper/libreoffice-writer/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program
 	mkdir -p debian/.debhelper/libreoffice-writer/dbgsym-root/usr/share/libreoffice/gdb/libreoffice/
-	for i in sw writerfilter; do \
+	for i in sw sw_writerfilter; do \
 		if [ -f debian/.debhelper/libreoffice-core/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program/lib$${i}lo.so-gdb.py ]; then \
 		mv debian/.debhelper/libreoffice-core/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program/lib$${i}lo.so-gdb.py \
 				debian/.debhelper/libreoffice-writer/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program/; \
