@@ -7,15 +7,15 @@ index abcb3a3e2593..35d45ad23413 100644
  			CC="$(CXX) $(gb_CXX03FLAGS)" LINK="$(CXX)" LIB="$(CXX)" \
  		    $(if $(MACOSX_SHELL_HACK), SHELL="$$$$ODK_BUILD_SHELL", ))) \
 -	$(if $(MACOSX_SHELL_HACK),&& rm -f "$$$$ODK_BUILD_SHELL")) \
--	    >$(call gb_CustomTarget_get_workdir,$(1))/log 2>&1 \
+-	    >$(gb_CustomTarget_workdir)/$(1)/log 2>&1 \
 -	|| (RET=$$$$? \
 -	    $(if $(MACOSX_SHELL_HACK), && rm -f "$$$$ODK_BUILD_SHELL" , ) \
--	    && cat $(call gb_CustomTarget_get_workdir,$(1))/log \
+-	    && cat $(gb_CustomTarget_workdir)/$(1)/log \
 -	    && exit $$$$RET)
 +	2>&1 )
  endif
  
- $(call gb_CustomTarget_get_workdir,$(1))/setsdkenv: \
+ $(gb_CustomTarget_workdir)/$(1)/setsdkenv: \
 diff --git a/solenv/gbuild/CppunitTest.mk b/solenv/gbuild/CppunitTest.mk
 index cfca2bbbf570..17c1070dcb12 100644
 --- a/solenv/gbuild/CppunitTest.mk

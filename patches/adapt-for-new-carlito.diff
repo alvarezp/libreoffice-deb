@@ -33,9 +33,9 @@ index 8b5834df94c6..39c0980bcdf7 100644
      OString aPath("//XShape[@text='New service request and approval; 18%']"_ostr);
      assertXPath(pXmlDoc, aPath, 1);
 -    // Expected something like 4 lines tall(1697), not 11 lines(3817).
--    CPPUNIT_ASSERT_EQUAL(OUString("1697"), getXPath(pXmlDoc, aPath, "sizeY"_ostr));
+-    CPPUNIT_ASSERT_EQUAL(u"1697"_ustr, getXPath(pXmlDoc, aPath, "sizeY"_ostr));
 +    // Expected something like 4 lines tall(2013), not 11 lines(3817).
-+    CPPUNIT_ASSERT_EQUAL(OUString("2013"), getXPath(pXmlDoc, aPath, "sizeY"_ostr));
++    CPPUNIT_ASSERT_EQUAL(u"2013"_ustr, getXPath(pXmlDoc, aPath, "sizeY"_ostr));
      // Expected some reasonable maximum text length for the label like 2350, not 881.
      sal_Int32 nTextLength = getXPath(pXmlDoc, aPath, "textMaximumFrameWidth"_ostr).toInt32();
      CPPUNIT_ASSERT_EQUAL(sal_Int32(2350), nTextLength);
