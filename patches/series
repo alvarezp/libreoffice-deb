@@ -50,3 +50,4 @@ fix-system-abseil-build.diff
 fix-riscv64-bridge.diff
 pdfium-ports.diff
 split-sdbc-firebird-mariadb.diff
+use-PyConfig.diff
