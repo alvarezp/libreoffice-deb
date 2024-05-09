@@ -52,3 +52,4 @@ pdfium-ports.diff
 split-sdbc-firebird-mariadb.diff
 use-PyConfig.diff
 reviewed-breakIterator-customizations.diff
+breakiterator-updates.diff
