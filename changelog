@@ -2,6 +2,9 @@ libreoffice (4:24.2.3-2) UNRELEASED; urgency=medium
 
   * debian/patches/use-PyConfig.diff: backport from master;
     fix build with python 3.13
+  * debian/patches/reviewed-breakIterator-customizations.diff: backport
+    from master; add tests to what is expected to not regress with
+    ICU 74/75 fixes/workarounds 
 
  -- Rene Engelhard <rene@debian.org>  Thu, 09 May 2024 10:07:20 +0200
 
