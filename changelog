@@ -10,6 +10,7 @@ libreoffice (4:24.8.0~alpha0~git20240510-1) UNRELEASED; urgency=medium
     - work around upstream wrong language setting in test files by
       build-depending on hyphen-hu; remove hyphen-es again since that test
       effectively was disabled
+  * debian/*.maintscript: long obsolete, remove
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 
