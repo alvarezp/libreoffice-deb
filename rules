@@ -1209,10 +1209,6 @@ endif
 
 	BUILD_DEPS_ARCH += , hunspell-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , hyphen-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
-	# For testTdf132599_frames_* in sw_layoutwriter3
-	# The text is english but LO suggests it wants hu-HU hyphenation
-	# patterns. badly formatted text?
-	BUILD_DEPS_ARCH += , hyphen-hu$(OOO_NO_CHECK_ARCHS) <!nocheck>
   endif
   # we don't run any cppunit check in all builds
   ifneq "$(AUTOPKGTEST_BUILD)" "y"
