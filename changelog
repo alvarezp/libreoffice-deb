@@ -7,6 +7,7 @@ libreoffice (4:24.8.0~alpha0~git20240511-1) UNRELEASED; urgency=medium
     - move bsh (and the new rhino) build-dep to Build-Depends-Indep: and
       build rhino and bsh scripting only in build-indep (and disable bsh/rhino
       for the "make check" configure call, too)
+    - remove obsolete dh_testroot in clean target
   * debian/*.maintscript: long obsolete, remove
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100

@@ -2010,7 +2010,6 @@ clean-debdir:
 	dh_clean
 
 clean:
-	dh_testroot
 	dh_testdir
 
 	if [ -f config.status ]; then \
