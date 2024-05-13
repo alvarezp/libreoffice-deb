@@ -629,7 +629,7 @@ OOO_CHECK_FATAL_ARCHS += armhf
 OOO_SMOKETEST_FATAL_ARCHS := $(OOO_ARCHS)
 
 # archs where the archive/ci runs autopkgtests
-OOO_AUTOPKGTEST_ARCHS := $(OOO_CHECK_ARCHS) i386 ppc64el s390x
+OOO_AUTOPKGTEST_ARCHS := $(OOO_CHECK_ARCHS) i386 ppc64el s390x riscv64
 
 ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
 PACKAGE_GEN=n
@@ -2291,6 +2291,13 @@ ifneq (,$(OOO_JUNIT_ARCHS))
 	sed -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
 		>> debian/tests/control.new < debian/tests/control.junit.in
 endif	    
+ifneq (,$(findstring riscv64,$(OOO_AUTOPKGTEST_ARCHS)))
+	# don't even try Calc tests on riscv64
+	perl -pi -e 's/Tests: uicheck-sd/Tests: uicheck-sd\nArchitecture: !riscv64/' debian/tests/control.new
+	sed -i "`grep -n -A1 uicheck-sc debian/tests/control | tail -n 1 | cut -d- -f1`s/riscv64 //" debian/tests/control.new
+	sed -i "`grep -n -A1 uicheck-sw debian/tests/control | tail -n 1 | cut -d- -f1`s/riscv64 //" debian/tests/control.new
+	#perl -pi -e 's/Tests: uicheck-uitest/Tests: uicheck-uitest\nArchitecture: !riscv64/' debian/tests/control.new
+endif 
 
 	diff -u debian/tests/control debian/tests/control.new && rm -f debian/tests/control.new || (\
 		echo "Generated control file differs! Check the result!"; \
