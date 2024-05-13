@@ -619,7 +619,7 @@ OOO_CHECK_FATAL_ARCHS += armhf
 OOO_SMOKETEST_FATAL_ARCHS := $(OOO_ARCHS)
 
 # archs where the archive/ci runs autopkgtests
-OOO_AUTOPKGTEST_ARCHS := $(OOO_CHECK_ARCHS) i386 ppc64el s390x
+OOO_AUTOPKGTEST_ARCHS := $(OOO_CHECK_ARCHS) armel i386 ppc64el s390x riscv64
 
 ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
 PACKAGE_GEN=n
