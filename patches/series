@@ -48,3 +48,4 @@ we-dont-have-the-needed-fonts.diff
 adapt-for-new-carlito.diff
 pdfium-ports.diff
 split-sdbc-firebird-mariadb.diff
+riscv-disable-NaN-test.diff

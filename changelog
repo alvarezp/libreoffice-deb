@@ -1,4 +1,7 @@
-libreoffice (4:24.8.0~alpha0~git20240511-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~alpha0~git20240513-1) UNRELEASED; urgency=medium
+
+  * debian/patches/riscv-disable-NaN-test.diff: disable the NaN test on riscv;
+    see below
 
   * New upstream snapshot 
 
@@ -9,6 +12,12 @@ libreoffice (4:24.8.0~alpha0~git20240511-1) UNRELEASED; urgency=medium
       for the "make check" configure call, too)
     - remove obsolete dh_testroot in clean target
   * debian/*.maintscript: long obsolete, remove
+  * debian/libreoffice-calc.{templates,config,postinst.in},
+    debian/po/*: add debconf note on riscv64 about NaN passing and Calc
+    maybe having problems (in the same idea as and under anticipation of
+    https://gerrit.libreoffice.org/c/core/+/165391 and until that one is in
+    upstream)
+  * debian/rules: add build-depends on po-debconf
 
  -- Rene Engelhard <rene@debian.org>  Tue, 12 Mar 2024 19:29:24 +0100
 

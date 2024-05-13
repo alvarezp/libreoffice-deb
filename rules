@@ -108,6 +108,7 @@ BUILD_DEPS=\
     libfreetype-dev,\
     libfontconfig-dev,\
     pkg-config,\
+    po-debconf,\
     unzip,\
     xsltproc,\
     zip,\
@@ -3159,7 +3160,7 @@ $(STAMP_DIR)/maintscripts: $(wildcard debian/shell-lib*.sh) $(wildcard debian/*.
 
 	# generate maintainer scripts from *.in
 	for PKG in $(PACKAGES); do \
-	  for FILE in postinst postrm preinst prerm triggers; do \
+	  for FILE in postinst postrm preinst prerm triggers config; do \
 	    MAINTSCRIPT=debian/$$PKG.$$FILE ; \
 	    if [ -e $$MAINTSCRIPT.in ]; then \
 	      sed -n '1,/^#INCLUDE_SHELL_LIB#$$/p' < $$MAINTSCRIPT.in | sed -e '/^#INCLUDE_SHELL_LIB#$$/d' > $$MAINTSCRIPT; \
@@ -3172,6 +3173,7 @@ $(STAMP_DIR)/maintscripts: $(wildcard debian/shell-lib*.sh) $(wildcard debian/*.
 	      sed -n '/^#INCLUDE_SHELL_LIB#$$/,$$p' < $$MAINTSCRIPT.in | sed -e '/^#INCLUDE_SHELL_LIB#$$/d' >> $$MAINTSCRIPT; \
 	      perl -pi -e "s/\@LANGPACKISOS\@/$(LANGPACKISOS)/" $$MAINTSCRIPT; \
 	      perl -pi -e "s,\@OODIR\@,$(OODIR),g" $$MAINTSCRIPT; \
+	      perl -pi -e "s,\@DEB_HOST_ARCH\@,$(DEB_HOST_ARCH),g" $$MAINTSCRIPT; \
 	    fi; \
 	  done; \
 	done
@@ -4110,7 +4112,7 @@ endif
 	dh_ucf -a
 	for i in $(ARCH_DEP_PACKAGES); do \
 		if [ -e debian/$$i.postinst.debhelper ] && grep -q ucf debian/$$i.postinst.debhelper; then \
-			sed -i "s/ucf\ /ucf --three-way /" debian/$$i.postinst.debhelper; \
+			sed -i "s/ucf\ /ucf --three-way --debconf-ok /" debian/$$i.postinst.debhelper; \
 			sed -i "s/ucfr\ /ucfr --force /" debian/$$i.postinst.debhelper; \
 		fi ; \
 		if [ -e debian/$$i.postrm.debhelper ] && grep -q ucf debian/$$i.postrm.debhelper; then \
