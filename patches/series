@@ -53,3 +53,4 @@ split-sdbc-firebird-mariadb.diff
 use-PyConfig.diff
 reviewed-breakIterator-customizations.diff
 breakiterator-updates.diff
+icu-74.1.diff

@@ -1,0 +1,105 @@
+From ae182240328f20508c7a8936daf74a088627540b Mon Sep 17 00:00:00 2001
+From: Taichi Haradaguchi <20001722@ymail.ne.jp>
+Date: Tue, 31 Oct 2023 19:46:23 +0900
+Subject: Update to ICU 74.1
+
+https://icu.unicode.org/download/74
+
+Unicode 15.1
+https://blog.unicode.org/2023/09/announcing-unicode-standard-version-151.html
+
+CLDR 44
+https://cldr.unicode.org/index/downloads/cldr-44
+
+New Unicode blocks:
+UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_I
+
+Change-Id: Ic9196e10138663d07235f5ebd9cc4bf3a9750824
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/158749
+Tested-by: Eike Rathke <erack@redhat.com>
+Reviewed-by: Eike Rathke <erack@redhat.com>
+---
+ configure.ac                                | 4 ++--
+ download.lst                                | 8 ++++----
+ external/icu/icu4c-khmerbreakengine.patch.1 | 1 -
+ include/svx/strings.hrc                     | 1 +
+ svx/source/dialog/charmap.cxx               | 5 +++++
+ 5 files changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 5954533a7f1b..b27504e56dac 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -11036,8 +11036,8 @@ fi
+ dnl ===================================================================
+ dnl Check for system icu
+ dnl ===================================================================
+-ICU_MAJOR=73
+-ICU_MINOR=2
++ICU_MAJOR=74
++ICU_MINOR=1
+ ICU_CFLAGS_internal="-I${WORKDIR}/UnpackedTarball/icu/source/i18n -I${WORKDIR}/UnpackedTarball/icu/source/common"
+ ICU_LIBS_internal="-L${WORKDIR}/UnpackedTarball/icu/source/lib"
+ libo_CHECK_SYSTEM_MODULE([icu],[ICU],[icu-i18n >= 66])
+diff --git a/download.lst b/download.lst
+index 59d7ae0ee360..0c4553a37dd7 100644
+--- a/download.lst
++++ b/download.lst
+@@ -317,10 +317,10 @@ IACCESSIBLE2_TARBALL := IAccessible2-1.3+git20231013.3d8c7f0.tar.gz
+ # three static lines
+ # so that git cherry-pick
+ # will not run into conflicts
+-ICU_SHA256SUM := 818a80712ed3caacd9b652305e01afc7fa167e6f2e94996da44b90c2ab604ce1
+-ICU_TARBALL := icu4c-73_2-src.tgz
+-ICU_DATA_SHA256SUM := ca1ee076163b438461e484421a7679fc33a64cd0a54f9d4b401893fa1eb42701
+-ICU_DATA_TARBALL := icu4c-73_2-data.zip
++ICU_SHA256SUM := 86ce8e60681972e60e4dcb2490c697463fcec60dd400a5f9bffba26d0b52b8d0
++ICU_TARBALL := icu4c-74_1-src.tgz
++ICU_DATA_SHA256SUM := 67d5ab39c5187e1dd0fed60a3fe52794dce9784b4c045cb85e19f5d317fd783f
++ICU_DATA_TARBALL := icu4c-74_1-data.zip
+ # three static lines
+ # so that git cherry-pick
+ # will not run into conflicts
+diff --git a/external/icu/icu4c-khmerbreakengine.patch.1 b/external/icu/icu4c-khmerbreakengine.patch.1
+index 605914014e96..db8ac50e6f75 100644
+--- a/external/icu/icu4c-khmerbreakengine.patch.1
++++ b/external/icu/icu4c-khmerbreakengine.patch.1
+@@ -796,7 +796,6 @@ diff -ur icu.org/source/common/dictionarydata.cpp icu/source/common/dictionaryda
+              if (wordCount < limit) {
+                  if (values != nullptr) {
+                      values[wordCount] = bt.getValue();
+-
+ diff -ur icu.org/source/common/dictionarydata.h icu/source/common/dictionarydata.h
+ --- icu.org/source/common/dictionarydata.h	2023-06-14 06:23:55.000000000 +0900
+ +++ icu/source/common/dictionarydata.h	2023-06-26 17:43:53.097724900 +0900
+diff --git a/include/svx/strings.hrc b/include/svx/strings.hrc
+index 13f896f04eeb..b8e69dc3dbe1 100644
+--- a/include/svx/strings.hrc
++++ b/include/svx/strings.hrc
+@@ -1790,6 +1790,7 @@
+ #define RID_SUBSETSTR_KAKTOVIK_NUMERALS                     NC_("RID_SUBSETMAP", "Kaktovik Numerals")
+ #define RID_SUBSETSTR_KAWI                                  NC_("RID_SUBSETMAP", "Kawi")
+ #define RID_SUBSETSTR_NAG_MUNDARI                           NC_("RID_SUBSETMAP", "Nag Mundari")
++#define RID_SUBSETSTR_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_I    NC_("RID_SUBSETMAP", "CJK Unified Ideographs Extension I")
+ 
+ #define RID_SVXSTR_FRAMEDIR_LTR                             NC_("RID_SVXSTR_FRAMEDIR_LTR", "Left-to-right (LTR)")
+ #define RID_SVXSTR_FRAMEDIR_RTL                             NC_("RID_SVXSTR_FRAMEDIR_RTL", "Right-to-left (RTL)")
+diff --git a/svx/source/dialog/charmap.cxx b/svx/source/dialog/charmap.cxx
+index ed0c626b59c6..a73b0e263d60 100644
+--- a/svx/source/dialog/charmap.cxx
++++ b/svx/source/dialog/charmap.cxx
+@@ -1923,6 +1923,11 @@ void SubsetMap::InitList()
+                 case UBLOCK_NAG_MUNDARI:
+                     aAllSubsets.emplace_back( 0x1E4D0, 0x1E4FF, SvxResId(RID_SUBSETSTR_NAG_MUNDARI) );
+                     break;
++#endif
++#if (U_ICU_VERSION_MAJOR_NUM >= 74)
++                case UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_I:
++                    aAllSubsets.emplace_back( 0x2EBF0, 0x2EE5F, SvxResId(RID_SUBSETSTR_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_I) );
++                    break;
+ #endif
+             }
+ 
+-- 
+cgit v1.2.3
+

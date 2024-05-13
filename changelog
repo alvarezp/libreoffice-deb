@@ -8,6 +8,8 @@ libreoffice (4:24.2.3-2) UNRELEASED; urgency=medium
   * debian/patches/breakiterator-updates.diff: backport from master; re-bases
     the BreakIterator rule customizations on top of a clean copy of the ICU
     74.2 rules. Fixes build with ICU 74 and 75
+  * debian/patches/icu-74.1.diff: new unicode stuff for ICU 74+, for
+    completeness
 
  -- Rene Engelhard <rene@debian.org>  Thu, 09 May 2024 10:07:20 +0200
 
