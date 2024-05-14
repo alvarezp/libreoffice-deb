@@ -167,14 +167,14 @@ Build-Depends-Arch: at-spi2-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd6
                     dbus-x11 [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     firebird-dev [!m68k],
                     firebird3.0-server-core [!m68k] <!nocheck>,
-                    fontconfig [amd64 arm64 armhf i386 ppc64el s390x riscv64] <!nocheck>,
-                    fonts-crosextra-caladea [amd64 arm64 armhf i386 ppc64el s390x riscv64] <!nocheck>,
-                    fonts-crosextra-carlito (>= 20230309) [amd64 arm64 armhf i386 ppc64el s390x riscv64] <!nocheck>,
-                    fonts-dejavu [amd64 arm64 armhf i386 ppc64el s390x riscv64] <!nocheck>,
-                    fonts-hosny-amiri [amd64 arm64 armhf i386 ppc64el s390x riscv64] <!nocheck>,
-                    fonts-liberation (>= 1:2) [amd64 arm64 armhf i386 ppc64el s390x riscv64] <!nocheck>,
-                    fonts-linuxlibertine [amd64 arm64 armhf i386 ppc64el s390x riscv64] <!nocheck>,
-                    fonts-noto-core [amd64 arm64 armhf i386 ppc64el s390x riscv64] <!nocheck>,
+                    fontconfig [amd64 arm64 armhf armel i386 ppc64el s390x riscv64] <!nocheck>,
+                    fonts-crosextra-caladea [amd64 arm64 armhf armel i386 ppc64el s390x riscv64] <!nocheck>,
+                    fonts-crosextra-carlito (>= 20230309) [amd64 arm64 armhf armel i386 ppc64el s390x riscv64] <!nocheck>,
+                    fonts-dejavu [amd64 arm64 armhf armel i386 ppc64el s390x riscv64] <!nocheck>,
+                    fonts-hosny-amiri [amd64 arm64 armhf armel i386 ppc64el s390x riscv64] <!nocheck>,
+                    fonts-liberation (>= 1:2) [amd64 arm64 armhf armel i386 ppc64el s390x riscv64] <!nocheck>,
+                    fonts-linuxlibertine [amd64 arm64 armhf armel i386 ppc64el s390x riscv64] <!nocheck>,
+                    fonts-noto-core [amd64 arm64 armhf armel i386 ppc64el s390x riscv64] <!nocheck>,
                     fonts-opensymbol <!pkg.libreoffice.opensymbolbuild>,
                     gdb [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     ghostscript [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
@@ -5263,8 +5263,8 @@ Description: office productivity suite -- GTK+ 3 integration
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains the Gtk plugin for drawing LibreOffices widgets
- with Gtk+ 3 and Gtk/GNOMEish print dialog when running under GNOME.
+ This package contains the GTK+ plugin for drawing LibreOffices widgets
+ with GTK+ 3 and GTK+/GNOMEish print dialog when running under GNOME.
 
 Package: gir1.2-lokdocview-0.1
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
@@ -5273,8 +5273,8 @@ Build-Profiles: <!nogir>
 Depends: liblibreofficekitgtk (= ${binary:Version}),
          ${gir:Depends},
          ${misc:Depends}
-Description: GTK3 widget wrapping LibreOffice functionality - introspection
- LOKDocView is the GTK3 widget that wraps the libreoffice functionality and
+Description: GTK+ 3 widget wrapping LibreOffice functionality - introspection
+ LOKDocView is the GTK+ 3 widget that wraps the libreoffice functionality and
  exposes a simple API for applications to use this widget.
  .
  This package contains the Introspection data.
@@ -5286,7 +5286,7 @@ Depends: libreofficekit-data, ${misc:Depends}, ${shlibs:Depends}
 Replaces: libreoffice-gtk3 (<< 1:5.2.0~)
 Breaks: libreoffice-gtk3 (<< 1:5.2.0~)
 Recommends: libreoffice-gtk3
-Description: GTK3 widget wrapping LibreOffice functionality
+Description: GTK+ 3 widget wrapping LibreOffice functionality
  This package contains a (basic) GTK+ document viewer widget (used
  by e.g. LOKDocView)
 
@@ -5296,7 +5296,7 @@ Section: web
 Depends: ${misc:Depends}
 Recommends: gir1.2-lokdocview-0.1
 Description: common data for LOKDocView
- LOKDocView is the GTK3 widget that wraps the libreoffice functionality and
+ LOKDocView is the GTK+ 3 widget that wraps the libreoffice functionality and
  exposes a simple API for applications to use this widget.
  .
  This package contains architecture-independent data (e.g. the selection
@@ -5311,12 +5311,12 @@ Suggests: libreofficekit-data
 Replaces: libreoffice-core (<< 4:7.6.0~rc2)
 Section: gnome
 Enhances: libreoffice
-Description: office productivity suite -- GTK+ 4 integration
+Description: office productivity suite -- GTK 4 integration
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains the Gtk plugin for drawing LibreOffices widgets
- with Gtk+ 4 and Gtk/GNOMEish print dialog.
+ This package contains the GTK plugin for drawing LibreOffices widgets
+ with GTK 4 and GTK/GNOMEish print dialog.
  .
  You need to enable it manually by export SAL_USE_VCLPLUGIN=gtk4.
 

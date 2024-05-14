@@ -55,6 +55,8 @@ libreoffice (4:24.2.3~rc1-2) unstable; urgency=medium
 libreoffice (4:24.2.3~rc1-1) experimental; urgency=medium
 
   * New upstream release candidate
+    - fixes CVE-2024-3044 ("Graphic on-click binding allows unchecked script
+      execution")
 
   * debian/rules:
     - more target fixes to make Rules-Requires-Root: no work

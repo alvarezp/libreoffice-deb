@@ -207,9 +207,8 @@ ifeq "$(ENABLE_GUI)" "y"
 BUILD_PLASMA=y
 # let's assume we won't ship two plasmas parallel..
 PLASMA_VERSION=5
-# but both kf5/kf6 are supposed to be in parallel according to the Qt/KDE
-# maintainers
-ENABLE_QT5=y
+PLASMA_KF_VERSION=$(PLASMA_VERSION)
+ENABLE_QT5=n
 #QT5_MINVER=
 ENABLE_KF5=y
 ENABLE_QT6=y
@@ -629,7 +628,7 @@ OOO_CHECK_FATAL_ARCHS += armhf
 OOO_SMOKETEST_FATAL_ARCHS := $(OOO_ARCHS)
 
 # archs where the archive/ci runs autopkgtests
-OOO_AUTOPKGTEST_ARCHS := $(OOO_CHECK_ARCHS) i386 ppc64el s390x riscv64
+OOO_AUTOPKGTEST_ARCHS := $(OOO_CHECK_ARCHS) armel i386 ppc64el s390x riscv64
 
 ifeq (alpha,$(findstring $(DEB_HOST_ARCH),$(OOO_ARCHS)))
 PACKAGE_GEN=n
@@ -2192,6 +2191,7 @@ ifeq "$(ENABLE_QT6)" "y"
 endif
 ifeq "$(BUILD_PLASMA)" "y"
 	sed -e "s|@PLASMA_VERSION@|$(PLASMA_VERSION)|g" \
+		-e "s|@PLASMA_KF_VERSION@|$(PLASMA_KF_VERSION)|g" \
 	        >> debian/control.new < debian/control.plasma.in
 endif
 	cat debian/control.postgresql.in >> debian/control.new
