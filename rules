@@ -2002,7 +2002,7 @@ clean-debdir:
 
 	rm -f debian/libreoffice-help-*.lintian-overrides
 	rm -f debian/*.install debian/*.dirs debian/*.changelog
-	rm -f debian/*.postinst debian/*.postrm debian/*.preinst debian/*.prerm debian/*.triggers
+	rm -f debian/*.postinst debian/*.postrm debian/*.preinst debian/*.prerm debian/*.triggers debian/*.config
 	rm -f debian/pom*.xml
 
 	rm -rf $(CURDIR)/debian/locales
