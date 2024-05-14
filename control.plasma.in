@@ -10,5 +10,5 @@ Description: office productivity suite -- some Plasma integration
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains some minor Plasma integration (like AppData
- and "Create New..." integration) and a KDE/KF5 configuration backend.
+ and "Create New..." integration) and a KDE/KF@PLASMA_KF_VERSION@ configuration backend.
 

@@ -206,6 +206,7 @@ ifeq "$(ENABLE_GUI)" "y"
 BUILD_PLASMA=y
 # let's assume we won't ship two plasmas parallel..
 PLASMA_VERSION=5
+PLASMA_KF_VERSION=$(PLASMA_VERSION)
 ENABLE_QT5=n
 #QT5_MINVER=
 endif
@@ -2185,6 +2186,7 @@ ifeq "$(ENABLE_QT6)" "y"
 endif
 ifeq "$(BUILD_PLASMA)" "y"
 	sed -e "s|@PLASMA_VERSION@|$(PLASMA_VERSION)|g" \
+		-e "s|@PLASMA_KF_VERSION@|$(PLASMA_KF_VERSION)|g" \
 	        >> debian/control.new < debian/control.plasma.in
 endif
 	cat debian/control.postgresql.in >> debian/control.new
