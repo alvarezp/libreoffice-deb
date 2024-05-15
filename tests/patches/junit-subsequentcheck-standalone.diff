@@ -68,7 +68,7 @@ index cff4299bf06e..76765351abdd 100644
 @@ -46,7 +46,7 @@ $(call gb_Helper_abbreviate_dirs,\
  			$(filter-out $(JARDEPS) $(T_JAVA9FILES),$(4))) && \
  		$(if $(3),$(call gb_JavaClassSet_JAVACCOMMAND,$(JAVA_TARGET_VER)) \
- 			$(gb_JavaClassSet_JAVACDEBUG) \
+ 			$(if $(call gb_target_symbols_enabled,$(2)),$(gb_JavaClassSet_JAVACDEBUG)) \
 -			-classpath "$(T_CP)$(gb_CLASSPATHSEP)$(call gb_JavaClassSet_get_classdir,$(2))" \
 +			-classpath "$(T_CP)$(gb_CLASSPATHSEP)$(call gb_JavaClassSet_get_classdir,$(2))$(gb_CLASSPATHSEP)$(shell echo $(wildcard /usr/lib/libreoffice/program/classes/*.jar) | sed -e s/\ /:/g)" \
  			-d $(call gb_JavaClassSet_get_classdir,$(2)) \
@@ -77,7 +77,7 @@ index cff4299bf06e..76765351abdd 100644
 @@ -55,7 +55,7 @@ $(call gb_Helper_abbreviate_dirs,\
  				$(T_JAVA9FILES)) && \
  			$(if $(3),$(call gb_JavaClassSet_JAVACCOMMAND,9) \
- 				$(gb_JavaClassSet_JAVACDEBUG) \
+ 				$(if $(call gb_target_symbols_enabled,$(2)),$(gb_JavaClassSet_JAVACDEBUG)) \
 -				-classpath "$(T_CP)$(gb_CLASSPATHSEP)$(call gb_JavaClassSet_get_classdir,$(2))" \
 +				-classpath "$(T_CP)$(gb_CLASSPATHSEP)$(call gb_JavaClassSet_get_classdir,$(2))$(gb_CLASSPATHSEP)$(shell echo $(wildcard /usr/lib/libreoffice/program/classes/*.jar) | sed -e s/\ /:/g)" \
  				--module-path "$(T_CP)$(gb_CLASSPATHSEP)$(call gb_JavaClassSet_get_classdir,$(2))" \
