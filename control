@@ -208,6 +208,11 @@ Build-Depends-Arch: at-spi2-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd6
                     libkf5i18n-dev,
                     libkf5kio-dev,
                     libkf5windowsystem-dev,
+                    libkf6config-dev [amd64],
+                    libkf6coreaddons-dev [amd64],
+                    libkf6i18n-dev [amd64],
+                    libkf6kio-dev [amd64],
+                    libkf6windowsystem-dev [amd64],
                     libldap-dev,
                     liblpsolve55-dev,
                     libmariadb-dev,
@@ -5335,6 +5340,22 @@ Description: office productivity suite -- KDE Frameworks 5 integration
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the KF5 plugin for LibreOffice and a KF5-based File
+ Picker when running under Plasma.
+
+Package: libreoffice-kf6
+Architecture: amd64
+Depends: libreoffice-core (= ${binary:Version}),
+         ${kf6-qt6-depends},
+         ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: ${plasma-iconset-dep}
+Section: kde
+Enhances: libreoffice
+Description: office productivity suite -- KDE Frameworks 6 integration
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the KF6 plugin for LibreOffice and a KF6-based File
  Picker when running under Plasma.
 
 Package: libreoffice-qt5

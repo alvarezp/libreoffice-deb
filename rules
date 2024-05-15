@@ -212,7 +212,9 @@ ENABLE_QT5=n
 #QT5_MINVER=
 ENABLE_KF5=y
 ENABLE_QT6=y
-ENABLE_KF6=n
+ifeq "$(DEB_HOST_ARCH)" "amd64"
+ENABLE_KF6=y
+endif
 endif
 # go sure. if we want plasma, we want kfX, too and if we want that
 # one we want qtX, too.
@@ -234,7 +236,6 @@ ifeq "$(BUILD_PLASMA)" "y"
      endif
   endif
 endif
-ENABLE_QT6=y
 # https://www.debian.org/doc/debian-policy/ says this is not defined and must
 # be ignored, but dh_strip mentions (and honours) it, so...
 ifneq (noautodbgsym,$(findstring noautodbgsym,$(DEB_BUILD_OPTIONS)))
