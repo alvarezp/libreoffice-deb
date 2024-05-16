@@ -49,3 +49,4 @@ adapt-for-new-carlito.diff
 pdfium-ports.diff
 split-sdbc-firebird-mariadb.diff
 riscv-disable-NaN-test.diff
+fix-odk-build-examples-on-32bit.diff

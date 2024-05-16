@@ -2,12 +2,14 @@ libreoffice (4:24.8.0~alpha1-2) experimental; urgency=medium
 
   * debian/patches/junit-subsequentcheck-standalone.diff,
     debian/patches/odk-build-examples-standalone.diff: fix to apply
+  * debian/patches/fix-odk-build-examples-on-32bit.diff: as name says,
+    from gerrit 
 
   * debian/tests/control: add libreoffice-math to uicheck-sws Depends 
   * debian/rules:
     - enable libreoffice-kf6 (only on amd64 for now)
 
- -- Rene Engelhard <rene@debian.org>  Wed, 15 May 2024 21:13:49 +0000
+ -- Rene Engelhard <rene@debian.org>  Thu, 16 May 2024 17:12:45 +0200
 
 libreoffice (4:24.8.0~alpha1-1) experimental; urgency=medium
 
