@@ -5,8 +5,9 @@ libreoffice (4:24.8.0~alpha1-3) experimental; urgency=medium
       (almost) everywhere
     - don't loose -qt5 if PLASMA_VERSION=6 as we might need it for -kf5
       still; don't make that depends on the plasma version
+    - fix install if PLASMA_VERSION=X but there's no kdeXbe (yet)
 
- -- Rene Engelhard <rene@debian.org>  Fri, 17 May 2024 15:08:09 +0000
+ -- Rene Engelhard <rene@debian.org>  Fri, 17 May 2024 22:30:36 +0200
 
 libreoffice (4:24.8.0~alpha1-2) experimental; urgency=medium
 
