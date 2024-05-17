@@ -42,6 +42,8 @@ libreoffice (4:24.8.0~alpha1-1) experimental; urgency=medium
     https://gerrit.libreoffice.org/c/core/+/165391 and until that one is in
     upstream)
   * debian/rules: add build-depends on po-debconf
+  * debian/rules, debian/control.plasma.in:
+    - prepare -plasma to say Kf6 (add @PLASMA_KF_VERSION@)
 
  -- Rene Engelhard <rene@debian.org>  Tue, 14 May 2024 17:44:05 +0000
 
