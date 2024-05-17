@@ -219,20 +219,20 @@ endif
 ifeq "$(BUILD_PLASMA)" "y"
    ifeq "$(PLASMA_VERSION)" "5"
      ENABLE_KF5=y
-     # KF5 depends on Qt5
-     ifeq "$(ENABLE_KF5)" "y"
-       ENABLE_QT5=y
-       KF5_QT5_DEPENDS := libreoffice-qt5 (= $${binary:Version})
-     endif
    endif
    ifeq "$(PLASMA_VERSION)" "6"
 	ENABLE_KF6=y
-	# KF6 depends on Qt6
-     ifeq "$(ENABLE_KF6)" "y"
-       ENABLE_QT6=y
-       KF6_QT6_DEPENDS := libreoffice-qt6 (= $${binary:Version})
-     endif
   endif
+endif
+# KF5 depends on Qt5
+ifeq "$(ENABLE_KF5)" "y"
+  ENABLE_QT5=y
+  KF5_QT5_DEPENDS := libreoffice-qt5 (= $${binary:Version})
+endif
+# KF6 depends on Qt6
+ifeq "$(ENABLE_KF6)" "y"
+  ENABLE_QT6=y
+  KF6_QT6_DEPENDS := libreoffice-qt6 (= $${binary:Version})
 endif
 # https://www.debian.org/doc/debian-policy/ says this is not defined and must
 # be ignored, but dh_strip mentions (and honours) it, so...
