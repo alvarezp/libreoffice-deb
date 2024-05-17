@@ -2188,6 +2188,11 @@ ifeq "$(BUILD_PLASMA)" "y"
 	sed -e "s|@PLASMA_VERSION@|$(PLASMA_VERSION)|g" \
 		-e "s|@PLASMA_KF_VERSION@|$(PLASMA_KF_VERSION)|g" \
 	        >> debian/control.new < debian/control.plasma.in
+	# no kf6be here
+ifeq "$(PLASMA_VERSION)" "6"
+	sed -i "s/and a KDE\/KF$(PLASMA_KF_VERSION) configuration backend//" \
+		debian/control.new
+endif
 endif
 	cat debian/control.postgresql.in >> debian/control.new
 ifeq "$(ENABLE_EVO2)" "y"
