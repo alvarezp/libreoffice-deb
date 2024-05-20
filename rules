@@ -209,25 +209,30 @@ PLASMA_VERSION=5
 PLASMA_KF_VERSION=$(PLASMA_VERSION)
 ENABLE_QT5=n
 #QT5_MINVER=
+ENABLE_KF5=y
+ENABLE_QT6=y
+ENABLE_KF6=y
 endif
+# go sure. if we want plasma, we want kfX, too and if we want that
+# one we want qtX, too.
 ifeq "$(BUILD_PLASMA)" "y"
    ifeq "$(PLASMA_VERSION)" "5"
      ENABLE_KF5=y
-     # KF5 depends on Qt5
-     ifeq "$(ENABLE_KF5)" "y"
-       ENABLE_QT5=y
-       KF5_QT5_DEPENDS := libreoffice-qt5 (= $${binary:Version})
-     endif
-  else
+   endif
+   ifeq "$(PLASMA_VERSION)" "6"
 	ENABLE_KF6=y
-	# KF6 depends on Qt6
-     ifeq "$(ENABLE_KF6)" "y"
-       ENABLE_QT6=y
-       KF6_QT6_DEPENDS := libreoffice-qt6 (= $${binary:Version})
-     endif
   endif
 endif
-ENABLE_QT6=y
+# KF5 depends on Qt5
+ifeq "$(ENABLE_KF5)" "y"
+  ENABLE_QT5=y
+  KF5_QT5_DEPENDS := libreoffice-qt5 (= $${binary:Version})
+endif
+# KF6 depends on Qt6
+ifeq "$(ENABLE_KF6)" "y"
+  ENABLE_QT6=y
+  KF6_QT6_DEPENDS := libreoffice-qt6 (= $${binary:Version})
+endif
 # https://www.debian.org/doc/debian-policy/ says this is not defined and must
 # be ignored, but dh_strip mentions (and honours) it, so...
 ifneq (noautodbgsym,$(findstring noautodbgsym,$(DEB_BUILD_OPTIONS)))
@@ -2188,6 +2193,11 @@ ifeq "$(BUILD_PLASMA)" "y"
 	sed -e "s|@PLASMA_VERSION@|$(PLASMA_VERSION)|g" \
 		-e "s|@PLASMA_KF_VERSION@|$(PLASMA_KF_VERSION)|g" \
 	        >> debian/control.new < debian/control.plasma.in
+	# no kf6be here
+ifeq "$(PLASMA_VERSION)" "6"
+	sed -i "s/and a KDE\/KF$(PLASMA_KF_VERSION) configuration backend//" \
+		debian/control.new
+endif
 endif
 	cat debian/control.postgresql.in >> debian/control.new
 ifeq "$(ENABLE_EVO2)" "y"
@@ -2680,13 +2690,15 @@ ifeq "$(ENABLE_QT6)" "y"
 endif
 ifeq "$(shell echo $(ENABLE_KF5)$(ENABLE_KF6) | grep -q y && echo true)" "true"
 ifeq "$(BUILD_PLASMA)" "y"
-	mkdir -p debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program
-	mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf$(PLASMA_VERSION)be1lo.so \
-		debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program
+	if [ -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf$(PLASMA_VERSION)be1lo.so ]; then \
+		mkdir -p debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program; \
+		mv debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf$(PLASMA_VERSION)be1lo.so \
+			debian/tmp/pkg/libreoffice-plasma/$(OODIR)/program; \
+	fi
 	# remove other ones maybe built by --enable-kfX
-	rm -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/libkf*be1lo.so 
+	rm -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf*be1lo.so 
 else
-	rm -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/libkf*be1lo.so
+	rm -f debian/tmp/pkg/libreoffice-kde/$(OODIR)/program/libkf*be1lo.so
 endif
 ifeq "$(ENABLE_KF5)" "y"
 	mkdir -p debian/tmp/pkg/libreoffice-kf5/$(OODIR)/program
