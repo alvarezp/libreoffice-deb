@@ -1567,6 +1567,12 @@ ifeq "$(ENABLE_QT6)" "y"
 	BUILD_DEPS_ARCH += , qt6-base-dev $(QT6_MINVER), qmake6 $(QT6_MINVER), qt6-base-dev-tools $(QT6_MINVER)
 	BUILD_DEPS_ARCH += , libxcb1-dev
 endif
+ifneq "$(shell echo $(ENABLE_QT6)$(ENABLE_KF6) | grep -q y && echo true)" "true"
+	CONFIGURE_FLAGS += --disable-qt6-multimedia
+else
+	CONFIGURE_FLAGS += --enable-qt6-multimedia
+	BUILD_DEPS_ARCH += , qt6-multimedia-dev $(QT6_MINVER)
+endif
 
 ifeq "$(ENABLE_MARIADB)" "y"
   ifeq "$(MYSQL_FLAVOUR)" "default"
@@ -2402,7 +2408,7 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 		--disable-scripting-beanshell --disable-scripting-javascript \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)" \
-		--disable-gui --disable-introspection --disable-qt5 --disable-kf5
+		--disable-gui --disable-introspection --disable-qt5 --disable-kf5 --disable-qt6-multimedia
 
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) ARCH_FLAGS=$(ARCH_FLAGS) TMP=`mktemp -q -d` $(MAKE) build-non-l10n-only
 
@@ -3399,6 +3405,11 @@ ifeq "$(ENABLE_GUI)" "y"
 	mv $(PKGDIR)-gnome/$(OODIR)/program/*gtk4* $(PKGDIR)-gtk4/$(OODIR)/program
 	mv $(PKGDIR)-core/$(OODIR)/program/libavmediagtk.so $(PKGDIR)-gtk4/$(OODIR)/program
   endif
+
+  ifeq "$(ENABLE_QT6)" "y"
+	mv $(PKGDIR)-core/$(OODIR)/program/libavmediaqt6.so $(PKGDIR)-qt6/$(OODIR)/program
+  endif
+
 endif
 
 ifeq "$(ENABLE_INTROSPECTION)" "y"
