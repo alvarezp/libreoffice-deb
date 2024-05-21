@@ -22,7 +22,7 @@ libreoffice (4:24.8.0~alpha1-2) experimental; urgency=medium
   * debian/patches/fix-odk-build-examples-on-32bit.diff: as name says,
     from gerrit 
 
-  * debian/tests/control: add libreoffice-math to uicheck-sws Depends 
+  * debian/tests/control.in: add libreoffice-math to uicheck-sws Depends 
   * debian/rules:
     - enable libreoffice-kf6 (only on amd64 for now)
 
