@@ -5325,7 +5325,7 @@ Depends: libreoffice-core (= ${binary:Version}),
          ${kf5-qt5-depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: ${plasma-iconset-dep}
+Recommends: kio (>> 5.115.0-5), ${plasma-iconset-dep}
 Replaces: libreoffice-kde (<< 1:6.1.0~alpha1-1)
 Section: kde
 Enhances: libreoffice
