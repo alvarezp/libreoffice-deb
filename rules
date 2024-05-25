@@ -212,6 +212,7 @@ ENABLE_QT5=n
 #QT5_MINVER=
 ENABLE_KF5=y
 ENABLE_QT6=y
+ENABLE_QT6_MULTIMEDIA=y
 ENABLE_KF6=y
 endif
 # go sure. if we want plasma, we want kfX, too and if we want that
@@ -1570,12 +1571,14 @@ endif
 ifneq "$(shell echo $(ENABLE_QT6)$(ENABLE_KF6) | grep -q y && echo true)" "true"
 	CONFIGURE_FLAGS += --disable-qt6-multimedia
 else
+  ifeq "$(ENABLE_QT6_MULTIMEDIA)" "y"
 	CONFIGURE_FLAGS += --enable-qt6-multimedia
-  ifneq "$(BOOKWORM_BACKPORT)" "y"
+    ifneq "$(BOOKWORM_BACKPORT)" "y"
 	# go sure. the avmediaqt6 code has stuff enabled only if >= 6.5.0
 	QT6_MINVER := (>= 6.5.0)
-  endif
+    endif
 	BUILD_DEPS_ARCH += , qt6-multimedia-dev $(QT6_MINVER)
+    endif
 endif
 
 ifeq "$(ENABLE_MARIADB)" "y"
