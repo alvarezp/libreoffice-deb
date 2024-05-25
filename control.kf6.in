@@ -1,5 +1,5 @@
 Package: libreoffice-kf6
-Architecture: amd64
+Architecture: %OOO_ARCHS%
 Depends: libreoffice-core (= ${binary:Version}),
          ${kf6-qt6-depends},
          ${misc:Depends},

@@ -1,9 +1,11 @@
-libreoffice (4:24.8.0~beta1~git20240521-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~beta1~git20240525-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
   * debian/rules:
     - recommend kio >> 5.115.0-5 in -kf5
+  * debian/control.in:
+    - really change amd64 to %OOO_ARCHS% here
 
  -- Rene Engelhard <rene@debian.org>  Tue, 14 May 2024 20:41:31 +0200
 
