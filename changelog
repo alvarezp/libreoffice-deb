@@ -1,6 +1,6 @@
 libreoffice (4:24.8.0~alpha1-4) UNRELEASED; urgency=medium
 
-  * debian/control.in:
+  * debian/control.kf6.in:
     - really change amd64 to %OOO_ARCHS% here
 
  -- Rene Engelhard <rene@debian.org>  Sat, 25 May 2024 14:48:28 +0200
