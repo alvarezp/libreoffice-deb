@@ -5349,7 +5349,7 @@ Depends: libreoffice-core (= ${binary:Version}),
          ${kf6-qt6-depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: ${plasma-iconset-dep}
+Recommends: kio (>> 5.115.0-5), ${plasma-iconset-dep}
 Section: kde
 Enhances: libreoffice
 Description: office productivity suite -- KDE Frameworks 6 integration

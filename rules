@@ -212,7 +212,7 @@ ENABLE_QT5=n
 #QT5_MINVER=
 ENABLE_KF5=y
 ENABLE_QT6=y
-ENABLE_KF6=n
+ENABLE_KF6=y
 endif
 # go sure. if we want plasma, we want kfX, too and if we want that
 # one we want qtX, too.
