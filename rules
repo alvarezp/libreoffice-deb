@@ -3421,7 +3421,7 @@ ifeq "$(ENABLE_GUI)" "y"
 	mv $(PKGDIR)-core/$(OODIR)/program/libavmediagtk.so $(PKGDIR)-gtk4/$(OODIR)/program
   endif
 
-  ifeq "$(ENABLE_QT6)" "y"
+  ifeq "$(ENABLE_QT6_MULTIMEDIA)" "y"
 	mv $(PKGDIR)-core/$(OODIR)/program/libavmediaqt6.so $(PKGDIR)-qt6/$(OODIR)/program
   endif
 
