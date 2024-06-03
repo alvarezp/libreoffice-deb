@@ -2999,6 +2999,9 @@ ifeq "$(PACKAGE_SDK)" "y"
 	mkdir -p $(PKGDIR)-dev-common/usr/include
 	mv $(PKGDIR)-dev/usr/include/libreoffice \
 		$(PKGDIR)-dev-common/usr/include
+	mkdir -p $(PKGDIR)-dev-common/$(OODIR)/sdk/bin
+	mv $(PKGDIR)-dev/$(OODIR)/sdk/bin/addon_console.py* \
+		$(PKGDIR)-dev-common/$(OODIR)/sdk/bin
 	# except include/sal/typesizes.h
 	mkdir -p $(PKGDIR)-dev/usr/include/$(DEB_HOST_MULTIARCH)/libreoffice/sal
 	mkdir -p $(PKGDIR)-dev/usr/include/libreoffice/sal

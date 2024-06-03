@@ -4,6 +4,8 @@ libreoffice (4:24.8.0~beta1~git20240602-1) UNRELEASED; urgency=medium
 
   * debian/rules:
     - recommend kio >> 5.115.0-5 in -kf5
+  * debian/rules, debian/control.sdk.in:
+    - move addon_console.py* to -dev-common and add Replaces: to -dev
 
  -- Rene Engelhard <rene@debian.org>  Tue, 14 May 2024 20:41:31 +0200
 

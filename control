@@ -5209,7 +5209,8 @@ Package: libreoffice-dev-common
 Section: devel
 Architecture: all
 Depends: ${misc:Depends}
-Replaces: libreoffice-dev (<< 1:5.2.0~)
+Recommends: python3
+Replaces: libreoffice-dev (<< 4:24.8.0~beta1~)
 Breaks: libreoffice-dev (<< 1:5.2.0~)
 Conflicts: libreoffice (<< 1:5.2.5-2~)
 Description: office productivity suite -- SDK -- architecture-independent parts
