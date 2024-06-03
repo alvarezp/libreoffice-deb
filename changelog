@@ -9,12 +9,12 @@ libreoffice (4:24.8.0~beta1~git20240602-1) UNRELEASED; urgency=medium
 
  -- Rene Engelhard <rene@debian.org>  Tue, 14 May 2024 20:41:31 +0200
 
-libreoffice (4:24.8.0~alpha1-4) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~alpha1-4) experimental; urgency=medium
 
   * debian/control.kf6.in:
     - really change amd64 to %OOO_ARCHS% here
 
- -- Rene Engelhard <rene@debian.org>  Sat, 25 May 2024 14:48:28 +0200
+ -- Rene Engelhard <rene@debian.org>  Sat, 25 May 2024 12:53:29 +0000
 
 libreoffice (4:24.8.0~alpha1-3) experimental; urgency=medium
 
@@ -34,7 +34,7 @@ libreoffice (4:24.8.0~alpha1-2) experimental; urgency=medium
   * debian/patches/fix-odk-build-examples-on-32bit.diff: as name says,
     from gerrit 
 
-  * debian/tests/control.in: add libreoffice-math to uicheck-sws Depends 
+  * debian/tests/control: add libreoffice-math to uicheck-sws Depends 
   * debian/rules:
     - enable libreoffice-kf6 (only on amd64 for now)
 
