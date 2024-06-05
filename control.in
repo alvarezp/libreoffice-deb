@@ -745,6 +745,7 @@ Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${bi
          ${misc:Depends},
          ${python3:Depends},
          ${shlibs:Depends}
+Pre-Depends: ucf, awk
 Conflicts: python-uno
 Replaces: libreoffice-core (= 1:4.3.0~beta1-1), libreoffice-common (<< 1:4.4.0~beta2)
 Build-Profiles: <!nopython>
