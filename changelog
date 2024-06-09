@@ -1,4 +1,7 @@
-libreoffice (4:24.8.0~beta1~git20240605-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~beta1~git20240609-1) UNRELEASED; urgency=medium
+
+  * debian/patches/no-check-if-root.diff: remove; we set RRR: no anyways
+    nowadays
 
   * New upstream snapshot 
 
