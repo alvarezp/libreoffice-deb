@@ -1,6 +1,6 @@
---- a/cui/qa/uitest/dialogs/shortcuts.py	2021-07-02 21:00:52.565424890 +0200
-+++ /dev/null	2021-06-19 15:31:01.435382997 +0200
-@@ -1,38 +0,0 @@
+--- cui/qa/uitest/dialogs/shortcuts.py	2024-06-10 16:53:25.647230480 +0200
++++ /dev/null	2024-06-07 16:44:09.580083050 +0200
+@@ -1,31 +0,0 @@
 -# -*- tab-width: 4; indent-tabs-mode: nil; py-indent-offset: 4 -*-
 -#
 -# This Source Code Form is subject to the terms of the Mozilla Public
@@ -16,25 +16,18 @@
 -class Test(UITestCase):
 -
 -    def test_tab_navigation(self):
--        with self.ui_test.create_doc_in_start_center("writer"):
--            xWriterDoc = self.xUITest.getTopFocusWindow()
+-        with self.ui_test.create_doc_in_start_center("writer"),\
+-                self.ui_test.execute_dialog_through_command(".uno:EditStyle") as xDialog:
+-            xTabs = xDialog.getChild("tabcontrol")
+-            select_pos(xTabs, "0")
 -
--            with self.ui_test.execute_dialog_through_command(".uno:EditStyle") as xDialog:
+-            for i in range(16):
+-                self.assertEqual(get_state_as_dict(xTabs)["CurrPagePos"], str(i))
+-                xTabs.executeAction("TYPE", mkPropertyValues({"KEYCODE":"CTRL+PAGEDOWN"}))
 -
--                xTabs = xDialog.getChild("tabcontrol")
--                select_pos(xTabs, "0")
--
--                for i in range(16):
--                    self.assertEqual(get_state_as_dict(xTabs)["CurrPagePos"], str(i))
--
--                    xTabs.executeAction("TYPE", mkPropertyValues({"KEYCODE":"CTRL+PAGEDOWN"}))
--
--                self.assertEqual(get_state_as_dict(xTabs)["CurrPagePos"], "0")
--
--                for i in reversed(range(16)):
--                    xTabs.executeAction("TYPE", mkPropertyValues({"KEYCODE":"CTRL+PAGEUP"}))
--
--                    self.assertEqual(get_state_as_dict(xTabs)["CurrPagePos"], str(i))
+-            for i in reversed(range(16)):
+-                self.assertEqual(get_state_as_dict(xTabs)["CurrPagePos"], str(i))
+-                xTabs.executeAction("TYPE", mkPropertyValues({"KEYCODE":"CTRL+PAGEUP"}))
 -
 -
 -
