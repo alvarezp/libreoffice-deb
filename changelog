@@ -1,9 +1,11 @@
-libreoffice (4:24.8.0~beta1~git20240610-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~beta1-1) experimental; urgency=medium
 
   * debian/patches/no-check-if-root.diff: remove; we set RRR: no anyways
     nowadays
+  * debian/patches/disable-shortcuts_tab_navigation-uitest.diff: remove;
+    seems to work now
 
-  * New upstream snapshot 
+  * New upstream beta release
 
   * debian/rules:
     - recommend kio >> 5.115.0-5 in -kf5
@@ -14,7 +16,7 @@ libreoffice (4:24.8.0~beta1~git20240610-1) UNRELEASED; urgency=medium
     [ Rico Tzschichholz ]
     Make sure ucf is available before installing python3-uno
 
- -- Rene Engelhard <rene@debian.org>  Wed, 05 Jun 2024 16:39:45 +0200
+ -- Rene Engelhard <rene@debian.org>  Tue, 11 Jun 2024 20:02:11 +0200
 
 libreoffice (4:24.8.0~alpha1-4) experimental; urgency=medium
 
