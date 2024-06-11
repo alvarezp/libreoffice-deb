@@ -1,4 +1,4 @@
---- cui/qa/uitest/dialogs/shortcuts.py	2024-06-10 16:53:25.647230480 +0200
+--- a/cui/qa/uitest/dialogs/shortcuts.py	2024-06-10 16:53:25.647230480 +0200
 +++ /dev/null	2024-06-07 16:44:09.580083050 +0200
 @@ -1,31 +0,0 @@
 -# -*- tab-width: 4; indent-tabs-mode: nil; py-indent-offset: 4 -*-
