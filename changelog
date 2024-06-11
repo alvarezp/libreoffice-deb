@@ -2,8 +2,6 @@ libreoffice (4:24.8.0~beta1-1) experimental; urgency=medium
 
   * debian/patches/no-check-if-root.diff: remove; we set RRR: no anyways
     nowadays
-  * debian/patches/disable-shortcuts_tab_navigation-uitest.diff: remove;
-    seems to work now
 
   * New upstream beta release
 

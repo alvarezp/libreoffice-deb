@@ -36,6 +36,7 @@ use-mariadb-java-instead-of-mysql-java.diff
 apparmor-opencl.diff
 fix-flaky-bridgetest.diff
 add-access2base-doc.diff
+disable-shortcuts_tab_navigation-uitest.diff
 no-opencl-per-default.diff
 apparmor-updates.diff
 apparmor-gnupg-tofu.diff
