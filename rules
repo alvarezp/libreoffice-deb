@@ -2183,6 +2183,11 @@ ifeq "$(BUILD_GTK4)" "y"
 endif
 ifeq "$(ENABLE_KF5)" "y"
 	cat debian/control.kf5.in >> debian/control.new
+  ifneq "$(BOOKWORM_BACKPORT)" "y"
+	perl -pi -e 's/plasma-iconset-dep}/plasma-iconset-dep}, kio (>> 5.115.0-5)/' debian/control.new
+  else
+	perl -pi -e 's/plasma-iconset-dep}/plasma-iconset-dep}, kio (>> 5.103.0-1)' debian/control.new
+  endif
 endif
 ifeq "$(ENABLE_KF6)" "y"
 	cat debian/control.kf6.in >> debian/control.new
@@ -2234,14 +2239,6 @@ ifeq "$(BUILD_PLASMA)" "y"
 	perl -pi -e 's/%LO-DESKTOP-INTEGRATION%/libreoffice-gnome | libreoffice-plasma/' debian/control.new
 else
 	perl -pi -e 's/%LO-DESKTOP-INTEGRATION%/libreoffice-gnome/' debian/control.new
-endif
-
-ifeq "$(ENABLE_KF5)" "y"
-ifneq "$(BOOKWORM_BACKPORT)" "y"
-	perl -pi -e 's/plasma-iconset-dep}/plasma-iconset-dep}, kio (>> 5.115.0-5)/' debian/control.new
-else
-	perl -pi -e 's/plasma-iconset-dep}/plasma-iconset-dep}, kio (>> 5.103.0-1)/' debian/control.new
-endif
 endif
 
 ifeq (sk,$(findstring sk,$(HELPISOS)))
