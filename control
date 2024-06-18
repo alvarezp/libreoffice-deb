@@ -1189,7 +1189,8 @@ Package: python3-access2base
 Section: python
 Architecture: all
 Homepage: http://www.access2base.com/access2base.html
-Depends: libreoffice-base,
+Depends: libjs-jquery,
+         libreoffice-base,
          libreoffice-common (>= 1:6.4.0~beta1-2~),
          python3-uno,
          ${misc:Depends},
