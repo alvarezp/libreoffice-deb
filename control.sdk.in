@@ -5,7 +5,7 @@ Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${bi
          libreoffice-dev-common (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: g++, ${java-common-depends}, ${java-runtime-depends}
+Recommends: g++, ${java-common-depends}, ${java-runtime-depends}, libreofficekit-dev
 Suggests: libmythes-dev, libreofficekit-dev, libreoffice-dev-doc
 Replaces: libreoffice-dev-common (<< 1:5.4.1~)
 Conflicts: libreoffice-dev-doc (<< 1:5.2.5-2~), libreoffice (<< 1:5.2.5-2~)

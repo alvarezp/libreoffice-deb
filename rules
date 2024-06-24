@@ -2011,7 +2011,8 @@ clean-debdir:
 		! -name "libreoffice-java-common.links" \
 		! -name "liblibreofficekitgtk.links" \
 		! -name "libreoffice-help-common.links" \
-		! -name "python3-access2base.links" -exec rm {} \;
+		! -name "python3-access2base.links" \
+	        ! -name "libeofficekit-dev.links" -exec rm {} \;
 	rm -f debian/libreoffice-l10n-*.ucf
 	if [ -d "$(STAMP_DIR)" ]; then rm -rf "$(STAMP_DIR)"; fi
 	rm -f debian/*.bug-script
@@ -3034,6 +3035,15 @@ ifeq "$(PACKAGE_SDK)" "y"
 else
 	rm -rf $(PKGDIR)-common/$(OODIR)/share/glade
 endif
+ifeq "$(PACKAGE_LOKIT)" "y"
+	# package LibreOfficeKit headers in an own package (which was the
+	# case anyway before it got installed into the SDK from 25.2 onwards).
+	# That one gets the .gir anyway
+	rm -rf debian/libreofficekit-dev
+	mkdir -p debian/libreofficekit-dev/usr/include
+	mv $(PKGDIR)-dev-common/usr/include/libreoffice/LibreOfficeKit \
+		debian/libreofficekit-dev/usr/include
+endif
 
  ifeq "$(PACKAGE_SDK_DOCS)" "y"
 	# move SDK documentation into own package
@@ -3438,7 +3448,8 @@ ifeq "$(ENABLE_INTROSPECTION)" "y"
 	dh_install -pgir1.2-lokdocview-0.1
 endif
 ifeq "$(PACKAGE_LOKIT)" "y"
-	echo "include/LibreOfficeKit usr/include" > debian/libreofficekit-dev.install
+	# https://gerrit.libreoffice.org/c/core/+/134863/comments/ff3ae40f_5ea9a831
+	echo "include/LibreOfficeKit/LibreOfficeKitGtk.h usr/include/LibreOfficeKit" >> debian/libreofficekit-dev.install
 ifeq "$(ENABLE_INTROSPECTION)" "y"
 	echo "workdir/CustomTarget/sysui/share/libreoffice/LOKDocView-0.1.gir /usr/share/gir-1.0/" >> debian/libreofficekit-dev.install
 endif
