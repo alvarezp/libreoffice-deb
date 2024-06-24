@@ -1,4 +1,4 @@
-libreoffice (4:24.8.0~beta1-2) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~rc1~git2024064-1) UNRELEASED; urgency=medium
 
   * debian/patches/add-access2base-doc.diff: update; remove embedded jquery
     and add src=/usr/share/javascript/jquery/jquery.min.js (closes: #1073808)
@@ -6,7 +6,7 @@ libreoffice (4:24.8.0~beta1-2) UNRELEASED; urgency=medium
   * debian/control.in:
     - make python3-access2base Suggest libjs-jquery for above
 
- -- Rene Engelhard <rene@debian.org>  Wed, 19 Jun 2024 00:14:48 +0200
+ -- Rene Engelhard <rene@debian.org>  Mon, 24 Jun 2024 21:46:50 +0200
 
 libreoffice (4:24.8.0~beta1-1) experimental; urgency=medium
 
