@@ -1655,7 +1655,11 @@ else
 endif
 
 ifeq "$(BUILD_GTK4)" "y"
-	BUILD_DEPS_ARCH += , libgtk-4-dev, libglib2.0-dev, libcairo2-dev, libatk1.0-dev
+ifneq "$(BOOKWORM_BACKPORT)" "y"
+	# go sure, needed for e.g. accessibility
+	GTK4_MINVER := (>= 4.10)
+endif
+	BUILD_DEPS_ARCH += , libgtk-4-dev $(GTK4_MINVER), libglib2.0-dev, libcairo2-dev, libatk1.0-dev
 	CONFIGURE_FLAGS += --enable-gtk4
 endif
 

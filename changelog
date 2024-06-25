@@ -14,6 +14,8 @@ libreoffice (4:24.8.0~beta1-1) experimental; urgency=medium
     nowadays
 
   * New upstream beta release
+    - fixes CVE-2024-5261: TLS certificate are not properly verified when
+      utilizing LibreOfficeKit
 
   * debian/rules:
     - recommend kio >> 5.115.0-5 in -kf5
