@@ -2012,7 +2012,7 @@ clean-debdir:
 		! -name "liblibreofficekitgtk.links" \
 		! -name "libreoffice-help-common.links" \
 		! -name "python3-access2base.links" \
-	        ! -name "libeofficekit-dev.links" -exec rm {} \;
+	        ! -name "libreofficekit-dev.links" -exec rm {} \;
 	rm -f debian/libreoffice-l10n-*.ucf
 	if [ -d "$(STAMP_DIR)" ]; then rm -rf "$(STAMP_DIR)"; fi
 	rm -f debian/*.bug-script
