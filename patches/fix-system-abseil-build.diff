@@ -66,7 +66,7 @@ index 924bbe23a8b8..f8d95d2785c7 100644
 +++ b/external/pdfium/UnpackedTarball_pdfium.mk
 @@ -16,6 +16,8 @@ pdfium_patches += c++20-comparison.patch
  
- pdfium_patches += constexpr-template.patch
+ pdfium_patches += annot.patch.1
  
 +pdfium_patches += system-abseil.diff
 +
