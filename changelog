@@ -1,6 +1,6 @@
 libreoffice (4:24.2.5~rc1-1) UNRELEASED; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules:
     - go sure and build-depend on libgtk-4-dev >= 4.10 (needed for
