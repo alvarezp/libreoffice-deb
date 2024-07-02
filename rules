@@ -3448,8 +3448,6 @@ ifeq "$(ENABLE_INTROSPECTION)" "y"
 	dh_install -pgir1.2-lokdocview-0.1
 endif
 ifeq "$(PACKAGE_LOKIT)" "y"
-	# https://gerrit.libreoffice.org/c/core/+/134863/comments/ff3ae40f_5ea9a831
-	echo "include/LibreOfficeKit/LibreOfficeKitGtk.h usr/include/LibreOfficeKit" >> debian/libreofficekit-dev.install
 ifeq "$(ENABLE_INTROSPECTION)" "y"
 	echo "workdir/CustomTarget/sysui/share/libreoffice/LOKDocView-0.1.gir /usr/share/gir-1.0/" >> debian/libreofficekit-dev.install
 endif
