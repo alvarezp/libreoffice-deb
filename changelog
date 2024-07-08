@@ -12,6 +12,7 @@ libreoffice (4:24.8.0~rc1-1) experimental; urgency=medium
     - go sure and build-depend on libgtk-4-dev >= 4.10 (needed for
       accessibility stuff for example) on sid
     - build-depend on pkgconf instead of pkg-config
+    - don't recommend versioned kf5 kio in -kf6
 
  -- Rene Engelhard <rene@debian.org>  Mon, 08 Jul 2024 20:08:05 +0200
 
