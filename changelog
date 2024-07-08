@@ -1,10 +1,17 @@
-libreoffice (4:24.8.0~rc1~git2024064-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.0~rc1~git20240608-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot
 
   * debian/patches/add-access2base-doc.diff: update; remove embedded jquery
     and add src=/usr/share/javascript/jquery/jquery.min.js (closes: #1073808)
  
   * debian/control.in:
     - make python3-access2base Suggest libjs-jquery for above
+
+  * debian/rules:
+    - go sure and build-depend on libgtk-4-dev >= 4.10 (needed for
+      accessibility stuff for example) on sid
+    - build-depend on pkgconf instead of pkg-config
 
  -- Rene Engelhard <rene@debian.org>  Mon, 24 Jun 2024 21:46:50 +0200
 
