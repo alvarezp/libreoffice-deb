@@ -107,7 +107,7 @@ BUILD_DEPS=\
     gperf,\
     libfreetype-dev,\
     libfontconfig-dev,\
-    pkg-config,\
+    pkgconf,\
     unzip,\
     xsltproc,\
     zip,\

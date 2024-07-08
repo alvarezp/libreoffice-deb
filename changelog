@@ -5,6 +5,7 @@ libreoffice (4:24.2.5~rc1-1) UNRELEASED; urgency=medium
   * debian/rules:
     - go sure and build-depend on libgtk-4-dev >= 4.10 (needed for
       accessibility stuff for example) on sid
+    - build-depend on pkgconf instead of pkg-config
 
  -- Rene Engelhard <rene@debian.org>  Fri, 21 Jun 2024 17:51:16 +0200
 
