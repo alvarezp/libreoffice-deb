@@ -1022,6 +1022,9 @@ Depends: libreoffice-common (>= 1:7.0.0~alpha~),
          ${misc:Depends},
          ${python3:Depends},
          ${shlibs:Depends}
+# ucf should suffice (needed for preinst usage and is mandated by policy anyway). awk here doesn't please lintian)
+# but there is a time64-related upgrade problem which can occur. Go safe. See Ubuntus
+# https://bugs.launchpad.net/ubuntu/+source/libreoffice/+bug/2067762
 Pre-Depends: ucf, awk
 Conflicts: python-uno
 Replaces: libreoffice-common (<< 1:4.4.0~beta2),
