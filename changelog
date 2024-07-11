@@ -1,6 +1,6 @@
-libreoffice (4:24.2.5~rc2-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.5-1) unstable; urgency=medium
 
-  * New upstream release candidate
+  * New upstream release
 
   * debian/rules:
     - go sure and build-depend on libgtk-4-dev >= 4.10 (needed for
