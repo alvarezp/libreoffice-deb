@@ -1,5 +1,7 @@
 libreoffice (4:24.8.0~rc2~git2040724-1) UNELEASED; urgency=medium
 
+  * New upstream snapshot
+
   * debian/rules:
     - don't manually install LibreofficeKit/ includes anymore
   * debian/control.sdk.in:

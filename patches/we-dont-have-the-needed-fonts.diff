@@ -29,7 +29,7 @@ index a4d4540ab228..46d262f6f0b8 100644
  CPPUNIT_TEST_FIXTURE(SwCoreTextTest, testScriptinfosurrogatePairs)
  {
 diff --git a/vcl/qa/cppunit/pdfexport/pdfexport2.cxx b/vcl/qa/cppunit/pdfexport/pdfexport2.cxx
-index 8502a6b5593a..54a588d22969 100644
+index 1ecdb98608bc..f8680321f9de 100644
 --- a/vcl/qa/cppunit/pdfexport/pdfexport2.cxx
 +++ b/vcl/qa/cppunit/pdfexport/pdfexport2.cxx
 @@ -5163,69 +5163,74 @@ CPPUNIT_TEST_FIXTURE(PdfExportTest2, testTdf134226)
@@ -168,5 +168,5 @@ index 8502a6b5593a..54a588d22969 100644
 +//    fnEqualPos(aRect[5], aRect[6]);
 +//}
  
- } // end anonymous namespace
- 
+ // tdf#101686 - Verifies that drawinglayer clears RTL flags while drawing Writer text boxes
+ CPPUNIT_TEST_FIXTURE(PdfExportTest2, testTdf101686)
