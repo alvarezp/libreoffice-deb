@@ -3037,7 +3037,8 @@ else
 endif
 ifeq "$(PACKAGE_LOKIT)" "y"
 	# package LibreOfficeKit headers in an own package (which was the
-	# case anyway before it got installed into the SDK from 25.2 onwards).
+	# case anyway before it got installed into the SDK from 24.8.0 rc2
+	# onwards).
 	# That one gets the .gir anyway
 	rm -rf debian/libreofficekit-dev
 	mkdir -p debian/libreofficekit-dev/usr/include
