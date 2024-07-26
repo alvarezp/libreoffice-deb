@@ -1,6 +1,6 @@
-libreoffice (4:24.8.0~rc2~git20240724-1) UNELEASED; urgency=medium
+libreoffice (4:24.8.0~rc2-1) experimental; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/rules:
     - don't manually install LibreofficeKit/ includes anymore
@@ -10,7 +10,7 @@ libreoffice (4:24.8.0~rc2~git20240724-1) UNELEASED; urgency=medium
   * debian/libreofficekit-dev.links: add symlink from (new) SDK location to
     /usr/include/LibreOfficeKit directly (as already packaged)
 
- -- Rene Engelhard <rene@debian.org>  Mon, 08 Jul 2024 20:08:05 +0200
+ -- Rene Engelhard <rene@debian.org>  Fri, 26 Jul 2024 16:32:04 +0200
 
 libreoffice (4:24.8.0~rc1-1) experimental; urgency=medium
 
