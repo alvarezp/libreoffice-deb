@@ -1,6 +1,8 @@
 libreoffice (4:24.2.5-1) unstable; urgency=medium
 
   * New upstream release
+    - removes ability to trust not validated macro signatures in high security
+      (CVE-2024-6472)
 
   * debian/rules:
     - go sure and build-depend on libgtk-4-dev >= 4.10 (needed for
