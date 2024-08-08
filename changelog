@@ -2,6 +2,9 @@ libreoffice (4:24.8.0~rc3-1) experimental; urgency=medium
 
   * New upstream release candidate
 
+  * debian/patches/gcc-14-armhf-registers.diff: remove explicit mention
+    of r0 and r1 registers to fix build with gcc 14 on armhf
+
  -- Rene Engelhard <rene@debian.org>  Thu, 08 Aug 2024 23:35:34 +0200
 
 libreoffice (4:24.8.0~rc2-1) experimental; urgency=medium
