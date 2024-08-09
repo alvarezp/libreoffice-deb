@@ -15,7 +15,7 @@ Build-Depends: autoconf,
                bison,
                bzip2,
                debhelper-compat (= 12),
-               default-jdk (>= 2:1.9) [!hppa !hurd-amd64 !hurd-i386 !kfreebsd-amd64 !kfreebsd-i386 !powerpcspe !s390 !sparc !ppc64el !s390x !armhf] <!nojava>,
+               default-jdk (>= 2:1.9) [!hppa !hurd-amd64 !hurd-i386 !kfreebsd-amd64 !kfreebsd-i386 !powerpcspe !s390 !sparc !ppc64el !s390x !armhf !armel] <!nojava>,
                dh-python <!nopython>,
                dpkg-dev (>= 1.22.5) [armel armhf hppa kfreebsd-i386 m68k mips mipsel powerpc powerpcspe sparc],
                flex,
@@ -25,13 +25,13 @@ Build-Depends: autoconf,
                gcc-12 [i386],
                gperf,
                java-common (>= 0.75) <!nojava>,
-               javahelper [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               javahelper [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                junit4 [amd64 arm64] <!nocheck !nojava>,
                libabw-dev (<< 0.2~),
                libabw-dev (>= 0.1),
-               libarchive-zip-perl [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libarchive-zip-perl [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                libargon2-dev,
-               libbase-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libbase-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                libbluetooth-dev [linux-any],
                libboost-date-time-dev,
                libboost-dev,
@@ -60,10 +60,10 @@ Build-Depends: autoconf,
                libexpat1-dev,
                libexttextcat-dev,
                libfixmath-dev,
-               libflute-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libflute-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                libfontconfig-dev,
-               libfonts-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
-               libformula-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libfonts-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libformula-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                libfreehand-dev (<< 0.2~),
                libfreehand-dev (>= 0.1),
                libfreetype-dev,
@@ -73,7 +73,7 @@ Build-Depends: autoconf,
                libglm-dev,
                libgraphite2-dev,
                libharfbuzz-dev (>= 5.1.0),
-               libhsqldb1.8.0-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libhsqldb1.8.0-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                libhunspell-dev,
                libhyphen-dev,
                libice-dev,
@@ -81,9 +81,9 @@ Build-Depends: autoconf,
                libjpeg-dev,
                libkrb5-dev,
                liblangtag-dev,
-               liblayout-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               liblayout-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                liblcms2-dev,
-               libloader-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libloader-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                liblockfile-bin,
                libmdds-dev (<< 2.2~),
                libmdds-dev (>= 2.1),
@@ -101,7 +101,7 @@ Build-Depends: autoconf,
                liborcus-dev (>= 0.19.1),
                libpagemaker-dev,
                libpagemaker-dev (<< 0.1~),
-               libpentaho-reporting-flow-engine-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libpentaho-reporting-flow-engine-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                libpng-dev,
                libpoppler-cpp-dev,
                libpoppler-dev,
@@ -109,12 +109,12 @@ Build-Depends: autoconf,
                libqxp-dev,
                libqxp-dev (<< 0.1~),
                librdf0-dev,
-               librepository-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               librepository-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                librevenge-dev,
                librevenge-dev (<< 0.1~),
-               libsac-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libsac-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                libsane-dev,
-               libserializer-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libserializer-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                libsm-dev,
                libstaroffice-dev,
                libstaroffice-dev (<< 0.1~),
@@ -135,7 +135,7 @@ Build-Depends: autoconf,
                libxext-dev,
                libxinerama-dev,
                libxkbfile-dev,
-               libxml-java [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               libxml-java [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                libxml2-dev,
                libxml2-utils,
                libxmlsec1-dev (>= 1.2.35),
@@ -148,7 +148,7 @@ Build-Depends: autoconf,
                libzmf-dev (<< 0.1~),
                libzxcvbn-dev,
                libzxing-dev,
-               maven-repo-helper [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+               maven-repo-helper [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                pkgconf,
                po-debconf,
                python3,
@@ -239,8 +239,8 @@ Build-Depends-Arch: at-spi2-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd6
                     qtbase5-dev-tools,
                     xauth [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     xvfb [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>
-Build-Depends-Indep: ant [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
-                     ant-optional [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+Build-Depends-Indep: ant [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
+                     ant-optional [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                      apparmor <!nocheck>,
                      dh-apparmor,
                      doxygen <!nodoc>,
@@ -278,7 +278,7 @@ Depends: libreoffice-base,
          libreoffice-draw,
          libreoffice-impress,
          libreoffice-math,
-         libreoffice-report-builder-bin [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc],
+         libreoffice-report-builder-bin [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc],
          libreoffice-writer,
          ${misc:Depends},
          ${pyuno-depends}
@@ -292,7 +292,7 @@ Recommends: fonts-crosextra-caladea,
             fonts-noto-ui-core,
             fonts-sil-gentium-basic,
             libreoffice-nlpsolver,
-            libreoffice-report-builder [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc],
+            libreoffice-report-builder [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc],
             libreoffice-script-provider-bsh,
             libreoffice-script-provider-js,
             libreoffice-script-provider-python,
@@ -378,7 +378,7 @@ Depends: libreoffice-base-nogui,
          libreoffice-draw-nogui,
          libreoffice-impress-nogui,
          libreoffice-math-nogui,
-         libreoffice-report-builder-bin-nogui [!armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc],
+         libreoffice-report-builder-bin-nogui [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc],
          libreoffice-writer-nogui,
          ${misc:Depends},
          ${pyuno-depends}
@@ -1117,7 +1117,7 @@ Depends: libreoffice-core-nogui | libreoffice-core,
          ${java:Depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
 Section: database
 Enhances: libreoffice-base-drivers
 Build-Profiles: <!nojava>
@@ -1152,7 +1152,7 @@ Suggests: libjtds-java,
           libreoffice-sdbc-mysql | libmyodbc | libmariadb-java,
           libreoffice-sdbc-postgresql | odbc-postgresql | libpg-java,
           libsqliteodbc | tdsodbc | odbc-mdbtools
-Recommends: libreoffice-sdbc-hsqldb [alpha amd64 arm64 armel i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips],
+Recommends: libreoffice-sdbc-hsqldb [alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips],
             ${base-firebird-recommends}
 Replaces: libreoffice-base (<< 1:4.3.0-3), libreoffice-core (<< 1:6.2.0~beta1~)
 Breaks: libreoffice-base (<< 1:4.3.0-3)
@@ -1236,7 +1236,7 @@ Depends: liblibreoffice-java,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libreoffice-core-nogui | libreoffice-core
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
 Replaces: libreoffice-officebean (<< 1:6.4.0~rc2-1)
 Breaks: libreoffice-officebean (<< 1:6.4.0~rc2-1)
 Build-Profiles: <!nojava>
@@ -4994,7 +4994,7 @@ Description: LibreOffice UNO runtime environment
 
 Package: ure-java
 Section: java
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
 Depends: libunoloader-java,
          uno-libs-private (= ${binary:Version}),
          ure (= ${binary:Version}),
@@ -5096,7 +5096,7 @@ Description: LibreOffice component for building database reports
 
 Package: libreoffice-report-builder-bin
 Section: misc
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
 Depends: libreoffice-base, libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
 Description: LibreOffice component for building database reports -- libraries
  LibreOffice is a full-featured office productivity suite that provides
@@ -5107,7 +5107,7 @@ Description: LibreOffice component for building database reports -- libraries
 
 Package: libreoffice-report-builder-bin-nogui
 Section: misc
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
 Depends: libreoffice-base-nogui | libreoffice-base,
          libreoffice-core-nogui | libreoffice-core,
          ${misc:Depends},
