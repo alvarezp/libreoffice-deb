@@ -688,6 +688,8 @@ endif
 # upstream says --source=1.8 / --target=1.8 so 1.8 is fine in runtime
 JAVA_RUNTIME_BASELINE=8
 JAVA_BRIDGE_BROKEN_ARCHS:=ppc64el s390x armhf
+# breaks since opnejdk 21. Forcing 17 could work, but like this it's more consistent (e.g. with armhf above)
+JAVA_BRIDGE_BROKEN_ARCHS += armel
 ifeq "$(JDK)" "default"
 OOO_JAVA_ARCHS = $(filter-out $(JAVA_BRIDGE_BROKEN_ARCHS),$(filter $(OOO_ARCHS),$(java$(JAVA_RUNTIME_BASELINE)_architectures)))
 else
