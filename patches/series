@@ -49,4 +49,4 @@ pdfium-ports.diff
 split-sdbc-firebird-mariadb.diff
 riscv-disable-NaN-test.diff
 gcc-14-armhf-registers.diff
-armhf-gtk4-build.diff
+fix-32bit-gtk4-a11y-build.diff

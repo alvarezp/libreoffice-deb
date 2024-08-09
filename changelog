@@ -2,6 +2,10 @@ libreoffice (4:24.8.0~rc3-2) UNRELEASED; urgency=medium
 
   * debian/rules: add armel to JAVA_BRIDGE_BROKEN_ARCHS
 
+  * merge from Ubuntu:
+  [ Rico Tzschichholz ]
+    - debian/patches/fix-32bit-gtk4-a11y-build.diff: as name says
+
  -- Rene Engelhard <rene@debian.org>  Thu, 08 Aug 2024 23:35:34 +0200
 
 libreoffice (4:24.8.0~rc3-1) experimental; urgency=medium
