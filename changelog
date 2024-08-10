@@ -2,7 +2,7 @@ libreoffice (4:24.2.5-3) unstable; urgency=medium
 
   * debian/rules: add armel to JAVA_BRIDGE_BROKEN_ARCHS
 
- -- Rene Engelhard <rene@debian.org>  Fri, 09 Aug 2024 06:16:35 +0200
+ -- Rene Engelhard <rene@debian.org>  Fri, 09 Aug 2024 17:22:35 +0200
  
 libreoffice (4:24.2.5-2) unstable; urgency=medium
 
