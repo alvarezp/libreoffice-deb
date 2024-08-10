@@ -6,7 +6,7 @@ libreoffice (4:24.8.0~rc3-2) experimental; urgency=medium
   [ Rico Tzschichholz ]
     - debian/patches/fix-32bit-gtk4-a11y-build.diff: as name says
 
- -- Rene Engelhard <rene@debian.org>  Thu, 08 Aug 2024 17:35:40 +0200
+ -- Rene Engelhard <rene@debian.org>  Fri, 09 Aug 2024 17:35:40 +0200
 
 libreoffice (4:24.8.0~rc3-1) experimental; urgency=medium
 
