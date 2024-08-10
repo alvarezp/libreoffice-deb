@@ -1,4 +1,4 @@
-libreoffice (4:24.2.5-3) UNRELEASED; urgency=medium
+libreoffice (4:24.2.5-3) unstable; urgency=medium
 
   * debian/rules: add armel to JAVA_BRIDGE_BROKEN_ARCHS
 
