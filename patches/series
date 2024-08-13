@@ -48,5 +48,3 @@ adapt-for-new-carlito.diff
 pdfium-ports.diff
 split-sdbc-firebird-mariadb.diff
 riscv-disable-NaN-test.diff
-gcc-14-armhf-registers.diff
-fix-32bit-gtk4-a11y-build.diff
