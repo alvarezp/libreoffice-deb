@@ -54,4 +54,3 @@ use-PyConfig.diff
 reviewed-breakIterator-customizations.diff
 breakiterator-updates.diff
 icu-74.1.diff
-gcc-14-armhf-registers.diff
