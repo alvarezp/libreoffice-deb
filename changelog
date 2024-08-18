@@ -1,8 +1,8 @@
-libreoffice (4:24.2.6~rc1~git20240727-1) UNRELEASED; urgency=medium
+libreoffice (4:24.2.6~rc1-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot 
 
- -- Rene Engelhard <rene@debian.org>  Sat, 27 Jul 2024 12:32:12 +0200
+ -- Rene Engelhard <rene@debian.org>  Sun, 18 Aug 2024 17:56:53 +0200
 
 libreoffice (4:24.2.5-3) unstable; urgency=medium
 
