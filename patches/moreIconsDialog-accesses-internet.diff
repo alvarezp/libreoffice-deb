@@ -13,7 +13,7 @@ index f0dedf626acf..ec330b584acd 100644
 +    // so that the test actually is run in autopkgtest where we are sure
 +    // we have internet (needs-internet)
 +    static bool bUITest;
-+    if (getenv("AUTOPKGTEST_TMP")) { bUITest = true; }
++    if (getenv("AUTOPKGTEST_TMP") == NULL) { bUITest = true; } // don't disable test
 +    else { bUITest = false; }
 + 
      m_bUITest = bUITest;

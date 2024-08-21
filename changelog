@@ -7,6 +7,10 @@ libreoffice (4:24.2.6~rc1-1) UNRELEASED; urgency=medium
     WANG Xuerui <i.salsa@xen0n.name> (closes: #1079438).
     Keep Java disabled on armel though for consistency with armhf
 
+  * debian/patches/moreIconsDialog-accesses-internet.diff: fix logic
+  * debian/tests/control.in: go sure and add needs-internet restriction here,
+    too (it runs a additiondialog UI test)
+
  -- Rene Engelhard <rene@debian.org>  Sun, 18 Aug 2024 17:56:53 +0200
 
 libreoffice (4:24.2.5-3) unstable; urgency=medium

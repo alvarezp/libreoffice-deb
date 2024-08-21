@@ -61,7 +61,7 @@ Restrictions: allow-stderr
 Tests: uicheck-cui
 Architecture: %OOO_JAVA_ARCHS%
 Depends: @builddeps@, libreoffice-core, libreoffice-impress, libreoffice-writer, python3-uno, libreoffice-script-provider-python, libreoffice-script-provider-js, libreoffice-script-provider-bsh
-Restrictions: allow-stderr
+Restrictions: allow-stderr, needs-internet
 
 Tests: uicheck-sd
 Depends: @builddeps@, libreoffice-core, libreoffice-draw, libreoffice-impress, libreoffice-calc, python3-uno
