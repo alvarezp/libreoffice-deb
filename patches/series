@@ -54,3 +54,4 @@ use-PyConfig.diff
 reviewed-breakIterator-customizations.diff
 breakiterator-updates.diff
 icu-74.1.diff
+jdk-minimal-and-zero-paths.diff

@@ -2,6 +2,11 @@ libreoffice (4:24.2.6~rc1-1) UNRELEASED; urgency=medium
 
   * New upstream release candidate 
 
+  * debian/patches/jdk-minimal-and-zero-paths.diff: add new
+    minimal/zero JDK paths as of OpenJDK 21, thanks
+    WANG Xuerui <i.salsa@xen0n.name> (closes: #1079438).
+    Keep Java disabled on armel though for consistency with armhf
+
   * debian/rules: enable -kf6
 
  -- Rene Engelhard <rene@debian.org>  Sun, 18 Aug 2024 17:56:53 +0200
