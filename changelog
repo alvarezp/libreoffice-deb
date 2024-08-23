@@ -1,3 +1,12 @@
+libreoffice (4:24.2.5-4) UNRELEASED; urgency=medium
+
+  * debian/patches/jdk-minimal-and-zero-paths.diff: add new
+    minimal/zero JDK paths as of OpenJDK 21, thanks
+    WANG Xuerui <i.salsa@xen0n.name> (closes: #1079438).
+    Keep Java disabled on armel though for consistency with armhf
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 18 Aug 2024 17:56:53 +0200
+
 libreoffice (4:24.2.5-3) unstable; urgency=medium
 
   * debian/rules: add armel to JAVA_BRIDGE_BROKEN_ARCHS
