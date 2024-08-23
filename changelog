@@ -1,12 +1,12 @@
-libreoffice (4:24.8.1~rc1~git20240821-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.1~rc1-1) UNRELEASED; urgency=medium
 
-  * New upstream snapshot
+  * New upstream release candidate
 
   * debian/patches/moreIconsDialog-accesses-internet.diff: fix logic
   * debian/tests/control.in: go sure and add needs-internet restriction here,
     too (it runs a additiondialog UI test)
 
- -- Rene Engelhard <rene@debian.org>  Wed, 21 Aug 2024 20:39:40 +0200
+ -- Rene Engelhard <rene@debian.org>  Fri, 23 Aug 2024 16:44:00 +0200
 
 libreoffice (4:24.8.0~rc3-2) experimental; urgency=medium
 
