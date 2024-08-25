@@ -1,4 +1,4 @@
-libreoffice (4:24.2.5-4) UNRELEASED; urgency=medium
+libreoffice (4:24.2.5-4) unstable; urgency=medium
 
   * debian/patches/jdk-minimal-and-zero-paths.diff: add new
     minimal/zero JDK paths as of OpenJDK 21, thanks
@@ -9,7 +9,7 @@ libreoffice (4:24.2.5-4) UNRELEASED; urgency=medium
   * debian/tests/control.in: go sure and add needs-internet restriction here,
     too (it runs a additiondialog UI test)
 
- -- Rene Engelhard <rene@debian.org>  Sun, 18 Aug 2024 17:56:53 +0200
+ -- Rene Engelhard <rene@debian.org>  Sun, 25 Aug 2024 13:06:48 +0200
 
 libreoffice (4:24.2.5-3) unstable; urgency=medium
 
