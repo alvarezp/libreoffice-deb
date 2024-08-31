@@ -763,6 +763,7 @@ DEBHELPER_OPTIONS += -Nlibreoffice-core-nogui -Nlibreoffice-calc-nogui -Nlibreof
 endif
 
 ifeq "$(AUTOPKGTEST_BUILD)" "y"
+BUILD_ONLY_EN_US=y
 # as above (for binary-indep), no need to do two builds here...
 # needs to be here since there is arch-specific rules before
 BUILD_NOGUI_PACKAGES=n
@@ -2322,6 +2323,10 @@ ifneq (,$(OOO_JUNIT_ARCHS))
 	sed -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
 		>> debian/tests/control.new < debian/tests/control.junit.in
 endif	    
+	# make sure it's the last one
+ifeq (y,$(ENABLE_MARIADB))
+	cat debian/tests/control.mysql.in >> debian/tests/control.new
+endif	    
 ifneq (,$(findstring riscv64,$(OOO_AUTOPKGTEST_ARCHS)))
 	# don't even try Calc tests on riscv64
 	perl -pi -e 's/Tests: uicheck-sd/Tests: uicheck-sd\nArchitecture: !riscv64/' debian/tests/control.new
@@ -2523,8 +2528,8 @@ endif
 
 	touch $@
 
-check:
 ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
+build-tests:
 ifneq (,$(filter $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
 	patch -p1 < $(CURDIR)/debian/tests/patches/disable-db-tests.diff
 endif
@@ -2553,14 +2558,14 @@ ifeq "$(BUILD_TESTS)" "y"
 		$(MAKE) check
 endif
 
-ifneq "$(AUTOPKGTEST_BUILD)" "y"
+check: build-tests
+ifeq "$(RUN_MAKE_CHECK)" "y"
 	# generate the needed en_US.UTF-8 locale if needed
 	if ! locale -a | grep -q ^en_US\.utf8; then \
 		mkdir -p $(CURDIR)/debian/locales; \
 		USE_CPUS=$(NUM_CPUS) debian/scripts/locale-gen; \
 	fi
 
-ifeq "$(RUN_MAKE_CHECK)" "y"
         # and now run them
 	$(IGNORE_MAKE_FAILURES)t=`mktemp -q -d`; \
 	cd $(SOURCE_TREE) && \
@@ -2640,7 +2645,6 @@ else
 		$(TEST_TIMEOUT) make check
   endif
 endif
-endif
 
 ifeq "$(BUILD_TESTS)" "y"
   ifneq (,$(filter $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
@@ -2671,6 +2675,10 @@ ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
     endif
   endif
 endif
+else
+# noop
+build-tests:
+check: build-tests
 endif
 
 install: $(STAMP_DIR)/install-common $(STAMP_DIR)/install-arch $(STAMP_DIR)/install-indep
@@ -3798,6 +3806,9 @@ ifeq "$(BUILD_TEST_PACKAGES)" "y"
 		$(PKGDIR)-smoketest-data/usr/share/libreoffice
 	cp workdir/Zip/smoketestdoc.sxw \
 		$(PKGDIR)-smoketest-data/usr/share/libreoffice
+else
+	rm -f $(PKGDIR)-java-common/$(shell echo $(OODIR) | sed -e s/lib/share/)/program/classes/smoketest.jar
+	rm -f $(PKGDIR)-java-common/$(OODIR)/program/classes/smoketest.jar
 endif
 endif
 

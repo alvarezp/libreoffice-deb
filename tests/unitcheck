@@ -28,6 +28,7 @@ trap "unapply" ERR
 if [ `id -u` = "0" ]; then
         exit 77
 fi
+if [ -f $AUTOPKGTEST_TMP/build-tests-skipped ]; then exit 77; fi
 
 echo
 echo "====== Patching the tree to only build the unittests against an existing installation ======"
@@ -40,15 +41,6 @@ ulimit -c unlimited || true
 
 echo
 echo "====== Starting unitcheck with ${CHECK_PARALLELISM} job ======"
-
-# hack, otherwise it fails
-mkdir -p $SRCDIR/instdir/program/.dir
-mkdir -p $SRCDIR/instdir/share/registry/.dir
-mkdir -p $SRCDIR/instdir/share/registry/res/.dir
-
-mkdir -p $SRCDIR/instdir/share/filter/.dir
-
-mkdir -p $SRCDIR/instdir/share/config/soffice.cfg/vcl/ui/.dir
 
 # all modules containing unitcheck
 export PARALLELISM=$CHECK_PARALLELISM
