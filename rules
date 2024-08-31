@@ -2500,8 +2500,8 @@ endif
 
 	touch $@
 
-check:
 ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
+build-tests:
 ifneq (,$(filter $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
 	patch -p1 < $(CURDIR)/debian/tests/patches/disable-db-tests.diff
 endif
@@ -2529,7 +2529,7 @@ ifeq "$(BUILD_TESTS)" "y"
 		$(MAKE) check
 endif
 
-ifneq "$(AUTOPKGTEST_BUILD)" "y"
+check: build-tests
 ifeq "$(RUN_MAKE_CHECK)" "y"
 	# generate the needed en_US.UTF-8 locale
 	mkdir -p $(CURDIR)/debian/locales
@@ -2612,7 +2612,6 @@ else
 		$(TEST_TIMEOUT) make check
   endif
 endif
-endif
 
 ifeq "$(BUILD_TESTS)" "y"
   ifneq (,$(filter $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
@@ -2643,6 +2642,10 @@ ifneq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
     endif
   endif
 endif
+else
+# noop
+build-tests:
+check: build-tests
 endif
 
 install: $(STAMP_DIR)/install-common $(STAMP_DIR)/install-arch $(STAMP_DIR)/install-indep
