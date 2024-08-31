@@ -3749,6 +3749,9 @@ ifeq "$(BUILD_TEST_PACKAGES)" "y"
 		$(PKGDIR)-smoketest-data/usr/share/libreoffice
 	cp workdir/Zip/smoketestdoc.sxw \
 		$(PKGDIR)-smoketest-data/usr/share/libreoffice
+else
+	rm -f $(PKGDIR)-java-common/$(shell echo $(OODIR) | sed -e s/lib/share/)/program/classes/smoketest.jar
+	rm -f $(PKGDIR)-java-common/$(OODIR)/program/classes/smoketest.jar
 endif
 endif
 
