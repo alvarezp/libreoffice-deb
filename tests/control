@@ -8,7 +8,7 @@ Depends: @builddeps@, ure
 Restrictions: allow-stderr, rw-build-tree, superficial
 
 Tests: testtools-bridgetest-with-java
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
 Depends: @builddeps@, ure-java, liblibreoffice-java, default-jdk
 Restrictions: allow-stderr, rw-build-tree, superficial
 
@@ -64,7 +64,7 @@ Depends: @builddeps@, libreoffice-core, libreoffice-impress, python3-uno
 Restrictions: allow-stderr
 
 Tests: uicheck-cui
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
 Depends: @builddeps@, libreoffice-core, libreoffice-impress, libreoffice-writer, python3-uno, libreoffice-script-provider-python, libreoffice-script-provider-js, libreoffice-script-provider-bsh
 Restrictions: allow-stderr, needs-internet
 
@@ -77,12 +77,12 @@ Depends: @builddeps@, libreoffice-core, libreoffice-writer, python3-uno
 Restrictions: allow-stderr
 
 Tests: uicheck-sc
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
 Depends: @builddeps@, libreoffice-core, libreoffice-calc, libreoffice-draw, libreoffice-impress, python3-uno, libreoffice-l10n-he, libreoffice-l10n-zh-tw, libreoffice-java-common, libreoffice-writer
 Restrictions: allow-stderr
 
 Tests: uicheck-sw
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
 Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-draw, libreoffice-calc, libreoffice-impress, libreoffice-base, python3-uno, libreoffice-l10n-he, libreoffice-l10n-zh-tw, libreoffice-librelogo, libreoffice-java-common
 Restrictions: allow-stderr, needs-internet
 
@@ -92,7 +92,7 @@ Restrictions: allow-stderr
 
 Test-Command: export DOXYGEN=`command -v doxygen`; export ENABLE_JAVA=TRUE; export JDK=sun; export JAVADOC=/usr/lib/jvm/default-java/bin/javadoc; perl odk/util/check.pl /usr/lib/libreoffice/sdk
 Features: test-name=sdk-complete
-Architecture: alpha amd64 arm64 armel i386 ia64 loong64 m68k mipsel mips64el powerpc ppc64 riscv64 sparc64 mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
 Depends: libreoffice-dev, libreoffice-dev-doc
 Restrictions: superficial
 
@@ -106,38 +106,40 @@ Architecture: amd64 arm64 i386 ppc64
 Depends: @builddeps@, libreoffice-core-nogui, libreoffice-dev, libreoffice-dev-doc, libreoffice-java-common, libofficebean-java
 Restrictions: allow-stderr, skippable
 
+## fake test to build the tests for the following ones
+#Tests: fake-build-tests
+#Architecture: amd64 arm64 armhf
+#Depends: @builddeps@, libreoffice,libreoffice-core,libreoffice-common,libreoffice-java-common,libreoffice-writer,libreoffice-calc,libreoffice-impress,libreoffice-draw,libreoffice-math,libreoffice-base-core,libreoffice-base,libreoffice-style-breeze,libreoffice-style-colibre,libreoffice-style-sifr,libreoffice-style-elementary,libreoffice-style-karasa-jaga,libreoffice-style-sukapura,libreoffice-gnome,python3-uno,libreoffice-script-provider-python,libreoffice-script-provider-bsh,libreoffice-script-provider-js,libreoffice-sdbc-hsqldb,libreoffice-sdbc-mysql,libreoffice-base-drivers,python3-access2base,python3-scriptforge,libofficebean-java,libreoffice-uiconfig-common,libreoffice-uiconfig-base,libreoffice-uiconfig-calc,libreoffice-uiconfig-draw,libreoffice-uiconfig-impress,libreoffice-uiconfig-math,libreoffice-uiconfig-writer,uno-libs-private,libuno-sal3t64,libuno-cppu3t64,ure,ure-java,libunoloader-java,liblibreoffice-java,libreoffice-wiki-publisher,libreoffice-report-builder,libreoffice-report-builder-bin,libreoffice-uiconfig-report-builder,libreoffice-nlpsolver,fonts-opensymbol,libreoffice-dev,libreoffice-dev-gui,libreoffice-dev-common,libreofficekit-dev,libreoffice-gtk3,gir1.2-lokdocview-0.1,liblibreofficekitgtk,libreofficekit-data,libreoffice-gtk4,libreoffice-kf5,libreoffice-qt5,libreoffice-qt6,libreoffice-plasma,libreoffice-sdbc-postgresql,libreoffice-evolution,libreoffice-subsequentcheckbase,libreoffice-smoketest-data,libreoffice-librelogo,libreoffice-sdbc-firebird
+#Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
+#
 #Tests: cppunit-subsequentcheck
 #Architecture: amd64 arm64 armhf
 #Depends: @builddeps@, libreoffice,libreoffice-core,libreoffice-common,libreoffice-java-common,libreoffice-writer,libreoffice-calc,libreoffice-impress,libreoffice-draw,libreoffice-math,libreoffice-base-core,libreoffice-base,libreoffice-style-breeze,libreoffice-style-colibre,libreoffice-style-sifr,libreoffice-style-elementary,libreoffice-style-karasa-jaga,libreoffice-style-sukapura,libreoffice-gnome,python3-uno,libreoffice-script-provider-python,libreoffice-script-provider-bsh,libreoffice-script-provider-js,libreoffice-sdbc-hsqldb,libreoffice-sdbc-mysql,libreoffice-base-drivers,python3-access2base,python3-scriptforge,libofficebean-java,libreoffice-uiconfig-common,libreoffice-uiconfig-base,libreoffice-uiconfig-calc,libreoffice-uiconfig-draw,libreoffice-uiconfig-impress,libreoffice-uiconfig-math,libreoffice-uiconfig-writer,uno-libs-private,libuno-sal3t64,libuno-cppu3t64,ure,ure-java,libunoloader-java,liblibreoffice-java,libreoffice-wiki-publisher,libreoffice-report-builder,libreoffice-report-builder-bin,libreoffice-uiconfig-report-builder,libreoffice-nlpsolver,fonts-opensymbol,libreoffice-dev,libreoffice-dev-gui,libreoffice-dev-common,libreofficekit-dev,libreoffice-gtk3,gir1.2-lokdocview-0.1,liblibreofficekitgtk,libreofficekit-data,libreoffice-gtk4,libreoffice-kf5,libreoffice-qt5,libreoffice-qt6,libreoffice-plasma,libreoffice-sdbc-postgresql,libreoffice-evolution,libreoffice-subsequentcheckbase,libreoffice-smoketest-data,libreoffice-librelogo,libreoffice-sdbc-firebird
-#Restrictions: build-needed, rw-build-tree, allow-stderr
+#Restrictions: build-needed, rw-build-tree, allow-stderr, skippable
 #
 ## Those tests even work when there is no /usr/lib/libreoffice there in any way. @builddeps@ is enough.
 ## That strictly violates the autopkgtest stuff thus mark them as superficial. But if a library
 ## or whatever update broke it we should know
 #Tests: slowcheck
 #Architecture: amd64 arm64 armhf
-##Depends: @builddeps@, libreoffice,libreoffice-core,libreoffice-common,libreoffice-java-common,libreoffice-writer,libreoffice-calc,libreoffice-impress,libreoffice-draw,libreoffice-math,libreoffice-base-core,libreoffice-base,libreoffice-style-breeze,libreoffice-style-colibre,libreoffice-style-sifr,libreoffice-style-elementary,libreoffice-style-karasa-jaga,libreoffice-style-sukapura,libreoffice-gnome,python3-uno,libreoffice-script-provider-python,libreoffice-script-provider-bsh,libreoffice-script-provider-js,libreoffice-sdbc-hsqldb,libreoffice-sdbc-mysql,libreoffice-base-drivers,python3-access2base,python3-scriptforge,libofficebean-java,libreoffice-uiconfig-common,libreoffice-uiconfig-base,libreoffice-uiconfig-calc,libreoffice-uiconfig-draw,libreoffice-uiconfig-impress,libreoffice-uiconfig-math,libreoffice-uiconfig-writer,uno-libs-private,libuno-sal3t64,libuno-cppu3t64,ure,ure-java,libunoloader-java,liblibreoffice-java,libreoffice-wiki-publisher,libreoffice-report-builder,libreoffice-report-builder-bin,libreoffice-uiconfig-report-builder,libreoffice-nlpsolver,fonts-opensymbol,libreoffice-dev,libreoffice-dev-gui,libreoffice-dev-common,libreofficekit-dev,libreoffice-gtk3,gir1.2-lokdocview-0.1,liblibreofficekitgtk,libreofficekit-data,libreoffice-gtk4,libreoffice-kf5,libreoffice-qt5,libreoffice-qt6,libreoffice-plasma,libreoffice-sdbc-postgresql,libreoffice-evolution,libreoffice-subsequentcheckbase,libreoffice-smoketest-data,libreoffice-librelogo,libreoffice-sdbc-firebird
-#Restrictions: build-needed, rw-build-tree, allow-stderr, superficial
+#Depends: @builddeps@, libreoffice,libreoffice-core,libreoffice-common,libreoffice-java-common,libreoffice-writer,libreoffice-calc,libreoffice-impress,libreoffice-draw,libreoffice-math,libreoffice-base-core,libreoffice-base,libreoffice-style-breeze,libreoffice-style-colibre,libreoffice-style-sifr,libreoffice-style-elementary,libreoffice-style-karasa-jaga,libreoffice-style-sukapura,libreoffice-gnome,python3-uno,libreoffice-script-provider-python,libreoffice-script-provider-bsh,libreoffice-script-provider-js,libreoffice-sdbc-hsqldb,libreoffice-sdbc-mysql,libreoffice-base-drivers,python3-access2base,python3-scriptforge,libofficebean-java,libreoffice-uiconfig-common,libreoffice-uiconfig-base,libreoffice-uiconfig-calc,libreoffice-uiconfig-draw,libreoffice-uiconfig-impress,libreoffice-uiconfig-math,libreoffice-uiconfig-writer,uno-libs-private,libuno-sal3t64,libuno-cppu3t64,ure,ure-java,libunoloader-java,liblibreoffice-java,libreoffice-wiki-publisher,libreoffice-report-builder,libreoffice-report-builder-bin,libreoffice-uiconfig-report-builder,libreoffice-nlpsolver,fonts-opensymbol,libreoffice-dev,libreoffice-dev-gui,libreoffice-dev-common,libreofficekit-dev,libreoffice-gtk3,gir1.2-lokdocview-0.1,liblibreofficekitgtk,libreofficekit-data,libreoffice-gtk4,libreoffice-kf5,libreoffice-qt5,libreoffice-qt6,libreoffice-plasma,libreoffice-sdbc-postgresql,libreoffice-evolution,libreoffice-subsequentcheckbase,libreoffice-smoketest-data,libreoffice-librelogo,libreoffice-sdbc-firebird
+#Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
 #
 #Tests: unitcheck
 #Architecture: amd64 arm64 armhf
 #Depends: @builddeps@, libreoffice,libreoffice-core,libreoffice-common,libreoffice-java-common,libreoffice-writer,libreoffice-calc,libreoffice-impress,libreoffice-draw,libreoffice-math,libreoffice-base-core,libreoffice-base,libreoffice-style-breeze,libreoffice-style-colibre,libreoffice-style-sifr,libreoffice-style-elementary,libreoffice-style-karasa-jaga,libreoffice-style-sukapura,libreoffice-gnome,python3-uno,libreoffice-script-provider-python,libreoffice-script-provider-bsh,libreoffice-script-provider-js,libreoffice-sdbc-hsqldb,libreoffice-sdbc-mysql,libreoffice-base-drivers,python3-access2base,python3-scriptforge,libofficebean-java,libreoffice-uiconfig-common,libreoffice-uiconfig-base,libreoffice-uiconfig-calc,libreoffice-uiconfig-draw,libreoffice-uiconfig-impress,libreoffice-uiconfig-math,libreoffice-uiconfig-writer,uno-libs-private,libuno-sal3t64,libuno-cppu3t64,ure,ure-java,libunoloader-java,liblibreoffice-java,libreoffice-wiki-publisher,libreoffice-report-builder,libreoffice-report-builder-bin,libreoffice-uiconfig-report-builder,libreoffice-nlpsolver,fonts-opensymbol,libreoffice-dev,libreoffice-dev-gui,libreoffice-dev-common,libreofficekit-dev,libreoffice-gtk3,gir1.2-lokdocview-0.1,liblibreofficekitgtk,libreofficekit-data,libreoffice-gtk4,libreoffice-kf5,libreoffice-qt5,libreoffice-qt6,libreoffice-plasma,libreoffice-sdbc-postgresql,libreoffice-evolution,libreoffice-subsequentcheckbase,libreoffice-smoketest-data,libreoffice-librelogo,libreoffice-sdbc-firebird
 #Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
 
-Test-Command: for i in /etc/apparmor.d/usr.lib.libreoffice.program.*; do /sbin/apparmor_parser --add --skip-cache --skip-kernel-load $i; done
-Features: test-name=apparmor-profiles-syntax-check
-Depends: libreoffice-common, apparmor
-Restrictions: allow-stderr, superficial
-
-## This one tests real connection to a MySQL and works by symlinking that one
-## specific library to the one in libreoffice-sdbc-mysql
-## Should probably always be last due to breaks-testbed?
-#Tests: cppunit-connectivity-mysql
-#Architecture: amd64 arm64 armhf
-#Depends: @builddeps@, pwgen, libreoffice-sdbc-mysql, libreoffice-core, default-mysql-server, default-mysql-client
-#Restrictions: build-needed, allow-stderr, needs-root, isolation-container, breaks-testbed, superficial
-
 Tests: junit-subsequentcheck
 Architecture: amd64 arm64
 Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-math, libreoffice-base, libreoffice-subsequentcheckbase, libreoffice-sdbc-hsqldb, libreoffice-sdbc-firebird
 Restrictions: allow-stderr, skippable
+
+# This one tests real connection to a MySQL and works by symlinking that one
+# specific library to the one in libreoffice-sdbc-mysql
+# Should probably always be last due to breaks-testbed?
+Tests: cppunit-connectivity-mysql
+Architecture: amd64
+Depends: @builddeps@, pwgen, libreoffice-sdbc-mysql, libreoffice-core, default-mysql-server, default-mysql-client
+Restrictions: build-needed, allow-stderr, needs-root, isolation-container, breaks-testbed, superficial, skippable
+

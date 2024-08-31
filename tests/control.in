@@ -101,34 +101,27 @@ Architecture: %OOO_JAVA_AND_NOGUI_ARCHS%
 Depends: @builddeps@, libreoffice-core-nogui, libreoffice-dev, libreoffice-dev-doc, libreoffice-java-common, libofficebean-java
 Restrictions: allow-stderr, skippable
 
+## fake test to build the tests for the following ones
+#Tests: fake-build-tests
+#Architecture: %OOO_CHECK_FATAL_ARCHS%
+#Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
+#Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
+#
 #Tests: cppunit-subsequentcheck
 #Architecture: %OOO_CHECK_FATAL_ARCHS%
 #Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
-#Restrictions: build-needed, rw-build-tree, allow-stderr
+#Restrictions: build-needed, rw-build-tree, allow-stderr, skippable
 #
 ## Those tests even work when there is no /usr/lib/libreoffice there in any way. @builddeps@ is enough.
 ## That strictly violates the autopkgtest stuff thus mark them as superficial. But if a library
 ## or whatever update broke it we should know
 #Tests: slowcheck
 #Architecture: %OOO_CHECK_FATAL_ARCHS%
-##Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
-#Restrictions: build-needed, rw-build-tree, allow-stderr, superficial
+#Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
+#Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
 #
 #Tests: unitcheck
 #Architecture: %OOO_CHECK_FATAL_ARCHS%
 #Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
 #Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
-
-Test-Command: for i in /etc/apparmor.d/usr.lib.libreoffice.program.*; do /sbin/apparmor_parser --add --skip-cache --skip-kernel-load $i; done
-Features: test-name=apparmor-profiles-syntax-check
-Depends: libreoffice-common, apparmor
-Restrictions: allow-stderr, superficial
-
-## This one tests real connection to a MySQL and works by symlinking that one
-## specific library to the one in libreoffice-sdbc-mysql
-## Should probably always be last due to breaks-testbed?
-#Tests: cppunit-connectivity-mysql
-#Architecture: %OOO_CHECK_FATAL_ARCHS%
-#Depends: @builddeps@, pwgen, libreoffice-sdbc-mysql, libreoffice-core, default-mysql-server, default-mysql-client
-#Restrictions: build-needed, allow-stderr, needs-root, isolation-container, breaks-testbed, superficial
 

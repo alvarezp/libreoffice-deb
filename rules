@@ -2308,6 +2308,10 @@ ifneq (,$(OOO_JUNIT_ARCHS))
 	sed -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
 		>> debian/tests/control.new < debian/tests/control.junit.in
 endif	    
+	# make sure it's the last one
+ifeq (y,$(ENABLE_MARIADB))
+	cat debian/tests/control.mysql.in >> debian/tests/control.new
+endif	    
 
 	diff -u debian/tests/control debian/tests/control.new && rm -f debian/tests/control.new || (\
 		echo "Generated control file differs! Check the result!"; \

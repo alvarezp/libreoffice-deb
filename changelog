@@ -4,6 +4,14 @@ libreoffice (4:24.2.6~rc1-1) UNRELEASED; urgency=medium
 
   * debian/rules: split check target into build-tests and check.
     Set BUILD_ONLY_EN_US=y for the build inside autopkgtest
+  * debian/control.in, debian/fake-build-tests: handle new autopkgtest
+    which does a nocheck build by running build-tests before attempting to
+    run the tests. Subject to timeout at 150m/160m. Change mkdir -ps to
+    touch since that also works
+  * debian/tests/{cppunit-subsequent,slow,unit}check: skip if
+    fake-build-tests get timeout (aka skipped)
+  * debian/rules, debian/control.{mysql,}.in: ensure the mysql test is
+    always last
 
  -- Rene Engelhard <rene@debian.org>  Sun, 18 Aug 2024 17:56:53 +0200
 
