@@ -2,6 +2,8 @@ libreoffice (4:24.2.6~rc1-1) UNRELEASED; urgency=medium
 
   * New upstream release candidate 
 
+  * debian/rules: Set BUILD_ONLY_EN_US=y for the build inside autopkgtest
+
  -- Rene Engelhard <rene@debian.org>  Sun, 18 Aug 2024 17:56:53 +0200
 
 libreoffice (4:24.2.5-4) unstable; urgency=medium

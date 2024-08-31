@@ -760,6 +760,7 @@ DEBHELPER_OPTIONS += -Nlibreoffice-core-nogui -Nlibreoffice-calc-nogui -Nlibreof
 endif
 
 ifeq "$(AUTOPKGTEST_BUILD)" "y"
+BUILD_ONLY_EN_US=y
 # as above (for binary-indep), no need to do two builds here...
 # needs to be here since there is arch-specific rules before
 BUILD_NOGUI_PACKAGES=n
