@@ -106,6 +106,11 @@ Architecture: amd64 arm64 i386 ppc64
 Depends: @builddeps@, libreoffice-core-nogui, libreoffice-dev, libreoffice-dev-doc, libreoffice-java-common, libofficebean-java
 Restrictions: allow-stderr, skippable
 
+Test-Command: for i in /etc/apparmor.d/usr.lib.libreoffice.program.*; do /sbin/apparmor_parser --add --skip-cache --skip-kernel-load $i; done
+Features: test-name=apparmor-profiles-syntax-check
+Depends: libreoffice-common, apparmor
+Restrictions: allow-stderr, superficial
+
 ## fake test to build the tests for the following ones
 #Tests: fake-build-tests
 #Architecture: amd64 arm64 armhf
