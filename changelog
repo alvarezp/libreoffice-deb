@@ -1,3 +1,10 @@
+libreoffice (4:24.2.6-2) unstable; urgency=medium
+
+  * debian/tests/control.in: oops, don't enable cppunit-connectivity-mysql
+    test yet
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 18 Sep 2024 17:45:57 +0200
+
 libreoffice (4:24.2.6-1) unstable; urgency=medium
 
   * New upstream release
