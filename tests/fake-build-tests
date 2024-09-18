@@ -72,9 +72,6 @@ touch $SRCDIR/instdir/share/config/soffice.cfg/modules/scalc/ui/.dir
 touch $SRCDIR/instdir/share/config/soffice.cfg/modules/scalc/menubar/.dir
 touch $SRCDIR/instdir/share/config/soffice.cfg/simpress/.dir
 
-touch $SRCDIR/instdir/share/config/webcast/.dir
-touch $SRCDIR/instdir/share/config/wizard/web/buttons/.dir
-
 touch $SRCDIR/instdir/share/config/soffice.cfg/modules/sdraw/popupmenu/.dir
 touch $SRCDIR/instdir/share/config/soffice.cfg/modules/sdraw/statusbar/.dir
 touch $SRCDIR/instdir/share/config/soffice.cfg/modules/sdraw/toolbar/.dir
@@ -136,8 +133,6 @@ touch $SRCDIR/instdir/share/config/soffice.cfg/xmlsec/ui/.dir
 
 touch $SRCDIR/instdir/share/registry/.dir
 touch $SRCDIR/instdir/share/registry/res/.dir
-
-touch $SRCDIR/instdir/share/emojiconfig/.dir
 
 touch $SRCDIR/instdir/share/filter/.dir
 

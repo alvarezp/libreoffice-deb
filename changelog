@@ -67,6 +67,7 @@ libreoffice (4:24.8.0~rc1-1) experimental; urgency=medium
   * New upstream release candidate
     - removes ability to trust not validated macro signatures in high security
       (CVE-2024-6472)
+    - does not trust signatures in "repair mode" anymore (CVE-2024-7788)
 
   * debian/patches/add-access2base-doc.diff: update; remove embedded jquery
     and add src=/usr/share/javascript/jquery/jquery.min.js (closes: #1073808)
