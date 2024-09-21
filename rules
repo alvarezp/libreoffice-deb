@@ -1216,19 +1216,19 @@ endif
 	BUILD_DEPS_ARCH += , hyphen-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
   endif
   # we don't run any cppunit check in all builds
-  ifneq "$(AUTOPKGTEST_BUILD)" "y"
+#  ifneq "$(AUTOPKGTEST_BUILD)" "y"
     ifneq (,$(filter cppunit, $(SYSTEM_STUFF)))
-	BUILD_DEPS_ARCH += , libcppunit-dev <!nocheck>
+	BUILD_DEPS_ARCH += , libcppunit-dev
       # without the deterministic order patch the xmlsecurity_signing test fails. See
       # https://cgit.freedesktop.org/libreoffice/core/commit/external/cppunit/order.patch.0?id=2f2246d22e2a8ccbc1dc3e6f5243734a61edf270
       ifeq "$(ENABLE_LTO)" "y"
-        BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.15.1-4) [$(filter $(OOO_CHECK_ARCHS),$(OOO_ARCHS))] <!nocheck>
+        BUILD_DEPS_ARCH += , libcppunit-dev (>= 1.15.1-4) [$(filter $(OOO_CHECK_ARCHS),$(OOO_ARCHS))]
       endif
     endif
     ifeq ($(MAKECMDGOALS),binary-indep)
 	CONFIGURE_FLAGS_INDEP += --without-cppunit
     endif
-  endif
+#  endif
   ifeq "$(ENABLE_JUNIT4)" "y"
 	BUILD_DEPS += , junit4 $(JUNIT_MIN_VER) [$(OOO_JUNIT_ARCHS)] <!nocheck !nojava>
   else
