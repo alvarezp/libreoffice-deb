@@ -52,14 +52,14 @@ Gemeinsame Unterverzeichnisse: odk-old/util und odk/util.
 -if test "$ENABLE_JAVA" != "" -a "$cross_compiling" != "yes"; then
 +if test "$ENABLE_JAVA" != "" -a "$enable_odk" != no -a "$cross_compiling" != "yes"; then
      if test -z "$with_jdk_home"; then
-         AC_PATH_PROG(JAVADOC, javadoc)
+         AC_PATH_PROG(JAVADOC, $javadoc)
      else
--        _javadoc_path="$with_jdk_home/bin/javadoc"
+-        _javadoc_path="$with_jdk_home/bin/$javadoc"
 -        dnl Check if there is a javadoc at all.
 -        if test -x "$_javadoc_path"; then
 -            JAVADOC=$_javadoc_path
 -        else
--            AC_PATH_PROG(JAVADOC, javadoc)
+-            AC_PATH_PROG(JAVADOC, $javadoc)
 -        fi
 -    fi
 -    if test -z "$JAVADOC"; then
@@ -72,12 +72,12 @@ Gemeinsame Unterverzeichnisse: odk-old/util und odk/util.
 -        JAVADOC=`win_short_path_for_make "$JAVADOC"`
 -    fi
 +	if test "$with_javadoc" = "yes"; then
-+            _javadoc_path="$with_jdk_home/bin/javadoc"
++            _javadoc_path="$with_jdk_home/bin/$javadoc"
 +            dnl Check if there is a javadoc at all.
 +            if test -x "$_javadoc_path"; then
 +                JAVADOC=$_javadoc_path
 +            else
-+                AC_PATH_PROG(JAVADOC, javadoc)
++                AC_PATH_PROG(JAVADOC, $javadoc)
 +            fi
 +            if test -z "$JAVADOC"; then
 +                AC_MSG_ERROR([$_javadoc_path not found set with_jdk_home])
@@ -148,4 +148,4 @@ index 5f2654b..471210f 100644
 +		$(if $(JAVADOC),odk_javadoc) \
  		odk_uno_loader_classes \
  	) \
- ))
+ 	odk_scripts \

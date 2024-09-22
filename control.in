@@ -15,7 +15,7 @@ Build-Conflicts: nvidia-glx-dev,
                  fontconfig-config (= 2.14.1-3) <!nocheck>
 Standards-Version: 4.0.1
 Rules-Requires-Root: no
-Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git
+Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-24.8
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
 Bugs: @BUGS@
 Homepage: http://www.libreoffice.org
@@ -896,7 +896,7 @@ Package: python3-access2base
 Section: python
 Architecture: all
 Homepage: http://www.access2base.com/access2base.html
-Depends: libreoffice-common (>= 1:6.4.0~beta1-2~), libreoffice-base, python3-uno, ${python3:Depends}, ${misc:Depends}
+Depends: libreoffice-common (>= 1:6.4.0~beta1-2~), libreoffice-base, python3-uno, ${python3:Depends}, ${misc:Depends}, libjs-jquery
 Replaces: libreoffice-base
 Build-Profiles: <!nopython>
 Description: interface between Python and the LibreOffice Access2Base library

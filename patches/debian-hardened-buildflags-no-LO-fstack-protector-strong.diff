@@ -5,18 +5,18 @@ diff --git a/solenv/gbuild/platform/com_GCC_defs.mk b/solenv/gbuild/platform/com
 index 712a61df544f..0d50f538ba7b 100644
 --- a/solenv/gbuild/platform/com_GCC_defs.mk
 +++ b/solenv/gbuild/platform/com_GCC_defs.mk
-@@ -67,7 +67,6 @@ gb_CFLAGS_COMMON := \
- 	-fmessage-length=0 \
+@@ -77,7 +77,6 @@ gb_CFLAGS_COMMON := \
  	-fno-common \
  	-pipe \
+ 	$(if $(ENABLE_HARDENING_FLAGS),$(HARDENING_CFLAGS)) \
 -	$(if $(filter EMSCRIPTEN,$(OS)),-fno-stack-protector,-fstack-protector-strong) \
  
  gb_CXXFLAGS_COMMON := \
  	-Wall \
-@@ -82,7 +81,6 @@ gb_CXXFLAGS_COMMON := \
- 	-fmessage-length=0 \
+@@ -94,7 +93,6 @@ gb_CXXFLAGS_COMMON := \
  	-fno-common \
  	-pipe \
+ 	$(if $(ENABLE_HARDENING_FLAGS),$(HARDENING_CFLAGS)) \
 -	$(if $(filter EMSCRIPTEN,$(OS)),-fno-stack-protector,-fstack-protector-strong) \
  
  ifeq ($(HAVE_WDEPRECATED_COPY_DTOR),TRUE)

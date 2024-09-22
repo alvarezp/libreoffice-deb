@@ -7,33 +7,33 @@ index abcb3a3e2593..35d45ad23413 100644
  			CC="$(CXX) $(gb_CXX03FLAGS)" LINK="$(CXX)" LIB="$(CXX)" \
  		    $(if $(MACOSX_SHELL_HACK), SHELL="$$$$ODK_BUILD_SHELL", ))) \
 -	$(if $(MACOSX_SHELL_HACK),&& rm -f "$$$$ODK_BUILD_SHELL")) \
--	    >$(call gb_CustomTarget_get_workdir,$(1))/log 2>&1 \
+-	    >$(gb_CustomTarget_workdir)/$(1)/log 2>&1 \
 -	|| (RET=$$$$? \
 -	    $(if $(MACOSX_SHELL_HACK), && rm -f "$$$$ODK_BUILD_SHELL" , ) \
--	    && cat $(call gb_CustomTarget_get_workdir,$(1))/log \
+-	    && cat $(gb_CustomTarget_workdir)/$(1)/log \
 -	    && exit $$$$RET)
 +	2>&1 )
  endif
  
- $(call gb_CustomTarget_get_workdir,$(1))/setsdkenv: \
+ $(gb_CustomTarget_workdir)/$(1)/setsdkenv: \
 diff --git a/solenv/gbuild/CppunitTest.mk b/solenv/gbuild/CppunitTest.mk
-index 45af5c9b25a7..7933fc84c8b2 100644
+index cfca2bbbf570..17c1070dcb12 100644
 --- a/solenv/gbuild/CppunitTest.mk
 +++ b/solenv/gbuild/CppunitTest.mk
-@@ -139,12 +139,7 @@ else
+@@ -159,12 +159,7 @@ else
  		$(call gb_CppunitTest__make_args) "-env:CPPUNITTESTTARGET=$@" \
- 		$(if $(gb_CppunitTest_localized),|| exit $$?; done) \
  		) \
--		$(if $(gb_CppunitTest__interactive),, \
--			> $@.log 2>&1 \
--			|| ($(if $(value gb_CppunitTest_postprocess), \
+ 		$(if $(gb_CppunitTest__interactive),$(if $(gb_CppunitTest_localized),|| exit $$?), \
+-			> $@.$(if $(gb_CppunitTest_localized),$$l.)log 2>&1 \
+-			|| { $(if $(value gb_CppunitTest_postprocess), \
 -					RET=$$?; \
--					$(call gb_CppunitTest_postprocess,$(gb_CppunitTest_CPPTESTCOMMAND),$@.core,$$RET) >> $@.log 2>&1;) \
--				cat $@.log; $(gb_CppunitTest_UNITTESTFAILED) Cppunit $*)))
-+		2>&1)
+-					$(call gb_CppunitTest_postprocess,$(gb_CppunitTest_CPPTESTCOMMAND),$@.core,$$RET) >> $@.$(if $(gb_CppunitTest_localized),$$l.)log 2>&1;) \
+-				cat $@.$(if $(gb_CppunitTest_localized),$$l.)log; $(gb_CppunitTest_UNITTESTFAILED) Cppunit $*; \
+-				$(if $(gb_CppunitTest_localized),exit $$RET;) } ) \
++			2>&1 ) \
+ 		$(if $(gb_CppunitTest_localized),; done))
  	$(call gb_Trace_EndRange,$*,CUT)
  endif
- 
 diff --git a/solenv/gbuild/JunitTest.mk b/solenv/gbuild/JunitTest.mk
 index 36f29b50ef28..3ac4603ff6a0 100644
 --- a/solenv/gbuild/JunitTest.mk

@@ -21,7 +21,7 @@ include /usr/share/dpkg/pkg-info.mk
 CURDIR ?= $(realpath $(dir $(firstword $(MAKEFILE_LIST)))/..)
 BASE_VERSION:=$(shell echo $(DEB_VERSION) | cut -d: -f1):$(DEB_VERSION_UPSTREAM)
 BINARY_VERSION=$(DEB_VERSION)
-OOVER:=24.2
+OOVER:=24.8
 HELP_L10N_VIRTUAL_VERSION:=$(OOVER)
 ifeq "$(shell echo $(OOVER) | cut -d. -f2)" "2"
 # 24.2 + .6 -> 24.8 -> OK
@@ -83,7 +83,7 @@ lo_sources_ver=$(shell grep AC_INIT $(SOURCE_TREE)/configure.ac | grep documentf
 # NOT in proper libreoffice-3-6 branch
 # use ./g checkout -b tag-libreoffice-3.6.2.1 libreoffice-3.6.2.1
 GIT_TAG=libreoffice-$(lo_sources_ver)
-GIT_BRANCH=libreoffice-24-2-6
+GIT_BRANCH=libreoffice-24-8-1
 endif
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 lo_sources_ver=$(shell cat $(CURDIR)/sources.ver | cut -d= -f2)
@@ -108,6 +108,7 @@ BUILD_DEPS=\
     libfreetype-dev,\
     libfontconfig-dev,\
     pkgconf,\
+    po-debconf,\
     unzip,\
     xsltproc,\
     zip,\
@@ -211,7 +212,8 @@ ENABLE_QT5=n
 #QT5_MINVER=
 ENABLE_KF5=y
 ENABLE_QT6=y
-ENABLE_KF6=n
+ENABLE_QT6_MULTIMEDIA=y
+ENABLE_KF6=y
 endif
 # go sure. if we want plasma, we want kfX, too and if we want that
 # one we want qtX, too.
@@ -269,6 +271,7 @@ endif
 
 ifeq "$(ENABLE_JAVA)" "y"
   SYSTEM_STUFF += beanshell
+  SYSTEM_STUFF += rhino
   SYSTEM_STUFF += hsqldb
 endif
 ENABLE_LPSOLVE=y
@@ -1169,7 +1172,7 @@ endif
 	BUILD_DEPS += , debhelper-compat (= 12)
 
   ifeq "$(RUN_MAKE_CHECK)" "y"
-	BUILD_DEPS_ARCH += , locales$(OOO_NO_CHECK_ARCHS) <!nocheck>
+	BUILD_DEPS_ARCH += , locales <!nocheck> | locales-all <!nocheck>
 	BUILD_DEPS_ARCH += , gdb$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , fontconfig [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 ifeq ($(BOOKWORM_BACKPORT),y)
@@ -1195,6 +1198,8 @@ endif
 	# sdext/source/pdfimport/test/tests.cxx (the test PDF uses NaskhArabic) and the result of the import is
 	# checked which fails without the font. Also used in /vcl/qa/cppunit/complextext.cxx (VclComplexTextTest::testCaching())
 	BUILD_DEPS_ARCH += , fonts-noto-core [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
+	# in pdfexport2.cxx (testTdf124116TrackUntrack - which uses David CLM)
+	BUILD_DEPS_ARCH += , culmus [$(OOO_AUTOPKGTEST_ARCHS)] <!nocheck>
 	# FIXME: Linux Libertine G (does fonts-linuxlibertine even contain it?, I don't see the _G files?)
 	# now is used in test documents.
 	# now we get a abort if fonts is not found and replaced in layout tests (even though
@@ -1209,11 +1214,6 @@ endif
 
 	BUILD_DEPS_ARCH += , hunspell-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
 	BUILD_DEPS_ARCH += , hyphen-en-us$(OOO_NO_CHECK_ARCHS) <!nocheck>
-	# for test_tdf159102_smart_justify_with_automatic_hyphenation.
-	# The test itself claims the test must not depend on the installed hyphenation patterns
-	# but installing this (which is suggested by writer as missing even after
-	# opening the .fodt) fixes it
-	BUILD_DEPS_ARCH += , hyphen-es$(OOO_NO_CHECK_ARCHS) <!nocheck>
   endif
   # we don't run any cppunit check in all builds
 #  ifneq "$(AUTOPKGTEST_BUILD)" "y"
@@ -1573,6 +1573,18 @@ ifeq "$(ENABLE_QT6)" "y"
 	BUILD_DEPS_ARCH += , qt6-base-dev $(QT6_MINVER), qmake6 $(QT6_MINVER), qt6-base-dev-tools $(QT6_MINVER)
 	BUILD_DEPS_ARCH += , libxcb1-dev
 endif
+ifneq "$(shell echo $(ENABLE_QT6)$(ENABLE_KF6) | grep -q y && echo true)" "true"
+	CONFIGURE_FLAGS += --disable-qt6-multimedia
+else
+  ifeq "$(ENABLE_QT6_MULTIMEDIA)" "y"
+	CONFIGURE_FLAGS += --enable-qt6-multimedia
+    ifneq "$(BOOKWORM_BACKPORT)" "y"
+	# go sure. the avmediaqt6 code has stuff enabled only if >= 6.5.0
+	QT6_MINVER := (>= 6.5.0)
+    endif
+	BUILD_DEPS_ARCH += , qt6-multimedia-dev $(QT6_MINVER)
+    endif
+endif
 
 ifeq "$(ENABLE_MARIADB)" "y"
   ifeq "$(MYSQL_FLAVOUR)" "default"
@@ -1706,15 +1718,18 @@ ifeq "$(ENABLE_JAVA)" "y"
   endif
   ifeq "$(ENABLE_SCRIPT_PROVIDER_BSH)" "y"
     ifneq (,$(filter beanshell, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libbsh-java <!nojava>
+	BUILD_DEPS_INDEP += , libbsh-java <!nojava>
     endif
-	CONFIGURE_FLAGS += --enable-scripting-beanshell
+	CONFIGURE_FLAGS_INDEP += --enable-scripting-beanshell
   else
 	CONFIGURE_FLAGS += --disable-scripting-beanshell
  	DEBHELPER_OPTIONS += -Nlibreoffice-script-provider-bsh
   endif
   ifeq "$(ENABLE_SCRIPT_PROVIDER_JS)" "y"
-	CONFIGURE_FLAGS += --enable-scripting-javascript
+    ifneq (,$(filter rhino, $(SYSTEM_STUFF)))
+	BUILD_DEPS_INDEP += , librhino-java <!nojava>
+    endif
+	CONFIGURE_FLAGS_INDEP += --enable-scripting-javascript
   else
 	CONFIGURE_FLAGS += --disable-scripting-javascript
 	DEBHELPER_OPTIONS += -Nlibreoffice-script-provider-js
@@ -1999,7 +2014,8 @@ clean-debdir:
 		! -name "libreoffice-java-common.links" \
 		! -name "liblibreofficekitgtk.links" \
 		! -name "libreoffice-help-common.links" \
-		! -name "python3-access2base.links" -exec rm {} \;
+		! -name "python3-access2base.links" \
+	        ! -name "libreofficekit-dev.links" -exec rm {} \;
 	rm -f debian/libreoffice-l10n-*.ucf
 	if [ -d "$(STAMP_DIR)" ]; then rm -rf "$(STAMP_DIR)"; fi
 	rm -f debian/*.bug-script
@@ -2008,7 +2024,7 @@ clean-debdir:
 
 	rm -f debian/libreoffice-help-*.lintian-overrides
 	rm -f debian/*.install debian/*.dirs debian/*.changelog
-	rm -f debian/*.postinst debian/*.postrm debian/*.preinst debian/*.prerm debian/*.triggers
+	rm -f debian/*.postinst debian/*.postrm debian/*.preinst debian/*.prerm debian/*.triggers debian/*.config
 	rm -f debian/pom*.xml
 
 	rm -rf $(CURDIR)/debian/locales
@@ -2016,7 +2032,6 @@ clean-debdir:
 	dh_clean
 
 clean:
-	dh_testroot
 	dh_testdir
 
 	if [ -f config.status ]; then \
@@ -2312,6 +2327,13 @@ endif
 ifeq (y,$(ENABLE_MARIADB))
 	cat debian/tests/control.mysql.in >> debian/tests/control.new
 endif	    
+ifneq (,$(findstring riscv64,$(OOO_AUTOPKGTEST_ARCHS)))
+	# don't even try Calc tests on riscv64
+	perl -pi -e 's/Tests: uicheck-sd/Tests: uicheck-sd\nArchitecture: !riscv64/' debian/tests/control.new
+	sed -i "`grep -n -A1 uicheck-sc debian/tests/control | tail -n 1 | cut -d- -f1`s/riscv64 //" debian/tests/control.new
+	sed -i "`grep -n -A1 uicheck-sw debian/tests/control | tail -n 1 | cut -d- -f1`s/riscv64 //" debian/tests/control.new
+	#perl -pi -e 's/Tests: uicheck-uitest/Tests: uicheck-uitest\nArchitecture: !riscv64/' debian/tests/control.new
+endif 
 
 	diff -u debian/tests/control debian/tests/control.new && rm -f debian/tests/control.new || (\
 		echo "Generated control file differs! Check the result!"; \
@@ -2409,9 +2431,10 @@ ifeq "$(BUILD_NOGUI_PACKAGES)" "y"
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--without-junit --without-cppunit \
 		--disable-ext-wiki-publisher \
+		--disable-scripting-beanshell --disable-scripting-javascript \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)" \
-		--disable-gui --disable-introspection --disable-qt5 --disable-kf5
+		--disable-gui --disable-introspection --disable-qt5 --disable-kf5 --disable-qt6-multimedia
 
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) ARCH_FLAGS=$(ARCH_FLAGS) TMP=`mktemp -q -d` $(MAKE) build-non-l10n-only
 
@@ -2433,6 +2456,7 @@ endif
 	./autogen.sh $(CONFIGURE_FLAGS) \
 		--without-junit --without-cppunit \
 		--disable-ext-wiki-publisher \
+		--disable-scripting-beanshell --disable-scripting-javascript \
 		--without-doxygen --without-javadoc \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
 
@@ -2525,6 +2549,7 @@ endif
 	./autogen.sh $(CONFIGURE_FLAGS) $(CONFIGURE_FLAGS_TESTS) \
 		--disable-ext-wiki-publisher \
 		--without-doxygen --without-javadoc \
+		--disable-scripting-beanshell --disable-scripting-javascript \
 		--with-galleries=no --with-theme="$(DEFAULT_IMAGE)"
 
 ifeq "$(BUILD_TESTS)" "y"
@@ -2535,9 +2560,11 @@ endif
 
 check: build-tests
 ifeq "$(RUN_MAKE_CHECK)" "y"
-	# generate the needed en_US.UTF-8 locale
-	mkdir -p $(CURDIR)/debian/locales
-	USE_CPUS=$(NUM_CPUS) debian/scripts/locale-gen
+	# generate the needed en_US.UTF-8 locale if needed
+	if ! locale -a | grep -q ^en_US\.utf8; then \
+		mkdir -p $(CURDIR)/debian/locales; \
+		USE_CPUS=$(NUM_CPUS) debian/scripts/locale-gen; \
+	fi
 
         # and now run them
 	$(IGNORE_MAKE_FAILURES)t=`mktemp -q -d`; \
@@ -2558,7 +2585,7 @@ else
 	# don't run make check but *do* run selected tests here which are deemed too important
 	# to fail
 	# - "bridgetest"
-	# - the public libraries (sal, cppu(helper), comphelper)
+	# - the public libraries (sal(helper), cppu(helper))
 	# - "smoketest" as a smoketest
 	# - pyuno (as we ship python3-uno..)
 	# - unoidl for the SDK
@@ -2577,7 +2604,7 @@ else
 			make smoketest.allcheck \
 		)
 	# build some more tests
-	for i in cppu cppuhelper comphelper unoidl; do \
+	for i in salhelper cppu cppuhelper unoidl; do \
 		gb_SUPPRESS_TESTS=true make $$i.allcheck; \
 	done
 	# run the sal tests. We built them anyways and it does make sense to test
@@ -2589,10 +2616,12 @@ else
 		export TMPDIR=$$t; \
 		export HOME=$$t; \
 		export PARALLELISM=1; \
+		export LOCPATH=$(CURDIR)/debian/locales; \
+		export LANG=en_US.UTF-8; \
 		$(TEST_TIMEOUT) make check
 	# more public library checks
 	$(IGNORE_MAKE_FAILURES)\
-	for i in cppu cppuhelper comphelper; do \
+	for i in salhelper cppu cppuhelper; do \
 		export PARALLELISM=1; \
 		$(TEST_TIMEOUT) make $$i.allcheck; \
 	done
@@ -2982,6 +3011,9 @@ ifeq "$(PACKAGE_SDK)" "y"
 	mkdir -p $(PKGDIR)-dev-common/usr/include
 	mv $(PKGDIR)-dev/usr/include/libreoffice \
 		$(PKGDIR)-dev-common/usr/include
+	mkdir -p $(PKGDIR)-dev-common/$(OODIR)/sdk/bin
+	mv $(PKGDIR)-dev/$(OODIR)/sdk/bin/addon_console.py* \
+		$(PKGDIR)-dev-common/$(OODIR)/sdk/bin
 	# except include/sal/typesizes.h
 	mkdir -p $(PKGDIR)-dev/usr/include/$(DEB_HOST_MULTIARCH)/libreoffice/sal
 	mkdir -p $(PKGDIR)-dev/usr/include/libreoffice/sal
@@ -3012,6 +3044,16 @@ ifeq "$(PACKAGE_SDK)" "y"
 		$(PKGDIR)-dev-common/$(OODIR)/share/glade
 else
 	rm -rf $(PKGDIR)-common/$(OODIR)/share/glade
+endif
+ifeq "$(PACKAGE_LOKIT)" "y"
+	# package LibreOfficeKit headers in an own package (which was the
+	# case anyway before it got installed into the SDK from 24.8.0 rc2
+	# onwards).
+	# That one gets the .gir anyway
+	rm -rf debian/libreofficekit-dev
+	mkdir -p debian/libreofficekit-dev/usr/include
+	mv $(PKGDIR)-dev-common/usr/include/libreoffice/LibreOfficeKit \
+		debian/libreofficekit-dev/usr/include
 endif
 
  ifeq "$(PACKAGE_SDK_DOCS)" "y"
@@ -3070,6 +3112,8 @@ endif
 	# ScriptForge
 	mkdir -p debian/python3-scriptforge/$(PYTHON_SITE)
 	mv $(PKGDIR)-common/$(OODIR)/program/scriptforge.py \
+		debian/python3-scriptforge/$(PYTHON_SITE)
+	mv $(PKGDIR)-common/$(OODIR)/program/scriptforge.pyi \
 		debian/python3-scriptforge/$(PYTHON_SITE)
 
 ifeq "$(PACKAGE_SDK)" "y"
@@ -3177,7 +3221,7 @@ $(STAMP_DIR)/maintscripts: $(wildcard debian/shell-lib*.sh) $(wildcard debian/*.
 
 	# generate maintainer scripts from *.in
 	for PKG in $(PACKAGES); do \
-	  for FILE in postinst postrm preinst prerm triggers; do \
+	  for FILE in postinst postrm preinst prerm triggers config; do \
 	    MAINTSCRIPT=debian/$$PKG.$$FILE ; \
 	    if [ -e $$MAINTSCRIPT.in ]; then \
 	      sed -n '1,/^#INCLUDE_SHELL_LIB#$$/p' < $$MAINTSCRIPT.in | sed -e '/^#INCLUDE_SHELL_LIB#$$/d' > $$MAINTSCRIPT; \
@@ -3190,6 +3234,7 @@ $(STAMP_DIR)/maintscripts: $(wildcard debian/shell-lib*.sh) $(wildcard debian/*.
 	      sed -n '/^#INCLUDE_SHELL_LIB#$$/,$$p' < $$MAINTSCRIPT.in | sed -e '/^#INCLUDE_SHELL_LIB#$$/d' >> $$MAINTSCRIPT; \
 	      perl -pi -e "s/\@LANGPACKISOS\@/$(LANGPACKISOS)/" $$MAINTSCRIPT; \
 	      perl -pi -e "s,\@OODIR\@,$(OODIR),g" $$MAINTSCRIPT; \
+	      perl -pi -e "s,\@DEB_HOST_ARCH\@,$(DEB_HOST_ARCH),g" $$MAINTSCRIPT; \
 	    fi; \
 	  done; \
 	done
@@ -3402,6 +3447,11 @@ ifeq "$(ENABLE_GUI)" "y"
 	mv $(PKGDIR)-gnome/$(OODIR)/program/*gtk4* $(PKGDIR)-gtk4/$(OODIR)/program
 	mv $(PKGDIR)-core/$(OODIR)/program/libavmediagtk.so $(PKGDIR)-gtk4/$(OODIR)/program
   endif
+
+  ifeq "$(ENABLE_QT6_MULTIMEDIA)" "y"
+	mv $(PKGDIR)-core/$(OODIR)/program/libavmediaqt6.so $(PKGDIR)-qt6/$(OODIR)/program
+  endif
+
 endif
 
 ifeq "$(ENABLE_INTROSPECTION)" "y"
@@ -3409,7 +3459,6 @@ ifeq "$(ENABLE_INTROSPECTION)" "y"
 	dh_install -pgir1.2-lokdocview-0.1
 endif
 ifeq "$(PACKAGE_LOKIT)" "y"
-	echo "include/LibreOfficeKit usr/include" > debian/libreofficekit-dev.install
 ifeq "$(ENABLE_INTROSPECTION)" "y"
 	echo "workdir/CustomTarget/sysui/share/libreoffice/LOKDocView-0.1.gir /usr/share/gir-1.0/" >> debian/libreofficekit-dev.install
 endif
@@ -4131,7 +4180,7 @@ endif
 	dh_ucf -a
 	for i in $(ARCH_DEP_PACKAGES); do \
 		if [ -e debian/$$i.postinst.debhelper ] && grep -q ucf debian/$$i.postinst.debhelper; then \
-			sed -i "s/ucf\ /ucf --three-way /" debian/$$i.postinst.debhelper; \
+			sed -i "s/ucf\ /ucf --three-way --debconf-ok /" debian/$$i.postinst.debhelper; \
 			sed -i "s/ucfr\ /ucfr --force /" debian/$$i.postinst.debhelper; \
 		fi ; \
 		if [ -e debian/$$i.postrm.debhelper ] && grep -q ucf debian/$$i.postrm.debhelper; then \
@@ -4195,7 +4244,7 @@ ifeq "$(BUILD_DBGSYM_PACKAGES)" "y"
 	# move sw and writerfilter gdb helpers to writer-dbgsym
 	mkdir -p debian/.debhelper/libreoffice-writer/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program
 	mkdir -p debian/.debhelper/libreoffice-writer/dbgsym-root/usr/share/libreoffice/gdb/libreoffice/
-	for i in sw writerfilter; do \
+	for i in sw sw_writerfilter; do \
 		if [ -f debian/.debhelper/libreoffice-core/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program/lib$${i}lo.so-gdb.py ]; then \
 		mv debian/.debhelper/libreoffice-core/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program/lib$${i}lo.so-gdb.py \
 				debian/.debhelper/libreoffice-writer/dbgsym-root/usr/share/gdb/auto-load/$(OODIR)/program/; \
@@ -4455,9 +4504,11 @@ ifeq "$(ENABLE_JAVA)" "y"
 			-Xlibreoffice-report-builder -Xbase-files; \
         done
 endif
+    ifeq (,$(filter rhino, $(SYSTEM_STUFF)))
 	# jh_depends adds a librhino-java Depends where we still use internal rhino
 	perl -pi -e "s/librhino-java//" \
 		debian/libreoffice-script-provider-js.substvars
+    endif
 ifeq "$(BUILD_TEST_PACKAGES)" "y"
 	perl -pi -e 's/junit4/junit4 $(JUNIT_MIN_VER)/' \
 		debian/libreoffice-subsequentcheckbase.substvars

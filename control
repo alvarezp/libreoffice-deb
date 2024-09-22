@@ -39,7 +39,6 @@ Build-Depends: autoconf,
                libboost-iostreams-dev,
                libboost-locale-dev,
                libbox2d-dev,
-               libbsh-java <!nojava>,
                libcairo2-dev,
                libcdr-dev (<< 0.2~),
                libcdr-dev (>= 0.1),
@@ -151,6 +150,7 @@ Build-Depends: autoconf,
                libzxing-dev,
                maven-repo-helper [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mips64 !powerpcspe !ppc64el !s390x !sparc] <!nojava>,
                pkgconf,
+               po-debconf,
                python3,
                python3-dev <!nopython>,
                python3-setuptools <!nopython>,
@@ -164,6 +164,7 @@ Build-Depends-Arch: at-spi2-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd6
                     clang [!alpha !hppa !ia64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64],
                     coinor-libcoinmp-dev,
                     coinor-libcoinutils-dev,
+                    culmus [amd64 arm64 armhf armel i386 ppc64el s390x riscv64] <!nocheck>,
                     dbus-x11 [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     firebird-dev [!m68k],
                     firebird3.0-server-core [!m68k] <!nocheck>,
@@ -184,7 +185,6 @@ Build-Depends-Arch: at-spi2-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd6
                     gpgconf [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     hunspell-en-us [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     hyphen-en-us [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
-                    hyphen-es [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     imagemagick [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     libabsl-dev [alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64],
                     libatk1.0-dev,
@@ -209,6 +209,11 @@ Build-Depends-Arch: at-spi2-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd6
                     libkf5i18n-dev,
                     libkf5kio-dev,
                     libkf5windowsystem-dev,
+                    libkf6config-dev,
+                    libkf6coreaddons-dev,
+                    libkf6i18n-dev,
+                    libkf6kio-dev,
+                    libkf6windowsystem-dev,
                     libldap-dev,
                     liblpsolve55-dev,
                     libmariadb-dev,
@@ -220,15 +225,16 @@ Build-Depends-Arch: at-spi2-core [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd6
                     libxcb1-dev,
                     libxmlsec1-dev (>= 1.2.39-5) [armhf] <!nocheck>,
                     llvm [!alpha !hppa !ia64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !s390x !sparc !sparc64],
-                    locales [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
+                    locales <!nocheck> | locales-all <!nocheck>,
                     lp-solve,
                     poppler-data [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     pstoedit [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
                     python3-lxml [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck !nopython>,
-                    qmake6,
+                    qmake6 (>= 6.5.0),
                     qt5-qmake,
-                    qt6-base-dev,
-                    qt6-base-dev-tools,
+                    qt6-base-dev (>= 6.5.0),
+                    qt6-base-dev-tools (>= 6.5.0),
+                    qt6-multimedia-dev (>= 6.5.0),
                     qtbase5-dev,
                     qtbase5-dev-tools,
                     xauth [!alpha !armel !hppa !i386 !ia64 !kfreebsd-amd64 !kfreebsd-i386 !loong64 !m68k !mips !mipsel !mips64 !mips64el !powerpc !powerpcspe !ppc64 !ppc64el !riscv64 !s390x !sparc !sparc64] <!nocheck>,
@@ -242,6 +248,8 @@ Build-Depends-Indep: ant [!armel !armhf !hppa !kfreebsd-amd64 !kfreebsd-i386 !mi
                      gettext,
                      graphviz <!nodoc>,
                      junit4 <!nojava>,
+                     libbsh-java <!nojava>,
+                     librhino-java <!nojava>,
                      node-normalize.css,
                      node-prismjs,
                      rdfind,
@@ -256,7 +264,7 @@ Build-Conflicts: amd-libopencl1,
                  nvidia-libopencl1
 Standards-Version: 4.0.1
 Rules-Requires-Root: no
-Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git
+Vcs-Git: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice.git -b debian-experimental-24.8
 Vcs-Browser: https://salsa.debian.org/libreoffice-team/libreoffice/libreoffice
 Bugs: mailto:debian-openoffice@lists.debian.org
 Homepage: http://www.libreoffice.org
@@ -1184,7 +1192,8 @@ Package: python3-access2base
 Section: python
 Architecture: all
 Homepage: http://www.access2base.com/access2base.html
-Depends: libreoffice-base,
+Depends: libjs-jquery,
+         libreoffice-base,
          libreoffice-common (>= 1:6.4.0~beta1-2~),
          python3-uno,
          ${misc:Depends},
@@ -5171,7 +5180,10 @@ Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${bi
          libreoffice-dev-common (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: g++, ${java-common-depends}, ${java-runtime-depends}
+Recommends: g++,
+            libreofficekit-dev,
+            ${java-common-depends},
+            ${java-runtime-depends}
 Suggests: libmythes-dev, libreoffice-dev-doc, libreofficekit-dev
 Replaces: libreoffice-dev-common (<< 1:5.4.1~)
 Conflicts: libreoffice (<< 1:5.2.5-2~), libreoffice-dev-doc (<< 1:5.2.5-2~)
@@ -5205,7 +5217,8 @@ Package: libreoffice-dev-common
 Section: devel
 Architecture: all
 Depends: ${misc:Depends}
-Replaces: libreoffice-dev (<< 1:5.2.0~)
+Recommends: python3
+Replaces: libreoffice-dev (<< 4:24.8.0~beta1~)
 Breaks: libreoffice-dev (<< 1:5.2.0~)
 Conflicts: libreoffice (<< 1:5.2.5-2~)
 Description: office productivity suite -- SDK -- architecture-independent parts
@@ -5338,6 +5351,22 @@ Description: office productivity suite -- KDE Frameworks 5 integration
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the KF5 plugin for LibreOffice and a KF5-based File
+ Picker when running under Plasma.
+
+Package: libreoffice-kf6
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
+Depends: libreoffice-core (= ${binary:Version}),
+         ${kf6-qt6-depends},
+         ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: ${plasma-iconset-dep}
+Section: kde
+Enhances: libreoffice
+Description: office productivity suite -- KDE Frameworks 6 integration
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the KF6 plugin for LibreOffice and a KF6-based File
  Picker when running under Plasma.
 
 Package: libreoffice-qt5

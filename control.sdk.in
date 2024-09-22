@@ -5,7 +5,7 @@ Depends: libreoffice-core-nogui (= ${binary:Version}) | libreoffice-core (= ${bi
          libreoffice-dev-common (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: g++, ${java-common-depends}, ${java-runtime-depends}
+Recommends: g++, ${java-common-depends}, ${java-runtime-depends}, libreofficekit-dev
 Suggests: libmythes-dev, libreofficekit-dev, libreoffice-dev-doc
 Replaces: libreoffice-dev-common (<< 1:5.4.1~)
 Conflicts: libreoffice-dev-doc (<< 1:5.2.5-2~), libreoffice (<< 1:5.2.5-2~)
@@ -39,7 +39,8 @@ Package: libreoffice-dev-common
 Section: devel
 Architecture: all
 Depends: ${misc:Depends}
-Replaces: libreoffice-dev (<< 1:5.2.0~)
+Recommends: python3
+Replaces: libreoffice-dev (<< 4:24.8.0~beta1~)
 Breaks: libreoffice-dev (<< 1:5.2.0~)
 Conflicts: libreoffice (<< 1:5.2.5-2~)
 Description: office productivity suite -- SDK -- architecture-independent parts

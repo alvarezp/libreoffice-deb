@@ -1,0 +1,30 @@
+diff --git a/sal/qa/rtl/math/test-rtl-math.cxx b/sal/qa/rtl/math/test-rtl-math.cxx
+index bab2774a414c..d434a95326fa 100644
+--- a/sal/qa/rtl/math/test-rtl-math.cxx
++++ b/sal/qa/rtl/math/test-rtl-math.cxx
+@@ -648,6 +648,7 @@ public:
+         CPPUNIT_ASSERT(std::isnan(res));
+     }
+ 
++#ifndef __riscv
+     void test_payloadNaN() {
+         // Test that a quiet NaN payload is propagated and behaves as we
+         // expect. Ideally that could be done with a constexpr in
+@@ -670,6 +671,7 @@ public:
+                 0xbeef == reinterpret_cast<const sal_math_Double*>(&fVal3)->nan_parts.fraction_lo ||
+                 0xdead == reinterpret_cast<const sal_math_Double*>(&fVal3)->nan_parts.fraction_lo);
+     }
++#endif
+ 
+     CPPUNIT_TEST_SUITE(Test);
+     CPPUNIT_TEST(test_stringToDouble_good);
+@@ -685,7 +687,9 @@ public:
+     CPPUNIT_TEST(test_acosh);
+     CPPUNIT_TEST(test_asinh);
+     CPPUNIT_TEST(test_atanh);
++#ifndef __riscv
+     CPPUNIT_TEST(test_payloadNaN);
++#endif
+     CPPUNIT_TEST_SUITE_END();
+ };
+ 

@@ -43,17 +43,17 @@ index 95094265e..c0ad7802e 100644
  OUString getJavaDriverClass(css::uno::Sequence<css::beans::PropertyValue> const& info)
  {
      return comphelper::NamedValueCollection::getOrDefault(info, u"JavaDriverClass",
--                                                          OUString("com.mysql.jdbc.Driver"));
-+                                                          OUString("org.mariadb.jdbc.Driver"));
+-                                                          u"com.mysql.jdbc.Driver"_ustr);
++                                                          u"org.mariadb.jdbc.Driver"_ustr);
  }
  }
  
-@@ -170,7 +170,7 @@ Sequence<PropertyValue> lcl_convertProperties(T_DRIVERTYPE _eType,
+@@ -165,7 +165,7 @@ Sequence<PropertyValue> lcl_convertProperties(T_DRIVERTYPE _eType,
+     {
          if (!jdc)
          {
-             aProps.push_back(PropertyValue("JavaDriverClass", 0,
--                                           Any(OUString("com.mysql.jdbc.Driver")),
-+                                           Any(OUString("org.mariadb.jdbc.Driver")),
-                                            PropertyState_DIRECT_VALUE));
+-            aProps.emplace_back("JavaDriverClass", 0, Any(u"com.mysql.jdbc.Driver"_ustr),
++            aProps.emplace_back("JavaDriverClass", 0, Any(u"org.mariadb.jdbc.Driver"_ustr),
+                                 PropertyState_DIRECT_VALUE);
          }
      }

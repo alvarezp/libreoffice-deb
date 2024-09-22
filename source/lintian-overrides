@@ -17,11 +17,7 @@ libreoffice source: source-is-missing [sw/qa/extras/htmlimport/data/tdf142781.ht
 libreoffice source: source-is-missing [sw/qa/extras/layout/data/forcepoint94.html]
 # hrmpf. of course they are there
 # $ ls tarballs/*
-# tarballs/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip    tarballs/dtoa-20180411.tgz
-# tarballs/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip    tarballs/pdfium-5058.tar.bz2
 # tarballs/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip  tarballs/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz
-libreoffice source: superfluous-file-pattern tarballs/*rhino* [debian/copyright:135]
-libreoffice source: superfluous-file-pattern tarballs/*swingEx* [debian/copyright:167]
 libreoffice source: superfluous-file-pattern tarballs/*xsltml* [debian/copyright:140]
 libreoffice source: superfluous-file-pattern tarballs/dtoa* [debian/copyright:126]
 libreoffice source: superfluous-file-pattern tarballs/pdfium* [debian/copyright:173]

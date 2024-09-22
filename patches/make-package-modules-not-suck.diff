@@ -163,8 +163,8 @@ index f386b8aa7c05..7c337f23891b 100644
  	textconversiondlgs \
  	textfd \
 @@ -506,12 +501,15 @@ $(eval $(call gb_Helper_register_plugins_for_install,OOOLIBS,ooo, \
+     $(if $(ENABLE_CUSTOMTARGET_COMPONENTS),components) \
      cui \
-     $(if $(USING_X11),desktop_detector) \
      icg \
 -    sdui \
      $(if $(ENABLE_GEN),vclplug_gen) \
