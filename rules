@@ -762,7 +762,10 @@ ifneq "$(BUILD_NOGUI_PACKAGES)" "y"
 DEBHELPER_OPTIONS += -Nlibreoffice-core-nogui -Nlibreoffice-calc-nogui -Nlibreoffice-writer-nogui -Nlibreoffice-draw-nogui -Nlibreoffice-report-builder-bin-nogui -Nlibreoffice-base-nogui -Nlibreoffice-impress-nogui -Nlibreoffice-math-nogui
 endif
 
+# this assumes autopkgtest -B. Without -B it tries to use the built packages
+# which would break (nogui being empty, needed l10ns not being there)
 ifeq "$(AUTOPKGTEST_BUILD)" "y"
+# save build time for languages we do not exactly need.
 BUILD_ONLY_EN_US=y
 # as above (for binary-indep), no need to do two builds here...
 # needs to be here since there is arch-specific rules before
@@ -1274,6 +1277,12 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
 	  ta te tg th tn tr ts ug uk uz ve vi xh zh-CN zh-TW zu
   endif
+  # only needed if we supported builds without -B, see above
+  #ifeq "$(AUTOPKGTEST_BUILD)" "y"
+  #    ISOS := en-US he zh-TW
+  #    HELPISOS := en-US zh-TW
+  #    LANGPACKISOS := en-US he zh-TW
+  #endif
 else
 	ISOS=en-US
     ifeq "$(ENABLE_HELP)" "n"
