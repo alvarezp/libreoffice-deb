@@ -2320,6 +2320,7 @@ debian/tests/control.new: debian/tests/control.in debian/rules
 	echo "# and move control.new to control if the difference is sane." >> debian/tests/control.new
 	echo "#" >> debian/tests/control.new
 	sed -e "s|%OOO_JAVA_ARCHS%|$(OOO_JAVA_ARCHS)|g" \
+	    -e "s,%OOO_NOJAVA_ARCHS%,$(filter-out $(OOO_JAVA_ARCHS),$(OOO_ARCHS)),g" \
 	    -e "s|%OOO_JUNIT_ARCHS%|$(OOO_JUNIT_ARCHS)|g" \
 	    -e "s|%OOO_NOGUI_ARCHS%|$(OOO_NOGUI_ARCHS)|g" \
 	    -e "s|%OOO_JAVA_AND_NOGUI_ARCHS%|$(filter $(OOO_JAVA_ARCHS),$(OOO_NOGUI_ARCHS))|g" \

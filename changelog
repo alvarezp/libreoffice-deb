@@ -3,6 +3,10 @@ libreoffice (4:24.8.2~rc1-1) experimental; urgency=medium
   * New upstream snapshot 
 
   * debian/rules: add some explanatory comments for AUTOPKGTEST_BUILD
+  * debian/tests/control.in:
+    - make testtools-bridgetest-without-java Architecture: %OOO_NOJAVA_ARCHS%
+      only run on archs where Java is disabled (also because on amd64 it fails
+      with a full with-Java build tree, like with build-needed tests)
 
  -- Rene Engelhard <rene@debian.org>  Mon, 23 Sep 2024 18:53:14 +0200
 

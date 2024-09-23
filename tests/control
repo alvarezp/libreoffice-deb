@@ -4,6 +4,7 @@
 # and move control.new to control if the difference is sane.
 #
 Tests: testtools-bridgetest-without-java
+Architecture: armel armhf hppa kfreebsd-amd64 kfreebsd-i386 mips64 powerpcspe ppc64el s390x sparc
 Depends: @builddeps@, ure
 Restrictions: allow-stderr, rw-build-tree, superficial
 

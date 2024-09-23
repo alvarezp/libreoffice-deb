@@ -1,4 +1,5 @@
 Tests: testtools-bridgetest-without-java
+Architecture: %OOO_NOJAVA_ARCHS%
 Depends: @builddeps@, ure
 Restrictions: allow-stderr, rw-build-tree, superficial
 
