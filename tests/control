@@ -83,7 +83,7 @@ Depends: @builddeps@, libreoffice-core, libreoffice-calc, libreoffice-draw, libr
 Restrictions: allow-stderr
 
 Tests: uicheck-sw
-Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 riscv64 sparc64 m68k mips
+Architecture: alpha amd64 arm64 i386 ia64 loong64 mipsel mips64el powerpc ppc64 sparc64 m68k mips
 Depends: @builddeps@, libreoffice-core, libreoffice-writer, libreoffice-draw, libreoffice-calc, libreoffice-impress, libreoffice-base, libreoffice-math, python3-uno, libreoffice-l10n-he, libreoffice-l10n-zh-tw, libreoffice-librelogo, libreoffice-java-common
 Restrictions: allow-stderr, needs-internet
 
