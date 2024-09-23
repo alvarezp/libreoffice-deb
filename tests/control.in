@@ -107,27 +107,28 @@ Features: test-name=apparmor-profiles-syntax-check
 Depends: libreoffice-common, apparmor
 Restrictions: allow-stderr, superficial
 
-## fake test to build the tests for the following ones
-#Tests: fake-build-tests
-#Architecture: %OOO_CHECK_FATAL_ARCHS%
-#Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
-#Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
-#
-#Tests: cppunit-subsequentcheck
-#Architecture: %OOO_CHECK_FATAL_ARCHS%
-#Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
-#Restrictions: build-needed, rw-build-tree, allow-stderr, skippable
-#
-## Those tests even work when there is no /usr/lib/libreoffice there in any way. @builddeps@ is enough.
-## That strictly violates the autopkgtest stuff thus mark them as superficial. But if a library
-## or whatever update broke it we should know
-#Tests: slowcheck
-#Architecture: %OOO_CHECK_FATAL_ARCHS%
-#Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
-#Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
-#
-#Tests: unitcheck
-#Architecture: %OOO_CHECK_FATAL_ARCHS%
-#Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
-#Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
+# fake test to build the tests for the following ones since autopkgtests
+# build-needed builds with nocheck and thus they are not built.
+Tests: fake-build-tests
+Architecture: amd64
+Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
+Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
+
+Tests: cppunit-subsequentcheck
+Architecture: amd64
+Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
+Restrictions: build-needed, rw-build-tree, allow-stderr, skippable
+
+# Those tests even work when there is no /usr/lib/libreoffice there in any way. @builddeps@ is enough.
+# That strictly violates the autopkgtest stuff thus mark them as superficial. But if a library
+# or whatever update broke it we should know
+Tests: slowcheck
+Architecture: amd64
+Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
+Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
+
+Tests: unitcheck
+Architecture: amd64
+Depends: @builddeps@, %AUTOPKGTEST_CPPUNIT_PACKAGES%
+Restrictions: build-needed, rw-build-tree, allow-stderr, superficial, skippable
 
