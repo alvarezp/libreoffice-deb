@@ -1,8 +1,10 @@
-libreoffice (4:24.8.2-1) UNRELEASED; urgency=medium
+libreoffice (4:24.8.2-1) unstable; urgency=medium
 
   * LibreOffice 24.8.2 final (indentical to rc1...) 
 
- -- Rene Engelhard <rene@debian.org>  Fri, 27 Sep 2024 16:47:18 +0200
+  * upload to unstable
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 27 Sep 2024 17:38:49 +0200
 
 libreoffice (4:24.8.2~rc1-1) experimental; urgency=medium
 
