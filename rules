@@ -1268,20 +1268,20 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu hy id is it ja \
 	  ka kk km kmr-Latn kn ko lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
-	  ta te tg th tn tr ts ug uk uz ve vi xh zh-CN zh-TW zu
+	  ta te tg th tl tn tr ts ug uk uz ve vi xh zh-CN zh-TW zu
     ifeq "$(ENABLE_HELP)" "n"
 	HELPISOS:=
     else
 	#HELPISOS:=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
 	HELPISOS:=en-US ca ca-valencia cs da de dz el en-GB es et eu fi fr gl hi hu id it \
-	  ja km ko nl om pl pt pt-BR ru sk sl sv tr vi zh-CN zh-TW
+	  ja km ko nl tl om pl pt pt-BR ru sk sl sv tr vi zh-CN zh-TW
     endif
 	#LANGPACKISOS:=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
 	LANGPACKISOS:=en-US af am ar as ast be bg bn bn-IN br bs ca ca-valencia cs cy da de dz el \
 	  en-GB en-ZA eo es et eu fa fi fr ga gd gl gu gug he hi hr hu hy id is it ja \
 	  ka kk km kmr-Latn kn ko lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr sr-Latn ss st sv szl \
-	  ta te tg th tn tr ts ug uk uz ve vi xh zh-CN zh-TW zu
+	  ta te tg th tl tn tr ts ug uk uz ve vi xh zh-CN zh-TW zu
   endif
   # only needed if we supported builds without -B, see above
   #ifeq "$(AUTOPKGTEST_BUILD)" "y"

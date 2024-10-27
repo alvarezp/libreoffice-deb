@@ -3873,6 +3873,37 @@ Description: office productivity suite -- Thai language package
  install extra dictionaries/hyphenation patterns/thesauri independently of
  the language packs.
 
+Package: libreoffice-l10n-tl
+Section: localization
+Architecture: all
+Depends: libreoffice-common (>= 1:7.0.0~alpha~),
+         locales | locales-all,
+         ${misc:Depends}
+Recommends: libreoffice-core (>> ${base-version})
+Provides: libreoffice-l10n (= ${help-l10n-virtual-version})
+Suggests: hunspell-dictionary-tl | myspell-dictionary-tl | libreoffice-spellcheck-tl,
+          hyphen-tl | libreoffice-hyphenation-tl,
+          libreoffice-grammarcheck-tl,
+          libreoffice-help-tl,
+          mythes-tl
+Description: office productivity suite -- Tagalog language package
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the localization of LibreOffice in
+ Tagalog.
+ It contains the user interface, the templates and the autotext features.
+ (please note that not all this is available for all possible languages).
+ You can switch user interface language using the locales system.
+ .
+ Spelling dictionaries, hyphenation patterns, thesauri and help are not
+ included in this package. There are some available in separate packages
+ (myspell-*, hyphen-*, mythes-*, libreoffice-help-*)
+ .
+ If you just want to be able to spellcheck etc. in other languages, you can
+ install extra dictionaries/hyphenation patterns/thesauri independently of
+ the language packs.
+
 Package: libreoffice-l10n-tn
 Section: localization
 Architecture: all
@@ -4618,6 +4649,23 @@ Description: office productivity suite -- Dutch help
  .
  This package contains the help of LibreOffice in
  Dutch.
+
+Package: libreoffice-help-tl
+Architecture: all
+Section: doc
+Recommends: libreoffice-core (>> ${base-version}), ${help-recommends}
+Depends: libreoffice-common (>= 1:6.1.0~),
+         libreoffice-l10n-tl,
+         ${help-depends},
+         ${misc:Depends}
+Provides: libreoffice-help (= ${help-l10n-virtual-version})
+Replaces: libreoffice-help-common (<< 1:6.4.1~rc1)
+Description: office productivity suite -- Tagalog help
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the help of LibreOffice in
+ Tagalog.
 
 Package: libreoffice-help-om
 Architecture: all
