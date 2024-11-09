@@ -208,7 +208,7 @@ BUILD_PLASMA=y
 # let's assume we won't ship two plasmas parallel..
 PLASMA_VERSION=5
 PLASMA_KF_VERSION=$(PLASMA_VERSION)
-ENABLE_QT5=n
+ENABLE_QT5=y
 #QT5_MINVER=
 ENABLE_KF5=y
 ENABLE_QT6=y
@@ -785,6 +785,8 @@ ifeq "$(DEB_DISTRIBUTION)" "bookworm-backports"
   SYSTEM_STUFF := $(filter-out frozen mdds orcus libcmis,$(SYSTEM_STUFF))
   BOOKWORM_BACKPORT=y
   ENABLE_KF6=n
+  PLASMA_VERSION=5
+  ENABLE_KF5=y
 endif
 
 ifeq "$(BOOKWORM_BACKPORT)" "y"

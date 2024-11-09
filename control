@@ -5336,23 +5336,6 @@ Description: office productivity suite -- GTK 4 integration
  .
  You need to enable it manually by export SAL_USE_VCLPLUGIN=gtk4.
 
-Package: libreoffice-kf5
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
-Depends: libreoffice-core (= ${binary:Version}),
-         ${kf5-qt5-depends},
-         ${misc:Depends},
-         ${shlibs:Depends}
-Recommends: kio (>> 5.115.0-5), ${plasma-iconset-dep}
-Replaces: libreoffice-kde (<< 1:6.1.0~alpha1-1)
-Section: kde
-Enhances: libreoffice
-Description: office productivity suite -- KDE Frameworks 5 integration
- LibreOffice is a full-featured office productivity suite that provides
- a near drop-in replacement for Microsoft(R) Office.
- .
- This package contains the KF5 plugin for LibreOffice and a KF5-based File
- Picker when running under Plasma.
-
 Package: libreoffice-kf6
 Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 loong64 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el riscv64 s390x sparc sparc64
 Depends: libreoffice-core (= ${binary:Version}),
@@ -5406,14 +5389,14 @@ Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreeb
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: libreoffice-kf5
+Recommends: libreoffice-kf6
 Replaces: libreoffice-kde5 (<< 1:6.4.0~)
 Description: office productivity suite -- some Plasma integration
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains some minor Plasma integration (like AppData
- and "Create New..." integration) and a KDE/KF5 configuration backend.
+ and "Create New..." integration) .
 
 Package: libreoffice-sdbc-postgresql
 Section: misc
