@@ -1,11 +1,11 @@
-libreoffice (4:24.8.3~rc2-1) experimental; urgency=medium
+libreoffice (4:24.8.3-1) unstable; urgency=medium
 
-  * New upstream release candidate
+  * New upstream release
     - fixes SyntaxWarning: invalid escape sequence '\P' in officehelper.py
       (closes: #1082775)
     - (closes: #1064494) by reverting the 24-2 changes causing this
 
- -- Rene Engelhard <rene@debian.org>  Fri, 08 Nov 2024 17:20:17 +0100
+ -- Rene Engelhard <rene@debian.org>  Sun, 10 Nov 2024 15:24:11 +0100
 
 libreoffice (4:24.8.2-1) unstable; urgency=medium
 
