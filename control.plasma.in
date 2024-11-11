@@ -1,5 +1,5 @@
 Package: libreoffice-plasma
-Architecture: %OOO_ARCHS%
+Architecture: @PLASMA_ARCHITECTURE@
 Depends: libreoffice-core (= ${binary:Version}),
         ${misc:Depends},
         ${shlibs:Depends}

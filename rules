@@ -208,6 +208,7 @@ BUILD_PLASMA=y
 # let's assume we won't ship two plasmas parallel..
 PLASMA_VERSION=5
 PLASMA_KF_VERSION=$(PLASMA_VERSION)
+PLASMA_ARCHITECTURE=all
 ENABLE_QT5=y
 #QT5_MINVER=
 ENABLE_KF5=y
@@ -787,6 +788,7 @@ ifeq "$(DEB_DISTRIBUTION)" "bookworm-backports"
   ENABLE_KF6=n
   PLASMA_VERSION=5
   ENABLE_KF5=y
+  PLASMA_ARCHITECTURE=%OOO_ARCHS%
 endif
 
 ifeq "$(BOOKWORM_BACKPORT)" "y"
@@ -2230,7 +2232,13 @@ endif
 ifeq "$(BUILD_PLASMA)" "y"
 	sed -e "s|@PLASMA_VERSION@|$(PLASMA_VERSION)|g" \
 		-e "s|@PLASMA_KF_VERSION@|$(PLASMA_KF_VERSION)|g" \
+<<<<<<< HEAD
 	        >> debian/control.new < debian/control.plasma.in
+=======
+	        -e "s|@PLASMA_ARCHITECTURE@|$(PLASMA_ARCHITECTURE)|g" \
+		>> debian/control.new < debian/control.plasma.in
+ifeq "$(PLASMA_VERSION)" "6"
+>>>>>>> 62bc4b2ce (make -plasma Arch: all on sid)
 	# no kf6be here
 ifeq "$(PLASMA_VERSION)" "6"
 	sed -i "s/and a KDE\/KF$(PLASMA_KF_VERSION) configuration backend//" \
@@ -2911,6 +2919,31 @@ endif
 
 ifeq "$(BUILD_PLASMA)" "y"
 	echo "../usr/share/metainfo/org.libreoffice.kde.metainfo.xml /usr/share/metainfo/" >> $(PKGDIR)-plasma.install
+	# install files for "create new" ...
+	mkdir -p $(PKGDIR)-plasma/usr/share/templates/.source
+	for i in $(SOURCE_TREE)/extras/source/shellnew/*; do \
+		cp $$i $(PKGDIR)-plasma/usr/share/templates/.source/`basename $$i`; \
+	done
+	cat debian/templates/soffice-template.desktop.in \
+		| sed -e "s/@APP@/Writer/" \
+		| sed -e "s/@EXT@/odt/" \
+		| sed -e "s/@TYPE@/text/" \
+		> $(PKGDIR)-plasma/usr/share/templates/soffice.odt.desktop
+	cat debian/templates/soffice-template.desktop.in \
+		| sed -e "s/@APP@/Calc/" \
+		| sed -e "s/@EXT@/ods/" \
+		| sed -e "s/@TYPE@/spreadsheet/" \
+		> $(PKGDIR)-plasma/usr/share/templates/soffice.ods.desktop
+	cat debian/templates/soffice-template.desktop.in \
+		| sed -e "s/@APP@/Impress/" \
+		| sed -e "s/@EXT@/odp/" \
+		| sed -e "s/@TYPE@/presentation/" \
+		> $(PKGDIR)-plasma/usr/share/templates/soffice.odp.desktop
+	cat debian/templates/soffice-template.desktop.in \
+		| sed -e "s/@APP@/Draw/" \
+		| sed -e "s/@EXT@/odg/" \
+		| sed -e "s/@TYPE@/drawing/" \
+		> $(PKGDIR)-plasma/usr/share/templates/soffice.odg.desktop
 endif
 
 ifneq "$(ENABLE_GUI)" "y"
@@ -3399,35 +3432,6 @@ endif
 		mv debian/ure/$(OODIR)/program/$$i \
 			debian/uno-libs-private/$(OODIR)/program; \
 	done
-
-
-ifeq "$(BUILD_PLASMA)" "y"
-	# install files for "create new" ...
-	mkdir -p $(PKGDIR)-plasma/usr/share/templates/.source
-	for i in $(SOURCE_TREE)/extras/source/shellnew/*; do \
-		cp $$i $(PKGDIR)-plasma/usr/share/templates/.source/`basename $$i`; \
-	done
-	cat debian/templates/soffice-template.desktop.in \
-		| sed -e "s/@APP@/Writer/" \
-		| sed -e "s/@EXT@/odt/" \
-		| sed -e "s/@TYPE@/text/" \
-		> $(PKGDIR)-plasma/usr/share/templates/soffice.odt.desktop
-	cat debian/templates/soffice-template.desktop.in \
-		| sed -e "s/@APP@/Calc/" \
-		| sed -e "s/@EXT@/ods/" \
-		| sed -e "s/@TYPE@/spreadsheet/" \
-		> $(PKGDIR)-plasma/usr/share/templates/soffice.ods.desktop
-	cat debian/templates/soffice-template.desktop.in \
-		| sed -e "s/@APP@/Impress/" \
-		| sed -e "s/@EXT@/odp/" \
-		| sed -e "s/@TYPE@/presentation/" \
-		> $(PKGDIR)-plasma/usr/share/templates/soffice.odp.desktop
-	cat debian/templates/soffice-template.desktop.in \
-		| sed -e "s/@APP@/Draw/" \
-		| sed -e "s/@EXT@/odg/" \
-		| sed -e "s/@TYPE@/drawing/" \
-		> $(PKGDIR)-plasma/usr/share/templates/soffice.odg.desktop
-endif
 
 ifeq "$(ENABLE_EVO2)" "y"
 	mkdir -p -m755 $(PKGDIR)-evolution/$(OODIR)/program
