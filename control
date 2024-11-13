@@ -4650,23 +4650,6 @@ Description: office productivity suite -- Dutch help
  This package contains the help of LibreOffice in
  Dutch.
 
-Package: libreoffice-help-tl
-Architecture: all
-Section: doc
-Recommends: libreoffice-core (>> ${base-version}), ${help-recommends}
-Depends: libreoffice-common (>= 1:6.1.0~),
-         libreoffice-l10n-tl,
-         ${help-depends},
-         ${misc:Depends}
-Provides: libreoffice-help (= ${help-l10n-virtual-version})
-Replaces: libreoffice-help-common (<< 1:6.4.1~rc1)
-Description: office productivity suite -- Tagalog help
- LibreOffice is a full-featured office productivity suite that provides
- a near drop-in replacement for Microsoft(R) Office.
- .
- This package contains the help of LibreOffice in
- Tagalog.
-
 Package: libreoffice-help-om
 Architecture: all
 Section: doc

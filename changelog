@@ -1,7 +1,7 @@
 libreoffice (4:24.8.3-4) UNRELEASED; urgency=medium
 
   * debian/rules:
-    - enable tl langpack/help
+    - enable tl langpack
 
  -- Rene Engelhard <rene@debian.org>  Sun, 08 Dec 2024 14:04:41 +0100
 

@@ -1274,7 +1274,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
     else
 	#HELPISOS:=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
 	HELPISOS:=en-US ca ca-valencia cs da de dz el en-GB es et eu fi fr gl hi hu id it \
-	  ja km ko nl tl om pl pt pt-BR ru sk sl sv tr vi zh-CN zh-TW
+	  ja km ko nl om pl pt pt-BR ru sk sl sv tr vi zh-CN zh-TW
     endif
 	#LANGPACKISOS:=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
 	LANGPACKISOS:=en-US af am ar as ast be bg bn bn-IN br bs ca ca-valencia cs cy da de dz el \
