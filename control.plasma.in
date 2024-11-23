@@ -1,7 +1,6 @@
 Package: libreoffice-plasma
 Architecture: @PLASMA_ARCHITECTURE@
-Depends: libreoffice-core (= ${binary:Version}),
-        ${misc:Depends},
+Depends: ${misc:Depends},
         ${shlibs:Depends}
 Recommends: libreoffice-kf@PLASMA_VERSION@
 Replaces: libreoffice-kde5 (<< 1:6.4.0~)

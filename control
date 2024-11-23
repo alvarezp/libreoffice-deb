@@ -5386,9 +5386,7 @@ Description: office productivity suite -- Qt 6 integration
 
 Package: libreoffice-plasma
 Architecture: all
-Depends: libreoffice-core (= ${binary:Version}),
-         ${misc:Depends},
-         ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Recommends: libreoffice-kf6
 Replaces: libreoffice-kde5 (<< 1:6.4.0~)
 Description: office productivity suite -- some Plasma integration

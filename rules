@@ -4389,6 +4389,16 @@ ifeq "$(ENABLE_JAVA)" "y"
 	perl -pi -e 's/^(java:Depends.*$$)/\1, ure/' \
 		debian/libofficebean-java.substvars
 endif
+ifneq "$(PLASMA_ARCHITECTURE)" "all"
+	# hack in a libreoffice-core dependency
+	if grep -q misc\:Depends debian/libreoffice-plasma.substvars; then \
+		sed -i 's/misc:Depends=\(.*\)/misc:Depends=$1, libreoffice-core (= ${binary:Version})' \
+			debian/libreoffice-plasma.substvars; \
+	else \
+		echo 'misc:Depends=libreoffice-core (= ${binary:Version})' \
+			>> debian/libreoffice-plasma.substvars'; \
+	fi
+endif
 	dh_gencontrol -a $(DEBHELPER_OPTIONS) \
 		-- \
 		-V'base-version=$(BASE_VERSION)' \
