@@ -1,3 +1,11 @@
+libreoffice (4:24.8.3-3) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - don't set BUILD_PLASMA=-n on build-indep builds if
+      PLASMA_ARCHITECTURE=all
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 26 Nov 2024 18:33:46 +0100
+
 libreoffice (4:24.8.3-2) unstable; urgency=medium
 
   * debian/rules:
