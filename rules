@@ -206,12 +206,12 @@ ENABLE_GPGMEPP=y
 ifeq "$(ENABLE_GUI)" "y"
 BUILD_PLASMA=y
 # let's assume we won't ship two plasmas parallel..
-PLASMA_VERSION=5
+PLASMA_VERSION=6
 PLASMA_KF_VERSION=$(PLASMA_VERSION)
 PLASMA_ARCHITECTURE=all
 ENABLE_QT5=y
 #QT5_MINVER=
-ENABLE_KF5=y
+ENABLE_KF5=n
 ENABLE_QT6=y
 ENABLE_QT6_MULTIMEDIA=y
 ENABLE_KF6=y
@@ -2232,15 +2232,10 @@ endif
 ifeq "$(BUILD_PLASMA)" "y"
 	sed -e "s|@PLASMA_VERSION@|$(PLASMA_VERSION)|g" \
 		-e "s|@PLASMA_KF_VERSION@|$(PLASMA_KF_VERSION)|g" \
-<<<<<<< HEAD
-	        >> debian/control.new < debian/control.plasma.in
-=======
 	        -e "s|@PLASMA_ARCHITECTURE@|$(PLASMA_ARCHITECTURE)|g" \
 		>> debian/control.new < debian/control.plasma.in
 ifeq "$(PLASMA_VERSION)" "6"
->>>>>>> 62bc4b2ce (make -plasma Arch: all on sid)
 	# no kf6be here
-ifeq "$(PLASMA_VERSION)" "6"
 	sed -i "s/and a KDE\/KF$(PLASMA_KF_VERSION) configuration backend//" \
 		debian/control.new
 endif
